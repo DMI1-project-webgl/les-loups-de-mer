@@ -14,19 +14,18 @@ export default class Duck extends BasicObject3D {
             'src/assets/js/webgl/models/Duck.gltf',
             (gltf) =>
             {
-                console.log('success')
-                console.log(gltf)
+                // console.log('success')
                 this.add(gltf.scene.children[0])
             },
             (progress) =>
             {
-                console.log('progress')
-                console.log(progress)
+                // console.log('progress')
+                // console.log(progress)
             },
             (error) =>
             {
-                console.log('error')
-                console.log(error)
+                // console.log('error')
+                // console.log(error)
             }
         )
 

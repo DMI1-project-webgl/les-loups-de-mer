@@ -1,13 +1,14 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Clock } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import type { Size } from 'src/assets/js/webgl/utils/index'
 import type BasicObject3D from './BasicObject3D'
+import type Signal from "../utils/Signal";
 
 /**
  * @name BasicScene 
  * @description Abstract class 
- * The class is a three.js Scene
- * The class instantiates camera, render and Clock of the application
+ * This class is a three.js Scene
+ * This class instantiates camera, render and Clock of the application
  */
 
 export default class BasicScene extends Scene {
@@ -17,16 +18,17 @@ export default class BasicScene extends Scene {
   public camera: PerspectiveCamera
   public deltaTime: number = 0 // delta time between two tick
   public models: Array<BasicObject3D> = [] // All models of the application
+  public signal: Signal
 
   private canvas: HTMLCanvasElement
   private clock: Clock
   private controls!: OrbitControls
   private time: number // current time
   private elapsedTime: number = 0 // Keeps track of the total time that the clock has been running
-  private raf: number = -1
+  private raf: number = -1 // window animation frame
   private isRunning: Boolean
 
-  constructor (canvas: HTMLCanvasElement) {
+  constructor (canvas: HTMLCanvasElement, signal: Signal) {
     super()
     if (this.constructor === BasicScene) {
       throw new TypeError('Abstract class BasicScene cannot be instantiated directly')
@@ -34,6 +36,7 @@ export default class BasicScene extends Scene {
     this.bind()
 
     this.canvas = canvas
+    this.signal = signal
     this.sizes = {
       width: window.innerWidth,
       height: window.innerHeight
@@ -59,7 +62,15 @@ export default class BasicScene extends Scene {
     this.isRunning = true
     this.tick()
 
-    this.init()
+    this.signal.add(this.onSignal);
+  }
+
+  /**
+   * @param slug (route-home|route-about|...)
+   * Listen event send by BasicApp
+   */
+  onSignal (slug: String) {
+    console.log('signal : ', slug)
   }
 
   setCameraPosition () {
@@ -67,12 +78,14 @@ export default class BasicScene extends Scene {
   }
 
   bind () {
-    this.init = this.init.bind(this)
     this.start = this.start.bind(this)
     this.update = this.update.bind(this)
     this.onResize = this.onResize.bind(this)
     this.tick = this.tick.bind(this)
     this.setupControls = this.setupControls.bind(this)
+    this.onSignal = this.onSignal.bind(this)
+    this.removeObject = this.removeObject.bind(this)
+    this.addObject = this.addObject.bind(this)
   }
 
   setupControls () {
@@ -106,11 +119,16 @@ export default class BasicScene extends Scene {
     this.tick()
   }
 
-  /**
-   * Instanciate models and lights
-   */
-  init () {
-    throw new Error('method must be implemented')
+  removeObject (object: BasicObject3D) {
+    object.destroy()
+    this.remove(object)
+    this.models.slice(this.models.indexOf(object),1)
+    object = null
+  }
+  
+  addObject (object: BasicObject3D) {
+    this.add(object)
+    this.models.push(object)
   }
 
   update () {
@@ -127,7 +145,7 @@ export default class BasicScene extends Scene {
     this.renderer.render(this, this.camera)
 
     if (this.isRunning) {
-      window.requestAnimationFrame(this.tick)
+      this.raf = window.requestAnimationFrame(this.tick)
     }
   }
 
@@ -137,5 +155,6 @@ export default class BasicScene extends Scene {
     window.removeEventListener('resize', this.onResize)
     this.renderer.dispose()
     this.canvas = null
+    this.signal.remove(this.onSignal);
   }
 }
