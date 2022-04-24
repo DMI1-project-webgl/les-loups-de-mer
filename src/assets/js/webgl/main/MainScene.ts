@@ -3,14 +3,21 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import Cube from './Cube'
 import Duck from './Duck'
 import { AmbientLight } from 'three'
-import type BasicObject3D from '../core/BasicObject3D'
 
 export default class MainScene extends BasicScene {
 
     private cursor: Cursor = { x: 0 , y: 0 }
+    private cube!: Cube
+    private duck!: Duck
 
-    constructor (canvas: HTMLCanvasElement) {
-        super(canvas)
+    constructor (canvas: HTMLCanvasElement, signal: Signal) {
+        super(canvas, signal)
+
+        this.cube = new Cube(1,1,1, 0x00ff00)
+        this.addObject(this.cube)
+
+        const ambient = new AmbientLight(0xFFFFFF, 1000)
+        this.add(ambient)
     
         window.addEventListener('mousemove', this.onMouseMove)
     }
@@ -33,20 +40,25 @@ export default class MainScene extends BasicScene {
     setCameraPosition () {
         this.camera.position.set(0, 0, 3)
     }
-    
-    init () {
-        const cube: BasicObject3D = new Cube(1,1,1, 0x00ff00)
-        cube.position.set(-1, 0, 0)
-        this.add(cube)
-        this.models.push(cube)
 
-        const duck: BasicObject3D = new Duck()
-        duck.position.set(1, 0, 0)
-        this.add(duck)
-        this.models.push(duck)
+    onSignal (slug: string) {
+        // super.onSignal(slug)
 
-        const ambient = new AmbientLight(0xFFFFFF, 1000)
-        this.add(ambient)
+        switch (slug) {
+            case 'route-home':
+                if (!this.duck) { return }
+                this.removeObject(this.duck)
+                this.cube = new Cube(1,1,1, 0x00ff00)
+                this.addObject(this.cube)
+                break
+            case 'route-about':
+                if (!this.cube) { return }
+                this.removeObject(this.cube)
+                this.duck = new Duck()
+                this.addObject(this.duck)
+                break
+            default:
+        }
     }
     
     onResize () {

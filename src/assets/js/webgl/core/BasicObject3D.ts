@@ -3,8 +3,9 @@ import { Group } from 'three'
 /**
  * @name BasicObject3D 
  * @description Abstract class 
- * The class is a three.js Group
+ * This class is a three.js Group
  */
+
 export default class BasicObject3D extends Group {
 
     // time of the application
@@ -29,5 +30,9 @@ export default class BasicObject3D extends Group {
      */
     update (deltaTime: number) {
         this.time += deltaTime
+    }
+
+    destroy () {
+        this.clear()
     }
 }

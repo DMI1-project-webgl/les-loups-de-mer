@@ -5,15 +5,26 @@
 </template>
 
 <script lang="ts">
-import MainScene from '../assets/js/webgl/main/MainScene'
+import MainApp from '../assets/js/webgl/main/MainApp'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CanvasElement',
+  data() {
+    return {
+      app: null
+    };
+  },
+  watch:{
+    $route (to, from) {
+      this.app.changeState('route-' + to.name.toLowerCase())
+    }
+  },
   mounted () {
-    new MainScene(this.$refs['canvas'] as HTMLCanvasElement)
+    this.app = new MainApp(this.$refs['canvas'] as HTMLCanvasElement)
   },
   beforeDestroy () {
+    this.app.destroy()
   }
 })
 </script>
