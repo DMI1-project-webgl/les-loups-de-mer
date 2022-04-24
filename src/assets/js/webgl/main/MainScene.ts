@@ -1,84 +1,65 @@
-import { Scene, WebGLRenderer, PerspectiveCamera } from 'three'
+import BasicScene from '../core/BasicScene'
+import type { Cursor } from 'src/assets/js/webgl/utils/index'
+import Cube from './Cube'
+import Duck from './Duck'
+import { AmbientLight } from 'three'
+import type BasicObject3D from '../core/BasicObject3D'
 
-export default class MainScene {
-    private canvas: HTMLCanvasElement
-    private scene!: Scene
-    private camera!: PerspectiveCamera
-    private renderer!: WebGLRenderer
-    private period: number
+export default class MainScene extends BasicScene {
 
-    constructor(canvas: HTMLCanvasElement) {
-        this.canvas = canvas
+    private cursor: Cursor = { x: 0 , y: 0 }
 
-        this.period = 10
-
-        this.init()
-        this.run()
-    }
-
-    // Initialization
-    init() {
-        this.renderer = new WebGLRenderer({
-            canvas: this.canvas
-        })
-
-        this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio))
-
-        const gl = this.renderer.getContext()
-        const aspect = gl.drawingBufferWidth / gl.drawingBufferHeight
-
-        this.scene = new Scene()
-        this.camera = new PerspectiveCamera(90, aspect, 0.01, 1000)
-
-        this.camera.position.set(1, 1, 1)
-        this.camera.lookAt(0, 0, 0)
+    constructor (canvas: HTMLCanvasElement) {
+        super(canvas)
+    
+        window.addEventListener('mousemove', this.onMouseMove)
     }
     
-    // Run app, load things, add listeners, ...
-    run() {
-        this.renderer.render(this.scene, this.camera)
-        this.animate()
+    bind () {
+        super.bind()
+    
+        this.onMouseMove = this.onMouseMove.bind(this)
     }
-
-    resizeRendererToDisplaySize() {
-        const width = this.canvas.clientWidth
-        const height = this.canvas.clientHeight
-        const needResize = this.canvas.width !== width || this.canvas.height !== height
-        if (needResize) {
-            this.renderer.setSize(width, height, false)
-        }
-        return needResize
+    
+    onMouseMove (event: MouseEvent) {
+        this.cursor.x = event.clientX / this.sizes.width - 0.5
+        this.cursor.y = event.clientY / this.sizes.height - 0.5
     }
-
-    render() {
-        this.renderer.render(this.scene, this.camera)
+    
+    setupControls () {
+        super.setupControls()
     }
-
-    animate() {
-        window.requestAnimationFrame(this.animate.bind(this))
-
-        // Update ...
-        if (this.resizeRendererToDisplaySize()) {
-            const gl = this.renderer.getContext()
-            const aspect = gl.drawingBufferWidth / gl.drawingBufferHeight
-            this.camera.aspect = aspect
-            this.camera.updateProjectionMatrix()
-        }
-
-        // Animation
-        // Periodique time
-        const tn = ((Date.now() * 0.001) % this.period) / this.period
-
-        // Render ...
-        this.render()
+    
+    setCameraPosition () {
+        this.camera.position.set(0, 0, 3)
     }
+    
+    init () {
+        const cube: BasicObject3D = new Cube(1,1,1, 0x00ff00)
+        cube.position.set(-1, 0, 0)
+        this.add(cube)
+        this.models.push(cube)
 
-    // Memory management
-    destroy() {
-        this.canvas = null 
+        const duck: BasicObject3D = new Duck()
+        duck.position.set(1, 0, 0)
+        this.add(duck)
+        this.models.push(duck)
 
-        this.scene = null
-        this.camera = null
-        this.renderer = null
+        const ambient = new AmbientLight(0xFFFFFF, 1000)
+        this.add(ambient)
+    }
+    
+    onResize () {
+        super.onResize()
+    }
+    
+    update () {
+        this.models.forEach((model) => {
+          model.update(this.deltaTime)
+        })
+    }
+    
+    destroy () {
+        super.destroy()
     }
 }
