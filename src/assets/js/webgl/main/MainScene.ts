@@ -58,7 +58,7 @@ export default class MainScene extends BasicScene {
     setupControls () {
         super.setupControls()
     }
-    
+
     setCameraPosition () {
         this.camera.position.set(0, 0, 3)
     }

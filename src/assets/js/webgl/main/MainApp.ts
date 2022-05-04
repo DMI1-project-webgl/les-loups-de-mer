@@ -4,7 +4,7 @@ import MainScene from "./MainScene";
 export default class MainApp extends BasicApp {
     constructor (canvas: HTMLCanvasElement) {
         super(canvas)
-
+        
         this.scene = new MainScene(this, canvas, this.signal)
         this.scenes.push(this.scene)
     }

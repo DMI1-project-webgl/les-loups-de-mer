@@ -2,7 +2,6 @@ import type BasicScene from "./BasicScene";
 import Signal from "../utils/Signal";
 import Loader from "./Loader";
 import type AssetsUrl from "./InterfaceAssetsUrl";
-
 /**
  * @name BasicApp 
  * @description Abstract class 

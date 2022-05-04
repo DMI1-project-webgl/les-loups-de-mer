@@ -11,7 +11,7 @@ export default class BasicObject3D extends Group {
 
     // time of the application
     public time: number = 0
-  
+
     constructor (model: Object3D) {
         super()
 

@@ -46,7 +46,6 @@ export default class BasicScene extends Scene {
     }
 
     this.loader = app.loader
-
     this.camera = new PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 1000)
     this.setCameraPosition()
     this.add(this.camera)
@@ -117,7 +116,6 @@ export default class BasicScene extends Scene {
   init () {
     throw new Error('method must be implemented')
   }
-
   start () {
     throw new Error('method must be implemented')
   }
