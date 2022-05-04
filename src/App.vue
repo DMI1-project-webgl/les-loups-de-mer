@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Canvas from './components/Canvas.vue';
+import Draggable from './components/Draggable.vue';
 </script>
 
 <template>
@@ -8,17 +9,18 @@ import Canvas from './components/Canvas.vue';
   </header>
 
   <div class="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/clean">Clean</router-link>
-      <router-link to="/greenery">Greenery</router-link>
-      <router-link to="/food">Food</router-link>
-      <router-link to="/result">Result</router-link>
-      <router-link to="/shop">Shop</router-link>
-      <router-link to="/newsletter">Newsletter</router-link>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+    <router-link to="/clean">Clean</router-link>
+    <router-link to="/greenery">Greenery</router-link>
+    <router-link to="/food">Food</router-link>
+    <router-link to="/result">Result</router-link>
+    <router-link to="/shop">Shop</router-link>
+    <router-link to="/newsletter">Newsletter</router-link>
   </div>
 
   <Canvas />
+  <Draggable />
 
   <router-view />
 </template>
