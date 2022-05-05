@@ -1,11 +1,12 @@
 import BasicApp from "../core/BasicApp";
-import MainScene from "./MainScene";
+import ExperienceScene from "./ExperienceScene";
+import HomeScene from "./HomeScene";
 
 export default class MainApp extends BasicApp {
     constructor (canvas: HTMLCanvasElement) {
         super(canvas)
         
-        this.scene = new MainScene(this, canvas, this.signal)
+        this.scene = new ExperienceScene(this, canvas, this.signal)
         this.scenes.push(this.scene)
     }
 

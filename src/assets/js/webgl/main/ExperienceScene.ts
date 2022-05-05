@@ -3,12 +3,9 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import type BasicApp from '../core/BasicApp'
 import type Signal from '../utils/Signal'
 import MaterialFactory from '../core/MaterialFactory'
-import FioleBouillon from './object/FioleBouillon'
-import PotDepices from './object/PotDepices'
-import PotDhuile from './object/PotDhuile'
-import { Color, Object3D } from 'three'
+import { Color } from 'three'
 
-export default class MainScene extends BasicScene {
+export default class ExperienceScene extends BasicScene {
 
     private cursor: Cursor = { x: 0 , y: 0 }
     private materials: MaterialFactory
@@ -31,23 +28,7 @@ export default class MainScene extends BasicScene {
         this.background = this.materials.getEnv('main')
         this.background = new Color(0x111111)
 
-        const fioleBouillon = new FioleBouillon(this.loader.getAsset('SCN1_FioleBouillon_v1') as Object3D)
-        fioleBouillon.applyMaterials(this.materials)
-        fioleBouillon.position.set(0,0.9,0)
-        this.add(fioleBouillon)
-        this.models.push(fioleBouillon)
-
-        const potDepices = new PotDepices(this.loader.getAsset('SCN1_PotDepices_v2') as Object3D)
-        potDepices.applyMaterials(this.materials)
-        potDepices.position.set(-0.7,0,0)
-        this.add(potDepices)
-        this.models.push(potDepices)
-
-        const potDhuile = new PotDhuile(this.loader.getAsset('SCN1_PotDhuile_v1') as Object3D)
-        potDhuile.applyMaterials(this.materials)
-        potDhuile.position.set(0.7,0,0)
-        this.add(potDhuile)
-        this.models.push(potDhuile)
+        
     }
     
     onMouseMove (event: MouseEvent) {
