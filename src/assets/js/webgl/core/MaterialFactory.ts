@@ -48,6 +48,7 @@ export default class MaterialFactory {
    */
   getMaterial (name:string): MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial  {
     let materialName = 'default'
+    console.log(name)
     switch (name) {
       case 'Bouchon':
       case 'Bouchon_epices':
@@ -61,6 +62,23 @@ export default class MaterialFactory {
 
       case 'Texture_intérieur':
         materialName = 'epices'
+        break
+
+      case 'Can':
+      case 'Drink_1':
+        materialName = 'metal'
+        break
+
+      case 'PlasticBag':
+        materialName = 'plasticBag'
+        break
+
+      case 'Body':
+        materialName = 'plasticBottle'
+        break
+
+      case 'Caps':
+        materialName = 'bluePlastic'
         break
 
       default:
@@ -101,6 +119,44 @@ export default class MaterialFactory {
         m.envMap = this.hdrCubeRenderTarget.texture
         material = m
         break
+
+      case 'metal':
+        material = new MeshStandardMaterial({
+          color: 0x666666,
+          metalness: 0.9,
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_Metal_Roughness')
+        })
+        break
+
+      case 'plasticBag':
+        material = new MeshStandardMaterial({
+          // color: 0x111111,
+          map: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Albedo'),
+          displacementMap: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Displacement'),
+          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Normal'),
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Roughness')
+        })
+      break
+
+      case 'plasticBottle': {
+        const m = new MeshPhysicalMaterial()
+        m.thickness = 1.5
+        m.roughness = 1
+        m.clearcoat = 0.1
+        m.clearcoatRoughness = 0
+        m.transmission = 1
+        m.ior = 1.25
+        m.envMapIntensity = 25
+        m.envMap = this.hdrCubeRenderTarget.texture
+        material = m
+        break
+      }
+
+      case 'bluePlastic': {
+        material = new MeshStandardMaterial({
+          color: 0xff0000,
+        })
+      }
 
       default:
         break

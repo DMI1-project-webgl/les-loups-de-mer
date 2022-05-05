@@ -5,6 +5,7 @@ import type BasicObject3D from './BasicObject3D'
 import type Signal from "../utils/Signal";
 import type Loader from './Loader';
 import type BasicApp from './BasicApp';
+import Stats from 'three/examples/jsm/libs/stats.module';
 
 /**
  * @name BasicScene 
@@ -23,6 +24,7 @@ export default class BasicScene extends Scene {
   public signal: Signal
   public loader: Loader
 
+  private stats: Stats
   private canvas: HTMLCanvasElement
   private clock: Clock
   private controls!: OrbitControls
@@ -55,6 +57,8 @@ export default class BasicScene extends Scene {
       antialias: true
     })
 
+    this.stats = Stats()
+
     this.setupControls()
 
     this.clock = new Clock()
@@ -65,6 +69,8 @@ export default class BasicScene extends Scene {
     this.time = Date.now()
     this.isRunning = true
     this.tick()
+
+    document.body.appendChild(this.stats.dom)
 
     this.signal.add(this.onSignal);
   }
@@ -149,6 +155,8 @@ export default class BasicScene extends Scene {
     this.elapsedTime = this.clock.getElapsedTime()
     this.deltaTime = (Date.now() - this.time) * 0.001
     this.time = Date.now()
+
+    this.stats.update()
 
     this.update()
 

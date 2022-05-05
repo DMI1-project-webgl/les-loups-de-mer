@@ -31,23 +31,41 @@ export default class HomeScene extends BasicScene {
         this.background = this.materials.getEnv('main')
         this.background = new Color(0x111111)
 
-        const fioleBouillon = new FioleBouillon(this.loader.getAsset('SCN1_FioleBouillon_v1') as Object3D)
+        /* const fioleBouillon = new FioleBouillon(this.loader.getAsset('SCN1_FioleBouillon_v1') as Object3D)
         fioleBouillon.applyMaterials(this.materials)
         fioleBouillon.position.set(0,0.9,0)
         this.add(fioleBouillon)
-        this.models.push(fioleBouillon)
+        this.models.push(fioleBouillon) */
 
         const potDepices = new PotDepices(this.loader.getAsset('SCN1_PotDepices_v2') as Object3D)
         potDepices.applyMaterials(this.materials)
-        potDepices.position.set(-0.7,0,0)
+        potDepices.position.set(-5,0,0)
         this.add(potDepices)
         this.models.push(potDepices)
 
-        const potDhuile = new PotDhuile(this.loader.getAsset('SCN1_PotDhuile_v1') as Object3D)
+        const potDhuile = new PotDhuile(this.loader.getAsset('SCN2_Drink_V2') as Object3D)
         potDhuile.applyMaterials(this.materials)
-        potDhuile.position.set(0.7,0,0)
+        potDhuile.position.set(-2,0,0)
         this.add(potDhuile)
         this.models.push(potDhuile)
+
+        const can = new PotDhuile(this.loader.getAsset('SCN2_Can') as Object3D)
+        can.applyMaterials(this.materials)
+        can.position.set(0.5,0,0)
+        this.add(can)
+        this.models.push(can)
+
+        const poubelle = new PotDhuile(this.loader.getAsset('SCN2_PlasticBag_v3') as Object3D)
+        poubelle.applyMaterials(this.materials)
+        poubelle.position.set(6,0,0)
+        this.add(poubelle)
+        this.models.push(poubelle)
+
+        const bottle = new PotDhuile(this.loader.getAsset('SCN2_Bottle_v3') as Object3D)
+        bottle.applyMaterials(this.materials)
+        bottle.position.set(3,0,0)
+        this.add(bottle)
+        this.models.push(bottle)
     }
     
     onMouseMove (event: MouseEvent) {
@@ -60,7 +78,7 @@ export default class HomeScene extends BasicScene {
     }
 
     setCameraPosition () {
-        this.camera.position.set(0, 0, 3)
+        this.camera.position.set(0, 0, 10)
     }
 
     onSignal (slug: Array<string|number>) {
