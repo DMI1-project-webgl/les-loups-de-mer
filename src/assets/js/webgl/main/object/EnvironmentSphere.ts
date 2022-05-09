@@ -1,9 +1,13 @@
-import { Scene, BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Vector3, Group, Object3D, IcosahedronGeometry, ShaderMaterial } from 'three'
+import { Scene, BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Vector3, Group, Object3D, IcosahedronGeometry, ShaderMaterial, Sphere, DoubleSide, Color, AdditiveBlending } from 'three'
 import type { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import BasicObject3D from '../../core/BasicObject3D'
 
-import fragmentShader from '../../shaders/sphere_fragment.glsl?raw'
-import vertexShader from '../../shaders/sphere_vertex.glsl?raw'
+import sphereFragmentShader from '../../shaders/sphere_fragment.glsl?raw'
+import sphereVertexShader from '../../shaders/sphere_vertex.glsl?raw'
+
+import pollutionFragmentShader from '../../shaders/pollution_fragment.glsl?raw'
+import pollutionVertexShader from '../../shaders/pollution_vertex.glsl?raw'
+
 
 function getSphereMesh() {
     let speed: number = 0.08
@@ -12,6 +16,9 @@ function getSphereMesh() {
     let density: number = 2.5
     let strength: number = 0.02
     let offset: number = Math.PI * 2
+
+    const vertexShader = sphereVertexShader
+    const fragmentShader = sphereFragmentShader
 
     const geometry = new IcosahedronGeometry( size, 64 );
     const material = new ShaderMaterial({
@@ -42,6 +49,41 @@ function getSphereMesh() {
     return new Mesh(geometry, material);
 }
 
+function getPollutionSmog() {
+    const vertexShader = pollutionVertexShader
+    const fragmentShader = pollutionFragmentShader
+
+    const geometry = new SphereGeometry(13, 80, 80)
+    const material = new ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        uniforms: { 
+            attenuation: {
+                value: 1.15
+            },
+            anglePower: {
+                value: 16
+            },
+            spotPosition: {
+                value: new Vector3(0, 0, 0)
+            },
+            lightColor: {
+                value: new Color(0xCAC92B)
+            },
+        },
+        side: DoubleSide,
+        // Sympa pour donner un effet clair au milieu
+        // blending	: AdditiveBlending,
+        transparent: true,
+        depthWrite: false,
+    });
+    const basicMaterial = new MeshBasicMaterial({
+        color: 0xff0000
+    })
+
+    return new Mesh(geometry, material);
+}
+
 export default class EnvironmentSphere extends BasicObject3D {
     public mesh!: Mesh
     public childrens!: Group
@@ -55,7 +97,8 @@ export default class EnvironmentSphere extends BasicObject3D {
 
     constructor() {
         super(getSphereMesh());
-        //this.init()
+        
+        this.add(getPollutionSmog())
     }
 
     // Initialization
