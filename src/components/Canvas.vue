@@ -5,26 +5,46 @@
 </template>
 
 <script lang="ts">
-import MainApp from '../assets/js/webgl/main/MainApp'
+import App1 from '../assets/js/webgl/main/App1'
+import App2 from '../assets/js/webgl/main/App2'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CanvasElement',
   data() {
     return {
-      app: null
+      app1: null,
+      app2: null
     };
   },
   watch:{
     $route (to, from) {
-      this.app.changeState('route-' + to.name.toLowerCase())
+      const pageName = to.name.toLowerCase()
+      switch (pageName) {
+            case 'home':
+              if (this.app2) this.app2.destroy()
+              this.app1 = new App1(this.$refs['canvas'] as HTMLCanvasElement)
+                break
+            case 'clean':
+              if (this.app1) this.app1.destroy()
+              this.app2 = new App2(this.$refs['canvas'] as HTMLCanvasElement)
+                break
+              case 'greenery':
+              case 'food':
+                if (this.app1) this.app1.destroy()
+                break
+            default:
+              if (this.app1) this.app1.destroy()
+              if (this.app2) this.app2.destroy()
+        }
+
+      if (this.app1) this.app1.changeState(['route-' + pageName])
+      if (this.app2) this.app2.changeState(['route-' + pageName])
     }
   },
-  mounted () {
-    this.app = new MainApp(this.$refs['canvas'] as HTMLCanvasElement)
-  },
   beforeDestroy () {
-    this.app.destroy()
+    if (this.app1) this.app1.destroy()
+    if (this.app2) this.app2.destroy()
   }
 })
 </script>

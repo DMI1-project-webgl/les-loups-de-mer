@@ -9,7 +9,6 @@ import Canvas from './components/Canvas.vue';
 
   <div class="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
       <router-link to="/clean">Clean</router-link>
       <router-link to="/greenery">Greenery</router-link>
       <router-link to="/food">Food</router-link>

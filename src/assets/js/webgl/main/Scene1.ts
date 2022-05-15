@@ -8,7 +8,7 @@ import PotDepices from './object/PotDepices'
 import PotDhuile from './object/PotDhuile'
 import { Color, Object3D } from 'three'
 
-export default class MainScene extends BasicScene {
+export default class Scene1 extends BasicScene {
 
     private cursor: Cursor = { x: 0 , y: 0 }
     private materials: MaterialFactory
@@ -68,16 +68,6 @@ export default class MainScene extends BasicScene {
 
         switch (slug[0]) {
             case 'route-home':
-                // if (!this.duck) { return }
-                // this.removeObject(this.duck)
-                // this.cube = new Cube(1,1,1, 0x00ff00)
-                // this.addObject(this.cube)
-                break
-            case 'route-about':
-                // if (!this.cube) { return }
-                // this.removeObject(this.cube)
-                // this.duck = new Duck()
-                // this.addObject(this.duck)
                 break
             default:
         }
