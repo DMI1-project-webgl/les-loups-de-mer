@@ -78,6 +78,8 @@ export default class BasicApp {
     }
 
     destroy () {
-        this.scene.destroy()
+        for (let i = 0; i < this.scenes.length; i++) {
+            this.scenes[i].destroy()
+        }
     }
 }

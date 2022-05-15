@@ -32,4 +32,8 @@ header {
 .nav {
   z-index: 10;
 }
+
+.nav a {
+  margin: 10px;
+}
 </style>

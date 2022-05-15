@@ -5,16 +5,16 @@
 </template>
 
 <script lang="ts">
-import App1 from '../assets/js/webgl/main/App1'
-import App2 from '../assets/js/webgl/main/App2'
+import HomeApp from '../assets/js/webgl/main/HomeApp'
+import ExperienceApp from '../assets/js/webgl/main/ExperienceApp'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CanvasElement',
   data() {
     return {
-      app1: null,
-      app2: null
+      homeApp: null,
+      experienceApp: null
     };
   },
   watch:{
@@ -22,29 +22,30 @@ export default defineComponent({
       const pageName = to.name.toLowerCase()
       switch (pageName) {
             case 'home':
-              if (this.app2) this.app2.destroy()
-              this.app1 = new App1(this.$refs['canvas'] as HTMLCanvasElement)
+              if (this.experienceApp) this.experienceApp.destroy(); this.experienceApp = null
+              this.homeApp = new HomeApp(this.$refs['canvas'] as HTMLCanvasElement)
                 break
             case 'clean':
-              if (this.app1) this.app1.destroy()
-              this.app2 = new App2(this.$refs['canvas'] as HTMLCanvasElement)
+              if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
+              this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement)
                 break
               case 'greenery':
               case 'food':
-                if (this.app1) this.app1.destroy()
+                if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
+                if (!this.experienceApp) this.$router.push('clean')
                 break
             default:
-              if (this.app1) this.app1.destroy()
-              if (this.app2) this.app2.destroy()
+              if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
+              if (this.experienceApp) this.experienceApp.destroy(); this.experienceApp = null
         }
 
-      if (this.app1) this.app1.changeState(['route-' + pageName])
-      if (this.app2) this.app2.changeState(['route-' + pageName])
+      if (this.homeApp) this.homeApp.changeState(['route-' + pageName])
+      if (this.experienceApp) this.experienceApp.changeState(['route-' + pageName])
     }
   },
   beforeDestroy () {
-    if (this.app1) this.app1.destroy()
-    if (this.app2) this.app2.destroy()
+    if (this.homeApp) this.homeApp.destroy()
+    if (this.experienceApp) this.experienceApp.destroy()
   }
 })
 </script>

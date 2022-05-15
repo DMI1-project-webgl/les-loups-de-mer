@@ -1,4 +1,4 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D, Color } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import type { Size } from 'src/assets/js/webgl/utils/index'
 import type BasicObject3D from './BasicObject3D'
@@ -163,6 +163,7 @@ export default class BasicScene extends Scene {
     window.cancelAnimationFrame(this.raf)
     this.stop()
     window.removeEventListener('resize', this.onResize)
+    this.renderer.clear()
     this.renderer.dispose()
     this.canvas = null
     this.signal.remove(this.onSignal);

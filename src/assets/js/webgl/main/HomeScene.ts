@@ -8,7 +8,7 @@ import PotDepices from './object/PotDepices'
 import PotDhuile from './object/PotDhuile'
 import { Color, Object3D } from 'three'
 
-export default class Scene1 extends BasicScene {
+export default class HomeScene extends BasicScene {
 
     private cursor: Cursor = { x: 0 , y: 0 }
     private materials: MaterialFactory
