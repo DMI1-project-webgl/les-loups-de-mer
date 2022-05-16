@@ -70,7 +70,7 @@ export default class ExperienceScene extends BasicScene {
     }
 
     setCameraPosition () {
-        this.camera.position.set(0, 0, 160)
+        this.camera.position.set(0, 0, 250)
         this.camera.lookAt(0, 0, 0)
     }
 
