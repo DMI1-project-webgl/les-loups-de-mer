@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import MainScene from '../assets/js/webgl/main/MainScene'
+import HomeScene from '../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 import { gsap } from "gsap";
 import { TimelineMax, TweenLite , CSSPlugin, ScrollToPlugin, Draggable } from "gsap/all"; 
