@@ -1,5 +1,15 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
+  --dark-blue: #163860;
+  --blue: #23548f;
+  --light-blue: #4f85c1;
+
+  --light-brow: #fef9f0;
+  --green: #8aa385;
+  --red: #da5e33;
+  --pink: #ed9f91;
+  --yellow: #f5b548;
+
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -23,6 +33,9 @@
 
 /* semantic color variables for this project */
 :root {
+  --color-primary: var(--dark-blue);
+  --color-secondary: var(--light-brow);
+
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
@@ -76,6 +89,65 @@ main::before {
   }
 }
 
+@font-face {
+  font-family: "frasha-regular";
+  src: url("./fonts/frastha_regular-webfont.woff2") format("woff2"),
+         url("./fonts/frastha_regular-webfont.woff") format("woff");
+}
+@font-face {
+  font-family: "greatvibes-regular";
+  src: url("./fonts/greatvibes-regular-webfont.woff2") format("woff2"),
+         url("./fonts/greatvibes-regular-webfont.woff") format("woff");
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/leaguespartan-variablefont_wght-webfont.woff2") format("woff2"),
+         url("./fonts/leaguespartan-variablefont_wght-webfont.woff") format("woff");
+}
+
+
+.color--primary{
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+.color--primary .background--img{
+  height: 100%;
+  width: unset;
+  color: var(--color-secondary);
+}
+.color--secondary{
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}
+.color--primary .background--img{
+  height: 100%;
+  width: unset;
+  color: white;
+}
+.background--primary svg{
+  height: 100%;
+  width: unset;
+  color: var(--color-primary);
+}
+.background--secondary svg{
+  height: 100%;
+  width: unset;
+  color: white;
+}
+.background--tertiary svg{
+  height: 100%;
+  width: unset;
+  color: var(--color-primary);
+}
+.color--none {
+  background: transparent;
+}
+
+/* ================================================== */
+/*                     MIXINS                         */
+/* ================================================== */
+
+
 *,
 *::before,
 *::after {
@@ -87,14 +159,121 @@ main::before {
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
-  line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* H1- Frastha Regular 90pt */
+h1 {
+  font-family: "frasha-regular";
+  font-size: 5.5em;
+}
+
+/* H2- Frastha Regular 60pt */
+h2 {
+  font-family: "frasha-regular";
+  font-size: 3em;
+}
+
+/* H3- LeagueSpartan Regular 20pt */
+h3 {
+  font-family: "leaguespartan";
+  font-size: 1.2em;
+}
+
+/* H4- LeagueSpartan Light 14pt */
+h4 {
+  font-family: "leaguespartan";
+  font-size: .85em;
+  font-weight: lighter;
+}
+
+/* p- LeagueSpartan Regular 16pt - interlignagne 20 */
+p {
+  font-family: "leaguespartan";
+  font-size: 1em;
+  line-height: 20pt;
+  font-weight: bold;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+
+/* GENERAL */
+
+.page {
+  position: fixed;
+  top: 0%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+section.page {
+  height: 100vh;
+  width: 100vw;
+}
+
+header ~ section.page{
+  border: 1px solid red;
+  padding-left: 150px;
+  padding-top: calc(3% + 26px + 26px);
+}
+
+/* .col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}  */
+
+.d-none {
+  display: none !important;
+}
+
+.btn {
+  width: fit-content;
+  padding: 15px 30px;
+}
+.btn--primary {
+  font-family: "frasha-regular";
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+.btn span {
+  font-size: 1.2em;
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  height: 100%;
+  width: 100%;
+}
+
+.container-fluid {
+  height: 100%;
 }
