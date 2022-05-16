@@ -51,7 +51,8 @@ export default defineComponent({
       return array[i] || array[i-1];
     },
     displayPercentX( widthContainer: number, widthDraggable: number, elementX: number) {
-      const percentX = Math.floor(( 100 * Math.floor(elementX) ) / ( widthContainer - widthDraggable -1)) ;
+      let percentX = Math.round(( 100 * Math.round(elementX) ) / ( widthContainer - widthDraggable -1)) ;
+      if (isNaN(percentX)) percentX = 0;
       document.querySelector("span.percent").textContent = percentX.toString();
     },
     initPositionArray(step: number, stepWidth: number) {

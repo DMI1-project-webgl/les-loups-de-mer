@@ -1,0 +1,126 @@
+<template>
+    <section v-if="display" class="page actions color--secondary">
+        <div class="container-fluid"> 
+            <div class="row h-100">
+                <div class="col-12 col-lg-6 h-lg-100">
+                    <div class="actions--img-container">
+                        <div class="actions--img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="actions--img">
+                            <img src="" alt="">
+                        </div>
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 actions--col-content">
+                    <div class="actions--title-container">
+                        <h1 class="actions--title">Nos actions</h1>
+                    </div>
+                    <div class="actions--content-container">
+                        <p class="actions--text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, earum nobis. Ea reprehenderit dolorum illo. Voluptate corrupti repudiandae, aspernatur harum maxime aliquid ducimus, doloribus autem vero, quas exercitationem minus nihil? </p>
+                        <p class="actions--text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, earum nobis. Ea reprehenderit dolorum illo. Voluptate corrupti repudiandae, aspernatur harum maxime aliquid ducimus, doloribus autem vero, quas exercitationem minus nihil? </p>
+                        <p class="actions--text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, earum nobis. Ea reprehenderit dolorum illo. Voluptate corrupti repudiandae, aspernatur harum maxime aliquid ducimus, doloribus autem vero, quas exercitationem minus nihil? </p>
+                    </div>
+                    <div class="actions--link-container btn btn--secondary">
+                        <img src="" alt="">
+                    </div>
+                    <div class="ws-50"></div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div> 
+    </section>
+</template>
+
+<script lang="ts">
+import MainScene from '../assets/js/webgl/main/MainScene'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ActionsPage',
+  props: ['display'],
+  mounted () {
+      
+  },
+  methods: {
+
+  },
+  beforeDestroy () {
+  }
+})
+</script>
+
+<style scoped>
+.actions--col-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.actions--img-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    min-height: 50vh;
+}
+
+.actions--img img { 
+    background: transparent;
+}
+.actions--img {
+    border: 2px solid var(--color-primary);
+    aspect-ratio: 4 / 5;
+    height: 50%;
+    position: absolute;
+}
+.actions--img:nth-child(1) {
+    top: 0;
+    right: 0;
+}
+.actions--img:nth-child(2) {
+    bottom: 0;
+    left: 0;
+}
+
+.actions--text {
+    padding: 3% 0px;
+}
+.actions--quote::before {
+    content: "«";
+    font-size: 5em;
+    color: var(--color-primary);
+    font-family: "frasha-regular";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, 100%);
+}
+.actions--quote::after {
+    content: "»";
+    font-size: 5em;
+    color: var(--color-primary);
+    font-family: "frasha-regular";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(-100%, -100%);
+}
+.actions--name {
+    font-family:  "greatvibes-regular";
+    font-size: 2em;
+    font-weight: 100;
+    line-height: 1.5em;
+}
+.actions--profession {
+    font-family:  "greatvibes-regular";
+    font-size: 1.3em;
+    font-weight: 100;
+}
+.actions--img-container canvas{
+    height: 100%;
+    width: 100%;
+    border: 1px solid green;
+}
+
+</style>
