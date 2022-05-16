@@ -6,7 +6,7 @@
                     <div class="values--img-container">
                         <div class="values--img"></div>
                         <div class="values--img">
-                            <img src="" alt="">
+                            <img src="./../assets/img/christelle.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -22,12 +22,14 @@
                             <p class="values--profession">fondatrice de Loup de mer</p>
                         </div>
                     </div>
-                    <div class="values--link-container btn btn--secondary">
-                        <img src="" alt="">
+                    <div class="values--link-container">
+                        <button @click="goTo" class="values--link btn--secondary">
+                            <img src="./../assets/img/cliquer_ici.svg" alt="">
+                        </button>
                     </div>
                     <div class="ws-50"></div>
                 </div>
-                <div class="col-1"></div>
+                <!-- <div class="col-1"></div> -->
             </div>
         </div> 
     </section>
@@ -39,12 +41,15 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ValuesPage',
-  props: ['display'],
+  props: ['show','display'],
+  emits: ['next'],
   mounted () {
       
   },
   methods: {
-
+    goTo() {
+      this.$emit('next', 'toActions')      
+    },
   },
   beforeDestroy () {
   }
@@ -135,6 +140,12 @@ export default defineComponent({
     font-family:  "greatvibes-regular";
     font-size: 1.3em;
     font-weight: 100;
+}
+.values--link-container {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100px;
+    align-items: flex-end;
 }
 
 </style>

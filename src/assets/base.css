@@ -1,5 +1,6 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
+  /* loup de mer theme */
   --dark-blue: #163860;
   --blue: #23548f;
   --light-blue: #4f85c1;
@@ -10,6 +11,8 @@
   --pink: #ed9f91;
   --yellow: #f5b548;
 
+
+  /* default theme */
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -35,6 +38,7 @@
 :root {
   --color-primary: var(--dark-blue);
   --color-secondary: var(--light-brow);
+  --color-tertiary: var(--blue);
 
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
@@ -191,6 +195,7 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: hidden;
 }
 
 section.page {
@@ -235,7 +240,23 @@ header ~ section.page{
 .btn span {
   font-size: 1.2em;
 }
-
+.btn--secondary {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+.btn--secondary img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.btn--secondary-container {
+  height: 200px;
+  width: 200px;
+  /* background-color: currentColor; */
+  border-radius: 100px;
+  border: 1px solid currentColor;
+}
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;

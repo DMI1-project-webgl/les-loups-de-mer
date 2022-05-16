@@ -12,9 +12,9 @@
     </div>
     <div class="header--main">
       <div class="header--logo">
-        <a href="/" class="header--link">
+        <button @click="goTo" class="header--link">
           <img src="../assets/img/logo_texte.svg" alt="">
-        </a>
+        </button>
       </div>
       <div class="header--text-container">
         <h4 class="header--text">Nos produits</h4>
@@ -29,12 +29,16 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'HeaderElement',
-  props: ['display', 'banner'],
+  props: ['show','display', 'banner'],
+  emits: ['next'],
+  
   mounted () {
       
   },
   methods: {
-
+    goTo() {
+      this.$emit('next', '')      
+    }
   },
   beforeDestroy () {
   }

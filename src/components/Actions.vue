@@ -22,12 +22,12 @@
                         <p class="actions--text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, earum nobis. Ea reprehenderit dolorum illo. Voluptate corrupti repudiandae, aspernatur harum maxime aliquid ducimus, doloribus autem vero, quas exercitationem minus nihil? </p>
                         <p class="actions--text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, earum nobis. Ea reprehenderit dolorum illo. Voluptate corrupti repudiandae, aspernatur harum maxime aliquid ducimus, doloribus autem vero, quas exercitationem minus nihil? </p>
                     </div>
-                    <div class="actions--link-container btn btn--secondary">
-                        <img src="" alt="">
+                    <div class="actions--link-container">
+                        <a href="/clean" class="actions--link btn--secondary">
+                            <img src="./../assets/img/cliquer_ici.svg" alt="">
+                        </a>
                     </div>
-                    <div class="ws-50"></div>
                 </div>
-                <div class="col-1"></div>
             </div>
         </div> 
     </section>
@@ -121,6 +121,12 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     border: 1px solid green;
+}
+
+.actions--link-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
 }
 
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <section v-if="display" id="welcome" class="page welcome color--secondary">
+  <section v-show="display" id="welcome" class="page welcome color--secondary">
     <div class="welcome--logo-container">
       <img src="../assets/img/logo_complet.svg" alt="">
     </div>
     <div class="welcome--arrow-container">
-      <div id="go-to-discover">
-        <img src="../assets/img/fleche.svg" alt="">
-      </div>
+      <button @click="goTo" id="go-to-discover">
+        <img src="../assets/img/decouvrir_fleche.svg" alt="">
+      </button>
     </div>
   </section>
 </template>
@@ -17,14 +17,14 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'WelcomePage',
-  props: ['display'],
+  props: ['show','display'],
+  emits: ['next'], 
   mounted () {
-      // document.getElementById('go-to-discover').addEventListener("click", this.goToDiscover() );
-      // // console.log(this.$Home.Show);
+    
   },
   methods: {
-    goToDiscover() {
-      console.log("discover")
+    goTo() {
+      this.$emit('next', 'toDiscover')      
     }
   },
   beforeDestroy () {
@@ -46,7 +46,7 @@ export default defineComponent({
 .welcome--arrow-container {
   height: 100px;
   width: 100px;
-  border: 1px solid blue;
+  transform: rotate(-90deg);
   border-radius: 50%;
   margin: 0 auto 30px;
 }

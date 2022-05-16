@@ -3,27 +3,32 @@
     <div class="container-fluid">
       <div class="row h-100">
         <div class="col-12 col-lg-4 h-lg-100">
-          <div v-if="index == 0" class="slider--content-container">
-            <h2 class="slider--title decoration">Les Flocons</h2>
+          <div v-if="this.index == 0" class="slider--content-container">
+            <h2 class="slider--title decoration">Les Flocons 1</h2>
             <h3 class="slider--subtitle">Vitalité</h3>
             <p class="slider--text">Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennet l'énergie dans la durée, favorisent le désir et la libido. Retrouvez l'énergie et la vivacité d'un grand requin marteau</p>
           </div>
-          <div v-if="index == 1" class="slider--content-container">
-            <h2 class="slider--title decoration">Les Flo cons</h2>
+          <div v-else-if="this.index == 1" class="slider--content-container">
+            <h2 class="slider--title decoration">Les Flo cons 2</h2>
             <h3 class="slider--subtitle">Rivalité</h3>
             <p class="slider--text">Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennet l'énergie dans la durée, favorisent le désir et la libido. Retrouvez l'énergie et la vivacité d'un grand requin marteau</p>
-            <a href="#" class="">
+          </div>
+          <div v-else-if="this.index == 2" class="slider--content-container">
+            <h2 class="slider--title decoration">Les Flo cons 3</h2>
+            <h3 class="slider--subtitle">Rivalité</h3>
+            <p class="slider--text">Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennet l'énergie dans la durée, favorisent le désir et la libido. Retrouvez l'énergie et la vivacité d'un grand requin marteau</p>
+            <button @click="goTo" href="#" class="">
               <div class="btn btn--primary">
                 <span>En savoir plus</span>
               </div>
-            </a>
+            </button>
           </div>
         </div>
         <div class="col-12 col-lg-7 h-lg-100">
           <div class="slider--canvas-container">
             <canvas></canvas>
-            <div class="slider--arrow-prev"></div>
-            <div class="slider--arrow-next"></div>
+            <button @click="slidePrev" id="prev" class="slider--arrow-prev"></button>
+            <button @click="slideNext" id="next" class="slider--arrow-next"></button>
           </div>
         </div>
       </div>
@@ -38,10 +43,20 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'SlidePage',
   props: ['display', 'index'],
+  emits: ['next', 'slide'], 
   mounted () {
-  
+    
   },
   methods: {
+    goTo() {
+      this.$emit('next', 'toValues')      
+    },
+    slideNext() {
+      this.$emit('slide', 'next')
+    },
+    slidePrev() {
+      this.$emit('slide', 'prev')
+    }
 
   },
   beforeDestroy () {

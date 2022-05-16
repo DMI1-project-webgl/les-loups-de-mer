@@ -138,25 +138,44 @@
         <path id="Tracé_4244" data-name="Tracé 4244" d="M810.569,271.36c-7.531,18.188-.78,55.734,9.153,65.581,3.07,3.044,5.926,4.574,8.531,4.574a6.529,6.529,0,0,0,3.042-.755c9.871-5.134,9.087-36.71,3.363-53.822-1.442-4.309-.9-8.98-.424-13.1.553-4.781,1.03-8.906-1.7-11.386-1.858-1.687-4.821-2.267-9.311-1.825-5.6.546-9.974,4.261-12.656,10.735m12.977-8.015c.838-.083,1.608-.121,2.313-.121,2.171,0,3.7.39,4.552,1.167,1.711,1.553,1.3,5.075.832,9.156-.507,4.382-1.081,9.346.537,14.188,6.211,18.565,5.1,46.964-1.977,50.646-1.979,1.031-4.625-.079-7.865-3.292-9.307-9.226-15.588-45.778-8.553-62.762,2.286-5.522,5.706-8.544,10.161-8.982" transform="translate(823.274 218.349)" fill="currentColor"/>
       </g>
     </svg>
-    <div class="container-fluid">
-        <div class="row h-lg-100">
-            <div class="col-6">
-                <div class="discover--logo-container">
-                    <img src="" alt="">
-                </div>
+    <div class="container-fluid discover--container py-5 px-0">
+      <div class="row h-lg-100 mx-5">
+          <div class="col-6">
+              <div class="discover--logo-container">
+                  <img src="./../assets/img/logo_simple.svg" alt="">
+              </div>
+          </div>
+          <div class="col-6 position-relative">
+              <div class="discover--shark-container right">
+                  <img src="./../assets/img/requin.png" alt="">
+              </div>
+          </div>
+          <div class="col-12">
+              <div class="discover--title-container">
+                  <h1 class="discover--title">Découvrezz notre nouvelle gamme</h1>
+                  <p class="discover--subtitle">test 1 2</p>
+              </div>
+          </div>
+          <div class="col-6 position-relative">
+              <div class="discover--shark-container left">
+                  <img src="./../assets/img/requin.png" alt="">
+              </div>
+          </div>
+          <div class="col-6 position-relative">
+            <div class="discover--link-container">
+              <button @click="goTo" class="discover--link btn--secondary">
+                  <img src="./../assets/img/cliquer_ici.svg" alt="">
+              </button>
             </div>
-            <div class="col-6">
-                <div class="discover--shark-container">
-                    <img src="" alt="">
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="discover--title-container">
-                    <h1 class="discover--title">Oui</h1>
-                    <p class="discover--subtitle">test 1 2</p>
-                </div>
-            </div>
+          </div>
+      </div>
+      <div class="row px-0">
+        <div class="col-12 px-0">
+          <div class="discover--banner-container">
+            <p class="discover--banner">BLABLA BLABLA</p>
+          </div>
         </div>
+      </div>
     </div>
   </section>
 </template>
@@ -168,11 +187,14 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'DiscoverPage',
   props: ['display'],
+  emits: ['next'],
   mounted () {
       
   },
   methods: {
-
+    goTo() {
+      this.$emit('next', 'toSlide')      
+    }
   },
   beforeDestroy () {
   }
@@ -183,15 +205,55 @@ export default defineComponent({
 .discover {
     position: relative;
 }
-.discover .container-fluid {
+.discover .discover--container {
     position: absolute;
     top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.discover--title {
+.discover--logo-container {
+  height: 30vh;
+  width: fit-content;
+}
+.discover--shark-container {
+  height: 25vh;
+  aspect-ratio: 3/2 ;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
+.discover--shark-container.right {
+  right: 0;
+  top: 50%;
+  transform: translate(0,-50%) rotate(45deg) ;
+}
+.discover--shark-container.left {
+  left: 0;
+  top: 50%;
+  transform: translate(0,-50%) rotate(-45deg) ;
+}
+.discover--title-container {
+  padding: 3% 0 0 0;
+}
+
+.discover--link-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+.discover--subtitle {
+  font-size: 1.2em;
+  color: var(--color-tertiary);
+  font-weight: 900;
+}
+.discover--banner-container {
+  border-top: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  padding: 5px 0 15px 0;
+}
+.discover--banner {
+  font-size: 5em;
+  line-height: 1em;
+}
+
 </style>
 
