@@ -11,7 +11,7 @@ import pollutionVertexShader from '../../shaders/pollution_vertex.glsl?raw'
 
 function getSphereMesh() {
     let speed: number = 0.08
-    let size: number = 8
+    let size: number = 115
     let color: number = 0.55
     let density: number = 2.5
     let strength: number = 0.02
@@ -53,7 +53,7 @@ function getPollutionSmog() {
     const vertexShader = pollutionVertexShader
     const fragmentShader = pollutionFragmentShader
 
-    const geometry = new SphereGeometry(13, 80, 80)
+    const geometry = new SphereGeometry(150, 80, 80)
     const material = new ShaderMaterial({
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,

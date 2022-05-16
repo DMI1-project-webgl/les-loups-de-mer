@@ -3,8 +3,10 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import type BasicApp from '../core/BasicApp'
 import type Signal from '../utils/Signal'
 import MaterialFactory from '../core/MaterialFactory'
-import { Clock, Color, Mesh, ShaderMaterial } from 'three'
+import { Clock, Color, Mesh, Raycaster, ShaderMaterial, Vector2 } from 'three'
 import EnvironementSphere from './object/EnvironmentSphere'
+import MainFish from './fish/MainFish'
+import Vegetation from './object/Vegetation'
 
 export default class ExperienceScene extends BasicScene {
 
@@ -12,7 +14,14 @@ export default class ExperienceScene extends BasicScene {
     private materials: MaterialFactory
 
     private sphere: EnvironementSphere = null
-    private _clock: Clock = new Clock();
+    private _clock: Clock = new Clock()
+
+    private mainFish: MainFish
+
+    private period: number
+    private pointer: Vector2
+    private raycaster: Raycaster
+    private vegetation!: Vegetation
 
     constructor (app:BasicApp, canvas: HTMLCanvasElement, signal: Signal) {
         super(app, canvas, signal)
@@ -40,11 +49,20 @@ export default class ExperienceScene extends BasicScene {
         this.add(sphere)
         this.models.push(sphere)
         this.sphere = sphere
+
+        this.mainFish = new MainFish(this.renderer, this)
+
+        this.period = 10
+        this.raycaster = new Raycaster();
+        this.pointer = new Vector2();
+        this.vegetation = new Vegetation(this);
     }
     
     onMouseMove (event: MouseEvent) {
         this.cursor.x = event.clientX / this.sizes.width - 0.5
         this.cursor.y = event.clientY / this.sizes.height - 0.5
+        this.pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	    this.pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     }
     
     setupControls () {
@@ -52,7 +70,7 @@ export default class ExperienceScene extends BasicScene {
     }
 
     setCameraPosition () {
-        this.camera.position.set(-10, -10, -10)
+        this.camera.position.set(0, 0, 160)
         this.camera.lookAt(0, 0, 0)
     }
 
@@ -80,9 +98,28 @@ export default class ExperienceScene extends BasicScene {
             this.sphereMaterial.uniforms.uTime.value = this._clock.getElapsedTime()
         }
 
+        if (this.sphere) {
+            this.mainFish.render(this.cursor.x,this.cursor.y)
+        }
+
         this.models.forEach((model) => {
           model.update(this.deltaTime)
         })
+
+
+        if (this.raycaster) {
+            this.raycaster.setFromCamera( this.pointer, this.camera );
+
+            const intersects = this.raycaster.intersectObjects(this.vegetation.childrensArray, false);
+
+            console.log(intersects)
+
+            for ( let i = 0; i < intersects.length; i ++ ) {
+                intersects[ i ].object.scale.set(0.001, 0.001, Math.min(0.015, intersects[ i ].object.scale.z + 0.0015));
+
+            }
+        }
+        
     }
     
     destroy () {
