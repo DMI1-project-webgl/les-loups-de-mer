@@ -138,7 +138,7 @@
         <path id="Tracé_4244" data-name="Tracé 4244" d="M810.569,271.36c-7.531,18.188-.78,55.734,9.153,65.581,3.07,3.044,5.926,4.574,8.531,4.574a6.529,6.529,0,0,0,3.042-.755c9.871-5.134,9.087-36.71,3.363-53.822-1.442-4.309-.9-8.98-.424-13.1.553-4.781,1.03-8.906-1.7-11.386-1.858-1.687-4.821-2.267-9.311-1.825-5.6.546-9.974,4.261-12.656,10.735m12.977-8.015c.838-.083,1.608-.121,2.313-.121,2.171,0,3.7.39,4.552,1.167,1.711,1.553,1.3,5.075.832,9.156-.507,4.382-1.081,9.346.537,14.188,6.211,18.565,5.1,46.964-1.977,50.646-1.979,1.031-4.625-.079-7.865-3.292-9.307-9.226-15.588-45.778-8.553-62.762,2.286-5.522,5.706-8.544,10.161-8.982" transform="translate(823.274 218.349)" fill="currentColor"/>
       </g>
     </svg>
-    <div class="container-fluid discover--container py-5 px-0">
+    <div class="container-fluid discover--container px-0">
       <div class="row h-lg-100 mx-5">
           <div class="col-6">
               <div class="discover--logo-container">
@@ -153,7 +153,7 @@
           <div class="col-12">
               <div class="discover--title-container">
                   <h1 class="discover--title">Découvrezz notre nouvelle gamme</h1>
-                  <p class="discover--subtitle">test 1 2</p>
+                  <p class="discover--subtitle">Prooduits français, naturels et surtout rajeunissants</p>
               </div>
           </div>
           <div class="col-6 position-relative">
@@ -163,16 +163,16 @@
           </div>
           <div class="col-6 position-relative">
             <div class="discover--link-container">
-              <button @click="goTo" class="discover--link btn--secondary">
+              <a href="#slide" class="discover--link btn--secondary">
                   <img src="./../assets/img/cliquer_ici.svg" alt="">
-              </button>
+              </a>
             </div>
           </div>
       </div>
       <div class="row px-0">
         <div class="col-12 px-0">
           <div class="discover--banner-container">
-            <p class="discover--banner">BLABLA BLABLA</p>
+            <p class="discover--banner">BLABLA    BLABLA    BLABLA    BLABLA    BLABLA    BLABLA    BLABLA  </p>
           </div>
         </div>
       </div>
@@ -210,7 +210,7 @@ export default defineComponent({
     top: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .discover--logo-container {
   height: 30vh;
@@ -241,7 +241,7 @@ export default defineComponent({
     align-items: flex-end;
 }
 .discover--subtitle {
-  font-size: 1.2em;
+  font-size: .7em;
   color: var(--color-tertiary);
   font-weight: 900;
 }
@@ -249,11 +249,25 @@ export default defineComponent({
   border-top: 2px solid var(--color-primary);
   border-bottom: 2px solid var(--color-primary);
   padding: 5px 0 15px 0;
+  display: inline-flex;
+  width: 100%;
 }
 .discover--banner {
-  font-size: 5em;
+  font-size: 2em;
   line-height: 1em;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(110%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
 
 </style>
 

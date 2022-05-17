@@ -14,13 +14,13 @@ import Discover from './../components/Discover.vue';
 </script>
 
 <template>
+  <Loading :display="this.Show.loading" @next="next" />
   <Header :display="this.Show.header" :banner="this.Show.banner" @next="next"/>
   <Welcome :display="this.Show.welcome" @next="next"/>
-  <Loading :display="this.Show.loading" @next="next" />
+  <Discover  :display="this.Show.discover" @next="next"/>
   <Slide :display="this.Show.slide" :index="this.Show.slideIndex" @next="next" @slide="slideTo"/>
   <Values :display="this.Show.values" @next="next"/>
   <Actions :display="this.Show.actions" @next="next"/>
-  <Discover  :display="this.Show.discover" @next="next"/>
   
 </template>
 
@@ -34,9 +34,9 @@ export default defineComponent({
         header: false,
         banner: true,
         welcome: true,
-        discover: false,
+        discover: true,
         loading: false,
-        slide: false,
+        slide: true,
         slideIndex: 0,
         values: false,
         actions: false,
@@ -62,17 +62,14 @@ export default defineComponent({
       }
     },
     next(elem: string) {
-      console.log(elem )
+      if (elem == 'toValues') {
+        this.Show.slide = false;
+        this.Show.welcome = false;
+        this.Show.discover = false;
+        this.Show.header = true;
+        this.Show.values = true;
+      }
       switch (elem) {
-        case 'toDiscover':
-          this.Show.welcome = false;
-          this.Show.discover = true; 
-          break;
-        case 'toSlide':
-          this.Show.discover = false;
-          this.Show.header = true;
-          this.Show.slide = true;
-          break;
         case 'toValues': 
           this.Show.slide = false;
           this.Show.header = true;

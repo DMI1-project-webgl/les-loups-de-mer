@@ -4,9 +4,9 @@
       <img src="../assets/img/logo_complet.svg" alt="">
     </div>
     <div class="welcome--arrow-container">
-      <button @click="goTo" id="go-to-discover">
+      <a href="#discover" id="go-to-discover">
         <img src="../assets/img/decouvrir_fleche.svg" alt="">
-      </button>
+      </a>
     </div>
   </section>
 </template>
@@ -44,11 +44,11 @@ export default defineComponent({
   margin: auto;
 }
 .welcome--arrow-container {
-  height: 100px;
-  width: 100px;
+  height: 15vh;
+  width: 15vh;
   transform: rotate(-90deg);
   border-radius: 50%;
-  margin: 0 auto 30px;
+  margin: 0 auto 5%;
 }
 .welcome--arrow-container img {
   transform: rotate(90deg);

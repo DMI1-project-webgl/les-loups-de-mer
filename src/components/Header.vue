@@ -1,13 +1,13 @@
 <template>
-  <header v-if="display" id="1" class="page header">
+  <header v-if="display" id="1" class="page-full header">
     <div v-if="banner" class="banner--container color--primary">
       <div class="banner--text">
-        <p>test</p>
+        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
       </div>
     </div>
     <div v-if="banner != false" class="banner--container color--secondary">
-      <div class="banner--text">
-        <p>test</p>
+      <div class="header--text-upper">
+        <p>protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète   protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète </p>
       </div>
     </div>
     <div class="header--main">
@@ -49,6 +49,7 @@ export default defineComponent({
 /* HEADER */
 header {
   pointer-events: none;
+  z-index: 1;
 }
 .header--main {
   position: relative;
@@ -82,9 +83,11 @@ header {
   left: 0;
   text-align: center;
   border-bottom: 2px solid currentColor;
+  padding: 5px 0;
 }
-.header--text {
+.header--text-upper {
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .header--link {
   width: 100%; 
