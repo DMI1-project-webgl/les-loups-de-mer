@@ -11,7 +11,9 @@ export default class ExperienceApp extends BasicApp {
 
     getAssets () {
         return {
-          models: [] as string[],
+          models: [
+            'CoralTestALONE.gltf'
+          ] as string[],
           textures: [] as string[],
           envs: ['env'] as string[],
           hdr: [] as string[]
