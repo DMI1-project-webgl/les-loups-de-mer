@@ -1,10 +1,11 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D, Color } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D, Color, AmbientLight } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import type { Size } from 'src/assets/js/webgl/utils/index'
 import type BasicObject3D from './BasicObject3D'
 import type Signal from "../utils/Signal";
 import type Loader from './Loader';
 import type BasicApp from './BasicApp';
+import Stats from 'three/examples/jsm/libs/stats.module';
 
 /**
  * @name BasicScene 
@@ -23,6 +24,7 @@ export default class BasicScene extends Scene {
   public signal: Signal
   public loader: Loader
 
+  private stats: Stats
   private canvas: HTMLCanvasElement
   private clock: Clock
   private controls!: OrbitControls
@@ -50,10 +52,15 @@ export default class BasicScene extends Scene {
     this.setCameraPosition()
     this.add(this.camera)
 
+    var light = new AmbientLight(0xffffff);
+    this.add(light)
+
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
       antialias: true
     })
+
+    this.stats = Stats()
 
     this.setupControls()
 
@@ -65,6 +72,8 @@ export default class BasicScene extends Scene {
     this.time = Date.now()
     this.isRunning = true
     this.tick()
+
+    document.body.appendChild(this.stats.dom)
 
     this.signal.add(this.onSignal);
   }
@@ -149,6 +158,8 @@ export default class BasicScene extends Scene {
     this.elapsedTime = this.clock.getElapsedTime()
     this.deltaTime = (Date.now() - this.time) * 0.001
     this.time = Date.now()
+
+    this.stats.update()
 
     this.update()
 

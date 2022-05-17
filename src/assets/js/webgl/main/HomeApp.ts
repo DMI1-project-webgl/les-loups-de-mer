@@ -20,7 +20,7 @@ export default class HomeApp extends BasicApp {
           textures: [
             'TEXTURE_SCN1_BouchonFioleBouillon.jpg',
             'TEXTURE_SCN1_BouchonPotDepice.jpg',
-            'TEXTURE_SCN1_BouchonPotDhuile.jpg'
+            'TEXTURE_SCN1_BouchonPotDhuile.jpg',
           ] as string[],
           envs: ['env'] as string[],
           hdr: [
