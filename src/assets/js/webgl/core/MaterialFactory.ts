@@ -1,4 +1,4 @@
-import { CubeTexture, Group, Mesh, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, PMREMGenerator, Texture, WebGLRenderTarget } from 'three'
+import { Color, CubeTexture, Group, Mesh, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, PMREMGenerator, Texture, WebGLRenderTarget } from 'three'
 import * as THREE from 'three'
 import type BasicScene from './BasicScene'
 import type Loader from './Loader'
@@ -90,6 +90,19 @@ export default class MaterialFactory {
         materialName = 'plank'
         break
 
+      // Shark
+      case 'Requin':
+        materialName = 'glass'
+        break
+
+      case 'Aileron_requin':
+        materialName = 'sharkFin'
+        break
+
+      case 'Ceinture_requin':
+        materialName = 'sharkBelt'
+        break
+
       default:
         materialName = 'default'
         break
@@ -154,10 +167,12 @@ export default class MaterialFactory {
         material = m
         break
       }
-      
+
       case 'bluePlastic': {
         material = new MeshStandardMaterial({
-          color: 0xff0000
+          map: this.loader.getAsset('TEXTURE_SCN2_PlasticColor') as Texture,
+          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
         })
         break
       }
@@ -175,12 +190,48 @@ export default class MaterialFactory {
       }
 
       case 'plank': {
-        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
         material = new MeshStandardMaterial({
           map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
           normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
           roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture,
-          
+        })
+        break
+      }
+
+      case 'sharkBody': {
+        const m = new MeshPhysicalMaterial()
+        m.thickness = 1.5
+        m.roughness = 0.4
+        m.clearcoat = 1
+        m.clearcoatRoughness = 0
+        m.transmission = 1
+        m.ior = 4
+        m.envMapIntensity = 25
+        m.envMap = this.hdrCubeRenderTarget.texture
+        material = m
+        break
+      }
+
+      case 'sharkBelt': {
+        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
+        material = new MeshStandardMaterial({
+          color: 0x222222,
+          transparent: true,
+          alphaMap: this.loader.getAsset('TEXTURE_SCN0_SharkBeltAlpha') as Texture,
+          map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
+          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
+        })
+        break
+      }
+
+      case 'sharkFin': {
+        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
+        material = new MeshStandardMaterial({
+          color: 0x6E7D4A,
+          map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
+          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
         })
         break
       }

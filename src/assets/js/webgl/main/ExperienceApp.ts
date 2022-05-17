@@ -16,6 +16,7 @@ export default class ExperienceApp extends BasicApp {
             'SCN2_Drink_v3.gltf',
             'SCN2_ToothBrush_v1.gltf',
             'SCN2_Bottle_v3.gltf',
+            'SCN0_Shark_v4.gltf'
           ] as string[],
           textures: [
             'TEXTURE_SCN2_Metal_Roughness.jpg',
@@ -23,6 +24,7 @@ export default class ExperienceApp extends BasicApp {
             'TEXTURE_SCN2_PlasticColor.jpg',
             'TEXTURE_SCN2_PlasticNormal.jpg',
             'TEXTURE_SCN2_PlasticRoughness.jpg',
+            'TEXTURE_SCN0_SharkBeltAlpha.jpg',
           ] as string[],
           envs: ['env'] as string[],
           hdr: [] as string[]

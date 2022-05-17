@@ -8,6 +8,7 @@ import EnvironementSphere from './object/EnvironmentSphere'
 import MainFish from './fish/MainFish'
 import Vegetation from './object/Vegetation'
 import Trash from './object/Trash'
+import Shark from './object/Shark'
 
 export default class ExperienceScene extends BasicScene {
 
@@ -76,6 +77,12 @@ export default class ExperienceScene extends BasicScene {
         bottle.position.set(10,0,0)
         this.add(bottle)
         this.models.push(bottle)
+
+        const shark = new Shark(this.loader.getAsset('SCN0_Shark_v4') as Object3D)
+        shark.applyMaterials(this.materials)
+        shark.position.set(20,0,0)
+        this.add(shark)
+        this.models.push(shark)
 
         this.period = 10
         this.raycaster = new Raycaster();
