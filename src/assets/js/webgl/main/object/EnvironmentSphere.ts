@@ -53,19 +53,13 @@ function getPollutionSmog() {
     const vertexShader = pollutionVertexShader
     const fragmentShader = pollutionFragmentShader
 
-    const geometry = new SphereGeometry(150, 80, 80)
+    const geometry = new SphereGeometry(170, 80, 80)
     const material = new ShaderMaterial({
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,
         uniforms: { 
-            attenuation: {
-                value: 1.15
-            },
             anglePower: {
                 value: 16
-            },
-            spotPosition: {
-                value: new Vector3(0, 0, 0)
             },
             lightColor: {
                 value: new Color(0xCAC92B)
