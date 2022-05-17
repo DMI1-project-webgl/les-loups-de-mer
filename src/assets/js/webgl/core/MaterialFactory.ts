@@ -65,20 +65,29 @@ export default class MaterialFactory {
         break
 
       case 'Can':
-      case 'Drink_1':
         materialName = 'metal'
         break
 
-      case 'PlasticBag':
-        materialName = 'plasticBag'
+      case 'Drink':
+        materialName = 'metal'
         break
 
+      // Bottle
       case 'Body':
         materialName = 'plasticBottle'
         break
 
       case 'Caps':
         materialName = 'bluePlastic'
+        break
+
+      // Toothbrush
+      case 'Brush':
+        materialName = 'brush'
+        break
+
+      case 'Plank':
+        materialName = 'plank'
         break
 
       default:
@@ -95,19 +104,21 @@ export default class MaterialFactory {
   createMaterial (name:string) {
     let material = this.materials.default
     switch (name) {
-      case 'bouchon':
+      case 'bouchon': {
         material = new MeshStandardMaterial({
-          map: this.loader.getAsset('TEXTURE_SCN1_BouchonFioleBouillon')
+          map: this.loader.getAsset('TEXTURE_SCN1_BouchonFioleBouillon') as Texture
         })
         break
+      }
 
-      case 'epices':
+      case 'epices': {
         material = new MeshStandardMaterial({
           color: 0x442200
         })
         break
+      }
 
-      case 'glass':
+      case 'glass': {
         const m = new MeshPhysicalMaterial()
         m.thickness = 1.5
         m.roughness = 0
@@ -119,25 +130,17 @@ export default class MaterialFactory {
         m.envMap = this.hdrCubeRenderTarget.texture
         material = m
         break
+      }
 
-      case 'metal':
+      case 'metal': {
         material = new MeshStandardMaterial({
           color: 0x666666,
           metalness: 0.9,
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_Metal_Roughness')
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_Metal_Roughness') as Texture
         })
         break
-
-      case 'plasticBag':
-        material = new MeshStandardMaterial({
-          // color: 0x111111,
-          map: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Albedo'),
-          displacementMap: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Displacement'),
-          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Normal'),
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticBag_Roughness')
-        })
-      break
-
+      }
+        
       case 'plasticBottle': {
         const m = new MeshPhysicalMaterial()
         m.thickness = 1.5
@@ -151,11 +154,35 @@ export default class MaterialFactory {
         material = m
         break
       }
-
+      
       case 'bluePlastic': {
         material = new MeshStandardMaterial({
-          color: 0xff0000,
+          color: 0xff0000
         })
+        break
+      }
+
+      case 'brush': {
+        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
+        material = new MeshStandardMaterial({
+          color: 0x555555,
+          map: this.loader.getAsset('TEXTURE_SCN2_PlasticColor') as Texture,
+          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture,
+          
+        })
+        break
+      }
+
+      case 'plank': {
+        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
+        material = new MeshStandardMaterial({
+          map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
+          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
+          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture,
+          
+        })
+        break
       }
 
       default:

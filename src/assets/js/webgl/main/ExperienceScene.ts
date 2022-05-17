@@ -3,10 +3,11 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import type BasicApp from '../core/BasicApp'
 import type Signal from '../utils/Signal'
 import MaterialFactory from '../core/MaterialFactory'
-import { Clock, Color, Mesh, Raycaster, ShaderMaterial, Vector2 } from 'three'
+import { Clock, Color, Mesh, Object3D, Raycaster, ShaderMaterial, Vector2 } from 'three'
 import EnvironementSphere from './object/EnvironmentSphere'
 import MainFish from './fish/MainFish'
 import Vegetation from './object/Vegetation'
+import Trash from './object/Trash'
 
 export default class ExperienceScene extends BasicScene {
 
@@ -51,6 +52,30 @@ export default class ExperienceScene extends BasicScene {
         this.sphere = sphere
 
         this.mainFish = new MainFish(this.renderer, this)
+
+        const can = new Trash(this.loader.getAsset('SCN2_Can_v1') as Object3D)
+        can.applyMaterials(this.materials)
+        can.position.set(0.5,0,0)
+        this.add(can)
+        this.models.push(can)
+
+        const drink = new Trash(this.loader.getAsset('SCN2_Drink_v3') as Object3D)
+        drink.applyMaterials(this.materials)
+        drink.position.set(6,0,0)
+        this.add(drink)
+        this.models.push(drink)
+
+        const toothbrush = new Trash(this.loader.getAsset('SCN2_ToothBrush_v1') as Object3D)
+        toothbrush.applyMaterials(this.materials)
+        toothbrush.position.set(15,0,0)
+        this.add(toothbrush)
+        this.models.push(toothbrush)
+
+        const bottle = new Trash(this.loader.getAsset('SCN2_Bottle_v3') as Object3D)
+        bottle.applyMaterials(this.materials)
+        bottle.position.set(10,0,0)
+        this.add(bottle)
+        this.models.push(bottle)
 
         this.period = 10
         this.raycaster = new Raycaster();
@@ -111,8 +136,6 @@ export default class ExperienceScene extends BasicScene {
             this.raycaster.setFromCamera( this.pointer, this.camera );
 
             const intersects = this.raycaster.intersectObjects(this.vegetation.childrensArray, false);
-
-            console.log(intersects)
 
             for ( let i = 0; i < intersects.length; i ++ ) {
                 intersects[ i ].object.scale.set(0.001, 0.001, Math.min(0.015, intersects[ i ].object.scale.z + 0.0015));

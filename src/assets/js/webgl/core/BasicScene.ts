@@ -1,4 +1,4 @@
-import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D, Color } from 'three'
+import { Scene, WebGLRenderer, PerspectiveCamera, Clock, Object3D, Color, AmbientLight } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import type { Size } from 'src/assets/js/webgl/utils/index'
 import type BasicObject3D from './BasicObject3D'
@@ -51,6 +51,9 @@ export default class BasicScene extends Scene {
     this.camera = new PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 1000)
     this.setCameraPosition()
     this.add(this.camera)
+
+    var light = new AmbientLight(0xffffff);
+    this.add(light)
 
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
