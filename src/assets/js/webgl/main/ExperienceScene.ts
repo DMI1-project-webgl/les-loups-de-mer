@@ -56,31 +56,33 @@ export default class ExperienceScene extends BasicScene {
 
         const can = new Trash(this.loader.getAsset('SCN2_Can_v1') as Object3D)
         can.applyMaterials(this.materials)
-        can.position.set(0.5,0,0)
+        can.position.set(-120,-30,0)
         this.add(can)
         this.models.push(can)
 
         const drink = new Trash(this.loader.getAsset('SCN2_Drink_v3') as Object3D)
         drink.applyMaterials(this.materials)
-        drink.position.set(6,0,0)
+        drink.position.set(-120,30,0)
         this.add(drink)
         this.models.push(drink)
 
         const toothbrush = new Trash(this.loader.getAsset('SCN2_ToothBrush_v1') as Object3D)
         toothbrush.applyMaterials(this.materials)
-        toothbrush.position.set(15,0,0)
+        toothbrush.position.set(120,30,0)
+        toothbrush.rotation.set(0, 0, 30)
         this.add(toothbrush)
         this.models.push(toothbrush)
 
         const bottle = new Trash(this.loader.getAsset('SCN2_Bottle_v3') as Object3D)
         bottle.applyMaterials(this.materials)
-        bottle.position.set(10,0,0)
+        bottle.position.set(120,-30,0)
         this.add(bottle)
         this.models.push(bottle)
 
         const shark = new Shark(this.loader.getAsset('SCN0_Shark_v4') as Object3D)
         shark.applyMaterials(this.materials)
-        shark.position.set(20,0,0)
+        shark.position.set(0,0,150)
+        shark.rotation.set(0, -90, 0)
         this.add(shark)
         this.models.push(shark)
 
@@ -152,8 +154,8 @@ export default class ExperienceScene extends BasicScene {
                 this.vegetation.scaleVegetation(instanceId)
 
 
-            }
-        }
+        //     }
+        // }
         
     }
     
