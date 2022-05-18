@@ -200,12 +200,15 @@ export default class MaterialFactory {
 
       case 'sharkBody': {
         const m = new MeshPhysicalMaterial()
+        m.color = new Color(0xff0000)
+        m.sheenColor = new Color(0xff0000)
+        m.sheen = 10
         m.thickness = 1.5
         m.roughness = 0.4
         m.clearcoat = 1
         m.clearcoatRoughness = 0
-        m.transmission = 1
-        m.ior = 4
+        m.transmission = 0.5
+        m.ior = 1.6
         m.envMapIntensity = 25
         m.envMap = this.hdrCubeRenderTarget.texture
         material = m
