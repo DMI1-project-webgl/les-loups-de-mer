@@ -11,7 +11,7 @@ import Slide from './components/Slide.vue';
 
 <template>
   <!-- ALL ROUTES -->
-  <div class="nav">
+  <!-- <div class="nav">
     <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link>
     <router-link to="/clean">Clean</router-link>
@@ -20,11 +20,10 @@ import Slide from './components/Slide.vue';
     <router-link to="/result">Result</router-link>
     <router-link to="/shop">Shop</router-link>
     <router-link to="/newsletter">Newsletter</router-link>
-  </div>
+  </div> -->
 
   <!-- 3D COMPONENT  -->
-
-  <Canvas />
+  <!-- <Canvas /> -->
   <!-- <Draggable /> -->
   <!-- <Breadcrumb step="1"/> -->
   

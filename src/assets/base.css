@@ -114,6 +114,9 @@ main::before {
   background-color: var(--color-primary);
   color: var(--color-secondary);
 }
+.nav.color--primary{
+  background-color: transparent;
+}
 .color--primary .background--img{
   height: 100%;
   width: unset;

@@ -15,7 +15,6 @@
 .nav {
   pointer-events: none;
   z-index: 1;
-  background-color: rgba(0,0,0,0);
 }
 .nav--main {
   position: relative;
@@ -41,4 +40,4 @@
 .nav--link svg {
   color: white;
 }
-</style>
+</style> 
