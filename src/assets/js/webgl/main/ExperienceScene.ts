@@ -154,8 +154,8 @@ export default class ExperienceScene extends BasicScene {
                 this.vegetation.scaleVegetation(instanceId)
 
 
-        //     }
-        // }
+            }
+        }
         
     }
     
