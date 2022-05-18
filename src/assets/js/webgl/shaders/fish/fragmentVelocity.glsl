@@ -24,7 +24,7 @@ float alignmentThresh = 0.65;
 const float UPPER_BOUNDS = BOUNDS; // 800
 const float LOWER_BOUNDS = -UPPER_BOUNDS;
 
-const float SPEED_LIMIT = 4.0;
+const float SPEED_LIMIT = 3.0;
 
 float rand( vec2 co ){
     return fract( sin( dot( co.xy, vec2(12.9898,78.233) ) ) * 43758.5453 );
@@ -71,7 +71,7 @@ void main() {
     distSquared = dist * dist;
     distSquared2 = dist2 * dist2;
 
-    float preyRadius = 200.0; // radius of sphere (base 150.0)
+    float preyRadius = 120.0; // radius of sphere (base 150.0)
     float preyRadiusSq = preyRadius * preyRadius;
 
 
@@ -106,16 +106,28 @@ void main() {
     // velocity -= normalize( dir ) * delta * 5.;
 
     float distanceToCenter = length( selfPosition );
-    float maxR = 124.0;
+    float maxR = 125.0;
     float minR = 120.0;
 
     float onSphere = - step(maxR,distanceToCenter) + step(-maxR,distanceToCenter) - 1.0 - step(minR,distanceToCenter) + step(-minR,distanceToCenter); // -1 si trop loin | 1 si trop proche | 0 dans le perimetre
-    float mult = 0.1 * max(0.0,abs(distanceToCenter - minR + 2.0) - 0.0);
+    float mult = 0.001 * max(0.0,abs(distanceToCenter - minR + 2.0) - 0.0);
 
-    velocity.x = velocity.x + onSphere * (step(0.0,selfPosition.x) - 0.5) * mult * abs(selfPosition.x) * 0.01 + sin(time * 0.0005 + step(0.0,selfPosition.y) * PI * 1.) * 1.;
-    velocity.y = velocity.y + onSphere * (step(0.0,selfPosition.y) - 0.5) * mult * abs(selfPosition.y) * 0.01 - selfPosition.y * 0.01;
-    velocity.z = velocity.z + onSphere * (step(0.0,selfPosition.z) - 0.5) * mult * abs(selfPosition.z) * 0.01 + cos(time * 0.0005 - step(0.0,selfPosition.y) * PI * 1.) * 1.;
+    // velocity.x = velocity.x + onSphere * (step(0.0,selfPosition.x) - 0.5) * mult * abs(selfPosition.x) * 0.01 + sin(time * 0.0006 + step(0.0,selfPosition.y) * PI * 1.) * 1.;
+    // velocity.y = velocity.y + onSphere * (step(0.0,selfPosition.y) - 0.5) * mult * abs(selfPosition.y) * 0.01 - selfPosition.y * 0.01;
+    // velocity.z = velocity.z + onSphere * (step(0.0,selfPosition.z) - 0.5) * mult * abs(selfPosition.z) * 0.01 + cos(time * 0.0006 - step(0.0,selfPosition.y) * PI * 1.) * 1.;
 
+    float x1 = selfPosition.x;
+    float y1 = selfPosition.y;
+    float z1 = selfPosition.z;
+    float x2 = -z1;
+    float y2 = 0.;
+    float z2 = x1;
+
+    float vecMult = .01;
+
+    velocity.x = velocity.x + onSphere * (step(0.0,selfPosition.x) - 0.5) * mult * abs(selfPosition.x) + x2 * vecMult;
+    velocity.y = velocity.y + onSphere * (step(0.0,selfPosition.y) - 0.5) * mult * abs(selfPosition.y) + y2 * vecMult + sin(time * 0.001) * 0.5 - selfPosition.y * 0.01;
+    velocity.z = velocity.z + onSphere * (step(0.0,selfPosition.z) - 0.5) * mult * abs(selfPosition.z) + z2 * vecMult;
 
     for ( float y = 0.0; y < height; y++ ) {
         for ( float x = 0.0; x < width; x++ ) {

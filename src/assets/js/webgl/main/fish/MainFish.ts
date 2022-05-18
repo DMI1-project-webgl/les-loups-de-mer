@@ -60,7 +60,7 @@ export default class MainFish {
             'textureVelocity': { value: null },
             'time': { value: 1.0 },
             'delta': { value: 0.0 },
-            'number': { value: 10.0 }
+            'number': { value: 100.0 }
         };
 
         this.initComputeRenderer()
@@ -127,11 +127,11 @@ export default class MainFish {
 
 
         const effectController = {
-            separation: 20.0,
+            separation: 30.0,
             alignment: 0.0,
             cohesion: 1.0,
             freedom: 0.75,
-            number: 0.0,
+            number: 100.0,
         };
 
         const valuesChanger = () => {
@@ -149,7 +149,7 @@ export default class MainFish {
         gui.add( effectController, 'separation', 0.0, 100.0, 1.0 ).onChange( valuesChanger );
         gui.add( effectController, 'alignment', 0.0, 100, 0.001 ).onChange( valuesChanger );
         gui.add( effectController, 'cohesion', 0.0, 100, 0.025 ).onChange( valuesChanger );
-        gui.add( effectController, 'number', 0.0, 256, 1.0 ).onChange( valuesChanger );
+        gui.add( effectController, 'number', 100.0, 256, 1.0 ).onChange( valuesChanger );
         gui.close();
 
     }
@@ -162,7 +162,7 @@ export default class MainFish {
             'textureVelocity': { value: null },
             'time': { value: 1.0 },
             'delta': { value: 0.0 },
-            'number': { value: 0.0 }
+            'number': { value: 100.0 }
         };
 
         // THREE.ShaderMaterial

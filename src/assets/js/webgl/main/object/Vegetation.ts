@@ -88,7 +88,7 @@ export default class Vegetation {
             }
             vec.w ++
 
-            const mat4 = new Matrix4().scale(new Vector3(1,1,1.8 - vec.w * 0.08))
+            const mat4 = new Matrix4().scale(new Vector3(1,1,1.7 - vec.w * 0.07))
             let currentMat = new Matrix4()
             this.instancedMesh.getMatrixAt(index, currentMat)
 

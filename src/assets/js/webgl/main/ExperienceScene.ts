@@ -24,6 +24,9 @@ export default class ExperienceScene extends BasicScene {
     private pointer: Vector2
     private raycaster: Raycaster
     private vegetation!: Vegetation
+    private angleCameraHorizontal = 0
+    private angleCameraVertical = 0
+    private mouseIsDown = false
 
     constructor (app:BasicApp, canvas: HTMLCanvasElement, signal: Signal) {
         super(app, canvas, signal)
@@ -31,6 +34,8 @@ export default class ExperienceScene extends BasicScene {
         this.materials = new MaterialFactory(this)
     
         window.addEventListener('mousemove', this.onMouseMove)
+        window.addEventListener('mousedown', () => this.mouseIsDown = true)
+        window.addEventListener('mouseup', () => this.mouseIsDown = false)
     }
 
     get sphereMaterial(): ShaderMaterial {
@@ -47,7 +52,7 @@ export default class ExperienceScene extends BasicScene {
         this.background = this.materials.getEnv('main')
         this.background = new Color(0x0085DE);
 
-        /*const sphere = new EnvironementSphere()
+        const sphere = new EnvironementSphere()
         this.add(sphere)
         this.models.push(sphere)
         this.sphere = sphere
@@ -84,7 +89,7 @@ export default class ExperienceScene extends BasicScene {
         shark.position.set(0,0,150)
         shark.rotation.set(0, -90, 0)
         this.add(shark)
-        this.models.push(shark) */
+        this.models.push(shark) 
 
         const star = new Trash(this.loader.getAsset('SCN3_StarFish_v1') as Object3D)
         star.applyMaterials(this.materials)
@@ -92,11 +97,11 @@ export default class ExperienceScene extends BasicScene {
         // star.rotation.set(0, -90, 0)
         this.add(star)
         this.models.push(star)
-/*
+
         this.period = 10
         this.raycaster = new Raycaster();
         this.pointer = new Vector2();
-        this.vegetation = new Vegetation(this); */
+        this.vegetation = new Vegetation(this);
     }
     
     onMouseMove (event: MouseEvent) {
@@ -147,10 +152,36 @@ export default class ExperienceScene extends BasicScene {
           model.update(this.deltaTime)
         })
 
+        if (this.pointer) {
+            if (this.pointer.x > 0.1) {
+                this.angleCameraVertical -= 0.01 * ((this.pointer.x - 0.1) * 2)
+            } else if (this.pointer.x < -0.1) {
+                this.angleCameraVertical += 0.01 * ((-this.pointer.x - 0.1)* 2)
+            }
+
+            if (this.pointer.y > 0.1) {
+                this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2)
+            } else if (this.pointer.y < -0.1) {
+                this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2)
+            }
+
+            this.angleCameraHorizontal = Math.max(Math.min(this.angleCameraHorizontal, 0.5), -0.5)
+            this.angleCameraHorizontal = this.lerp(this.angleCameraHorizontal, 0, 0.08)
+
+            this.camera.position.x = Math.cos(this.angleCameraHorizontal) * Math.cos(this.angleCameraVertical) * 250;
+            this.camera.position.z = Math.cos(this.angleCameraHorizontal) * Math.sin(this.angleCameraVertical) * 250;
+            this.camera.position.y = Math.sin(this.angleCameraHorizontal) * 250;
+
+            this.camera.lookAt(0,0,0)
+        }
+        
 
         if (this.raycaster && this.vegetation) {
-            this.raycaster.setFromCamera( this.pointer, this.camera );
             this.vegetation.update(this.deltaTime)
+
+            if (!this.mouseIsDown) return
+
+            this.raycaster.setFromCamera( this.pointer, this.camera );
 
             const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
 
@@ -165,6 +196,10 @@ export default class ExperienceScene extends BasicScene {
         }
         
     }
+
+    lerp (start: number, end: number, amt: number): number{
+        return (1-amt)*start+amt*end
+      }
     
     destroy () {
         super.destroy()
