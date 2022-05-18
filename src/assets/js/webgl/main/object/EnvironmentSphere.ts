@@ -63,6 +63,9 @@ function getPollutionSmog() {
             lightColor: {
                 value: new Color(0xCAC92B)
             },
+            attenuation: {
+                value: 1
+            }
         },
         side: DoubleSide,
         // Sympa pour donner un effet clair au milieu
@@ -78,19 +81,19 @@ function getPollutionSmog() {
 }
 
 export default class EnvironmentSphere extends BasicObject3D {
-    public mesh!: Mesh
-    public childrens!: Group
-    public childrensArray!: Array<Mesh | Object3D>
+    private smog: Mesh = null
 
     constructor() {
         super(getSphereMesh());
     }
 
     reducePollutionSmog() {
-        // TODO : Manage shader to reduce smog
+        (this.smog.material as ShaderMaterial).uniforms.attenuation.value += 0.1
     }
 
     addPollutionSmog() {
-        this.add(getPollutionSmog())
+        const smog = getPollutionSmog()
+        this.smog = smog
+        this.add(smog)
     }
 }

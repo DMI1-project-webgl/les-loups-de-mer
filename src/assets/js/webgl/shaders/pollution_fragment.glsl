@@ -1,8 +1,8 @@
 varying vec3	vNormal;
 
 uniform vec3   lightColor;
-
 uniform float	anglePower;
+uniform float attenuation;
 
 void main() {
 
@@ -16,5 +16,5 @@ void main() {
     //////////////////////////////////////////////////////////
 
     // set the final color
-    gl_FragColor = vec4( lightColor, angleIntensity);
+    gl_FragColor = vec4( lightColor, angleIntensity / attenuation);
 }
