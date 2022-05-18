@@ -1,12 +1,12 @@
 <template>
-  <section v-if="display" id="welcome" class="page welcome color--secondary">
+  <section v-show="display" id="welcome" class="page welcome color--secondary">
     <div class="welcome--logo-container">
       <img src="../assets/img/logo_complet.svg" alt="">
     </div>
     <div class="welcome--arrow-container">
-      <div id="go-to-discover">
-        <img src="../assets/img/fleche.svg" alt="">
-      </div>
+      <a href="#discover" id="go-to-discover">
+        <img src="../assets/img/decouvrir_fleche.svg" alt="">
+      </a>
     </div>
   </section>
 </template>
@@ -17,14 +17,14 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'WelcomePage',
-  props: ['display'],
+  props: ['show','display'],
+  emits: ['next'], 
   mounted () {
-      // document.getElementById('go-to-discover').addEventListener("click", this.goToDiscover() );
-      // // console.log(this.$Home.Show);
+    
   },
   methods: {
-    goToDiscover() {
-      console.log("discover")
+    goTo() {
+      this.$emit('next', 'toDiscover')      
     }
   },
   beforeDestroy () {
@@ -44,11 +44,11 @@ export default defineComponent({
   margin: auto;
 }
 .welcome--arrow-container {
-  height: 100px;
-  width: 100px;
-  border: 1px solid blue;
+  height: 15vh;
+  width: 15vh;
+  transform: rotate(-90deg);
   border-radius: 50%;
-  margin: 0 auto 30px;
+  margin: 0 auto 5%;
 }
 .welcome--arrow-container img {
   transform: rotate(90deg);

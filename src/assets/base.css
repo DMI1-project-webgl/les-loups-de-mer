@@ -1,5 +1,6 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
+  /* loup de mer theme */
   --dark-blue: #163860;
   --blue: #23548f;
   --light-blue: #4f85c1;
@@ -10,6 +11,8 @@
   --pink: #ed9f91;
   --yellow: #f5b548;
 
+
+  /* default theme */
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -35,6 +38,7 @@
 :root {
   --color-primary: var(--dark-blue);
   --color-secondary: var(--light-brow);
+  --color-tertiary: var(--blue);
 
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
@@ -147,7 +151,18 @@ main::before {
 /*                     MIXINS                         */
 /* ================================================== */
 
+/* Uses vh and vm with calc */
+/* @media screen and (min-width: 25em){
+  html { font-size: calc( 16px + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+} */
+/* Safari <8 and IE <11 */
+@media screen and (min-width: 25em){
+  html { font-size: calc( 16px + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+}
 
+@media screen and (min-width: 50em){
+html { font-size: calc( 16px + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
+}
 *,
 *::before,
 *::after {
@@ -168,19 +183,20 @@ body {
 /* H1- Frastha Regular 90pt */
 h1 {
   font-family: "frasha-regular";
-  font-size: 5.5em;
+  font-size: 2.3em;
 }
 
 /* H2- Frastha Regular 60pt */
 h2 {
   font-family: "frasha-regular";
-  font-size: 3em;
+  font-size: 1.8em;
 }
 
 /* H3- LeagueSpartan Regular 20pt */
 h3 {
   font-family: "leaguespartan";
-  font-size: 1.2em;
+  font-size: .8em;
+  font-weight: bold;
 }
 
 /* H4- LeagueSpartan Light 14pt */
@@ -193,7 +209,7 @@ h4 {
 /* p- LeagueSpartan Regular 16pt - interlignagne 20 */
 p {
   font-family: "leaguespartan";
-  font-size: 1em;
+  font-size: .6em;
   line-height: 20pt;
   font-weight: bold;
 }
@@ -212,41 +228,35 @@ a {
 /* GENERAL */
 
 .page {
+  position: relative;
+  top: 0%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.page-full {
   position: fixed;
   top: 0%;
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: hidden;
 }
 
-section.page {
-  height: 100vh;
-  width: 100vw;
+section.page, section.page-full {
+  height: 100vh !important;
+  width: 100vw !important;
 }
 
-header ~ section.page{
-  border: 1px solid red;
+header ~ section.page, header ~ section.page-full{
   padding-left: 150px;
   padding-top: calc(3% + 26px + 26px);
 }
 
-/* .col {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-}  */
-
-.d-none {
+/* .d-none {
   display: none !important;
-}
+} */
 
 .btn {
   width: fit-content;
@@ -259,9 +269,25 @@ header ~ section.page{
   color: var(--color-secondary);
 }
 .btn span {
-  font-size: 1.2em;
+  font-size: .8em;
 }
-
+.btn--secondary {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+.btn--secondary img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.btn--secondary-container {
+  height: 200px;
+  width: 200px;
+  /* background-color: currentColor; */
+  border-radius: 100px;
+  border: 1px solid currentColor;
+}
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;
