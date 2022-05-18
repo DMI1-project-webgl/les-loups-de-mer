@@ -1,10 +1,14 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/views/Home.vue";
-import About from "@/views/About.vue";
-import Clean from "@/views/Clean.vue";
-import Greenery from "@/views/Greenery.vue";
-import Food from "@/views/Food.vue";
-import Result from "@/views/Result.vue";
+import Home from "@/views/Home/Home.vue";
+import Values from "@/views/Home/Values.vue";
+import Actions from "@/views/Home/Actions.vue";
+
+import Experience from "@/views/Experience/Experience.vue";
+import Clean from "@/views/Experience/Clean.vue";
+import Greenery from "@/views/Experience/Greenery.vue";
+import Food from "@/views/Experience/Food.vue";
+import Result from "@/views/Experience/Result.vue";
+
 import Shop from "@/views/Shop.vue";
 import Newsletter from "@/views/Newsletter.vue";
 
@@ -15,29 +19,24 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
+    path: "/valeurs",
+    name: "Values",
+    component: Values,
   },
   {
-    path: "/clean",
-    name: "Clean",
-    component: Clean,
+    path: "/actions",
+    name: "Actions",
+    component: Actions,
   },
   {
-    path: "/greenery",
-    name: "Greenery",
-    component: Greenery,
-  },
-  {
-    path: "/food",
-    name: "Food",
-    component: Food,
-  },
-  {
-    path: "/result",
-    name: "Result",
-    component: Result,
+    path: "/experience",
+    component: Experience,
+    children: [
+      { path: '/clean', component: Clean, alias: ['', 'clean'] },
+      { path: "/greenery", component: Greenery, alias: ['', 'greenery'] },
+      { path: "/food", component: Food, alias: ['', 'food'] },
+      { path: "/result", component: Result, alias: ['', 'result'] },
+    ],
   },
   {
     path: "/shop",

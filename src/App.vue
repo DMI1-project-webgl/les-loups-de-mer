@@ -24,7 +24,7 @@ import Slide from './components/Slide.vue';
 
   <!-- 3D COMPONENT  -->
   <!-- <Canvas /> -->
-  <Draggable />
+  <!-- <Draggable /> -->
   <!-- <Breadcrumb step="1"/> -->
   
   <!-- <Scoreboard nbBottle="3" maxBottle="3" nbTrash="3" maxTrash="3" nbCan="0" maxCan="3" nbButt="0" maxButt="3" nbPlastic="3" maxPlastic="3"/> -->
