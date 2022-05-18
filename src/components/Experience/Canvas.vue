@@ -13,38 +13,28 @@ export default defineComponent({
   name: 'CanvasElement',
   data() {
     return {
-      homeApp: null,
       experienceApp: null
     };
   },
   watch:{
     $route (to, from) {
+      console.log('tooo', to)
       const pageName = to.name.toLowerCase()
       switch (pageName) {
-            case 'home':
-              if (this.experienceApp) this.experienceApp.destroy(); this.experienceApp = null
-              this.homeApp = new HomeApp(this.$refs['canvas'] as HTMLCanvasElement)
-                break
-            case 'clean':
-              if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
-              this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement)
-                break
               case 'greenery':
               case 'food':
-                if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
                 if (!this.experienceApp) this.$router.push('clean')
                 break
             default:
-              if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
               if (this.experienceApp) this.experienceApp.destroy(); this.experienceApp = null
         }
-
-      if (this.homeApp) this.homeApp.changeState(['route-' + pageName])
       if (this.experienceApp) this.experienceApp.changeState(['route-' + pageName])
     }
   },
+  mounted () {
+    this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement)
+  },
   beforeDestroy () {
-    if (this.homeApp) this.homeApp.destroy()
     if (this.experienceApp) this.experienceApp.destroy()
   }
 })

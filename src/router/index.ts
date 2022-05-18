@@ -32,10 +32,10 @@ const routes = [
     path: "/experience",
     component: Experience,
     children: [
-      { path: '/clean', component: Clean, alias: ['', 'clean'] },
-      { path: "/greenery", component: Greenery, alias: ['', 'greenery'] },
-      { path: "/food", component: Food, alias: ['', 'food'] },
-      { path: "/result", component: Result, alias: ['', 'result'] },
+      { path: "/clean", component: Clean, alias: ['', 'clean'], name: "Clean" },
+      { path: "/greenery", component: Greenery, alias: ['', 'greenery'], name: "Greenery" },
+      { path: "/food", component: Food, alias: ['', 'food'], name: "Food" },
+      { path: "/result", component: Result, alias: ['', 'result'], name: "Result" },
     ],
   },
   {
