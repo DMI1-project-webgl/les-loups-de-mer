@@ -81,28 +81,16 @@ export default class EnvironmentSphere extends BasicObject3D {
     public mesh!: Mesh
     public childrens!: Group
     public childrensArray!: Array<Mesh | Object3D>
-    private geometry!: SphereGeometry
-    private material!: MeshBasicMaterial
-    private positions!: BufferAttribute | InterleavedBufferAttribute
-    private normals!: BufferAttribute | InterleavedBufferAttribute
 
     constructor() {
         super(getSphereMesh());
-        
+    }
+
+    reducePollutionSmog() {
+        // TODO : Manage shader to reduce smog
+    }
+
+    addPollutionSmog() {
         this.add(getPollutionSmog())
-    }
-
-    // Initialization
-    init() {
-        this.geometry = new SphereGeometry( 5, 40, 28 );
-        this.positions = this.geometry.getAttribute('position')
-        this.normals = this.geometry.getAttribute('normal')
-        this.material = new MeshBasicMaterial( { color: 0x919191, visible: true } );
-        this.mesh = new Mesh(this.geometry,this.material);
-    }
-
-    // Memory management
-    destroy() {
-        this.geometry.dispose();
     }
 }
