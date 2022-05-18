@@ -54,7 +54,7 @@ export default class Loader {
 
   onLoaded () {
     this.isLoaded = true
-    this.signal.dispatch(['is-loaded'])
+    this.signal.dispatch(['loaded'])
   }
 
   onProgress (url:string, loaded: number, total: number) {

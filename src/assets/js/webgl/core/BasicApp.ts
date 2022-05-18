@@ -35,7 +35,7 @@ export default class BasicApp {
                 console.log('load is in progress', slug[1])
                 // this.onLoadProgress(slug[1] as number)
                 break
-            case 'is-loaded':
+            case 'loaded':
                 console.log('is loaded')
                 this.onLoadComplete()
                 break
