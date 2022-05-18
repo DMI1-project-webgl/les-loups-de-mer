@@ -1,5 +1,4 @@
-import { Scene, BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Vector3, Group, Object3D, IcosahedronGeometry, ShaderMaterial, Sphere, DoubleSide, Color, AdditiveBlending } from 'three'
-import type { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Vector3, Group, Object3D, IcosahedronGeometry, ShaderMaterial, Sphere, DoubleSide, Color, AdditiveBlending } from 'three'
 import BasicObject3D from '../../core/BasicObject3D'
 
 import sphereFragmentShader from '../../shaders/sphere_fragment.glsl?raw'
@@ -86,8 +85,6 @@ export default class EnvironmentSphere extends BasicObject3D {
     private material!: MeshBasicMaterial
     private positions!: BufferAttribute | InterleavedBufferAttribute
     private normals!: BufferAttribute | InterleavedBufferAttribute
-    private loader!: GLTFLoader
-    private scene!: Scene
 
     constructor() {
         super(getSphereMesh());
@@ -102,58 +99,6 @@ export default class EnvironmentSphere extends BasicObject3D {
         this.normals = this.geometry.getAttribute('normal')
         this.material = new MeshBasicMaterial( { color: 0x919191, visible: true } );
         this.mesh = new Mesh(this.geometry,this.material);
-
-        // this.childrens = new Group();
-        // this.childrensArray = []
-    
-        // this.loader = new GLTFLoader();
-        // this.loader.load('src/assets/js/webgl/models/grass2.glb', (gltf) => {
-        //     const model = gltf.scene;
-        //     this.initChild(model)
-        // } );
-    }
-
-    initChild(model: Group) {
-        for(let i = 0; i < this.getVertexCount(); i++) {
-            const modelClone = model.clone() 
-            const position = this.getVertexPosition(i)
-            modelClone.position.set(
-                position.x,
-                position.y,
-                position.z
-            )
-            modelClone.scale.set(1.5,1.5,0.1)
-            const nomalEnd = this.getVertexNormal(i)
-
-            modelClone.lookAt(nomalEnd.x * 10, nomalEnd.y * 10, nomalEnd.z * 10)
-
-            this.childrens.add(modelClone)
-            modelClone.children.forEach((child) => {
-                this.childrensArray.push(child)
-            })
-        }
-
-        this.add(this.childrens)
-    }
-
-    getVertexPosition(index: number): Vector3 {
-        return new Vector3(
-            this.positions.array[index * 3 + 0],
-            this.positions.array[index * 3 + 1],
-            this.positions.array[index * 3 + 2],
-        )
-    }
-
-    getVertexCount() : number {
-        return this.positions.count
-    }
-
-    getVertexNormal(index: number): Vector3 {
-        return new Vector3(
-            this.normals.array[index * 3 + 0],
-            this.normals.array[index * 3 + 1],
-            this.normals.array[index * 3 + 2],
-        )
     }
 
     // Memory management

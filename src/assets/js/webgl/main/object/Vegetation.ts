@@ -1,73 +1,102 @@
-import type { GeometryBox } from 'csstype'
-import { Scene, BoxGeometry, CircleGeometry, WebGLRenderer, PerspectiveCamera, BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Raycaster, Vector2, Vector3, Group, Color, Object3D } from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { BufferAttribute, InterleavedBufferAttribute, Vector3, Group, Object3D, AnimationMixer, AnimationClip, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, MeshPhongMaterial, Matrix4, Vector4 } from 'three'
+import type BasicScene from '../../core/BasicScene'
 
 export default class Vegetation {
-    public mesh!: Mesh
-    public childrens!: Group
-    public childrensArray!: Array<Mesh | Object3D>
-    private geometry!: SphereGeometry
-    private material!: MeshBasicMaterial
+    public instancedMesh!: InstancedMesh
+    private geometry!: IcosahedronGeometry
     private positions!: BufferAttribute | InterleavedBufferAttribute
-    private normals!: BufferAttribute | InterleavedBufferAttribute
-    private loader!: GLTFLoader
-    private scene!: Scene
+    private scene!: BasicScene
+    private positionsVegetation: Array<Vector4> = []
+    private vegetationOnAnim: Array<number> = []
 
-    constructor(scene: Scene) {
-        this.init()
+    constructor(scene: BasicScene) {
         this.scene = scene
-        // this.initChild()
+        this.init()
     }
 
     // Initialization
     init() {
-        this.geometry = new SphereGeometry( 114.4, 40, 28 );
+        this.geometry = new IcosahedronGeometry( 108, 3 );
         this.positions = this.geometry.getAttribute('position')
-        this.normals = this.geometry.getAttribute('normal')
-        this.material = new MeshBasicMaterial( { color: 0x000099, visible: true } );
-        this.mesh = new Mesh(this.geometry,this.material);
-        this.childrens = new Group();
-        this.childrensArray = []
-        this.loader = new GLTFLoader();
-        this.loader.load('src/assets/js/webgl/models/grass2.glb', (gltf) => {
-            const model = gltf.scene;
-            // console.log(gltf)
-            // model.position.set(0,0,8)
-            // model.lookAt(0,1,0)
-            // model.scale.set(2, 2, 2)
-            // const material = new MeshBasicMaterial( { color: 0xff0000, visible: false } );
-            // const mesh = new Mesh(scene, material)
-            // this.scene.add(model)
-            this.initChild(model)
-        } );
-    }
 
-    initChild(model: Group) {
-        for(let i = 0; i < this.getVertexCount(); i++) {
-            // const geometry = new CircleGeometry( 0.5, 8 );
-            // const material = new MeshBasicMaterial( {color: new Color(1, 0, 0)} );
-            // const cube = new Mesh( geometry, material );
-            const modelClone = model.clone() 
+        let glTFGeometry: BufferGeometry
+        this.scene.loader.getAsset('CoralTestALONE').traverse((child: any) => {
+
+            if ( child.isMesh ) {
+
+                //Setting the buffer geometry
+                glTFGeometry = child.geometry;
+                
+            }
+        
+        } );
+
+
+        const dummy = new Object3D()
+        const material = new MeshPhongMaterial( { color: 0x00ee99 } )
+        const count = this.getVertexCount()
+       
+        for (let i = 0; i < count; i = i + 1) {
             const position = this.getVertexPosition(i)
-            modelClone.position.set(
+
+            let isInclude = false
+
+            this.positionsVegetation.forEach((v: Vector4) => {
+                if (v.x === position.x && v.y === position.y && v.z === position.z) {
+                    isInclude = true
+                    return
+                }
+            })
+            if (!isInclude) {
+                this.positionsVegetation.push(new Vector4(position.x, position.y, position.z, 0));
+            }
+        }
+
+        this.instancedMesh = new InstancedMesh(glTFGeometry, material, this.positionsVegetation.length)
+        this.scene.add(this.instancedMesh)
+
+        for (let i = 0; i < this.positionsVegetation.length; i = i + 1) {
+
+            const position = this.positionsVegetation[i]
+
+            dummy.position.set(
                 position.x,
                 position.y,
                 position.z
             )
-            modelClone.scale.set(25.5,25.5,10)
-            const nomalEnd = this.getVertexNormal(i)
-            modelClone.lookAt(nomalEnd.x * 10, nomalEnd.y * 10, nomalEnd.z * 10)
-            // model.rotateX(0.5)
-            // this.scene.add(modelClone)
-            this.childrens.add(modelClone)
-            // this.childrensArray.push(modelClone)
-            modelClone.children.forEach((child) => {
-            //     this.childrens.add(child)
-                this.childrensArray.push(child)
-            })
-        }
 
-        this.scene.add(this.childrens)
+            dummy.scale.set(5,5,1)
+
+            dummy.lookAt(position.x * 10, position.y * 10, position.z * 10)
+            
+            dummy.updateMatrix()
+            this.instancedMesh.setMatrixAt(i, dummy.matrix)
+        }
+    }
+
+    scaleVegetation(index: number) {
+        if (this.positionsVegetation[index].w >= 1) return
+        this.positionsVegetation[index].w ++
+        this.vegetationOnAnim.push(index);
+    }
+
+    update (deltaSeconds: number) {
+        this.vegetationOnAnim.forEach((index: number, i: number) => {
+            const vec = this.positionsVegetation[index]
+            if (vec.w >= 10) {
+                this.vegetationOnAnim.splice(i, 1);
+            }
+            vec.w ++
+
+            const mat4 = new Matrix4().scale(new Vector3(1,1,1.8 - vec.w * 0.08))
+            let currentMat = new Matrix4()
+            this.instancedMesh.getMatrixAt(index, currentMat)
+
+            this.instancedMesh.setMatrixAt(index, currentMat.multiply(mat4))
+
+            this.instancedMesh.instanceMatrix.needsUpdate = true
+
+        })
     }
 
     getVertexPosition(index: number): Vector3 {
@@ -82,15 +111,8 @@ export default class Vegetation {
         return this.positions.count
     }
 
-    getVertexNormal(index: number): Vector3 {
-        return new Vector3(
-            this.normals.array[index * 3 + 0],
-            this.normals.array[index * 3 + 1],
-            this.normals.array[index * 3 + 2],
-        )
-    }
-
     // Memory management
     destroy() {
+        this.instancedMesh.dispose()
     }
 }

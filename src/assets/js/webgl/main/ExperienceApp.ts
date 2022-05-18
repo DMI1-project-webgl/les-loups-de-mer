@@ -16,7 +16,8 @@ export default class ExperienceApp extends BasicApp {
             'SCN2_Drink_v3.gltf',
             'SCN2_ToothBrush_v1.gltf',
             'SCN2_Bottle_v3.gltf',
-            'SCN0_Shark_v4.gltf'
+            'SCN0_Shark_v4.gltf',
+            'CoralTestALONE.gltf'
           ] as string[],
           textures: [
             'TEXTURE_SCN2_Metal_Roughness.jpg',

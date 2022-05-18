@@ -1,4 +1,4 @@
-import { CubeTexture, CubeTextureLoader, Group, LoadingManager, Texture, TextureLoader } from 'three'
+import { AnimationClip, CubeTexture, CubeTextureLoader, Group, LoadingManager, Object3D, Texture, TextureLoader } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader'
 import type AssetsUrl from './InterfaceAssetsUrl'
@@ -9,7 +9,7 @@ export default class Loader {
   private basePath: string
   private loadingManager: LoadingManager
   private assets: {
-    [key: string]: Group | Texture | CubeTexture,
+    [key: string]: Group | Texture | CubeTexture | any,
   }
   private isLoaded: Boolean
   private signal: Signal
@@ -68,6 +68,7 @@ export default class Loader {
       const path = this.basePath + 'models/' + model
       loader.load(path, (gltf) => {
         this.assets[this.getName(model)] = gltf.scene
+        this.assets[this.getName(model) + '-all'] = gltf
       })
     }
   }

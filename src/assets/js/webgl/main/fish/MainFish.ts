@@ -72,8 +72,6 @@ export default class MainFish {
 
         this.gpuCompute = new GPUComputationRenderer( this.WIDTH, this.WIDTH, this.renderer );
 
-        console.log(this.renderer.capabilities)
-
         // this.gpuCompute.setDataType( HalfFloatType );
 
         if ( this.renderer.capabilities.isWebGL2 === false ) {
@@ -133,7 +131,7 @@ export default class MainFish {
             alignment: 0.0,
             cohesion: 1.0,
             freedom: 0.75,
-            number: 100.0,
+            number: 0.0,
         };
 
         const valuesChanger = () => {
@@ -164,7 +162,7 @@ export default class MainFish {
             'textureVelocity': { value: null },
             'time': { value: 1.0 },
             'delta': { value: 0.0 },
-            'number': { value: 100.0 }
+            'number': { value: 0.0 }
         };
 
         // THREE.ShaderMaterial

@@ -3,7 +3,7 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import type BasicApp from '../core/BasicApp'
 import type Signal from '../utils/Signal'
 import MaterialFactory from '../core/MaterialFactory'
-import { Clock, Color, Mesh, Object3D, Raycaster, ShaderMaterial, Vector2 } from 'three'
+import { Clock, Color, Mesh, Raycaster, ShaderMaterial, Vector2 } from 'three'
 import EnvironementSphere from './object/EnvironmentSphere'
 import MainFish from './fish/MainFish'
 import Vegetation from './object/Vegetation'
@@ -45,7 +45,7 @@ export default class ExperienceScene extends BasicScene {
 
     init () {
         this.background = this.materials.getEnv('main')
-        this.background = new Color(0x0085DE)
+        this.background = new Color(0x0085DE);
 
         const sphere = new EnvironementSphere()
         this.add(sphere)
@@ -130,7 +130,7 @@ export default class ExperienceScene extends BasicScene {
             this.sphereMaterial.uniforms.uTime.value = this._clock.getElapsedTime()
         }
 
-        if (this.sphere) {
+        if (this.mainFish) {
             this.mainFish.render(this.cursor.x,this.cursor.y)
         }
 
@@ -139,13 +139,18 @@ export default class ExperienceScene extends BasicScene {
         })
 
 
-        if (this.raycaster) {
+        if (this.raycaster && this.vegetation) {
             this.raycaster.setFromCamera( this.pointer, this.camera );
+            this.vegetation.update(this.deltaTime)
 
-            const intersects = this.raycaster.intersectObjects(this.vegetation.childrensArray, false);
+            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
 
-            for ( let i = 0; i < intersects.length; i ++ ) {
-                intersects[ i ].object.scale.set(0.001, 0.001, Math.min(0.015, intersects[ i ].object.scale.z + 0.0015));
+            if ( intersects.length > 0 ) {
+
+                const instanceId = intersects[ 0 ].instanceId;
+
+                this.vegetation.scaleVegetation(instanceId)
+
 
             }
         }
