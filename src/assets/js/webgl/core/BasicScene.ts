@@ -62,7 +62,7 @@ export default class BasicScene extends Scene {
 
     this.stats = Stats()
 
-    this.setupControls()
+    // this.setupControls()
 
     this.clock = new Clock()
 
