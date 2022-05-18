@@ -59,7 +59,7 @@ export default class ExperienceScene extends BasicScene {
 
         this.mainFish = new MainFish(this.renderer, this)
 
-        const can = new Trash(this.loader.getAsset('SCN2_Can_v1') as Object3D)
+        /* const can = new Trash(this.loader.getAsset('SCN2_Can_v1') as Object3D)
         can.applyMaterials(this.materials)
         can.position.set(-120,-30,0)
         this.add(can)
@@ -96,7 +96,7 @@ export default class ExperienceScene extends BasicScene {
         star.position.set(0,0,0)
         // star.rotation.set(0, -90, 0)
         this.add(star)
-        this.models.push(star)
+        this.models.push(star) */
 
         this.period = 10
         this.raycaster = new Raycaster();
