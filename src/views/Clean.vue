@@ -14,7 +14,7 @@ import Discover from './../components/Discover.vue';
 </script>
 
 <template>
-  <nav class="nav page-full color--primary">
+  <nav class="nav page-full color--primary" style="display: none">
     <div class="nav--main">
       <div class="nav--logo">
         <button @click="goTo" class="nav--link">

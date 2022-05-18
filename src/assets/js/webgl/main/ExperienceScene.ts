@@ -47,7 +47,7 @@ export default class ExperienceScene extends BasicScene {
         this.background = this.materials.getEnv('main')
         this.background = new Color(0x0085DE);
 
-        const sphere = new EnvironementSphere()
+        /*const sphere = new EnvironementSphere()
         this.add(sphere)
         this.models.push(sphere)
         this.sphere = sphere
@@ -84,12 +84,19 @@ export default class ExperienceScene extends BasicScene {
         shark.position.set(0,0,150)
         shark.rotation.set(0, -90, 0)
         this.add(shark)
-        this.models.push(shark)
+        this.models.push(shark) */
 
+        const star = new Trash(this.loader.getAsset('SCN3_StarFish_v1') as Object3D)
+        star.applyMaterials(this.materials)
+        star.position.set(0,0,0)
+        // star.rotation.set(0, -90, 0)
+        this.add(star)
+        this.models.push(star)
+/*
         this.period = 10
         this.raycaster = new Raycaster();
         this.pointer = new Vector2();
-        this.vegetation = new Vegetation(this);
+        this.vegetation = new Vegetation(this); */
     }
     
     onMouseMove (event: MouseEvent) {

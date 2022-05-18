@@ -103,6 +103,10 @@ export default class MaterialFactory {
         materialName = 'sharkBelt'
         break
 
+      case 'StarFish':
+          materialName = 'starFish'
+          break
+  
       default:
         materialName = 'default'
         break
@@ -235,6 +239,14 @@ export default class MaterialFactory {
           map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
           normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
           roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
+        })
+        break
+      }
+
+      case 'starFish': {
+        material = new MeshStandardMaterial({
+          color: 0x6E7D4A,
+          map: this.loader.getAsset('TEXTURE_SCN3_Starfish_Color') as Texture,
         })
         break
       }
