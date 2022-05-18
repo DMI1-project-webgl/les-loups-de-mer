@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import HomeScene from '../assets/js/webgl/main/HomeScene'
+import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -61,7 +61,6 @@ export default defineComponent({
 
     console.log(lines)
     for(let i = 0; i < propsArray.length; i+=2 ) {
-        // console.log(propsArray[i][1] +" : "+ propsArray[i+1][1])
         if (propsArray[i][1] == propsArray[i+1][1]) {
             console.log("EGALLLLLL");
             lines[i/2].classList.add("done")

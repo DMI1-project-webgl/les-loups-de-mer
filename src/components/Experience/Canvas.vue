@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import HomeApp from '../assets/js/webgl/main/HomeApp'
-import ExperienceApp from '../assets/js/webgl/main/ExperienceApp'
+import HomeApp from './../../assets/js/webgl/main/HomeApp'
+import ExperienceApp from './../../assets/js/webgl/main/ExperienceApp'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

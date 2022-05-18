@@ -14,7 +14,7 @@
       <div class="header--main">
         <div class="header--logo">
           <a href="/" class="header--link">
-            <img src="../assets/img/logo_texte.svg" alt="">
+            <img src="./../../assets/img/logo_texte.svg" alt="">
           </a>
         </div>
         <div class="header--text-container">
@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import HomeScene from '../assets/js/webgl/main/HomeScene'
+import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

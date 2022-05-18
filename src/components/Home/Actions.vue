@@ -24,7 +24,7 @@
                     </div>
                     <div class="actions--link-container">
                         <a href="/clean" class="actions--link btn--secondary">
-                            <img src="./../assets/img/cliquer_ici.svg" alt="">
+                            <img src="./../../assets/img/cliquer_ici.svg" alt="">
                         </a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import HomeScene from '../assets/js/webgl/main/HomeScene'
+import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
