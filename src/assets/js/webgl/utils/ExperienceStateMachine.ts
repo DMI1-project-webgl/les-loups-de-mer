@@ -1,24 +1,25 @@
-enum ExperienceStep {
-    IDLE,
+export enum ExperienceStep {
     DEPOLLUTION,
-    REVEGETATION,
+    VEGETATION,
     FEEDING,
     END
 }
 
-interface DepollutionStatus {
+export interface ExperienceListener {
+
+}
+
+export interface DepollutionStatus {
     bottlesPicked: number;
-    buttsPicked: number;
-    plasticBagsPicked: number;
+    drinksPicked: number;
+    toothBrushesPicked: number;
     cansPicked: number;
-    trashBagsPicked: number;
 }
 
 const BOTTLES_AMOUNT = 3
-const BUTTS_AMOUNT = 3
-const PLASTICBAGS_AMOUNT = 3
+const DRINKS_AMOUNT = 3
+const TOOHBRUSHES_AMOUNT = 3
 const CANS_AMOUNT = 3
-const TRASHBAGS_AMOUNT = 3
 
 const NEEDED_FISH_AMOUNT = 50 // TO DEFINE
 
@@ -27,14 +28,15 @@ const NEEDED_FISH_AMOUNT = 50 // TO DEFINE
  */
 export default class ExperienceStateMachine {
 
-    private _currentStep: ExperienceStep = ExperienceStep.IDLE
+    private listener: ExperienceListener = null
+
+    private _currentStep: ExperienceStep = ExperienceStep.DEPOLLUTION
 
     private _depollutionStatus: DepollutionStatus = {
         bottlesPicked: 0,
-        buttsPicked: 0,
-        plasticBagsPicked: 0,
+        drinksPicked: 0,
+        toothBrushesPicked: 0,
         cansPicked: 0,
-        trashBagsPicked: 0
     }
 
     //////////////////
@@ -48,12 +50,12 @@ export default class ExperienceStateMachine {
         switch(this._currentStep) {
             case ExperienceStep.DEPOLLUTION:
                 return this.depollutionPercentage
-            case ExperienceStep.REVEGETATION:
+            case ExperienceStep.VEGETATION:
                 return 100/3
             case ExperienceStep.FEEDING:
                 return (100/3) * 2
             case ExperienceStep.END:
-                return 100
+                return 1
             default: 
                 return 0
         }
@@ -62,7 +64,7 @@ export default class ExperienceStateMachine {
     /**
      * Current experience step
      */
-    get currentStep(): number {
+    get currentStep(): ExperienceStep {
         return this._currentStep
     }
 
@@ -70,24 +72,25 @@ export default class ExperienceStateMachine {
      * Continue to next experience step
      * @returns 0 it has been done, -1 if it's not possible
      */
-    nextStep(): number {
+    nextStep(): boolean {
         switch(this._currentStep) {
-            case ExperienceStep.IDLE:
-                this._currentStep = ExperienceStep.DEPOLLUTION
-                return 0
             case ExperienceStep.DEPOLLUTION:
-                this._currentStep = ExperienceStep.REVEGETATION
-                return 0
-            case ExperienceStep.REVEGETATION:
+                this._currentStep = ExperienceStep.VEGETATION
+                return true
+            case ExperienceStep.VEGETATION:
                 this._currentStep = ExperienceStep.FEEDING
-                return 0
+                return true
             case ExperienceStep.FEEDING:
                 this._currentStep = ExperienceStep.END
-                return 0
+                return true
             case ExperienceStep.END:
                 // ..
-                return -1
+                return false
         }
+    }
+
+    register(listener: ExperienceListener) {
+        this.listener = listener;
     }
 
     ///////////////////////
@@ -99,8 +102,8 @@ export default class ExperienceStateMachine {
      */
     private get depollutionPercentage(): number {
         const dc = this._depollutionStatus
-        const trashPicked = dc.bottlesPicked + dc.buttsPicked + dc.cansPicked + dc.plasticBagsPicked + dc.trashBagsPicked
-        const trashAmount = BOTTLES_AMOUNT + BUTTS_AMOUNT + PLASTICBAGS_AMOUNT + CANS_AMOUNT + TRASHBAGS_AMOUNT
+        const trashPicked = dc.bottlesPicked + dc.drinksPicked + dc.cansPicked + dc.toothBrushesPicked 
+        const trashAmount = BOTTLES_AMOUNT + DRINKS_AMOUNT + TOOHBRUSHES_AMOUNT + CANS_AMOUNT
         
         return (trashPicked / trashAmount) * 100
     }
