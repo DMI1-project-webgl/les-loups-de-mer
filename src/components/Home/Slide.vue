@@ -14,7 +14,7 @@
       <div class="header--main">
         <div class="header--logo">
           <a href="/" class="header--link">
-            <img src="../assets/img/logo_texte.svg" alt="">
+            <img src="./../../assets/img/logo_texte.svg" alt="">
           </a>
         </div>
         <div class="header--text-container">
@@ -71,7 +71,6 @@
 </template>
 
 <script lang="ts">
-import MainScene from '../assets/js/webgl/main/MainScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

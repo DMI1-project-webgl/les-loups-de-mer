@@ -1,18 +1,17 @@
 <template>
   <section v-show="display" id="welcome" class="page welcome color--secondary">
     <div class="welcome--logo-container">
-      <img src="../assets/img/logo_complet.svg" alt="">
+      <img src="./../../assets/img/logo_complet.svg" alt="">
     </div>
     <div class="welcome--arrow-container">
       <a href="#discover" id="go-to-discover">
-        <img src="../assets/img/decouvrir_fleche.svg" alt="">
+        <img src="./../../assets/img/decouvrir_fleche.svg" alt="">
       </a>
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import MainScene from '../assets/js/webgl/main/MainScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

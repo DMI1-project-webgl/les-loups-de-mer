@@ -142,12 +142,12 @@
       <div class="row h-lg-100 mx-5">
           <div class="col-6">
               <div class="discover--logo-container">
-                  <img src="./../assets/img/logo_simple.svg" alt="">
+                  <img src="./../../assets/img/logo_simple.svg" alt="">
               </div>
           </div>
           <div class="col-6 position-relative">
               <div class="discover--shark-container right">
-                  <img src="./../assets/img/requin.png" alt="">
+                  <img src="./../../assets/img/requin.png" alt="">
               </div>
           </div>
           <div class="col-12">
@@ -158,13 +158,13 @@
           </div>
           <div class="col-6 position-relative">
               <div class="discover--shark-container left">
-                  <img src="./../assets/img/requin.png" alt="">
+                  <img src="./../../assets/img/requin.png" alt="">
               </div>
           </div>
           <div class="col-6 position-relative">
             <div class="discover--link-container">
               <a href="#slide" class="discover--link btn--secondary">
-                  <img src="./../assets/img/cliquer_ici.svg" alt="">
+                  <img src="./../../assets/img/cliquer_ici.svg" alt="">
               </a>
             </div>
           </div>
@@ -181,7 +181,6 @@
 </template>
 
 <script lang="ts">
-import MainScene from '../assets/js/webgl/main/MainScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

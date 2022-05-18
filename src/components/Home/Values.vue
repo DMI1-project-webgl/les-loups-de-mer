@@ -6,7 +6,7 @@
                     <div class="values--img-container">
                         <div class="values--img"></div>
                         <div class="values--img">
-                            <img src="./../assets/img/christelle.jpg" alt="">
+                            <img src="./../../assets/img/christelle.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="values--link-container">
                         <button @click="goTo" class="values--link btn--secondary">
-                            <img src="./../assets/img/cliquer_ici.svg" alt="">
+                            <img src="./../../assets/img/cliquer_ici.svg" alt="">
                         </button>
                     </div>
                     <div class="ws-50"></div>
@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts">
-import MainScene from '../assets/js/webgl/main/MainScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
