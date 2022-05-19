@@ -109,29 +109,11 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         })
 
 
-        if (this.raycaster && this.vegetation) {
-
-            this.vegetation.update(this.deltaTime)
-
-            if (!this.mouseIsDown) return
-
-            this.raycaster.setFromCamera( this.pointer, this.camera );
-            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
-
-            
-
-            if ( intersects.length > 0 ) {
-                const instanceId = intersects[ 0 ].instanceId;
-
-                this.vegetation.scaleVegetation(instanceId)
-            }
-        }
-
         if (this.pointer) {
-            if (this.pointer.x > 0.1) {
-                this.angleCameraVertical -= 0.01 * ((this.pointer.x - 0.1) * 2)
-            } else if (this.pointer.x < -0.1) {
-                this.angleCameraVertical += 0.01 * ((-this.pointer.x - 0.1)* 2)
+            if (this.pointer.x > 0.05) {
+                this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2), 0.6)
+            } else if (this.pointer.x < -0.05) {
+                this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2), 0.6)
             }
 
             if (this.pointer.y > 0.1) {
@@ -148,6 +130,25 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
             this.camera.position.y = Math.sin(this.angleCameraHorizontal) * 250;
 
             this.camera.lookAt(0,0,0)
+        }
+
+
+        if (this.raycaster && this.vegetation) {
+
+            this.vegetation.update(this.deltaTime)
+
+            if (!this.mouseIsDown) return
+
+            this.raycaster.setFromCamera( this.pointer, this.camera );
+            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
+
+            
+
+            if ( intersects.length > 0 ) {
+                const instanceId = intersects[ 0 ].instanceId;
+
+                this.vegetation.scaleVegetation(instanceId)
+            }
         }
     }
 
