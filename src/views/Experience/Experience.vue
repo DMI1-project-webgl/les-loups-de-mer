@@ -5,6 +5,7 @@ import Draggable from './../../components/Experience/Draggable.vue';
 import Breadcrumb from './../../components/Experience/Breadcrumb.vue';
 import Progress from './../../components/Experience/Progress.vue';
 import Scoreboard from './../../components/Experience/Scoreboard.vue';
+import Advancement from './../../components/Experience/Advancement.vue';
 </script>
 
 <template>
@@ -20,5 +21,6 @@ import Scoreboard from './../../components/Experience/Scoreboard.vue';
       <Breadcrumb step="1"/> 
       <Button />
   --> 
+  <Advancement />
   <router-view />
 </template>
