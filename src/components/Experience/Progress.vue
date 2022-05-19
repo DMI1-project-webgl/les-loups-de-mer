@@ -1,7 +1,12 @@
 <template>
   <section class="progress" >
       <div class="progress--container">
-          <progress id="progress--advancement" class="progress--advancement" value="0" max="100"></progress>
+        <p class="progress--title">indice de pérénité de la culture</p>
+        <progress id="progress--advancement" class="progress--advancement" value="0" max="100"></progress>
+        <div class="progress--legend-container">
+            <p class="progress--legend">faible</p>
+            <p class="progress--legend">idéal</p>
+        </div>
       </div>
   </section>
 </template>
@@ -26,22 +31,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.progress {
-    /* pointer-events: none; */
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
+
 .progress--container {
-    width: 450px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
 }
 
 /* KIT PROGRESBAR  */
 progress {
-    border: 1px solid white;
-    height: 100%;
+    /* border: 1px solid transparent; */
+    background-color: #FFFFFF17;
+    height: 15px;
     width: 100%;
     
 }
@@ -49,16 +49,29 @@ progress {
 
 progress::-webkit-progress-bar { 
     background: transparent;
-    padding: 5px;
-	/* ici les styles généraux pour Webkit */
+    height: 15px;
 }
 progress::-webkit-progress-value {  
     background: white;
-	/* styles de barre d'avancement pour Webkit */
+    height: 15px;
 }  
 progress::-moz-progress-bar { 
     background: white;
-	/* styles de barre d'avancement pour Firefox */
+    height: 15px;
 }
-
+.progress--title {
+    color: white;
+    margin-bottom: -10px;
+}
+.progress--legend-container {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.progress--legend {
+    width: max-content;
+    color: white;
+    opacity: .4;
+    transform: translateY(-10px);
+}
 </style>

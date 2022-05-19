@@ -15,6 +15,8 @@
 .nav {
   pointer-events: none;
   z-index: 1;
+  left: 0;
+  top: 0;
 }
 .nav--main {
   position: relative;
