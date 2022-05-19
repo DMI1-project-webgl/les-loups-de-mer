@@ -9,7 +9,7 @@ void main() {
     //////////////////////////////////////////////////////////
     // intensity on angle					//
     //////////////////////////////////////////////////////////
-    float angleIntensity = pow( dot(vNormal, vec3(0.0, 0.0, 1.0)), anglePower );
+    float angleIntensity = min(pow(abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), anglePower ), 0.54);
 
     //////////////////////////////////////////////////////////
     // final color						//
