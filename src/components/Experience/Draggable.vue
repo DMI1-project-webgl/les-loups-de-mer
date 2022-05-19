@@ -33,7 +33,7 @@ export default defineComponent({
     const widthContainer = this.$refs.container.offsetWidth;
     const widthDraggable = this.$refs.element.offsetWidth;
     
-    const positionArray = this.initPositionArray(10, ( widthContainer - widthDraggable ) / 10);
+    const positionArray = this.initPositionArray(4, ( widthContainer - widthDraggable ) / 4);
     
     Draggable.create(this.$refs.element, {
       type:"x",

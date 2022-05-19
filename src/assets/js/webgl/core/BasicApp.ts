@@ -17,9 +17,9 @@ export default class BasicApp {
     public signal: Signal
     public loader: Loader
 
-    constructor (canvas: HTMLCanvasElement) {
+    constructor (canvas: HTMLCanvasElement, signal: Signal) {
         this.canvas = canvas
-        this.signal = new Signal() // library to send event
+        this.signal = signal // library to send event
         this.loader = new Loader(this.getAssets(), this.getAssetsBasePath(), this.signal)
 
         this.loader.load()

@@ -32,7 +32,7 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement)
+    this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement, this.signal)
   },
   beforeDestroy () {
     if (this.experienceApp) this.experienceApp.destroy()
