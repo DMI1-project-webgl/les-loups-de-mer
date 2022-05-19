@@ -66,7 +66,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     init () {
         this.background = this.materials.getEnv('main')
-        this.background = new Color(0x0085DE);
+        this.background = new Color(0x002244);
 
         this.stateMachine = new ExperienceStateMachine();
         this.stateMachine.register(this)

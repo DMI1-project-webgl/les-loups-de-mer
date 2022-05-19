@@ -61,7 +61,7 @@ function getPollutionSmog() {
                 value: 16
             },
             lightColor: {
-                value: new Color(0xCAC92B)
+                value: new Color(0xCAC92B) // 0xCAC92B // 0xaabbff00
             },
             attenuation: {
                 value: 1

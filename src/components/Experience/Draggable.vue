@@ -2,11 +2,11 @@
   <section id="draggable" class="draggable">
     <div class="container">
       <div class="draggable--percent">
-        <p class="draggable--text"><span class="percent">0</span><span>%</span></p>
+        <p class="draggable--text"><span ref="percent" class="percent">{{ value }}</span><span>%</span></p>
         
       </div>
-      <div id="draggable--container">
-        <div ref="draggable--element" id="draggable--element" class=""></div>
+      <div  ref="container" id="draggable--container">
+        <div ref="element" id="draggable--element" class=""></div>
       </div>
     </div>
 
@@ -14,30 +14,37 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 import { gsap } from "gsap";
-import { TimelineMax, TweenLite , CSSPlugin, ScrollToPlugin, Draggable } from "gsap/all"; 
+import { Draggable } from "gsap/all"; 
 
 gsap.registerPlugin(Draggable);
 
 export default defineComponent({
   name: 'DraggableElement',
+  data: () => {
+    return {
+      value: 0,
+    }
+  },
   mounted () {
 
     const that = this
-    const widthContainer = document.getElementById("draggable--container").offsetWidth;
-    const widthDraggable = document.getElementById("draggable--element").offsetWidth;
+    const widthContainer = this.$refs.container.offsetWidth;
+    const widthDraggable = this.$refs.element.offsetWidth;
     
-    const positionArray = that.initPositionArray(10, ( widthContainer - widthDraggable ) / 10);
+    const positionArray = this.initPositionArray(10, ( widthContainer - widthDraggable ) / 10);
     
-    Draggable.create("#draggable--element", {
+    Draggable.create(this.$refs.element, {
       type:"x",
       inertia: true,
-      bounds: document.getElementById("draggable--container"),
+      bounds: this.$refs.container,
+      onDrag: function() {
+        that.displayPercentX(widthContainer, widthDraggable, this.x)
+      },
       onDragEnd: function() {
           let posX = that.closestNumArray(positionArray, this.x)
-          gsap.to("#draggable--element", { x: posX, duration: 0.2});
+          gsap.to(that.$refs.element, { x: posX, duration: 0.2});
 
           that.displayPercentX(widthContainer, widthDraggable, posX)
 
@@ -53,7 +60,8 @@ export default defineComponent({
     displayPercentX( widthContainer: number, widthDraggable: number, elementX: number) {
       let percentX = Math.round(( 100 * Math.round(elementX) ) / ( widthContainer - widthDraggable -1)) ;
       if (isNaN(percentX)) percentX = 0;
-      document.querySelector("span.percent").textContent = percentX.toString();
+      this.value = percentX;
+      this.$emit('valueChange', this.value)
     },
     initPositionArray(step: number, stepWidth: number) {
       let x1 = 0;
@@ -81,27 +89,27 @@ export default defineComponent({
 /* Draggable elements */
 section.draggable {
   position: fixed;
-  top: 50%;
+  top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(-50% - 50px), -50%);
 }
 #draggable--container{
-  height: 20px;
+  height: 15px;
   width: 400px;
   background-color: white;
-  border-radius: 10px 10px;
+  border-radius: 7px 7px;
   position: relative;
   margin: auto 0;
 }
 #draggable--element {
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   background-color: white;
   position: absolute;
   left: 0;
   top: 50%;
   transform: translate( 0, -50%);
-  border-radius: 20px 20px;
+  border-radius: 12px 12px;
   box-shadow: rgb(0 0 0 / 35%) -4px -3px 45px 21px;
 }
 .draggable--percent {
@@ -110,7 +118,7 @@ section.draggable {
 .draggable--text {
   color: white;
   margin: 0 20px;
-  font-size: 1.5em;
+  font-size: 0.5em;
   font-weight: bold;
   width: 100px;
   display: flex;
