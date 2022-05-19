@@ -9,7 +9,7 @@ import MainFish from './fish/MainFish'
 import Vegetation from './object/Vegetation'
 import Trash from './object/Trash'
 import Shark from './object/Shark'
-import ExperienceStateMachine, { ExperienceStep } from '../utils/ExperienceStateMachine'
+import ExperienceStateMachine, { ExperienceStep, type DepollutionStatus } from '../utils/ExperienceStateMachine'
 import type { ExperienceListener } from '../utils/ExperienceStateMachine'
 
 export default class ExperienceScene extends BasicScene implements ExperienceListener {
@@ -24,9 +24,16 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     // State machine
     private stateMachine: ExperienceStateMachine
+    private depollutionStatus: DepollutionStatus = {
+        bottlesPicked: 0,
+        cansPicked: 0,
+        drinksPicked: 0,
+        toothBrushesPicked: 0
+    }
 
     // 3D Objects
     private sphere: EnvironementSphere = null
+    private trashes: Object3D[] = []
     private mainFish: MainFish = null
     private vegetation!: Vegetation
     private angleCameraHorizontal = 0
@@ -41,6 +48,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         window.addEventListener('mousemove', this.onMouseMove)
         window.addEventListener('mousedown', () => this.mouseIsDown = true)
         window.addEventListener('mouseup', () => this.mouseIsDown = false)
+        window.addEventListener('click', this.onClick)
+        window.addEventListener('keydown', this.onKeyboard)
     }
 
     get sphereMaterial(): ShaderMaterial {
@@ -51,6 +60,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         super.bind()
     
         this.onMouseMove = this.onMouseMove.bind(this)
+        this.onClick = this.onClick.bind(this)
+        this.onKeyboard = this.onKeyboard.bind(this)
     }
 
     init () {
@@ -139,6 +150,46 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
     }
 
+    onClick(event: MouseEvent) {
+        if(!this.raycaster) return
+
+        this.pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	    this.pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+        this.raycaster.setFromCamera( this.pointer, this.camera );
+
+        if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION) {
+            const intersects = this.raycaster.intersectObjects(this.trashes);
+            if(intersects.length > 0) {
+                // TODO : Add oppacity removing animation
+                const object = intersects[0].object
+                const trashName = object.name
+                object.parent.removeFromParent()
+                switch(trashName) {
+                    case  'Caps' || 'Body':
+                        this.depollutionStatus.bottlesPicked++
+                        break
+                    case 'Can':
+                        this.depollutionStatus.cansPicked++
+                        break
+                    case 'Drink':
+                        this.depollutionStatus.drinksPicked++
+                        break
+                    case  'Plank' || 'Brush':
+                        this.depollutionStatus.toothBrushesPicked++
+                        break
+                }
+                const completionPercentage = this.stateMachine.updateDepollutionCompletion(this.depollutionStatus)
+            }
+        }
+        
+    }
+
+    onKeyboard(event: KeyboardEvent) {
+        if(event.key == 'j') {
+            this.signal.dispatch(['validate-step'])
+        }
+    }
+
     onMouseMove (event: MouseEvent) {
         if(!this.cursor || !this.pointer) return
         this.cursor.x = event.clientX / this.sizes.width - 0.5
@@ -151,22 +202,17 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         super.onResize()
     }
 
+    /**
+     * Receiving events from Vue componentsj
+     * @param slug 
+     */
     onSignal (slug: Array<string|number>) {
         super.onSignal(slug) 
 
-        switch (slug[0]) {
-            case 'loaded':
-                break
-            case 'validate-depollution':
-                // ...
-                break
-            case 'validate-vegetation':
-                // ...
-                break
-            case 'validate-feeding':
-                // ...
-                break
-            default:
+        if (slug[0] == 'validate-step') {
+            if(this.stateMachine.nextStep()) {
+                this.setupCurrentStep()
+            }
         }
     }
 
@@ -191,9 +237,17 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 break
             }
             case ExperienceStep.VEGETATION: {
+                for (let trash of this.trashes) {
+                    trash.removeFromParent();
+                }
+                this.sphere.removePollutionSmog()
+                this.vegetation = new Vegetation(this)
                 break
             }
             case ExperienceStep.FEEDING: {
+                this.vegetation.destroy()
+                this.vegetation = null
+                this.mainFish = new MainFish(this.renderer, this)
                 break
             }
             case ExperienceStep.END: {
@@ -206,10 +260,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     // -- Instanciation methods -- //
     /////////////////////////////////
 
-    instanceTrashes() {
-        // ...
-    }
-
     instanceSharkAt(pos: Vector3) {
         const shark = new Shark(this.loader.getAsset('SCN0_Shark_v4') as Object3D)
         shark.applyMaterials(this.materials)
@@ -218,12 +268,18 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.models.push(shark)
     }
 
+    instanceTrashes() {
+        this.instanceToothBrushAt(new Vector3(130, 30, 20))
+        this.instanceDrinkAt(new Vector3(130, -30, 20))
+    }
+
     instanceCanAt(pos: Vector3): void {
         const can = new Trash(this.loader.getAsset('SCN2_Can_v1') as Object3D)
         can.applyMaterials(this.materials)
         can.position.set(pos.x, pos.y, pos.z)
         this.add(can)
         this.models.push(can)
+        this.trashes.push(can)
     }
 
     instanceDrinkAt(pos: Vector3): void {
@@ -232,6 +288,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         drink.position.set(pos.x, pos.y, pos.z)
         this.add(drink)
         this.models.push(drink)
+        this.trashes.push(drink)
     }
 
     instanceToothBrushAt(pos: Vector3): void {
@@ -241,6 +298,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         toothbrush.rotation.set(0, 0, 30)
         this.add(toothbrush)
         this.models.push(toothbrush)
+        this.trashes.push(toothbrush)
     }
 
     instanceBottleAt(pos: Vector3): void {
@@ -249,6 +307,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         bottle.position.set(pos.x, pos.y, pos.z)
         this.add(bottle)
         this.models.push(bottle)
+        this.trashes.push(bottle)
     }
 
     initFishes() {

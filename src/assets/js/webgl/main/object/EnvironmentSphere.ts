@@ -88,6 +88,7 @@ export default class EnvironmentSphere extends BasicObject3D {
     }
 
     reducePollutionSmog() {
+        // TODO : Change color to keep the smog
         (this.smog.material as ShaderMaterial).uniforms.attenuation.value += 0.1
     }
 
@@ -95,5 +96,9 @@ export default class EnvironmentSphere extends BasicObject3D {
         const smog = getPollutionSmog()
         this.smog = smog
         this.add(smog)
+    }
+
+    removePollutionSmog() {
+        this.smog.removeFromParent();
     }
 }
