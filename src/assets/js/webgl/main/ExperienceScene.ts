@@ -50,7 +50,7 @@ export default class ExperienceScene extends BasicScene {
 
     init () {
         this.background = this.materials.getEnv('main')
-        this.background = new Color(0x0085DE);
+        this.background = new Color(0x002244);
 
         const sphere = new EnvironementSphere()
         this.add(sphere)

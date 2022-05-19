@@ -29,7 +29,7 @@ export default class ExperienceApp extends BasicApp {
             'TEXTURE_SCN0_SharkBeltAlpha.jpg',
             'TEXTURE_SCN3_Starfish_Color.jpg',
           ] as string[],
-          envs: ['env'] as string[],
+          envs: [] as string[],
           hdr: [] as string[]
         }
       }
