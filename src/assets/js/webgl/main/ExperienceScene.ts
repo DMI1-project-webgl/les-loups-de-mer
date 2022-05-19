@@ -30,6 +30,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         drinksPicked: 0,
         toothBrushesPicked: 0
     }
+    private smogLerpAlpha = 0
 
     // 3D Objects
     private sphere: EnvironementSphere = null
@@ -158,6 +159,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.raycaster.setFromCamera( this.pointer, this.camera );
 
         if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION) {
+            this.smogLerpAlpha += 0.1
+            this.sphere.reducePollutionSmog(this.smogLerpAlpha)
             const intersects = this.raycaster.intersectObjects(this.trashes);
             if(intersects.length > 0) {
                 // TODO : Add oppacity removing animation
@@ -240,7 +243,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 for (let trash of this.trashes) {
                     trash.removeFromParent();
                 }
-                this.sphere.removePollutionSmog()
                 this.vegetation = new Vegetation(this)
                 break
             }

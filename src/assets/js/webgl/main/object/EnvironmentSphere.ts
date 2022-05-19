@@ -87,9 +87,8 @@ export default class EnvironmentSphere extends BasicObject3D {
         super(getSphereMesh());
     }
 
-    reducePollutionSmog() {
-        // TODO : Change color to keep the smog
-        (this.smog.material as ShaderMaterial).uniforms.attenuation.value += 0.1
+    reducePollutionSmog(alpha: number) {
+        ((this.smog.material as ShaderMaterial).uniforms.lightColor.value as Color).lerpColors(new Color(0xCAC92B), new Color(0xaabbff), alpha)
     }
 
     addPollutionSmog() {
