@@ -8,7 +8,7 @@ import Scoreboard from './../../components/Experience/Scoreboard.vue';
 </script>
 
 <template>
-  <Scoreboard />
+  <!-- <Scoreboard /> -->
   <section id="clean" style="padding-left: 100px">
     <div>
       <h1 style="color:white;">clean</h1>

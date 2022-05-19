@@ -13,7 +13,7 @@ import Loading from './../../components/Home/Loading.vue';
   <Loading :display="this.Show.loading" @next="next" />
   <Header :display="this.Show.header" :banner="this.Show.banner" @next="next"/>
   <Welcome :display="this.Show.welcome" @next="next"/>
-  <Discover  :display="this.Show.discover" @next="next"/>
+  <Discover :display="this.Show.discover" @next="next"/>
   <Slide :display="this.Show.slide" :index="this.Show.slideIndex" @next="next" @slide="slideTo"/>
   <Values :display="this.Show.values" @next="next"/>
   <Actions :display="this.Show.actions" @next="next"/>

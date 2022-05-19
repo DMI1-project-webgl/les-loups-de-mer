@@ -3,19 +3,22 @@
       <div class="breadcrumb--container">
           <div class="breadcrumb--step">
             <div class="breadcrumb--step-content">
-                <img src="https://placekitten.com/50/50" alt="">
+                <p>Étape 1</p>
             </div>
           </div>
           <div class="breadcrumb--step">
             <div class="breadcrumb--step-content">
-                <img src="https://placekitten.com/50/50" alt="">
+                <p>Étape 2</p>
             </div>
           </div>
           <div class="breadcrumb--step">
               <div class="breadcrumb--step-content">
-                <img src="https://placekitten.com/50/50" alt="">
+                <p>Étape 3</p>
             </div>
           </div>
+      </div>
+      <div class="breadcrumb--title">
+          <h2>Dépollution de l'environnement</h2>
       </div>
   </section>
 </template>
@@ -28,9 +31,9 @@ export default defineComponent({
   name: 'BreadcrumbElement',
   props: ['step'],
   mounted () {
-      console.log(this.step)
+    //   console.log(this.step)
       const steps = document.querySelectorAll(".breadcrumb--step");
-      steps[this.step-1].classList.add("is-active");
+      steps[this.step - 1].classList.add("is-active");
   },
   methods: {
 
@@ -43,23 +46,25 @@ export default defineComponent({
 <style scoped>
 .breadcrumb {
     /* pointer-events: none; */
-    position: fixed;
-    bottom: 100px;
+    /* position: relative;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%); */
+    margin-top: 7%;
 }
 .breadcrumb--container { 
     position: relative;
     border: 1px solid white;
     height: 2px;
-    width: 400px;
+    margin: 0 15%;
     position: relative;
 }
 .breadcrumb--step {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--color-primary);
+    border: 1px solid white;
     position: absolute;
     top: 50%;
 }
@@ -76,12 +81,12 @@ export default defineComponent({
     transform: translate( 50% , -50% );
 }
 .breadcrumb--step-content {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    border: 1px solid white;
-    overflow: hidden;
+    color: white;
+    font-size: .9em;
+    text-align: center;
+    white-space: nowrap;
     position: absolute;
+    padding-bottom: 10px;
     bottom: -50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -90,28 +95,15 @@ export default defineComponent({
     height: 100%;
     width: 100%;
 }
-.breadcrumb--step::after {
-    position: absolute;
-    content: "";
-    height: 10px;
-    width: 2px;
-    background-color: white;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
-}
+
 .is-active.breadcrumb--step {
-    width: 15px;
-    height: 15px;
+    background-color: white;
 }
-.is-active .breadcrumb--step-content {
-    border: 3px solid white;
-    width: 70px;
-    height: 70px;
-}
-.is-active.breadcrumb--step::after {
-    width: 3px;
-    height: 15px;
+.breadcrumb--title h2 {
+    font-size: .9em;
+    color: white;
+    padding: 15px;
+    text-align: center;
 }
 
 </style>
