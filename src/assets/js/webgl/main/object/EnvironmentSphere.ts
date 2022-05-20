@@ -61,7 +61,7 @@ function getPollutionSmog() {
                 value: 16
             },
             lightColor: {
-                value: new Color(0xCAC92B) // 0xCAC92B // 0xaabbff00
+                value: new Color(0x96916D) // 0x155AAA (bleu marin de gazoduc) // 0x96916D (gris moche de maelys) // 0xCAC92B (vert chicane)
             },
             attenuation: {
                 value: 1
@@ -88,7 +88,7 @@ export default class EnvironmentSphere extends BasicObject3D {
     }
 
     reducePollutionSmog(alpha: number) {
-        ((this.smog.material as ShaderMaterial).uniforms.lightColor.value as Color).lerpColors(new Color(0xCAC92B), new Color(0xaabbff), alpha)
+        ((this.smog.material as ShaderMaterial).uniforms.lightColor.value as Color).lerpColors(new Color(0x96916D), new Color(0xaabbff), alpha)
     }
 
     addPollutionSmog() {
