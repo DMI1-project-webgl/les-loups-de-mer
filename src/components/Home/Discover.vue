@@ -203,6 +203,7 @@ export default defineComponent({
 <style scoped>
 .discover {
     position: relative;
+    overflow: hidden;
 }
 .discover .discover--container {
     position: absolute;
@@ -249,6 +250,7 @@ export default defineComponent({
   border-bottom: 2px solid var(--color-primary);
   padding: 6px 0 5px 0;
   width: 100%;
+  overflow: hidden;
 }
 .discover--banner {
   font-size: 2em;
