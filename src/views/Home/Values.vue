@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import Values from './../../components/Home/Values.vue';
+import Header from './../../components/Header.vue';
 </script>
 
 <template>
-    <Values />
+    <section>
+        <Header :display="true" :banner="true"/>
+        <Values />
+    </section>
 </template>
