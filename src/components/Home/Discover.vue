@@ -1,5 +1,5 @@
 <template>
-  <section v-if="display" id="discover" class="page discover color--secondary background--secondary">
+  <section id="discover" class="page discover color--secondary background--secondary">
     <svg id="Groupe_3835" data-name="Groupe 3835" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2707.52" height="770.076" viewBox="0 0 2707.52 770.076">
       <defs>
         <clipPath id="clip-path">
@@ -186,15 +186,10 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'DiscoverPage',
-  props: ['display'],
-  emits: ['next'],
   mounted () {
       
   },
   methods: {
-    goTo() {
-      this.$emit('next', 'toSlide')      
-    }
   },
   beforeDestroy () {
   }

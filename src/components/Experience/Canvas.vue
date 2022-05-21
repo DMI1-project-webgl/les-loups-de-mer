@@ -18,7 +18,6 @@ export default defineComponent({
   },
   watch:{
     $route (to, from) {
-      console.log('tooo', to)
       const pageName = to.name.toLowerCase()
       switch (pageName) {
               case 'greenery':

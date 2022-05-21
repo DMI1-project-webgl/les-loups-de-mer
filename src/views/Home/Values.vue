@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Values from './../../components/Home/Values.vue';
+</script>
+
 <template>
-    <h1>Values</h1>
+    <Values />
 </template>

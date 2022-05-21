@@ -1,5 +1,5 @@
 <template>
-    <section v-if="display" class="page-full actions color--secondary">
+    <section class="page-full actions color--secondary">
         <div class="container-fluid"> 
             <div class="row h-100">
                 <div class="col-12 col-lg-6 h-lg-100">
@@ -23,9 +23,9 @@
                         <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
                     </div>
                     <div class="actions--link-container">
-                        <a href="/clean" class="actions--link btn--secondary">
+                        <router-link to="/clean" class="actions--link btn--secondary">
                             <img src="./../../assets/img/cliquer_ici.svg" alt="">
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -34,12 +34,10 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ActionsPage',
-  props: ['display'],
   mounted () {
       
   },
