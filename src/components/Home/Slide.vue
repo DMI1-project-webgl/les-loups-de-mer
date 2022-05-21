@@ -59,7 +59,7 @@
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
             <div class="slider--canvas-container">
-              <canvas></canvas>
+              <Canvas />
               <button @click="slidePrev" id="prev" class="slider--arrow-prev"></button>
               <button @click="slideNext" id="next" class="slider--arrow-next"></button>
             </div>
@@ -72,24 +72,25 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Canvas from './Canvas.vue'
 
 export default defineComponent({
-  name: 'SlidePage',
-  props: ['index'],
-  emits: ['slide'], 
-  mounted () {
-    
-  },
-  methods: {
-    slideNext() {
-      this.$emit('slide', 'next')
+    name: "SlidePage",
+    props: ["index"],
+    emits: ["slide"],
+    mounted() {
     },
-    slidePrev() {
-      this.$emit('slide', 'prev')
-    }
-  },
-  beforeDestroy () {
-  }
+    methods: {
+        slideNext() {
+            this.$emit("slide", "next");
+        },
+        slidePrev() {
+            this.$emit("slide", "prev");
+        }
+    },
+    beforeDestroy() {
+    },
+    components: { Canvas }
 })
 </script>
 

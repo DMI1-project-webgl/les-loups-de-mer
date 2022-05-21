@@ -32,8 +32,9 @@ export default class BasicScene extends Scene {
   private elapsedTime: number = 0 // Keeps track of the total time that the clock has been running
   private raf: number = -1 // window animation frame
   private isRunning: Boolean
+  private container: HTMLElement
 
-  constructor (app: BasicApp, canvas: HTMLCanvasElement, signal: Signal) {
+  constructor (app: BasicApp, canvas: HTMLCanvasElement, signal: Signal, container: HTMLElement = null) {
     super()
     if (this.constructor === BasicScene) {
       throw new TypeError('Abstract class BasicScene cannot be instantiated directly')
@@ -42,9 +43,17 @@ export default class BasicScene extends Scene {
 
     this.canvas = canvas
     this.signal = signal
-    this.sizes = {
-      width: window.innerWidth,
-      height: window.innerHeight
+    this.container = container
+    if (container) {
+      this.sizes = {
+        width: container.offsetWidth,
+        height: container.offsetHeight
+      }
+    } else {
+      this.sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }
     }
 
     this.loader = app.loader
@@ -107,8 +116,17 @@ export default class BasicScene extends Scene {
   }
 
   onResize () {
-    this.sizes.width = document.documentElement.clientWidth // window.innerWidth
-    this.sizes.height = document.documentElement.clientHeight // window.innerHeight
+    if (this.container) {
+      this.sizes = {
+        width: this.container.offsetWidth,
+        height: this.container.offsetHeight
+      }
+    } else {
+      this.sizes = {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      }
+    }
 
     // Update camera
     this.camera.aspect = this.sizes.width / this.sizes.height

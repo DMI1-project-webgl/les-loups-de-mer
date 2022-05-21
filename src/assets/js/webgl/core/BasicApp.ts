@@ -1,5 +1,5 @@
 import type BasicScene from "./BasicScene";
-import Signal from "../utils/Signal";
+import type Signal from "../utils/Signal";
 import Loader from "./Loader";
 import type AssetsUrl from "./InterfaceAssetsUrl";
 /**
