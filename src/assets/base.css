@@ -311,6 +311,11 @@ header ~ section.page, header ~ section.page-full{
   font-size: .8em;
 }
 
+.validate-button {
+  position: fixed;
+  top: 50%;
+  left: 80%;
+}
 
 button, input[type="submit"], input[type="reset"] {
 	background: none;

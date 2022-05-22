@@ -213,8 +213,9 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     onSignal (slug: Array<string|number>) {
         super.onSignal(slug) 
 
-        if (slug[0] == 'validate-step') {
+        if (slug[0] == 'validate-tapped') {
             if(this.stateMachine.nextStep()) {
+                this.notifyUI()
                 this.setupCurrentStep()
             }
         }
@@ -257,6 +258,10 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 break
             }
         }
+    }
+
+    notifyUI() {
+        this.signal.dispatch(['next-step'])
     }
 
     /////////////////////////////////

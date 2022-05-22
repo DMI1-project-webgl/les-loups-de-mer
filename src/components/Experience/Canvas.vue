@@ -10,27 +10,32 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CanvasElement',
+  created() {
+    this.$router.push('clean')
+  },
+  mounted () {
+    this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement, this.signal)
+  },
   data() {
     return {
-      experienceApp: null
+      experienceApp: null as ExperienceApp
     };
   },
   watch:{
     $route (to, from) {
       const pageName = to.name.toLowerCase()
+
       switch (pageName) {
+              case 'clean':
               case 'greenery':
+                if (!this.experienceApp) this.$router.push('clean')
               case 'food':
                 if (!this.experienceApp) this.$router.push('clean')
                 break
             default:
               if (this.experienceApp) this.experienceApp.destroy(); this.experienceApp = null
-        }
-      if (this.experienceApp) this.experienceApp.changeState(['route-' + pageName])
+      }
     }
-  },
-  mounted () {
-    this.experienceApp = new ExperienceApp(this.$refs['canvas'] as HTMLCanvasElement, this.signal)
   },
   beforeDestroy () {
     if (this.experienceApp) this.experienceApp.destroy()
