@@ -23,9 +23,7 @@
                         <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
                     </div>
                     <div class="actions--link-container">
-                        <router-link to="/clean" class="actions--link btn--secondary">
-                            <img src="./../../assets/img/cliquer_ici.svg" alt="">
-                        </router-link>
+                        <RoundButton link="/clean" text="Lancer l'expèrience" :isClickHear="true" :isRouterLink="true" />
                     </div>
                 </div>
             </div>
@@ -35,17 +33,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
-  name: 'ActionsPage',
-  mounted () {
-      
-  },
-  methods: {
-
-  },
-  beforeDestroy () {
-  }
+    name: "ActionsPage",
+    mounted() {
+    },
+    methods: {},
+    beforeDestroy() {
+    },
+    components: { RoundButton }
 })
 </script>
 

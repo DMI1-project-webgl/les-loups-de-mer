@@ -163,9 +163,7 @@
           </div>
           <div class="col-6 position-relative">
             <div class="discover--link-container">
-              <a href="#slide" class="discover--link btn--secondary">
-                  <img src="./../../assets/img/cliquer_ici.svg" alt="">
-              </a>
+              <RoundButton link="#slide" text="Découvrir" :isClickHear="true" />
             </div>
           </div>
       </div>
@@ -185,18 +183,17 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
+import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
-  name: 'DiscoverPage',
-  mounted () {
-      
-  },
-  methods: {
-  },
-  beforeDestroy () {
-  }
+    name: "DiscoverPage",
+    mounted() {
+    },
+    methods: {},
+    beforeDestroy() {
+    },
+    components: { RoundButton }
 })
 </script>
 

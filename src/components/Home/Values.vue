@@ -23,9 +23,7 @@
                         </div>
                     </div>
                     <div class="values--link-container">
-                        <router-link to="/actions" class="values--link btn--secondary">
-                            <img src="./../../assets/img/cliquer_ici.svg" alt="">
-                        </router-link>
+                        <RoundButton link="/actions" text="Suivant" :isClickHear="true" :isRouterLink="true" />
                     </div>
                     <div class="ws-50"></div>
                 </div>
@@ -37,11 +35,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
   name: 'ValuesPage',
   beforeDestroy () {
-  }
+  },
+  components: { RoundButton }
 })
 </script>
 
