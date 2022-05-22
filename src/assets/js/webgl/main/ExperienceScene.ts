@@ -258,6 +258,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 break
             }
         }
+        this.signal.dispatch(['update-advancement', this.stateMachine.sustainabilityIndex])
+        this.signal.dispatch(['update-step', this.stateMachine.currentStep + 1])
     }
 
     notifyUI() {

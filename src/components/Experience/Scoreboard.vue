@@ -11,35 +11,27 @@
                     </p>
               </li>
               <li class="scoreboard--line">
-                    <p class="scoreboard--text">Sac poubelle</p>
+                    <p class="scoreboard--text">Brosse à dents</p>
                     <p class="scoreboard--value">
-                        <span>{{nbTrash}}</span>
+                        <span>{{nbToothbrush}}</span>
                         <span>/</span>
-                        <span>{{maxTrash}}</span>
+                        <span>{{maxToothbrush}}</span>
                     </p>
               </li>
               <li class="scoreboard--line">
                     <p class="scoreboard--text">Canette</p>
                     <p class="scoreboard--value">
+                        <span>{{nbDrink}}</span>
+                        <span>/</span>
+                        <span>{{maxDrink}}</span>
+                    </p>
+              </li>
+              <li class="scoreboard--line">
+                    <p class="scoreboard--text">Conserve</p>
+                    <p class="scoreboard--value">
                         <span>{{nbCan}}</span>
                         <span>/</span>
                         <span>{{maxCan}}</span>
-                    </p>
-              </li>
-              <li class="scoreboard--line">
-                    <p class="scoreboard--text">Mégots</p>
-                    <p class="scoreboard--value">
-                        <span>{{nbButt}}</span>
-                        <span>/</span>
-                        <span>{{maxButt}}</span>
-                    </p>
-              </li>
-              <li class="scoreboard--line">
-                    <p class="scoreboard--text">Sac Plastique</p>
-                    <p class="scoreboard--value">
-                        <span>{{nbPlastic}}</span>
-                        <span>/</span>
-                        <span>{{maxPlastic}}</span>
                     </p>
               </li>
           </ul>
@@ -48,12 +40,11 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ScoreboardElement',
-  props: ['nbBottle', 'maxBottle', 'nbTrash', 'maxTrash', 'nbCan', 'maxCan', 'nbButt', 'maxButt', 'nbPlastic', 'maxPlastic',],
+  props: ['nbBottle', 'maxBottle', 'nbToothbrush', 'maxToothbrush', 'nbDrink', 'maxDrink', 'nbCan', 'maxCan',],
   mounted () {
     const props = this.$props;
     const propsArray = Object.entries(props);
@@ -82,11 +73,11 @@ export default defineComponent({
     /* pointer-events: none; */
     position: fixed;
     top: 30%;
-    left: 50%;
+    left: 16%;
     transform: translate(-50%, 0);
 }
 .scoreboard--container {
-    width: 400px;
+    width: 300px;
     border: 1px solid white;
 }
 ul {
@@ -97,6 +88,7 @@ ul {
     display: flex;
     justify-content: space-between;
     font-size: 1.5em;
+    margin-bottom: 20px;
 }
 .scoreboard--value span {
     margin: 2px;

@@ -10,10 +10,10 @@ import RoundButton1 from '../UI/RoundButton.vue';
         <div class="container-fluid px-0">
             <div class="row h-100">
                 <div class="col col-3 h-100">
-                    <Progress advancement="50" />
+                    <Progress />
                 </div>
                 <div class="col col-6 h-100">
-                    <Breadcrumb step="1" />
+                    <Breadcrumb  />
                 </div>
                 <div class="col-3 h-100">
                     <div class="adencement--link-container">
