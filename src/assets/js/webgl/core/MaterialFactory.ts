@@ -48,7 +48,6 @@ export default class MaterialFactory {
    */
   getMaterial (name:string): MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial  {
     let materialName = 'default'
-    console.log(name)
     switch (name) {
       case 'Bouchon':
       case 'Bouchon_epices':
@@ -182,7 +181,6 @@ export default class MaterialFactory {
       }
 
       case 'brush': {
-        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
         material = new MeshStandardMaterial({
           color: 0x555555,
           map: this.loader.getAsset('TEXTURE_SCN2_PlasticColor') as Texture,
@@ -220,7 +218,6 @@ export default class MaterialFactory {
       }
 
       case 'sharkBelt': {
-        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
         material = new MeshStandardMaterial({
           color: 0x222222,
           transparent: true,
@@ -233,7 +230,6 @@ export default class MaterialFactory {
       }
 
       case 'sharkFin': {
-        console.log(this.loader.getAsset('TEXTURE_SCN2_PlasticColor'))
         material = new MeshStandardMaterial({
           color: 0x6E7D4A,
           map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,

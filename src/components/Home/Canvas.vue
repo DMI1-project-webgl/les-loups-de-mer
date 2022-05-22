@@ -31,7 +31,6 @@ export default defineComponent({
   },
   mounted () {
     this.homeApp = new HomeApp(this.$refs['canvas'] as HTMLCanvasElement, this.signal, this.$refs.container)
-    console.log(this.$refs.container)
   },
   beforeDestroy () {
     if (this.homeApp) this.homeApp.destroy()

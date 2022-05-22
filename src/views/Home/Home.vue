@@ -33,7 +33,6 @@ export default defineComponent({
   },
   methods: {
     slideTo(to: string) {
-      console.log("slide to ")
       if (to == 'next') {
         this.slideIndex += 1;
         if(this.slideIndex > 2) {

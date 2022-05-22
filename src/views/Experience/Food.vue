@@ -19,7 +19,6 @@ export default defineComponent({
   },
   methods: {
     updateNumberFish (value: number) {
-      console.log(value)
       this.signal.dispatch(['numberFish', value])
     }
   }

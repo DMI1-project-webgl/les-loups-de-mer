@@ -50,15 +50,11 @@ export default defineComponent({
     const propsArray = Object.entries(props);
     const lines = document.querySelectorAll(".scoreboard--line")
 
-    console.log(lines)
     for(let i = 0; i < propsArray.length; i+=2 ) {
         if (propsArray[i][1] == propsArray[i+1][1]) {
-            console.log("EGALLLLLL");
             lines[i/2].classList.add("done")
-
         }
     }
-      
   },
   methods: {
 
