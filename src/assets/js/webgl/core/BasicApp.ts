@@ -32,11 +32,8 @@ export default class BasicApp {
     onSignal (slug: Array<string|number>) {
         switch (slug[0]) {
             case 'load-on-progress':
-                console.log('load is in progress', slug[1])
-                // this.onLoadProgress(slug[1] as number)
                 break
             case 'loaded':
-                console.log('is loaded')
                 this.onLoadComplete()
                 break
             default:
@@ -66,15 +63,6 @@ export default class BasicApp {
             scene.init()
         }
         // this.dispatchReady()
-    }
-
-    /**
-     * @param slug (route-home|route-about|...)
-     * Dispatch DOM event to BasicScene
-     */
-    changeState(slug: String) {
-        // console.log('change state app : ', slug)
-        this.signal.dispatch(slug)
     }
 
     destroy () {
