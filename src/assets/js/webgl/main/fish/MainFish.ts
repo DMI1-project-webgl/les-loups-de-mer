@@ -50,9 +50,9 @@ export default class MainFish {
     
     constructor(renderer: WebGLRenderer, scene: Scene) {
         this.renderer = renderer
-        this.scene = scene
+        this.scene = scene;
 
-        this.scene.signal.add(this.onSignal.bind(this))
+        (this.scene as ExperienceScene).signal.add(this.onSignal.bind(this))
 
         this.fishGeometry = new FishGeometry(this.WIDTH)
 

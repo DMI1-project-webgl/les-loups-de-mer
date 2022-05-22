@@ -88,6 +88,7 @@ export default class EnvironmentSphere extends BasicObject3D {
     }
 
     reducePollutionSmog(alpha: number) {
+        if (alpha > 1) return
         ((this.smog.material as ShaderMaterial).uniforms.lightColor.value as Color).lerpColors(new Color(0x96916D), new Color(0xaabbff), alpha)
     }
 
