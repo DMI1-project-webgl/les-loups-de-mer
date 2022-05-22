@@ -5,7 +5,8 @@ import fishVertexShader from '../../shaders/fish/fishVertexShader.glsl?raw';
 import fragmentPositionShader from '../../shaders/fish/fragmentPosition.glsl?raw';
 import fragmentVelocityShader from '../../shaders/fish/fragmentVelocity.glsl?raw';
 import FishGeometry from './FishGeometry';
-import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
+import { GUI } from 'lil-gui'
+import type ExperienceScene from '../ExperienceScene';
 
 export interface IUniform<TValue = any> {
     value: TValue;
