@@ -1,5 +1,7 @@
 /// <reference path="Signal.ts" />
 
+import type Signal from "./Signal";
+
 /*
 *	@desc   	An object that represents a binding between a Signal and a listener function.
 *               Released under the MIT license
@@ -31,7 +33,7 @@ export default class SignalBinding {
     * @param {Object} [listenerContext] Context on which listener will be executed (object that should represent the `this` variable inside listener function).
     * @param {Number} [priority] The priority level of the event listener. (default = 0).
     */
-    constructor(signal: Signal, listener, isOnce: bool, listenerContext, priority?: number = 0) {
+    constructor(signal: Signal, listener: any, isOnce: boolean, listenerContext: any, priority: number = 0) {
 
         this._listener = listener;
         this._isOnce = isOnce;
@@ -53,7 +55,7 @@ export default class SignalBinding {
     * @type boolean
     * @private
     */
-    private _isOnce: bool;
+    private _isOnce: boolean;
 
     /**
     * Context on which listener will be executed (object that should represent the `this` variable inside listener function).
@@ -80,13 +82,13 @@ export default class SignalBinding {
     * If binding is active and should be executed.
     * @type boolean
     */
-    public active: bool = true;
+    public active: boolean = true;
 
     /**
     * Default parameters passed to listener during `Signal.dispatch` and `SignalBinding.execute`. (curried parameters)
     * @type Array|null
     */
-    public params = null;
+    public params: any = null;
 
     /**
     * Call listener passing arbitrary parameters.
@@ -129,7 +131,7 @@ export default class SignalBinding {
     /**
     * @return {Boolean} `true` if binding is still bound to the signal and have a listener.
     */
-    public isBound(): bool {
+    public isBound(): boolean {
 
         return (!!this._signal && !!this._listener);
 
@@ -138,7 +140,7 @@ export default class SignalBinding {
     /**
     * @return {boolean} If SignalBinding will only be executed once.
     */
-    public isOnce(): bool {
+    public isOnce(): boolean {
 
         return this._isOnce;
 
