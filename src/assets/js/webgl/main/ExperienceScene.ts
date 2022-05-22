@@ -183,6 +183,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                         break
                 }
                 const completionPercentage = this.stateMachine.updateDepollutionCompletion(this.depollutionStatus)
+                this.signal.dispatch(['update-depollution', this.depollutionStatus])
             }
         }
         

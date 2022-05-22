@@ -6,7 +6,7 @@ import Scoreboard from '../../components/Experience/Scoreboard.vue';
 
 
 <template>
-    <Scoreboard :nbBottle="nbBottle" maxBottle="3" :nbToothbrush="nbToothbrush" maxToothbrush="1" :nbDrink="nbDrink" maxDrink="2" :nbCan="nbCan" maxCan="2"/>
+    <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1"/>
     <SquaredButton class="validate-button" :isRouterLink="true" link="/greenery" text="Continuer" :isWhite="true" @validate="validateStep"/>
     
 </template>
@@ -29,14 +29,6 @@ export default defineComponent({
 
     validateStep() {
       this.signal.dispatch(['validate-tapped'])
-    }
-  },
-  data() {
-    return {
-      nbBottle: 0,
-      nbToothbrush: 0,
-      nbDrink: 0,
-      nbCan: 0
     }
   }
 })
