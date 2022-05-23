@@ -5,6 +5,7 @@ import Slide from './../../components/Home/Slide.vue';
 import Welcome from './../../components/Home/Welcome.vue';
 import Discover from './../../components/Home/Discover.vue';
 import Loading from './../../components/Home/Loading.vue';
+import Sound from './../../components/Sound.vue';
 </script>
 
 <template>
