@@ -24,19 +24,20 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'BreadcrumbElement',
-  props: ['step'],
-  mounted () {
-    //   console.log(this.step)
-      const steps = document.querySelectorAll(".breadcrumb--step");
-      steps[this.step - 1].classList.add("is-active");
+  mounted() {
+    this.signal.add(this.onSignal.bind(this))
   },
   methods: {
-
+      onSignal(slug: Array<string|number>) {
+          if (slug[0] == 'update-step') {
+            const steps = document.querySelectorAll(".breadcrumb--step");
+            steps[slug[1] as number - 1].classList.add("is-active");
+          }
+      }
   },
   beforeDestroy () {
   }

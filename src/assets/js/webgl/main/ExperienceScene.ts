@@ -30,6 +30,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         drinksPicked: 0,
         toothBrushesPicked: 0
     }
+    private smogLerpAlpha = 0
 
     // 3D Objects
     private sphere: EnvironementSphere = null
@@ -108,29 +109,11 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         })
 
 
-        if (this.raycaster && this.vegetation) {
-
-            this.vegetation.update(this.deltaTime)
-
-            if (!this.mouseIsDown) return
-
-            this.raycaster.setFromCamera( this.pointer, this.camera );
-            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
-
-            
-
-            if ( intersects.length > 0 ) {
-                const instanceId = intersects[ 0 ].instanceId;
-
-                this.vegetation.scaleVegetation(instanceId)
-            }
-        }
-
         if (this.pointer) {
-            if (this.pointer.x > 0.1) {
-                this.angleCameraVertical -= 0.01 * ((this.pointer.x - 0.1) * 2)
-            } else if (this.pointer.x < -0.1) {
-                this.angleCameraVertical += 0.01 * ((-this.pointer.x - 0.1)* 2)
+            if (this.pointer.x > 0.05) {
+                this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2), 0.6)
+            } else if (this.pointer.x < -0.05) {
+                this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2), 0.6)
             }
 
             if (this.pointer.y > 0.1) {
@@ -148,6 +131,25 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
             this.camera.lookAt(0,0,0)
         }
+
+
+        if (this.raycaster && this.vegetation) {
+
+            this.vegetation.update(this.deltaTime)
+
+            if (!this.mouseIsDown) return
+
+            this.raycaster.setFromCamera( this.pointer, this.camera );
+            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
+
+            
+
+            if ( intersects.length > 0 ) {
+                const instanceId = intersects[ 0 ].instanceId;
+
+                this.vegetation.scaleVegetation(instanceId)
+            }
+        }
     }
 
     onClick(event: MouseEvent) {
@@ -158,6 +160,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.raycaster.setFromCamera( this.pointer, this.camera );
 
         if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION) {
+            this.smogLerpAlpha += 0.1
+            this.sphere.reducePollutionSmog(this.smogLerpAlpha)
             const intersects = this.raycaster.intersectObjects(this.trashes);
             if(intersects.length > 0) {
                 // TODO : Add oppacity removing animation
@@ -179,6 +183,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                         break
                 }
                 const completionPercentage = this.stateMachine.updateDepollutionCompletion(this.depollutionStatus)
+                this.signal.dispatch(['update-depollution', this.depollutionStatus])
             }
         }
         
@@ -209,8 +214,9 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     onSignal (slug: Array<string|number>) {
         super.onSignal(slug) 
 
-        if (slug[0] == 'validate-step') {
+        if (slug[0] == 'validate-tapped') {
             if(this.stateMachine.nextStep()) {
+                this.notifyUI()
                 this.setupCurrentStep()
             }
         }
@@ -240,7 +246,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 for (let trash of this.trashes) {
                     trash.removeFromParent();
                 }
-                this.sphere.removePollutionSmog()
                 this.vegetation = new Vegetation(this)
                 break
             }
@@ -254,6 +259,12 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 break
             }
         }
+        this.signal.dispatch(['update-advancement', this.stateMachine.sustainabilityIndex])
+        this.signal.dispatch(['update-step', this.stateMachine.currentStep + 1])
+    }
+
+    notifyUI() {
+        this.signal.dispatch(['next-step'])
     }
 
     /////////////////////////////////

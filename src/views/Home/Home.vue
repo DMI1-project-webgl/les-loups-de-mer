@@ -2,23 +2,18 @@
 // Home
 import Header from './../../components/Header.vue';
 import Slide from './../../components/Home/Slide.vue';
-import Values from './../../components/Home/Values.vue';
 import Welcome from './../../components/Home/Welcome.vue';
-import Actions from './../../components/Home/Actions.vue';
 import Discover from './../../components/Home/Discover.vue';
 import Loading from './../../components/Home/Loading.vue';
 import Sound from './../../components/Sound.vue';
 </script>
 
 <template>
-  <Loading :display="this.Show.loading" @next="next" />
-  <Header :display="this.Show.header" :banner="this.Show.banner" @next="next"/>
-  <Welcome :display="this.Show.welcome" @next="next"/>
-  <Discover :display="this.Show.discover" @next="next"/>
-  <Slide :display="this.Show.slide" :index="this.Show.slideIndex" @next="next" @slide="slideTo"/>
-  <Values :display="this.Show.values" @next="next"/>
-  <Actions :display="this.Show.actions" @next="next"/>
-  
+  <Loading :display="this.show.loading"/>
+  <Header :display="this.show.header" :banner="this.show.banner"/>
+  <Welcome />
+  <Discover/>
+  <Slide :index="this.slideIndex" @slide="slideTo"/>
 </template>
 
 <script lang="ts">
@@ -27,69 +22,31 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   data() {
     return {  
-      Show: {
+      show: {
         header: false,
         banner: true,
-        welcome: true,
-        discover: true,
-        loading: false,
-        slide: true,
-        slideIndex: 0,
-        values: false,
-        actions: false,
-      }
+        loading: false
+      },
+      slideIndex: 0
     }
   },
   mounted () {
   },
   methods: {
     slideTo(to: string) {
-      console.log("slide to ")
       if (to == 'next') {
-        this.Show.slideIndex += 1;
-        if(this.Show.slideIndex > 2) {
-          this.Show.slideIndex = 0
+        this.slideIndex += 1;
+        if(this.slideIndex > 2) {
+          this.slideIndex = 0
         }
       }
       else if (to == 'prev') {
-        this.Show.slideIndex -= 1;
-        if(this.Show.slideIndex < 0) {
-          this.Show.slideIndex = 2
+        this.slideIndex -= 1;
+        if(this.slideIndex < 0) {
+          this.slideIndex = 2
         }
       }
     },
-    next(elem: string) {
-      if (elem == 'toValues') {
-        this.Show.slide = false;
-        this.Show.welcome = false;
-        this.Show.discover = false;
-        this.Show.header = true;
-        this.Show.values = true;
-      }
-      switch (elem) {
-        case 'toValues': 
-          this.Show.slide = false;
-          this.Show.header = true;
-          this.Show.values = true;
-          break;
-        case 'toActions': 
-          this.Show.values = false;
-          this.Show.header = true;
-          this.Show.actions = true;
-          break;
-        default:
-          this.Show.header = false;
-          this.Show.banner = true;
-          this.Show.welcome = true;
-          this.Show.discover = false;
-          this.Show.loading = false;
-          this.Show.slide = false;
-          this.Show.slideIndex = 1;
-          this.Show.values = false;
-          this.Show.actions = false;
-          break;
-      }
-    }
   },
   beforeDestroy () {
   }

@@ -5,6 +5,8 @@
   <!-- ALL ROUTES -->
   <div class="nav">
     <router-link to="/">Home</router-link>
+    <router-link to="/valeurs">Values</router-link>
+    <router-link to="/actions">Actions</router-link>
     <router-link to="/clean">Clean</router-link>
     <router-link to="/greenery">Greenery</router-link>
     <router-link to="/food">Food</router-link>

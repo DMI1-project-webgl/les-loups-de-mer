@@ -17,13 +17,15 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ProgressElement',
-  props: ['advancement'],
   mounted () {
-      console.log(this.advancement)
-     document.getElementById('progress--advancement').setAttribute("value", this.advancement);
+    this.signal.add(this.onSignal.bind(this))
   },
   methods: {
-
+    onSignal(slug: Array<string|number>) {
+        if(slug[0] == 'update-advancement') {
+            document.getElementById('progress--advancement').setAttribute("value", slug[1] as string); 
+        }
+    }
   },
   beforeDestroy () {
   }

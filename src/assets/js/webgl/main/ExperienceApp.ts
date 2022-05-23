@@ -3,10 +3,10 @@ import type Signal from "../utils/Signal";
 import ExperienceScene from "./ExperienceScene";
 
 export default class ExperienceApp extends BasicApp {
-    constructor (canvas: HTMLCanvasElement, signal: Signal) {
+    constructor (canvas: HTMLCanvasElement, signal: Signal, container: HTMLElement = null) {
         super(canvas, signal)
         
-        this.scene = new ExperienceScene(this, canvas, this.signal)
+        this.scene = new ExperienceScene(this, canvas, this.signal, container)
         this.scenes.push(this.scene)
     }
 

@@ -6,7 +6,7 @@
           <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
         </div>
       </div>
-      <div v-if="banner != false" class="banner--container color--secondary">
+      <div class="banner--container color--secondary">
         <div class="header--text-upper">
           <p>protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète   protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète </p>
         </div>
@@ -22,44 +22,44 @@
         </div>
       </div>
     </header>
-    <section v-if="display" id="slide" class="page slider color--secondary">
+    <section id="slide" class="page slider color--secondary">
       <div class="container-fluid">
         <div class="row h-100">
           <div class="col-12 col-lg-4 h-lg-100">
-            <div v-if="this.index == 0" class="slider--content-container">
+            <div v-if="index == 0" class="slider--content-container">
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
               <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
-              <button @click="goTo" href="#" class="">
+              <router-link to="/valeurs" href="#" class="">
                 <div class="btn btn--primary">
                   <span>En savoir plus</span>
                 </div>
-              </button>
+              </router-link>
             </div>
-            <div v-else-if="this.index == 1" class="slider--content-container">
+            <div v-else-if="index == 1" class="slider--content-container">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
-              <button @click="goTo" href="#" class="">
+              <router-link to="/valeurs" href="#" class="">
                 <div class="btn btn--primary">
                   <span>En savoir plus</span>
                 </div>
-              </button>
+              </router-link>
             </div>
-            <div v-else-if="this.index == 2" class="slider--content-container">
+            <div v-else-if="index == 2" class="slider--content-container">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
-              <button @click="goTo" href="#" class="">
+              <router-link to="/valeurs" href="#" class="">
                 <div class="btn btn--primary">
                   <span>En savoir plus</span>
                 </div>
-              </button>
+              </router-link>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
             <div class="slider--canvas-container">
-              <canvas></canvas>
+              <Canvas />
               <button @click="slidePrev" id="prev" class="slider--arrow-prev"></button>
               <button @click="slideNext" id="next" class="slider--arrow-next"></button>
             </div>
@@ -71,29 +71,26 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
+import Canvas from './Canvas.vue'
 
 export default defineComponent({
-  name: 'SlidePage',
-  props: ['display', 'index'],
-  emits: ['next', 'slide'], 
-  mounted () {
-    
-  },
-  methods: {
-    goTo() {
-      this.$emit('next', 'toValues')      
+    name: "SlidePage",
+    props: ["index"],
+    emits: ["slide"],
+    mounted() {
     },
-    slideNext() {
-      this.$emit('slide', 'next')
+    methods: {
+        slideNext() {
+            this.$emit("slide", "next");
+        },
+        slidePrev() {
+            this.$emit("slide", "prev");
+        }
     },
-    slidePrev() {
-      this.$emit('slide', 'prev')
-    }
-  },
-  beforeDestroy () {
-  }
+    beforeDestroy() {
+    },
+    components: { Canvas }
 })
 </script>
 

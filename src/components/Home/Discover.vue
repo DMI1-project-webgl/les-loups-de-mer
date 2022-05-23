@@ -1,5 +1,5 @@
 <template>
-  <section v-if="display" id="discover" class="page discover color--secondary background--secondary">
+  <section id="discover" class="discover color--secondary background--secondary">
     <svg id="Groupe_3835" data-name="Groupe 3835" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2707.52" height="770.076" viewBox="0 0 2707.52 770.076">
       <defs>
         <clipPath id="clip-path">
@@ -163,16 +163,18 @@
           </div>
           <div class="col-6 position-relative">
             <div class="discover--link-container">
-              <a href="#slide" class="discover--link btn--secondary">
-                  <img src="./../../assets/img/cliquer_ici.svg" alt="">
-              </a>
+              <RoundButton link="#slide" text="Découvrir" :isClickHear="true" />
             </div>
           </div>
       </div>
       <div class="row px-0">
         <div class="col-12 px-0">
           <div class="discover--banner-container">
-            <p class="discover--banner">BLABLA    BLABLA    BLABLA    BLABLA    BLABLA    BLABLA    BLABLA  </p>
+            <p class="discover--banner">
+              <span v-for="index in 4" :key="index">
+                WONDER EFFECTS
+              </span>
+            </p>
           </div>
         </div>
       </div>
@@ -181,29 +183,24 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
+import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
-  name: 'DiscoverPage',
-  props: ['display'],
-  emits: ['next'],
-  mounted () {
-      
-  },
-  methods: {
-    goTo() {
-      this.$emit('next', 'toSlide')      
-    }
-  },
-  beforeDestroy () {
-  }
+    name: "DiscoverPage",
+    mounted() {
+    },
+    methods: {},
+    beforeDestroy() {
+    },
+    components: { RoundButton }
 })
 </script>
 
 <style scoped>
 .discover {
     position: relative;
+    overflow: hidden;
 }
 .discover .discover--container {
     position: absolute;
@@ -248,23 +245,32 @@ export default defineComponent({
 .discover--banner-container {
   border-top: 2px solid var(--color-primary);
   border-bottom: 2px solid var(--color-primary);
-  padding: 5px 0 15px 0;
-  display: inline-flex;
+  padding: 6px 0 5px 0;
   width: 100%;
+  overflow: hidden;
 }
 .discover--banner {
   font-size: 2em;
   line-height: 1em;
-  animation: marquee 20s linear infinite;
+  width: 200%;
+  margin-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  animation: marquee 50s linear infinite;
   white-space: nowrap;
+}
+
+.discover--banner span {
+  display: block;
+  width: 50%;
 }
 
 @keyframes marquee {
   0% {
-    transform: translateX(110%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-200%);
+    transform: translateX(-50%);
   }
 }
 

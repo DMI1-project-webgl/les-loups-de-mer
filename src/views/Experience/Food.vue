@@ -3,7 +3,6 @@ import Draggable from './../../components/Experience/Draggable.vue';
 </script>
 
 <template>
-  <h1>Food Page</h1>
   <Draggable @valueChange="updateNumberFish" />
 </template>
 
@@ -20,7 +19,6 @@ export default defineComponent({
   },
   methods: {
     updateNumberFish (value: number) {
-      console.log(value)
       this.signal.dispatch(['numberFish', value])
     }
   }

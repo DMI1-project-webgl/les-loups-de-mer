@@ -89,7 +89,7 @@ export default defineComponent({
 /* Draggable elements */
 section.draggable {
   position: fixed;
-  top: 20%;
+  top: 10%;
   left: 50%;
   transform: translate(calc(-50% - 50px), -50%);
 }

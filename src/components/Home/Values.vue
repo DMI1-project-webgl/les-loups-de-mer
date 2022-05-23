@@ -1,5 +1,5 @@
 <template>
-    <section v-if="display" class="page-full values color--secondary">
+    <section class="page-full values color--secondary">
         <div class="container-fluid"> 
             <div class="row h-100">
                 <div class="col-12 col-lg-5 h-lg-100">
@@ -23,9 +23,7 @@
                         </div>
                     </div>
                     <div class="values--link-container">
-                        <button @click="goTo" class="values--link btn--secondary">
-                            <img src="./../../assets/img/cliquer_ici.svg" alt="">
-                        </button>
+                        <RoundButton link="/actions" text="Suivant" :isClickHear="true" :isRouterLink="true" />
                     </div>
                     <div class="ws-50"></div>
                 </div>
@@ -36,23 +34,14 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
+import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
   name: 'ValuesPage',
-  props: ['show','display'],
-  emits: ['next'],
-  mounted () {
-      
-  },
-  methods: {
-    goTo() {
-      this.$emit('next', 'toActions')      
-    },
-  },
   beforeDestroy () {
-  }
+  },
+  components: { RoundButton }
 })
 </script>
 
