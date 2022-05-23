@@ -230,6 +230,13 @@ a {
 
 
 /* GENERAL */
+.no {
+  pointer-events: none;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;  
+}
 
 .page {
   position: relative;
@@ -246,6 +253,10 @@ a {
   right: 0;
   bottom: 0;
   overflow: hidden;
+}
+.page-experience {
+  padding-left: 100px;
+  height: 100vh;
 }
 
 section.page, section.page-full {

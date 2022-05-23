@@ -7,6 +7,7 @@ import Welcome from './../../components/Home/Welcome.vue';
 import Actions from './../../components/Home/Actions.vue';
 import Discover from './../../components/Home/Discover.vue';
 import Loading from './../../components/Home/Loading.vue';
+import Sound from './../../components/Sound.vue';
 </script>
 
 <template>

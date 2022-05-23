@@ -3,7 +3,7 @@
       <div class="scoreboard--container">
           <ul>
               <li class="scoreboard--line">
-                    <p class="scoreboard--text">Bouteille en plastique</p>
+                    <p class="scoreboard--text">Bouteille</p>
                     <p class="scoreboard--value">
                         <span>{{nbBottle}}</span>
                         <span>/</span>
@@ -11,7 +11,7 @@
                     </p>
               </li>
               <li class="scoreboard--line">
-                    <p class="scoreboard--text">Sac poubelle</p>
+                    <p class="scoreboard--text">Brosse à dents</p>
                     <p class="scoreboard--value">
                         <span>{{nbTrash}}</span>
                         <span>/</span>
@@ -19,27 +19,11 @@
                     </p>
               </li>
               <li class="scoreboard--line">
-                    <p class="scoreboard--text">Canette</p>
+                    <p class="scoreboard--text">Conserve</p>
                     <p class="scoreboard--value">
                         <span>{{nbCan}}</span>
                         <span>/</span>
                         <span>{{maxCan}}</span>
-                    </p>
-              </li>
-              <li class="scoreboard--line">
-                    <p class="scoreboard--text">Mégots</p>
-                    <p class="scoreboard--value">
-                        <span>{{nbButt}}</span>
-                        <span>/</span>
-                        <span>{{maxButt}}</span>
-                    </p>
-              </li>
-              <li class="scoreboard--line">
-                    <p class="scoreboard--text">Sac Plastique</p>
-                    <p class="scoreboard--value">
-                        <span>{{nbPlastic}}</span>
-                        <span>/</span>
-                        <span>{{maxPlastic}}</span>
                     </p>
               </li>
           </ul>
@@ -53,7 +37,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ScoreboardElement',
-  props: ['nbBottle', 'maxBottle', 'nbTrash', 'maxTrash', 'nbCan', 'maxCan', 'nbButt', 'maxButt', 'nbPlastic', 'maxPlastic',],
+  props: ['nbBottle', 'maxBottle', 'nbTrash', 'maxTrash', 'nbCan', 'maxCan'],
   mounted () {
     const props = this.$props;
     const propsArray = Object.entries(props);
@@ -78,15 +62,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.scoreboard {
-    /* pointer-events: none; */
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
 .scoreboard--container {
-    width: 400px;
+    width: 100%;
     border: 1px solid white;
 }
 ul {
@@ -96,10 +73,12 @@ ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
-    font-size: 1.5em;
+    font-size: 1em;
+    color: white;
 }
 .scoreboard--value span {
     margin: 2px;
+    color: white;
 }
 .done::after {
     position: absolute;

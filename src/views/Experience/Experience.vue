@@ -6,6 +6,7 @@ import Breadcrumb from './../../components/Experience/Breadcrumb.vue';
 import Progress from './../../components/Experience/Progress.vue';
 import Scoreboard from './../../components/Experience/Scoreboard.vue';
 import Advancement from './../../components/Experience/Advancement.vue';
+import Sound from './../../components/Sound.vue';
 </script>
 
 <template>
@@ -22,5 +23,6 @@ import Advancement from './../../components/Experience/Advancement.vue';
       <Button />
   --> 
   <Advancement />
+  <Sound file="src/assets/sound/.mp3" />
   <router-view />
 </template>
