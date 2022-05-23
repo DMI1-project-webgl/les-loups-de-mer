@@ -1,9 +1,12 @@
 <template>
-  <section class="scoreboard" >
-      <div class="scoreboard--container">
+  <section class="scoreboard">
+    <div class="scoreboard--title">
+        <p>Objects à ramasser</p>
+    </div>
+    <div class="scoreboard--container">
           <ul>
               <li class="scoreboard--line" :class="maxBottle == depollutionStatus.bottlesPicked ? 'done' : ''">
-                    <p class="scoreboard--text">Bouteilles en plastique</p>
+                    <p class="scoreboard--text">Bouteilles</p>
                     <p class="scoreboard--value">
                         <span>{{depollutionStatus.bottlesPicked}}</span>
                         <span>/</span>
@@ -75,14 +78,10 @@ export default defineComponent({
 <style scoped>
 .scoreboard--container {
     width: 100%;
-}
-
-.scoreboard--container {
-    width: 300px;
-    border: 1px solid white;
+    max-width: 250px;
 }
 ul {
-    padding: 30px;
+    padding: 0;
 }
 .scoreboard--line {
     list-style: none;
@@ -90,17 +89,30 @@ ul {
     justify-content: space-between;
     font-size: 1em;
     color: white;
+    background-color: #ffffff10;
+    padding: 5px 20px;
+    margin: 10px 0;
+    border-radius: 30px;
+    font-size: .7em;
 }
+.scoreboard--title {
+    color: white;
+    font-size: .7em;
+}
+
 .scoreboard--value span {
     margin: 2px;
     color: white;
+    font-family: "leaguespartan";
+    font-weight: bold;
+    font-size: .8em;
 }
-.done::after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 1px;
-    background: white;
-    top: 50%;
+
+.done .scoreboard--text{
+    opacity: .3;
+    text-decoration:line-through;
+}
+.done .scoreboard--value span {
+    color: #3ad12f;
 }
 </style>
