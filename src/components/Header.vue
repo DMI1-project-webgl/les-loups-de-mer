@@ -7,7 +7,9 @@
     </div>
     <div v-if="banner != false" class="banner--container color--secondary">
       <div class="header--text-upper">
-        <p>protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète   protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète </p>
+        <span v-for="index in 8" :key="index">
+            protégeons notre planète
+        </span>
       </div>
     </div>
     <div class="header--main">
@@ -93,5 +95,40 @@ header {
   width: 100%; 
   height: 100%;
   pointer-events: all;
+}
+
+
+.banner--container {
+  border-top: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  padding: 6px 0 4px 0;
+  width: 100%;
+  overflow: hidden;
+}
+.header--text-upper {
+  font-family: "leaguespartan";
+  font-size: 0.5em;
+  font-weight: 400;
+  line-height: 1em;
+  width: 200%;
+  margin-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  animation: marquee 50s linear infinite;
+  white-space: nowrap;
+}
+
+.header--text-upper span {
+  display: block;
+  width: 25%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 </style>

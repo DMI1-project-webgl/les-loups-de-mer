@@ -8,7 +8,9 @@
       </div>
       <div class="banner--container color--secondary">
         <div class="header--text-upper">
-          <p>protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète   protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète &nbsp;&nbsp;&nbsp;&nbsp; protégeons notre planète </p>
+          <span v-for="index in 8" :key="index">
+            protégeons notre planète
+          </span>
         </div>
       </div>
       <div class="header--main">
@@ -30,38 +32,30 @@
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
               <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
-              <router-link to="/valeurs" href="#" class="">
-                <div class="btn btn--primary">
-                  <span>En savoir plus</span>
-                </div>
-              </router-link>
+              <SquaredButton link="/valeurs" text="En savoir plus"/>
             </div>
             <div v-else-if="index == 1" class="slider--content-container">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
-              <router-link to="/valeurs" href="#" class="">
-                <div class="btn btn--primary">
-                  <span>En savoir plus</span>
-                </div>
-              </router-link>
+              <SquaredButton link="/valeurs" text="En savoir plus"/>
             </div>
             <div v-else-if="index == 2" class="slider--content-container">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
-              <router-link to="/valeurs" href="#" class="">
-                <div class="btn btn--primary">
-                  <span>En savoir plus</span>
-                </div>
-              </router-link>
+              <SquaredButton link="/valeurs" text="En savoir plus"/>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
             <div class="slider--canvas-container">
-              <Canvas />
-              <button @click="slidePrev" id="prev" class="slider--arrow-prev"></button>
-              <button @click="slideNext" id="next" class="slider--arrow-next"></button>
+              <div class="elements-slider">
+                <img v-if="index == 2" src="@/assets/img/slider/bouillon.png" class="element-slider">
+                <img v-if="index == 0" src="@/assets/img/slider/epices.png" class="element-slider">
+                <img v-if="index == 1" src="@/assets/img/slider/huile.png" class="element-slider">
+              </div>
+              <button @click="slidePrev" id="prev" class="slider--arrow-prev slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
+              <button @click="slideNext" id="next" class="slider--arrow-next slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
             </div>
           </div>
         </div>
@@ -73,6 +67,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Canvas from './Canvas.vue'
+import SquaredButton from '../UI/SquaredButton.vue'
 
 export default defineComponent({
     name: "SlidePage",
@@ -90,7 +85,7 @@ export default defineComponent({
     },
     beforeDestroy() {
     },
-    components: { Canvas }
+    components: { Canvas, SquaredButton }
 })
 </script>
 
@@ -105,6 +100,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   position: relative;
   top: 50%;
   transform: translate(0, -50%);
@@ -118,26 +114,11 @@ export default defineComponent({
   position: relative;
 }
 .slider--title.decoration::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border: 1px solid var(--color-primary);
-  background-color: var(--color-primary);
-  border-radius: 50%;
+  content: "*";
+  font-size: 3rem;
   position: absolute;
   left: -30px;
   top: 9px;
-}
-.slider--title.decoration::after {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border: 1px solid var(--color-primary);
-  background-color: transparent;
-  border-radius: 50%;
-  position: absolute;
-  left: -30px;
-  top: 24px;
 }
 
 .slider--arrow-prev {
@@ -150,6 +131,11 @@ export default defineComponent({
   transform: translate(0, -50%);
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+.slider--arrow-prev img {
+  width: 15px;
+  transform: rotate(90deg);
 }
 .slider--arrow-next {
   position: absolute;
@@ -161,10 +147,41 @@ export default defineComponent({
   transform: translate(0, -50%);
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+.slider--arrow-next img {
+  width: 15px;
+  transform: rotate(-90deg);
 }
 .slider--canvas-container {
   height: 100%;
   width: 100%;
+  margin-left: 5%;
+}
+
+.slider--arrow::before {
+  position: absolute;
+  content: '';
+  width: 50px;
+  height: 50px;
+  transform: scale(0);
+  left: -1px;
+  top: -1px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.slider--arrow:hover:before {
+  transform: scale(1);
+}
+
+.slider--arrow:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.slider--arrow:hover {
+  transform: scale(1.15) translate(0, -44%);
 }
 canvas {
   height: 100%;
@@ -222,4 +239,54 @@ header {
   height: 100%;
   pointer-events: all;
 }
+.elements-slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.element-slider {
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  left: -10%;
+  object-fit: contain;
+}
+
+
+.banner--container {
+  border-top: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  padding: 6px 0 4px 0;
+  width: 100%;
+  overflow: hidden;
+}
+.header--text-upper {
+  font-family: "leaguespartan";
+  font-size: 0.5em;
+  font-weight: 400;
+  line-height: 1em;
+  width: 200%;
+  margin-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  animation: marquee 50s linear infinite;
+  white-space: nowrap;
+}
+
+.header--text-upper span {
+  display: block;
+  width: 25%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 </style>

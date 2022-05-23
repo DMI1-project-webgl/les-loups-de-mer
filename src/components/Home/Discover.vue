@@ -245,7 +245,7 @@ export default defineComponent({
 .discover--banner-container {
   border-top: 2px solid var(--color-primary);
   border-bottom: 2px solid var(--color-primary);
-  padding: 6px 0 5px 0;
+  padding: 6px 0 4px 0;
   width: 100%;
   overflow: hidden;
 }

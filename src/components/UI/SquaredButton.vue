@@ -1,12 +1,12 @@
 <template>
-  <div v-if="isRouterLink" class="RoundButton-Container" @click="$emit('validate')">
-    <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
-        <p class="RoundButton-Text">{{ text }}</p>
+  <div v-if="isRouterLink" class="SquaredButton-Container" @click="$emit('validate')">
+    <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
+        <p class="SquaredButton-Text">{{ text }}</p>
     </div>
   </div>
-  <a v-else :href="link" class="RoundButton-Container">
-    <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
-        <p class="RoundButton-Text">{{ text }}</p>
+  <a v-else :href="link" class="SquaredButton-Container">
+    <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
+        <p class="SquaredButton-Text">{{ text }}</p>
     </div>
   </a>
 </template>
@@ -31,7 +31,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.RoundButton-Container {
+.SquaredButton-Container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,7 +40,7 @@ export default defineComponent({
     padding: 3px;
 }
 
-.RoundButton {
+.SquaredButton {
     width: 175px;
     height: 50px;
     background-color: var(--color-primary);
@@ -52,15 +52,15 @@ export default defineComponent({
     transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 
-.RoundButton--white {
+.SquaredButton--white {
     background-color: var(--color-secondary);
 }
 
-.RoundButton-Container:hover .RoundButton {
+.SquaredButton-Container:hover .SquaredButton {
     transform: scale(1.05);
 }
 
-.RoundButton:after {
+.SquaredButton:after {
   position: absolute;
   content: '';
   width: 182px;
@@ -71,15 +71,15 @@ export default defineComponent({
   transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 
-.RoundButton--white:after {
+.SquaredButton--white:after {
     background: var(--color-primary);
 }
 
-.RoundButton-Container:hover .RoundButton:after {
+.SquaredButton-Container:hover .SquaredButton:after {
   transform: scale(1.01);
 }
 
-.RoundButton-Text {
+.SquaredButton-Text {
     color: var(--color-secondary);
     font-family: "frasha-regular";
     text-align: center;
@@ -89,15 +89,15 @@ export default defineComponent({
     transition: color 0.2s ease-out;
 }
 
-.RoundButton--white .RoundButton-Text {
+.SquaredButton--white .SquaredButton-Text {
     color: var(--color-primary);
 }
 
-.RoundButton-Container:hover .RoundButton-Text {
+.SquaredButton-Container:hover .SquaredButton-Text {
     color: var(--color-primary);
 }
 
-.RoundButton-Container:hover .RoundButton--white .RoundButton-Text {
+.SquaredButton-Container:hover .SquaredButton--white .SquaredButton-Text {
     color: var(--color-secondary);
 }
 </style>
