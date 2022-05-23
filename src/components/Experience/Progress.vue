@@ -1,5 +1,5 @@
 <template>
-  <section class="progress" >
+  <section class="progress no" >
       <div class="progress--container">
         <p class="progress--title">indice de pérénité de la culture</p>
         <progress id="progress--advancement" class="progress--advancement" value="0" max="100"></progress>
