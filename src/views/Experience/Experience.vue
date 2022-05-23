@@ -6,9 +6,11 @@ import Breadcrumb from './../../components/Experience/Breadcrumb.vue';
 import Progress from './../../components/Experience/Progress.vue';
 import Scoreboard from './../../components/Experience/Scoreboard.vue';
 import Advancement from './../../components/Experience/Advancement.vue';
+import BackgroundGradient from '../../components/BackgroundGradient.vue';
 </script>
 
 <template>
+  <BackgroundGradient />
   <Canvas />
   <Nav />
   <!-- 

@@ -66,7 +66,8 @@ export default class BasicScene extends Scene {
 
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
-      antialias: true
+      antialias: true,
+      alpha: true,
     })
 
     this.stats = Stats()
