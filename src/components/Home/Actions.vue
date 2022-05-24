@@ -1,33 +1,29 @@
 <template>
-    <section class="page-full actions color--secondary">
-        <div class="container-fluid"> 
-            <div class="row h-100">
-                <div class="col-12 col-lg-6 h-lg-100">
-                    <div class="actions--img-container">
-                        <div class="actions--img">
-                            <img src="" alt="">
-                        </div>
-                        <div class="actions--img">
-                            <img src="" alt="">
-                        </div>
-                        <canvas></canvas>
-                    </div>
+    <section class="actions color--secondary">
+        <div class="col-12 col-lg-6 h-lg-100">
+            <div class="actions--img-container">
+                <div class="actions--img">
+                    <img src="" alt="">
                 </div>
-                <div class="col-12 col-lg-5 actions--col-content">
-                    <div class="actions--title-container">
-                        <h1 class="actions--title">Nos actions</h1>
-                    </div>
-                    <div class="actions--content-container">
-                        <p class="actions--text">Découvrez nos actions sur le terrain pour protéger les requins.</p>
-                        <p class="actions--text">Les vertus millénaires des grands squales marins sont des trésors à préserver. Engagés depuis une dizaine d'années dans la préservation des espaces natureks abritant les requins, Les loups de mer défendent des valeurs écologiques.</p>
-                        <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
-                    </div>
-                    <div class="actions--link-container">
-                        <RoundButton link="/clean" text="Lancer l'expèrience" :isClickHear="true" :isRouterLink="true" />
-                    </div>
+                <div class="actions--img">
+                    <img src="" alt="">
                 </div>
+                <canvas></canvas>
             </div>
-        </div> 
+        </div>
+        <div class="actions-left col-12 col-lg-5 actions--col-content">
+            <div class="actions--title-container">
+                <h1 class="actions--title">Nos actions</h1>
+            </div>
+            <div class="actions--content-container">
+                <p class="actions--text">Découvrez nos actions sur le terrain pour protéger les requins.</p>
+                <p class="actions--text">Les vertus millénaires des grands squales marins sont des trésors à préserver. Engagés depuis une dizaine d'années dans la préservation des espaces natureks abritant les requins, Les loups de mer défendent des valeurs écologiques.</p>
+                <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
+            </div>
+            <div class="actions--link-container">
+                <RoundButton link="/clean" text="Lancer l'expèrience" :isClickHear="true" :isRouterLink="true" />
+            </div>
+        </div>
     </section>
 </template>
 
@@ -47,10 +43,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.actions {
+    min-height: 100vh;
+    padding: 105px 0 20px 100px;
+    display: flex;
+    width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+}
 .actions--col-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .actions--img-container {
     height: 100%;
@@ -80,37 +85,7 @@ export default defineComponent({
 
 .actions--text {
     padding: 3% 0px;
-}
-.actions--quote::before {
-    content: "«";
-    font-size: 5em;
-    color: var(--color-primary);
-    font-family: "frasha-regular";
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, 100%);
-}
-.actions--quote::after {
-    content: "»";
-    font-size: 5em;
-    color: var(--color-primary);
-    font-family: "frasha-regular";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transform: translate(-100%, -100%);
-}
-.actions--name {
-    font-family:  "greatvibes-regular";
-    font-size: 2em;
-    font-weight: 100;
-    line-height: 1.5em;
-}
-.actions--profession {
-    font-family:  "greatvibes-regular";
-    font-size: 1.3em;
-    font-weight: 100;
+    font-size: 0.5em;
 }
 .actions--img-container canvas{
     height: 100%;
@@ -119,12 +94,16 @@ export default defineComponent({
 }
 
 .actions--link-container {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: -50px;
 }
 .actions--content-container {
     padding: 0 35% 0 0;
+}
+
+.actions-left {
+    height: calc(100vh - 140px);
 }
 
 </style>

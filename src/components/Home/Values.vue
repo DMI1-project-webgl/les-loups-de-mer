@@ -1,35 +1,29 @@
 <template>
-    <section class="page-full values color--secondary">
-        <div class="container-fluid"> 
-            <div class="row h-100">
-                <div class="col-12 col-lg-5 h-lg-100">
-                    <div class="values--img-container">
-                        <div class="values--img"></div>
-                        <div class="values--img">
-                            <img src="./../../assets/img/christelle.jpg" alt="">
-                        </div>
-                    </div>
+    <section class="values color--secondary row">
+        <div class="values-col col-12 col-lg-5 h-lg-100">
+            <div class="values--img-container">
+                <div class="values--img"></div>
+                <div class="values--img">
+                    <img src="./../../assets/img/christelle.jpg" alt="">
                 </div>
-                <div class="col-12 col-lg-6 values--col-content">
-                    <div class="values--title-container">
-                        <h1 class="values--title">Nos valeurs</h1>
-                    </div>
-                    <div class="values--content-container">
-                        <p class="values--text">Chez les loups de mer, on est passionné du milieu marin depuis 1987, nous sommes une équipe composée de cuisiniers, scientifiques et spécialistes de la faune et la flore aquatique. Très soucieux du développement de cet espace naturel magique, nous travaillons à base de produits frais et sourcés avec attention. </p>
-                        <p class="values--quote">Nous vous proposons des produits dérivés de cette richesse naturelle destinés à vous aider à lutter contre les effets du temps sur votre corps.Vitalité, énergues jeunesse et confort, travaillons ensemble pour vous aider à profiter des bienfaits des fonds marins.</p>
-                        <div class="values--name-container">
-                            <p class="values--name">Christelle Deneuve</p>
-                            <p class="values--profession">fondatrice de Loup de mer</p>
-                        </div>
-                    </div>
-                    <div class="values--link-container">
-                        <RoundButton link="/actions" text="Suivant" :isClickHear="true" :isRouterLink="true" />
-                    </div>
-                    <div class="ws-50"></div>
-                </div>
-                <!-- <div class="col-1"></div> -->
             </div>
-        </div> 
+        </div>
+        <div class="values-col col-12 col-lg-6 values--col-content">
+            <div class="values--title-container">
+                <h1 class="values--title">Nos valeurs</h1>
+            </div>
+            <p class="values--text">Chez les loups de mer, on est passionné du milieu marin depuis 1987, nous sommes une équipe composée de cuisiniers, scientifiques et spécialistes de la faune et la flore aquatique. Très soucieux du développement de cet espace naturel magique, nous travaillons à base de produits frais et sourcés avec attention. </p>
+            <p class="values--quote">Nous vous proposons des produits dérivés de cette richesse naturelle destinés à vous aider à lutter contre les effets du temps sur votre corps.Vitalité, énergues jeunesse et confort, travaillons ensemble pour vous aider à profiter des bienfaits des fonds marins.</p>
+            <div class="values--name-container">
+                <p class="values--name">Christelle Deneuve</p>
+                <p class="values--profession">fondatrice de Loup de mer</p>
+            </div>
+            <div class="values--link-container">
+                <RoundButton link="/actions" text="Suivant" :isClickHear="true" :isRouterLink="true" />
+            </div>
+            <div class="ws-50"></div>
+        </div>
+        <!-- <div class="col-1"></div> -->
     </section>
 </template>
 
@@ -46,24 +40,41 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.values {
+    min-height: 100vh;
+    padding: 105px 0 20px 100px;
+    width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.values-col {
+    padding: 0;
+}
+
+.values--title {
+    margin-left: -40px;
+}
+
 .values--col-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: 100px;
 }
 .values--img-container {
     height: 100%;
     position: relative;
-    padding: 20px;
     min-height: 50vh;
 }
 .values--img img { 
-    background: red;
+    background: var(--color-primary);
 }
 .values--img {
     border: 2px solid var(--color-primary);
     aspect-ratio: 4 / 5;
-    height: 50%;
+    height: 60%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -90,14 +101,14 @@ export default defineComponent({
 }
 
 .values--text {
-    padding: 3% 0px 3% 40px;
+    padding: 5px 10% 0px 40px;
 }
 .values--quote {
-    padding: 3% 90px 3% 40px;
+    padding: 5px 90px 0px 40px;
     position: relative;
 }
 .values--name-container {
-    padding: 5% 0 5% 40px;
+    padding: 10px 0 0px 40px;
 }
 .values--quote::before {
     content: "«";
@@ -109,6 +120,10 @@ export default defineComponent({
     left: 0;
     transform: translate(-50%, 100%);
 }
+
+.values p {
+    font-size: 0.5em;
+}
 .values--quote::after {
     content: "»";
     font-size: 5em;
@@ -117,24 +132,23 @@ export default defineComponent({
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(-100%, -100%);
+    transform: translate(-100%, -120%);
 }
 .values--name {
     font-family:  "greatvibes-regular";
-    font-size: 1.1em;
+    font-size: 1em !important;
     font-weight: 100;
     line-height: 1.5em;
 }
 .values--profession {
     font-family:  "greatvibes-regular";
-    font-size: .7em;
+    font-size: .6em !important;
     font-weight: 100;
 }
 .values--link-container {
-    display: flex;
-    flex-direction: row-reverse;
-    height: 100px;
-    align-items: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: -50px;
 }
 
 </style>
