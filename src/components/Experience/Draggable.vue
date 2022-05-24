@@ -1,12 +1,19 @@
 <template>
   <section id="draggable" class="draggable">
     <div class="container">
-      <div class="draggable--percent">
+      <!-- <div class="draggable--percent">
         <p class="draggable--text"><span ref="percent" class="percent">{{ value }}</span><span>%</span></p>
         
-      </div>
+      </div> -->
       <div  ref="container" id="draggable--container">
-        <div ref="element" id="draggable--element" class=""></div>
+        <div ref="element" id="draggable--element" class="draggable--element"></div>
+        <p class="draggable--legend left">Minimum</p>
+        <p class="draggable--legend right">Maximum</p>
+        <div class="draggable--step step-1"></div>
+        <div class="draggable--step step-2"></div>
+        <div class="draggable--step step-3"></div>
+        <div class="draggable--step step-4"></div>
+        <div class="draggable--step step-5"></div>
       </div>
     </div>
 
@@ -89,28 +96,29 @@ export default defineComponent({
 /* Draggable elements */
 section.draggable {
   position: fixed;
+  width: 40vw;
   top: 10%;
   left: 50%;
-  transform: translate(calc(-50% - 50px), -50%);
+  transform: translate(-50%, -50%);
 }
 #draggable--container{
-  height: 15px;
-  width: 400px;
+  height: 1px;
+  width: 500px;
   background-color: white;
   border-radius: 7px 7px;
   position: relative;
   margin: auto 0;
 }
 #draggable--element {
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
   background-color: white;
   position: absolute;
   left: 0;
   top: 50%;
   transform: translate( 0, -50%);
-  border-radius: 12px 12px;
-  box-shadow: rgb(0 0 0 / 35%) -4px -3px 45px 21px;
+  border-radius: 50%;
+  /* box-shadow: rgb(0 0 0 / 35%) -4px -3px 45px 21px; */
 }
 .draggable--percent {
   height: 100%;
@@ -129,5 +137,49 @@ section.draggable {
   font-size: 1.3em;
   font-weight: bold;
 
+}
+.draggable--legend {
+  position: absolute;
+  top: 0;
+  color: white;
+  opacity: .5;
+  padding: 15px;
+  font-size: .4em;
+}
+.draggable--legend.left {
+  transform: translate(-100%,-50%);
+  left: 0;
+}
+.draggable--legend.right {
+  transform: translate(100%,-50%);
+  right: 0;
+}
+.draggable--step {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  background-color: white;
+}
+.draggable--step.step-1 {
+  left: 0;
+  transform: translate(0%, -50%);
+}
+.draggable--step.step-2 {
+  left: 25%;
+  transform: translate(0%, -50%);
+}
+.draggable--step.step-3 {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.draggable--step.step-4 {
+  left: 75%;
+  transform: translate(-100%, -50%);
+}
+.draggable--step.step-5 {
+  left: 100%;
+  transform: translate(-100%, -50%);
 }
 </style>

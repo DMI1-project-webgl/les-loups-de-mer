@@ -46,12 +46,8 @@ export default defineComponent({
 
 <style scoped>
 .breadcrumb {
-    /* pointer-events: none; */
-    /* position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    margin-top: 7%;
+    top: -15px;
+    transform: translate(0, 50%);
 }
 .breadcrumb--container { 
     position: relative;
@@ -61,8 +57,8 @@ export default defineComponent({
     position: relative;
 }
 .breadcrumb--step {
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: var(--color-primary);
     border: 1px solid white;
@@ -83,7 +79,7 @@ export default defineComponent({
 }
 .breadcrumb--step-content {
     color: white;
-    font-size: .9em;
+    font-size: .7em;
     text-align: center;
     white-space: nowrap;
     position: absolute;
@@ -101,7 +97,7 @@ export default defineComponent({
     background-color: white;
 }
 .breadcrumb--title h2 {
-    font-size: .9em;
+    font-size: .7em;
     color: white;
     padding: 15px;
     text-align: center;

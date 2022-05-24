@@ -33,7 +33,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.progress {
+    max-width: 250px;
+}
 .progress--container {
     width: 100%;
     height: 100%;
@@ -43,7 +45,7 @@ export default defineComponent({
 progress {
     /* border: 1px solid transparent; */
     background-color: #FFFFFF17;
-    height: 15px;
+    height: 10px;
     width: 100%;
     
 }
@@ -51,24 +53,26 @@ progress {
 
 progress::-webkit-progress-bar { 
     background: transparent;
-    height: 15px;
+    height: 10px;
 }
 progress::-webkit-progress-value {  
     background: white;
-    height: 15px;
+    height: 10px;
 }  
 progress::-moz-progress-bar { 
     background: white;
-    height: 15px;
+    height: 10px;
 }
 .progress--title {
     color: white;
-    margin-bottom: -10px;
+    margin-bottom: -20px;
+    font-size: .5em;
 }
 .progress--legend-container {
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
+    font-size: .7em;
 }
 .progress--legend {
     width: max-content;

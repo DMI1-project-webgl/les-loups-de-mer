@@ -2,26 +2,28 @@
 <script setup lang="ts">
 import SquaredButton from '../../components/UI/SquaredButton.vue';
 import Scoreboard from '../../components/Experience/Scoreboard.vue';
+import Modal from '../../components/Experience/Modal.vue';
+import Aileron from '../../components/Experience/Aileron.vue';
 </script>
 
 
 <template>
   <!-- <Scoreboard /> -->
-  <section id="clean" class="page-experience clean ">
+  <section id="clean" class="page-experience clean no">
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-3 h-100 px-0">
           <div class="clear--data-container ">
             <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1"/>
             <div class="clean--img-container">
-              <img src="" alt="">
+              <Aileron step="8"/>      
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-   
+   <Modal />
   <SquaredButton class="validate-button" :isRouterLink="true" link="/greenery" text="Continuer" :isWhite="true" @validate="validateStep"/>
     
 </template>
@@ -38,6 +40,7 @@ import Scoreboard from '../../components/Experience/Scoreboard.vue';
   color: white;
   width: 100%;
   padding-right: 15%;
+  margin-top: 50px;
 }
 .clean--img-container img{ 
   aspect-ratio: 1/1;
