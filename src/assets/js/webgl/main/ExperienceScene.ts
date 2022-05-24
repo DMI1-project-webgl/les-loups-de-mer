@@ -34,6 +34,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     // 3D Objects
     private sphere: EnvironementSphere = null
+    private shark: Shark = null
     private trashes: Object3D[] = []
     private mainFish: MainFish = null
     private vegetation!: Vegetation
@@ -81,6 +82,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.raycaster = new Raycaster();
         this.pointer = new Vector2();
 
+        this.instanceSharkAt(new Vector3(130, 30, 40))
         this.setupCurrentStep()
     }
 
@@ -108,6 +110,10 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
           model.update(this.deltaTime)
         })
 
+        if (this.shark) {
+            const tn = ((Date.now() * 0.001) % this.period) / this.period
+            this.shark.update(tn)
+        }
 
         if (this.pointer) {
             if (this.pointer.x > 0.05) {
@@ -277,6 +283,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         shark.position.set(pos.x, pos.y, pos.z)
         this.add(shark)
         this.models.push(shark)
+        this.shark = shark
     }
 
     instanceTrashes() {
