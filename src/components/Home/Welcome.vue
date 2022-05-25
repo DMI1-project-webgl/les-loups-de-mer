@@ -1,9 +1,14 @@
 <template>
   <section id="welcome" class="page welcome color--secondary">
     <div class="welcome--logo-container">
-      <img src="./../../assets/img/logo_complet.svg" alt="">
+      <!-- <img src="./../../assets/img/logo_complet.svg" alt=""> -->
+      <div id="content" class="content">
+        <div id="slider" data-images='["./../../src/assets/img/logo_complet_bg_empty.png","./../../src/assets/img/logo_complet_bg.png"]' data-disp="./../../src/assets/img/logo_complet_bg_empty.png">
+        </div>
+      </div>
+      <canvas ref="cover"></canvas>
     </div>
-    <div class="welcome--arrow-container">
+    <div ref="arrow" class="welcome--arrow-container">
       <a href="#discover" id="go-to-discover" class="welcome--arrow">
         <img src="./../../assets/img/arrow.svg" alt="">
       </a>
@@ -13,11 +18,58 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Sketch from './../../assets/js/webgl/Sketch'
 
 export default defineComponent({
   name: 'WelcomePage',
   mounted () {
-    
+    let sketch = new Sketch(this.$refs.cover, {
+      debug: true,
+      uniforms: {
+        intensity: {value: 0.12, type:'f', min:0., max:3}
+      },
+      duration: 3,
+      easing: 'power4',
+      fragment: `
+        uniform float time;
+        uniform float progress;
+        uniform float intensity;
+        uniform float width;
+        uniform float scaleX;
+        uniform float scaleY;
+        uniform float transition;
+        uniform float radius;
+        uniform float swipe;
+        uniform sampler2D texture1;
+        uniform sampler2D texture2;
+        uniform sampler2D displacement;
+        uniform vec4 resolution;
+        varying vec2 vUv;
+        mat2 getRotM(float angle) {
+            float s = sin(angle);
+            float c = cos(angle);
+            return mat2(c, -s, s, c);
+        }
+        const float PI = 3.1415;
+        const float angle1 = PI *0.25;
+        const float angle2 = PI *1.75;
+        void main()	{
+          vec2 newUV = (vUv - vec2(0.5))*resolution.zw + vec2(0.5);
+          vec4 disp = texture2D(displacement, newUV);
+          vec2 dispVec = vec2(disp.r, disp.g);
+          vec2 distortedPosition1 = newUV + getRotM(angle1) * dispVec * intensity * progress;
+          vec4 t1 = texture2D(texture1, distortedPosition1);
+          vec2 distortedPosition2 = newUV + getRotM(angle2) * dispVec * intensity * (1.0 - progress);
+          vec4 t2 = texture2D(texture2, distortedPosition2);
+          gl_FragColor = mix(t1, t2, progress);
+        }
+      `
+    });
+    document.documentElement.style.overflow = 'hidden';
+    setTimeout(() => {
+      this.$refs.arrow.classList.add('visible')
+      document.documentElement.style.overflow = 'scroll';
+    },2000)
   },
   methods: {
   },
@@ -33,6 +85,11 @@ export default defineComponent({
   width: 100%;
   height: 100%;
 }
+
+.welcome canvas {
+  width: 75vw;
+  height: 25vw;
+}
 .welcome--logo-container {
   width: 50vw;
   margin: auto;
@@ -46,7 +103,14 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: transform 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  transition: transform 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000), opacity 2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  opacity: 0;
+  transform: scale(0.8) translateY(-20px);
+}
+
+.welcome .visible {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
 }
 
 .welcome--arrow-container:hover {
