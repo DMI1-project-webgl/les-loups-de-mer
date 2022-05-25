@@ -17,9 +17,9 @@ export interface DepollutionStatus {
 }
 
 const BOTTLES_AMOUNT = 3
-const DRINKS_AMOUNT = 3
-const TOOHBRUSHES_AMOUNT = 3
-const CANS_AMOUNT = 3
+const DRINKS_AMOUNT = 2
+const TOOHBRUSHES_AMOUNT = 1
+const CANS_AMOUNT = 2
 
 const NEEDED_FISH_AMOUNT = 50 // TO DEFINE
 
@@ -42,6 +42,22 @@ export default class ExperienceStateMachine {
     //////////////////
     // -- Global -- //
     //////////////////
+
+    get neededCanAmount() {
+        return CANS_AMOUNT;
+    }
+
+    get neededToothbrushAmount() {
+        return TOOHBRUSHES_AMOUNT;
+    }
+
+    get neededDrinkAmount() {
+        return DRINKS_AMOUNT;
+    }
+
+    get neededBottleAmount() {
+        return BOTTLES_AMOUNT;
+    }
 
     /**
      * Global environment sustainability

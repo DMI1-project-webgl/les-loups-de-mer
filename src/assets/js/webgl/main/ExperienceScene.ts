@@ -287,42 +287,67 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     }
 
     instanceTrashes() {
-        this.instanceToothBrushAt(new Vector3(130, 30, 20))
-        this.instanceDrinkAt(new Vector3(130, -30, 20))
+        for(let i = 0; i < this.stateMachine.neededBottleAmount; i++) {
+            console.log('instance bottle')
+            const randomPos = this.randomSpherePoint()
+            this.instanceBottleAt(randomPos)
+        }
+
+        for(let i = 0; i < this.stateMachine.neededToothbrushAmount; i++) {
+            console.log('instance toothbrush')
+            const randomPos = this.randomSpherePoint()
+            this.instanceToothBrushAt(randomPos)
+        }
+
+        for(let i = 0; i < this.stateMachine.neededDrinkAmount; i++) {
+            console.log('instance drink')
+            const randomPos = this.randomSpherePoint()
+            this.instanceDrinkAt(randomPos)
+        }
+
+        for(let i = 0; i < this.stateMachine.neededCanAmount; i++) {
+            console.log('instance can')
+            const randomPos = this.randomSpherePoint()
+            this.instanceCanAt(randomPos)
+        }
+        console.log('trashes number', this.trashes.length)
     }
 
     instanceCanAt(pos: Vector3): void {
-        const can = new Trash(this.loader.getAsset('SCN2_Can_v1') as Object3D)
+        const can = new Trash((this.loader.getAsset('SCN2_Can_v1') as Mesh).clone())
         can.applyMaterials(this.materials)
         can.position.set(pos.x, pos.y, pos.z)
+        can.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(can)
         this.models.push(can)
         this.trashes.push(can)
     }
 
     instanceDrinkAt(pos: Vector3): void {
-        const drink = new Trash(this.loader.getAsset('SCN2_Drink_v3') as Object3D)
+        const drink = new Trash((this.loader.getAsset('SCN2_Drink_v3') as Mesh).clone())
         drink.applyMaterials(this.materials)
         drink.position.set(pos.x, pos.y, pos.z)
+        drink.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(drink)
         this.models.push(drink)
         this.trashes.push(drink)
     }
 
     instanceToothBrushAt(pos: Vector3): void {
-        const toothbrush = new Trash(this.loader.getAsset('SCN2_ToothBrush_v1') as Object3D)
+        const toothbrush = new Trash((this.loader.getAsset('SCN2_ToothBrush_v1') as Mesh).clone())
         toothbrush.applyMaterials(this.materials)
         toothbrush.position.set(pos.x, pos.y, pos.z)
-        toothbrush.rotation.set(0, 0, 30)
+        toothbrush.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(toothbrush)
         this.models.push(toothbrush)
         this.trashes.push(toothbrush)
     }
 
     instanceBottleAt(pos: Vector3): void {
-        const bottle = new Trash(this.loader.getAsset('SCN2_Bottle_v3') as Object3D)
+        const bottle = new Trash((this.loader.getAsset('SCN2_Bottle_v3') as Mesh).clone())
         bottle.applyMaterials(this.materials)
         bottle.position.set(pos.x, pos.y, pos.z)
+        bottle.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(bottle)
         this.models.push(bottle)
         this.trashes.push(bottle)
@@ -336,9 +361,34 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.vegetation = new Vegetation(this)
     }
 
-    lerp (start: number, end: number, amt: number): number{
+    /////////////////
+    // -- Utils -- //
+    /////////////////
+
+    lerp (start: number, end: number, amt: number): number {
         return (1-amt)*start+amt*end
-      }
+    }
+
+    randomSpherePoint(): Vector3 {
+        const radius = this.randomIntFromInterval(125, 140); // Random orbit
+        const x0 = 0;
+        const y0 = 0;
+        const z0 = 0;
+
+        const u = Math.random();
+        const v = Math.random();
+        const theta = 2 * Math.PI * u;
+        const phi = Math.acos(2 * v - 1);
+        const x = x0 + (radius * Math.sin(phi) * Math.cos(theta));
+        const y = y0 + (radius * Math.sin(phi) * Math.sin(theta));
+        const z = z0 + (radius * Math.cos(phi));
+
+        return new Vector3(x,y,z);
+    }
+
+    randomIntFromInterval(min: number, max: number) { // min and max included 
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
     
     destroy () {
         super.destroy()
