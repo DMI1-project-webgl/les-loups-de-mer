@@ -188,8 +188,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                         this.depollutionStatus.toothBrushesPicked++
                         break
                 }
-                const completionPercentage = this.stateMachine.updateDepollutionCompletion(this.depollutionStatus)
-                this.signal.dispatch(['update-depollution', this.depollutionStatus])
+                const completionStep = this.stateMachine.updateDepollutionCompletion(this.depollutionStatus)
+                this.signal.dispatch(['update-depollution', this.depollutionStatus, completionStep])
             }
         }
         

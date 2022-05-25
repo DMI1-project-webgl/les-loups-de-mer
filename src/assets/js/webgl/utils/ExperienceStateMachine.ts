@@ -125,13 +125,21 @@ export default class ExperienceStateMachine {
     }
 
     /**
+     * Get the depollution step based on remaining trash
+     */
+     private get depollutionStep(): number {
+        const dc = this._depollutionStatus
+        return dc.bottlesPicked + dc.drinksPicked + dc.cansPicked + dc.toothBrushesPicked 
+    }
+
+    /**
      * Update the depollution status object & return the new depollutionPercentage
      * @param depollutionCompletion
      * @returns completion percentage
      */
     public updateDepollutionCompletion(dc: DepollutionStatus): number {
         this._depollutionStatus = dc;
-        return this.depollutionPercentage
+        return this.depollutionStep
     }
 
     ///////////////////

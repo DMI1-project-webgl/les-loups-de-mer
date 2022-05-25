@@ -14,7 +14,7 @@
         </svg>
     </div>
     <div class="aileron--percent">
-        <p id="aileron--percent">0%</p>
+        <p id="aileron--percent">{{ percentage }}</p>
     </div>
     <div class="aileron--text">
         <p>Prothèse d'aileron de requin</p>
@@ -28,9 +28,10 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'AileronElement',
   props: ['step'],
-  mounted () {
-      console.log(this.step * 100 / 9)
-      document.getElementById('aileron--percent').innerHTML = Math.round(String(this.step * 100 / 8)) + "%";
+  computed: {
+      percentage() {
+          return String(Math.round(this.step * 100 / 8)) + "%";
+      }
   },
   methods: {
     

@@ -16,7 +16,7 @@ import Aileron from '../../components/Experience/Aileron.vue';
           <div class="clear--data-container ">
             <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1"/>
             <div class="clean--img-container">
-              <Aileron step="3"/>      
+              <Aileron :step="step"/>      
             </div>
           </div>
         </div>
@@ -57,11 +57,18 @@ export default defineComponent({
   mounted() {
     this.signal.add(this.onSignal.bind(this))
   },
+  data() {
+    return {
+      step: 0
+    }
+  },
   methods: {
     onSignal(slug: Array<string|number>) {
       switch(slug[0]) {
         case 'next-step':
           this.$router.push('greenery')
+        case 'update-depollution':
+          this.step = Number(slug[2])
       }
     },
 
