@@ -166,11 +166,12 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.raycaster.setFromCamera( this.pointer, this.camera );
 
         if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION) {
-            this.smogLerpAlpha += 0.1
-            this.sphere.reducePollutionSmog(this.smogLerpAlpha)
             const intersects = this.raycaster.intersectObjects(this.trashes);
             if(intersects.length > 0) {
-                // TODO : Add oppacity removing animation
+                this.smogLerpAlpha += 0.1
+                this.sphere.reducePollutionSmog(this.smogLerpAlpha)
+
+                // TODO : Add oppacity for removing animation
                 const object = intersects[0].object
                 const trashName = object.name
                 object.parent.removeFromParent()
