@@ -175,7 +175,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 const trashName = object.name
                 object.parent.removeFromParent()
                 switch(trashName) {
-                    case  'Caps' || 'Body':
+                    case  'Body': case 'Caps':
                         this.depollutionStatus.bottlesPicked++
                         break
                     case 'Can':
@@ -184,7 +184,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                     case 'Drink':
                         this.depollutionStatus.drinksPicked++
                         break
-                    case  'Plank' || 'Brush':
+                    case  'Plank': case 'Brush':
                         this.depollutionStatus.toothBrushesPicked++
                         break
                 }
