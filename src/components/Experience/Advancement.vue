@@ -3,6 +3,7 @@ import Breadcrumb from './../../components/Experience/Breadcrumb.vue';
 import Progress from './../../components/Experience/Progress.vue';
 import RoundButton from '../UI/RoundButton.vue';
 import RoundButton1 from '../UI/RoundButton.vue';
+
 </script>
 
 <template>  
@@ -23,7 +24,6 @@ import RoundButton1 from '../UI/RoundButton.vue';
             </div>
         </div>
     </section>
-  
 </template>
 
 
