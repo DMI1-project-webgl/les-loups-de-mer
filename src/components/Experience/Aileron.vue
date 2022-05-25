@@ -29,8 +29,8 @@ export default defineComponent({
   name: 'AileronElement',
   props: ['step'],
   mounted () {
-      console.log(this.step * 100 / 8)
-      document.getElementById('aileron--percent').innerHTML = String(this.step * 100 / 8) + "%";
+      console.log(this.step * 100 / 9)
+      document.getElementById('aileron--percent').innerHTML = Math.round(String(this.step * 100 / 8)) + "%";
   },
   methods: {
     

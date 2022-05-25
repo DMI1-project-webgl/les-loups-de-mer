@@ -16,7 +16,7 @@ import Aileron from '../../components/Experience/Aileron.vue';
           <div class="clear--data-container ">
             <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1"/>
             <div class="clean--img-container">
-              <Aileron step="8"/>      
+              <Aileron step="3"/>      
             </div>
           </div>
         </div>
