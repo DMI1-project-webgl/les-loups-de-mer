@@ -24,7 +24,7 @@ import Aileron from '../../components/Experience/Aileron.vue';
     </div>
   </section>
    <Modal />
-  <SquaredButton class="validate-button" :isRouterLink="true" link="/greenery" text="Continuer" :isWhite="true" @validate="validateStep"/>
+  <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="true" link="/greenery" text="Continuer" :isWhite="true" @validate="validateStep"/>
     
 </template>
 
@@ -59,7 +59,8 @@ export default defineComponent({
   },
   data() {
     return {
-      step: 0
+      step: 0,
+      canContinue: false
     }
   },
   methods: {
@@ -69,6 +70,9 @@ export default defineComponent({
           this.$router.push('greenery')
         case 'update-depollution':
           this.step = Number(slug[2])
+          if (this.step === 8) {
+            this.canContinue = true
+          }
       }
     },
 
