@@ -4,11 +4,16 @@
         <p class="RoundButton-Text">{{ text }}</p>
     </div>
   </router-link>
-  <a v-else :href="link" class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
+  <a v-else-if="link" :href="link" class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
     <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
         <p class="RoundButton-Text">{{ text }}</p>
     </div>
   </a>
+  <div v-else class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
+    <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
+        <p class="RoundButton-Text">{{ text }}</p>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -40,6 +45,7 @@ export default defineComponent({
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 

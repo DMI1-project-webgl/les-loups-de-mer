@@ -176,7 +176,7 @@ html { font-size: calc( 16px + (24 - 16) * (100vw - 400px) / (800 - 400) ); }
 }
 
 body {
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
   min-height: 100vh;
   transition: color 0.5s, background-color 0.5s;
   text-rendering: optimizeLegibility;

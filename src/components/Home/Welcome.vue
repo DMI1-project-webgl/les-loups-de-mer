@@ -9,7 +9,7 @@
       <canvas ref="cover"></canvas>
     </div>
     <div ref="arrow" class="welcome--arrow-container">
-      <a href="#discover" id="go-to-discover" class="welcome--arrow">
+      <a href="#discover" id="go-to-discover" class="welcome--arrow" @click="goTo">
         <img src="./../../assets/img/arrow.svg" alt="">
       </a>
     </div>
@@ -22,6 +22,7 @@ import Sketch from './../../assets/js/webgl/Sketch'
 
 export default defineComponent({
   name: 'WelcomePage',
+  props: ['scrollBar'],
   mounted () {
     let sketch = new Sketch(this.$refs.cover, {
       debug: true,
@@ -68,10 +69,13 @@ export default defineComponent({
     document.documentElement.style.overflow = 'hidden';
     setTimeout(() => {
       this.$refs.arrow.classList.add('visible')
-      document.documentElement.style.overflow = 'scroll';
+      // document.documentElement.style.overflow = 'scroll';
     },2000)
   },
   methods: {
+    goTo () {
+      this.scrollBar.scrollTo(0, window.innerHeight, 600);
+    }
   },
   beforeDestroy () {
   }

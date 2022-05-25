@@ -9,15 +9,29 @@ import Sound from './../../components/Sound.vue';
 </script>
 
 <template>
-  <Loading :display="this.show.loading"/>
-  <Header :display="this.show.header" :banner="this.show.banner"/>
-  <Welcome />
-  <Discover/>
-  <Slide :index="this.slideIndex" @slide="slideTo"/>
+  <section
+      ref="scrollSections"
+      class="toto"
+      id="my-scrollbar"
+      data-scrollbar
+    >
+      <div class="Home">
+        <Loading :display="show.loading"/>
+        <Header :display="show.header" :banner="show.banner"/>
+        <Welcome :scrollBar="scrollBar" />
+        <Discover :scrollBar="scrollBar"/>
+        <Slide :index="slideIndex" @slide="slideTo"/>
+      </div>
+    </section>
 </template>
+
+
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Scrollbar from 'smooth-scrollbar';
+import { Bounce } from 'smooth-scrollbar/plugins/overscroll/bounce'
+import OverscrollPlugin from 'smooth-scrollbar/plugins/overscroll/index'
 
 export default defineComponent({
   data() {
@@ -27,10 +41,23 @@ export default defineComponent({
         banner: true,
         loading: false
       },
-      slideIndex: 0
+      slideIndex: 0,
+      scrollBar: undefined
     }
   },
   mounted () {
+    Scrollbar.use(OverscrollPlugin);
+    this.scrollBar =  Scrollbar.init(this.$refs.scrollSections, {
+      plugins: {
+       overscroll: {
+         effect: 'bounce',
+          onScroll: undefined,
+          damping: 0.2,
+          maxOverscroll: 150,
+          glowColor: '#87ceeb',
+        }
+      }
+    })
   },
   methods: {
     slideTo(to: string) {
@@ -53,3 +80,16 @@ export default defineComponent({
 })
 </script>
 
+<style scoped>
+.toto {
+  height: 100vh;
+  overflow: hidden; 
+  outline: none;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+</style>
