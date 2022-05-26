@@ -6,6 +6,7 @@ import type Signal from "../utils/Signal";
 import type Loader from './Loader';
 import type BasicApp from './BasicApp';
 import Stats from 'three/examples/jsm/libs/stats.module';
+import type MaterialFactory from './MaterialFactory';
 
 /**
  * @name BasicScene 
@@ -23,6 +24,7 @@ export default class BasicScene extends Scene {
   public models: Array<BasicObject3D> = [] // All models of the application
   public signal: Signal
   public loader: Loader
+  public materials: MaterialFactory
 
   private stats: Stats
   private canvas: HTMLCanvasElement

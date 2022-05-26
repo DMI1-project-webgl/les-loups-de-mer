@@ -3,7 +3,7 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import type BasicApp from '../core/BasicApp'
 import type Signal from '../utils/Signal'
 import MaterialFactory from '../core/MaterialFactory'
-import { Clock, Color, Mesh, Object3D, Raycaster, ShaderMaterial, Vector2, Vector3 } from 'three'
+import { AmbientLight, Clock, Color, Mesh, Object3D, Raycaster, ShaderMaterial, Vector2, Vector3 } from 'three'
 import EnvironementSphere from './object/EnvironmentSphere'
 import MainFish from './fish/MainFish'
 import Vegetation from './object/Vegetation'
@@ -11,6 +11,7 @@ import Trash from './object/Trash'
 import Shark from './object/Shark'
 import ExperienceStateMachine, { ExperienceStep, type DepollutionStatus } from '../utils/ExperienceStateMachine'
 import type { ExperienceListener } from '../utils/ExperienceStateMachine'
+import Rock from './object/Rock'
 
 export default class ExperienceScene extends BasicScene implements ExperienceListener {
     private materials: MaterialFactory
@@ -67,8 +68,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     }
 
     init () {
-        this.background = this.materials.getEnv('main')
-        this.background = new Color(0x002244);
+        // this.background = this.materials.getEnv('main')
+        // this.background = new Color(0x002244);
 
         this.stateMachine = new ExperienceStateMachine();
         this.stateMachine.register(this)
@@ -200,6 +201,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if(event.key == 'j') {
             this.signal.dispatch(['validate-step'])
         }
+        console.log('vegeee')
+        this.vegetation.reset()
     }
 
     onMouseMove (event: MouseEvent) {
@@ -246,6 +249,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         switch(this.stateMachine.currentStep) {
             case ExperienceStep.DEPOLLUTION: {
                 this.instanceTrashes()
+                this.instanceRocks()
                 this.sphere.addPollutionSmog();
                 break
             }
@@ -253,7 +257,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 for (let trash of this.trashes) {
                     trash.removeFromParent();
                 }
-                this.vegetation = new Vegetation(this)
+                this.vegetation = new Vegetation(this, this.sphere.positionsElements)
                 break
             }
             case ExperienceStep.FEEDING: {
@@ -279,7 +283,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     /////////////////////////////////
 
     instanceSharkAt(pos: Vector3) {
-        const shark = new Shark(this.loader.getAsset('SCN0_Shark_v4') as Object3D)
+        const shark = new Shark(this.loader.getAsset('SCN0_Shark_v4') as Object3D, this.loader.getAsset('SCN0_Shark_v4-all'))
         shark.applyMaterials(this.materials)
         shark.position.set(pos.x, pos.y, pos.z)
         this.add(shark)
@@ -354,12 +358,26 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         this.trashes.push(bottle)
     }
 
-    initFishes() {
-        this.mainFish = new MainFish(this.renderer, this)
+    instanceRocks(): void {
+        const numberRock = 15 + Math.floor(Math.random() * 5)
+        for(let i = 0; i <= numberRock; i++) {
+            const rock = new Rock(this.loader.getAsset('SCN0_Rock1_v1').clone())
+            rock.applyMaterials(this.materials)
+            const randomPosition = Math.floor(Math.random() * this.sphere.positionsElements.length)
+            const randomRotation = Math.random() * Math.PI * 2
+            const randomX = Math.random() * 8
+            const randomY = Math.random() * 8
+            const pos = this.sphere.positionsElements.splice(randomPosition, 1)[0];
+            rock.position.set(pos.x, pos.y, pos.z)
+            rock.lookAt(0,0,0)
+            rock.rotateZ(randomRotation)
+            rock.scale.set(5 + randomX, 5 + randomY, 8)
+            this.add(rock)
+        }
     }
 
-    initVegetation() {
-        this.vegetation = new Vegetation(this)
+    initFishes() {
+        this.mainFish = new MainFish(this.renderer, this)
     }
 
     /////////////////

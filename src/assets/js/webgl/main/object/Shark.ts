@@ -1,17 +1,22 @@
-import {AnimationMixer, Object3D, Vector3 } from 'three'
+import {AnimationClip, AnimationMixer, Object3D, Vector3 } from 'three'
 import BasicObject3D from '../../core/BasicObject3D'
 
 export default class Shark extends BasicObject3D {
   animationMixer: AnimationMixer = null
   activeAction: any = null
 
-  constructor(object: Object3D) {
+  constructor(object: Object3D, modelFull: any) {
     super(object)
     this.animationMixer = new AnimationMixer(object)
+    const clips = modelFull.animations;
+    console.log(clips)
+    const clip = AnimationClip.findByName( clips, 'animation_0' );
+    const action = this.animationMixer.clipAction( clip );
+    action.play();
   }
 
   getScale(): number {
-      return 1
+      return 0.7
   }
   getEnvMapIntensity () {
     return 3
@@ -30,7 +35,7 @@ export default class Shark extends BasicObject3D {
     this.lookAt(new Vector3(0, 0, 0))
     this.rotateY(30)
     
-    // this.animationMixer.update(deltaTime)
+    this.animationMixer.update(deltaTime * 0.02)
     // this.animationMixer.clipAction(this.animations[0]).play()
   }
 }

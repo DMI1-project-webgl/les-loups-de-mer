@@ -5,7 +5,7 @@ import fishVertexShader from '../../shaders/fish/fishVertexShader.glsl?raw';
 import fragmentPositionShader from '../../shaders/fish/fragmentPosition.glsl?raw';
 import fragmentVelocityShader from '../../shaders/fish/fragmentVelocity.glsl?raw';
 import FishGeometry from './FishGeometry';
-import { GUI } from 'lil-gui'
+// import { GUI } from 'lil-gui'
 import type ExperienceScene from '../ExperienceScene';
 
 export interface IUniform<TValue = any> {
@@ -131,7 +131,7 @@ export default class MainFish {
 
         }
 
-        const gui = new GUI();
+        // const gui = new GUI();
 
 
         const effectController = {
@@ -154,11 +154,11 @@ export default class MainFish {
 
         valuesChanger();
 
-        gui.add( effectController, 'separation', 0.0, 100.0, 1.0 ).onChange( valuesChanger );
-        gui.add( effectController, 'alignment', 0.0, 100, 0.001 ).onChange( valuesChanger );
-        gui.add( effectController, 'cohesion', 0.0, 100, 0.025 ).onChange( valuesChanger );
-        gui.add( effectController, 'number', 0.0, 256, 1.0 ).onChange( valuesChanger );
-        gui.close();
+        // gui.add( effectController, 'separation', 0.0, 100.0, 1.0 ).onChange( valuesChanger );
+        // gui.add( effectController, 'alignment', 0.0, 100, 0.001 ).onChange( valuesChanger );
+        // gui.add( effectController, 'cohesion', 0.0, 100, 0.025 ).onChange( valuesChanger );
+        // gui.add( effectController, 'number', 0.0, 256, 1.0 ).onChange( valuesChanger );
+        // gui.close();
 
     }
 

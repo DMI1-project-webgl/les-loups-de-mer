@@ -1,5 +1,6 @@
-import { BufferAttribute, InterleavedBufferAttribute, Vector3, Group, Object3D, AnimationMixer, AnimationClip, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, MeshPhongMaterial, Matrix4, Vector4 } from 'three'
+import { BufferAttribute, InterleavedBufferAttribute, Vector3, Object3D, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, Matrix4, Vector4, MeshMatcapMaterial, Color } from 'three'
 import type BasicScene from '../../core/BasicScene'
+import Rock from './Rock'
 
 export default class Vegetation {
     public instancedMesh!: InstancedMesh
@@ -9,16 +10,14 @@ export default class Vegetation {
     private positionsVegetation: Array<Vector4> = []
     private vegetationOnAnim: Array<number> = []
 
-    constructor(scene: BasicScene) {
+    constructor(scene: BasicScene, positionsVegetation: Array<Vector4>) {
         this.scene = scene
+        this.positionsVegetation = positionsVegetation
         this.init()
     }
 
     // Initialization
     init() {
-        this.geometry = new IcosahedronGeometry( 108, 3 );
-        this.positions = this.geometry.getAttribute('position')
-
         let glTFGeometry: BufferGeometry
         this.scene.loader.getAsset('CoralTestALONE').traverse((child: any) => {
 
@@ -33,24 +32,10 @@ export default class Vegetation {
 
 
         const dummy = new Object3D()
-        const material = new MeshPhongMaterial( { color: 0x00ee99 } )
-        const count = this.getVertexCount()
-       
-        for (let i = 0; i < count; i = i + 1) {
-            const position = this.getVertexPosition(i)
 
-            let isInclude = false
 
-            this.positionsVegetation.forEach((v: Vector4) => {
-                if (v.x === position.x && v.y === position.y && v.z === position.z) {
-                    isInclude = true
-                    return
-                }
-            })
-            if (!isInclude) {
-                this.positionsVegetation.push(new Vector4(position.x, position.y, position.z, 0));
-            }
-        }
+        const material = new MeshMatcapMaterial()
+        material.matcap = this.scene.loader.getAsset('TEXTURE_SCN3_MatcapGrass') as Texture
 
         this.instancedMesh = new InstancedMesh(glTFGeometry, material, this.positionsVegetation.length)
         this.scene.add(this.instancedMesh)
@@ -65,7 +50,7 @@ export default class Vegetation {
                 position.z
             )
 
-            dummy.scale.set(5,5,1)
+            dummy.scale.set(6,6,1)
 
             dummy.lookAt(position.x * 10, position.y * 10, position.z * 10)
             
@@ -78,6 +63,21 @@ export default class Vegetation {
         if (this.positionsVegetation[index].w >= 1) return
         this.positionsVegetation[index].w ++
         this.vegetationOnAnim.push(index);
+    }
+
+    reset() {
+        this.positionsVegetation.forEach((vec, index) => {
+            if (vec.w != 0) {
+                vec.w = 0
+                const mat4 = new Matrix4().scale(new Vector3(1,1,0.13))
+                let currentMat = new Matrix4()
+                this.instancedMesh.getMatrixAt(index, currentMat)
+
+                this.instancedMesh.setMatrixAt(index, currentMat.multiply(mat4))
+
+                this.instancedMesh.instanceMatrix.needsUpdate = true
+            }
+        })
     }
 
     update (deltaSeconds: number) {
@@ -97,18 +97,6 @@ export default class Vegetation {
             this.instancedMesh.instanceMatrix.needsUpdate = true
 
         })
-    }
-
-    getVertexPosition(index: number): Vector3 {
-        return new Vector3(
-            this.positions.array[index * 3 + 0],
-            this.positions.array[index * 3 + 1],
-            this.positions.array[index * 3 + 2],
-        )
-    }
-
-    getVertexCount() : number {
-        return this.positions.count
     }
 
     // Memory management

@@ -1,4 +1,4 @@
-import { BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Vector3, Group, Object3D, IcosahedronGeometry, ShaderMaterial, Sphere, DoubleSide, Color, AdditiveBlending } from 'three'
+import { BufferAttribute, InterleavedBufferAttribute, SphereGeometry, Mesh, MeshBasicMaterial, Vector3, Group, Object3D, IcosahedronGeometry, ShaderMaterial, Sphere, DoubleSide, Color, AdditiveBlending, Vector4 } from 'three'
 import BasicObject3D from '../../core/BasicObject3D'
 
 import sphereFragmentShader from '../../shaders/sphere_fragment.glsl?raw'
@@ -82,14 +82,46 @@ function getPollutionSmog() {
 
 export default class EnvironmentSphere extends BasicObject3D {
     private smog: Mesh = null
+    public positionsElements: Array<Vector4> = []
 
     constructor() {
         super(getSphereMesh());
+        this.initIsocahedron()
+    }
+
+    initIsocahedron() {
+        const geometry = new IcosahedronGeometry( 108, 2 );
+        const positions = geometry.getAttribute('position')
+        const count = positions.count
+       
+        for (let i = 0; i < count; i = i + 1) {
+            const position = this.getVertexPosition(positions, i)
+
+            let isInclude = false
+
+            this.positionsElements.forEach((v: Vector4) => {
+                if (v.x === position.x && v.y === position.y && v.z === position.z) {
+                    isInclude = true
+                    return
+                }
+            })
+            if (!isInclude) {
+                this.positionsElements.push(new Vector4(position.x, position.y, position.z, 0));
+            }
+        }
+    }
+
+    getVertexPosition(positions: BufferAttribute | InterleavedBufferAttribute, index: number): Vector3 {
+        return new Vector3(
+            positions.array[index * 3 + 0],
+            positions.array[index * 3 + 1],
+            positions.array[index * 3 + 2],
+        )
     }
 
     reducePollutionSmog(alpha: number) {
         if (alpha > 1) return
-        ((this.smog.material as ShaderMaterial).uniforms.lightColor.value as Color).lerpColors(new Color(0x96916D), new Color(0xaabbff), alpha)
+        ((this.smog.material as ShaderMaterial).uniforms.lightColor.value as Color).lerpColors(new Color(0x96916D), new Color(0x7799ff), alpha)
     }
 
     addPollutionSmog() {

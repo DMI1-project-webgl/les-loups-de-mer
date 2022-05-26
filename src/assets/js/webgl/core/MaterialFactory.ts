@@ -1,4 +1,4 @@
-import { Color, CubeTexture, Group, Mesh, MeshBasicMaterial, MeshPhysicalMaterial, MeshStandardMaterial, PMREMGenerator, Texture, WebGLRenderTarget } from 'three'
+import { Color, CubeTexture, Group, Mesh, MeshBasicMaterial, MeshMatcapMaterial, MeshPhysicalMaterial, MeshStandardMaterial, PMREMGenerator, Texture, WebGLRenderTarget } from 'three'
 import * as THREE from 'three'
 import type BasicScene from './BasicScene'
 import type Loader from './Loader'
@@ -8,7 +8,7 @@ export default class MaterialFactory {
   private loader: Loader
   private pmremGenerator: PMREMGenerator
   private materials: {
-    [key: string]: MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial,
+    [key: string]: MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial | MeshMatcapMaterial,
   }
   private hdrCubeRenderTarget: WebGLRenderTarget
 
@@ -46,8 +46,9 @@ export default class MaterialFactory {
    * @param name (name of mesh in the model)
    * @returns material of the mesh
    */
-  getMaterial (name:string): MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial  {
+  getMaterial (name:string): MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial | MeshMatcapMaterial  {
     let materialName = 'default'
+    console.log(name)
     switch (name) {
       case 'Bouchon':
       case 'Bouchon_epices':
@@ -64,20 +65,20 @@ export default class MaterialFactory {
         break
 
       case 'Can':
-        materialName = 'metal'
+        materialName = 'matCapMetal'
         break
 
       case 'Drink':
-        materialName = 'metal'
+        materialName = 'matCapMetal'
         break
 
       // Bottle
       case 'Body':
-        materialName = 'plasticBottle'
+        materialName = 'matCapPlastic'
         break
 
       case 'Caps':
-        materialName = 'bluePlastic'
+        materialName = 'matCapPlasticBlue'
         break
 
       // Toothbrush
@@ -91,7 +92,7 @@ export default class MaterialFactory {
 
       // Shark
       case 'Requin':
-        materialName = 'glass'
+        materialName = 'MatCapSharkBody'
         break
 
       case 'Aileron_requin':
@@ -105,6 +106,11 @@ export default class MaterialFactory {
       case 'StarFish':
           materialName = 'starFish'
           break
+      
+      // Rock
+      case 'Rock1':
+        materialName = 'rock'
+        break
   
       default:
         materialName = 'default'
@@ -213,6 +219,48 @@ export default class MaterialFactory {
         m.ior = 1.6
         m.envMapIntensity = 25
         m.envMap = this.hdrCubeRenderTarget.texture
+        material = m
+        break
+      }
+
+      case 'MatCapSharkBody': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatcapShark') as Texture
+        material = m
+        break
+      }
+
+      case 'rock': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('TEXTURE_SCNO_Rock') as Texture
+        material = m
+        break
+      }
+
+      case 'matCapMetal': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatcapMetal') as Texture
+        material = m
+        break
+      }
+
+      case 'matCapPlastic': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatcapPlastic') as Texture
+        material = m
+        break
+      }
+
+      case 'matCapPlasticBlue': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatPlaticBlue') as Texture
+        material = m
+        break
+      }
+
+      case 'matCap4': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('12') as Texture
         material = m
         break
       }
