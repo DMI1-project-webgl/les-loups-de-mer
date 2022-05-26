@@ -6,4 +6,6 @@ export class Size {
 export class Cursor {
     public x: number = 0
     public y: number = 0
+    public xWin: number = 0
+    public yWin: number = 0
 }

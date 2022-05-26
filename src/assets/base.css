@@ -347,3 +347,48 @@ button, input[type="submit"], input[type="reset"] {
 .container-fluid {
   height: 100%;
 }
+
+.cursor-vegetation {
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cursor-vegetation_child, .cursor-vegetation_child2 {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.cursor-vegetation_child2::after {
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000), border 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.cursor-vegetation_child2--focus::after {
+  transform: scale(0.8);
+}
+
+.cursor-vegetation_child2--error::after {
+  border: 2px solid #f00;
+  transform: scale(1);
+}
+
+.cursor-vegetation_child2--clicked::after {
+  transform: scale(0.7);
+  border: 4px solid #0f0;
+}
+
+.cursor-vegetation--disable .cursor-vegetation_child2::after {
+  transform: scale(0);
+}

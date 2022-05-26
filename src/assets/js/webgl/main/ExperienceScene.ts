@@ -3,7 +3,7 @@ import type { Cursor } from 'src/assets/js/webgl/utils/index'
 import type BasicApp from '../core/BasicApp'
 import type Signal from '../utils/Signal'
 import MaterialFactory from '../core/MaterialFactory'
-import { AmbientLight, Clock, Color, Mesh, Object3D, Raycaster, ShaderMaterial, Vector2, Vector3 } from 'three'
+import { AmbientLight, Clock, Color, IcosahedronGeometry, Mesh, MeshBasicMaterial, Object3D, Raycaster, ShaderMaterial, Vector2, Vector3 } from 'three'
 import EnvironementSphere from './object/EnvironmentSphere'
 import MainFish from './fish/MainFish'
 import Vegetation from './object/Vegetation'
@@ -19,9 +19,12 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     // Screen management
     private raycaster: Raycaster
     private pointer: Vector2
-    private cursor: Cursor = { x: 0 , y: 0 }
+    private cursor: Cursor = { x: 0 , y: 0, xWin: 0, yWin: 0 }
     private period: number
     private _clock: Clock = new Clock()
+    private cursorVegetation: HTMLElement
+    private cursorVegetationChild: HTMLElement
+    private cursorVegetationChild2: HTMLElement
 
     // State machine
     private stateMachine: ExperienceStateMachine
@@ -140,17 +143,41 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
 
-        if (this.raycaster && this.vegetation) {
+        if (this.raycaster && this.vegetation && this.cursorVegetation) {
+            this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--clicked")
+
+            this.cursorVegetation.style.transform = `
+            translate(${this.cursor.xWin}px, ${this.cursor.yWin}px)
+            `
+
+            if (Math.pow(this.pointer.y * (this.sizes.height / this.sizes.width) , 2) + Math.pow(this.pointer.x, 2) < 0.12) {
+                this.cursorVegetationChild.style.transform = `
+                rotate3d(${this.pointer.y}, 0, 0, ${(Math.abs(this.pointer.y) + Math.abs(this.pointer.x * 0.25)) * 0.1 * this.sizes.height}deg)
+                `
+                this.cursorVegetationChild2.style.transform = `
+                rotate3d(0, ${this.pointer.x}, 0, ${(Math.abs(this.pointer.x) + Math.abs(this.pointer.y * 0.25)) * 0.1 * this.sizes.width}deg)
+                `
+                this.cursorVegetationChild2.classList.add("cursor-vegetation_child2--focus")
+                if (this.mouseIsDown) {
+                    this.cursorVegetationChild2.classList.add("cursor-vegetation_child2--clicked")
+                }
+            } else {
+                this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--focus")
+                this.cursorVegetationChild.style.transform = `
+                rotate3d(0,0,0,0)
+                `
+                this.cursorVegetationChild2.style.transform = `
+                rotate3d(0,0,0,0)
+                `
+            }
 
             this.vegetation.update(this.deltaTime)
 
             if (!this.mouseIsDown) return
 
             this.raycaster.setFromCamera( this.pointer, this.camera );
-            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false);
-
-            
-
+            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false); 
+    
             if ( intersects.length > 0 ) {
                 const instanceId = intersects[ 0 ].instanceId;
 
@@ -201,7 +228,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if(event.key == 'j') {
             this.signal.dispatch(['validate-step'])
         }
-        console.log('vegeee')
         this.vegetation.reset()
     }
 
@@ -209,6 +235,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if(!this.cursor || !this.pointer) return
         this.cursor.x = event.clientX / this.sizes.width - 0.5
         this.cursor.y = event.clientY / this.sizes.height - 0.5
+        this.cursor.xWin = event.clientX
+        this.cursor.yWin = event.clientY
         this.pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	    this.pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
     }
@@ -232,6 +260,19 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
     }
 
+    initCursorVegetation () {
+        this.cursorVegetation = document.createElement("div");
+        this.cursorVegetationChild = document.createElement("div");
+        this.cursorVegetationChild2 = document.createElement("div");
+        this.cursorVegetationChild.classList.add("cursor-vegetation_child");
+        this.cursorVegetationChild2.classList.add("cursor-vegetation_child2");
+        this.cursorVegetation.classList.add("cursor-vegetation")
+        this.cursorVegetation.classList.add("cursor-vegetation--disable")
+        this.cursorVegetationChild.appendChild(this.cursorVegetationChild2);
+        this.cursorVegetation.appendChild(this.cursorVegetationChild);
+        document.body.appendChild(this.cursorVegetation);
+    }
+
     /////////////////////////
     // -- Setup methods -- //
     /////////////////////////
@@ -251,6 +292,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 this.instanceTrashes()
                 this.instanceRocks()
                 this.sphere.addPollutionSmog();
+                this.initCursorVegetation();
                 break
             }
             case ExperienceStep.VEGETATION: {
@@ -258,9 +300,11 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                     trash.removeFromParent();
                 }
                 this.vegetation = new Vegetation(this, this.sphere.positionsElements)
+                this.cursorVegetation.classList.remove("cursor-vegetation--disable")
                 break
             }
             case ExperienceStep.FEEDING: {
+                this.cursorVegetation.classList.add("cursor-vegetation--disable")
                 this.vegetation.destroy()
                 this.vegetation = null
                 this.mainFish = new MainFish(this.renderer, this)

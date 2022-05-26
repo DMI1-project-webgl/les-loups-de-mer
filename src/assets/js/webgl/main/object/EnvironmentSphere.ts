@@ -83,9 +83,12 @@ function getPollutionSmog() {
 export default class EnvironmentSphere extends BasicObject3D {
     private smog: Mesh = null
     public positionsElements: Array<Vector4> = []
+    public mesh: Mesh
 
     constructor() {
-        super(getSphereMesh());
+        const mesh = getSphereMesh()
+        super(mesh);
+        this.mesh = mesh
         this.initIsocahedron()
     }
 
