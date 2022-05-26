@@ -32,19 +32,19 @@
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
               <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
-              <SquaredButton link="/valeurs" text="En savoir plus"/>
+              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
             <div v-else-if="index == 1" class="slider--content-container">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
-              <SquaredButton link="/valeurs" text="En savoir plus"/>
+              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
             <div v-else-if="index == 2" class="slider--content-container">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
-              <SquaredButton link="/valeurs" text="En savoir plus"/>
+              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">

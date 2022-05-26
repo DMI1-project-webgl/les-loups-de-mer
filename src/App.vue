@@ -3,26 +3,26 @@
 
 <template>
   <!-- ALL ROUTES -->
-  <div class="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/valeurs">Values</router-link>
-    <router-link to="/actions">Actions</router-link>
-    <router-link to="/clean">Clean</router-link>
-    <router-link to="/greenery">Greenery</router-link>
-    <router-link to="/food">Food</router-link>
-    <router-link to="/result">Result</router-link>
-    <router-link to="/shop">Shop</router-link>
-    <router-link to="/newsletter">Newsletter</router-link>
+  <div>
+    <div class="nav">
+      <router-link to="/">Home</router-link>
+      <router-link to="/valeurs">Values</router-link>
+      <router-link to="/actions">Actions</router-link>
+      <router-link to="/clean">Clean</router-link>
+      <router-link to="/greenery">Greenery</router-link>
+      <router-link to="/food">Food</router-link>
+      <router-link to="/result">Result</router-link>
+      <router-link to="/shop">Shop</router-link>
+      <router-link to="/newsletter">Newsletter</router-link>
+    </div>
+    <main>
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition> 
+      </router-view>
+    </main>
   </div>
-
-  <!-- 3D COMPONENT  -->
-  <!-- <Canvas /> -->
-  <!-- <Draggable /> -->
-  <!-- <Breadcrumb step="1"/> -->
-  
-  <!-- <Scoreboard nbBottle="3" maxBottle="3" nbTrash="3" maxTrash="3" nbCan="0" maxCan="3" nbButt="0" maxButt="3" nbPlastic="3" maxPlastic="3"/> -->
-
-  <router-view />
 </template>
 
 <style>
@@ -43,5 +43,29 @@ header {
 
 .nav a {
   margin: 10px;
+}
+
+
+.fade-enter-active {
+  opacity: 0;
+  transition-duration: 0.3s;
+  transition-delay: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  opacity: 1;
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

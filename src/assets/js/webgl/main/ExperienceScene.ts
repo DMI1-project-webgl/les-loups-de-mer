@@ -403,7 +403,22 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     }
 
     instanceRocks(): void {
-        const numberRock = 15 + Math.floor(Math.random() * 5)
+        this.sphere.positionsElements.forEach((vec, i) => {
+            if (vec.y > 70 || vec.y < -70) {
+                const rock = new Rock(this.loader.getAsset('SCN0_Rock1_v1').clone())
+                rock.applyMaterials(this.materials)
+                const randomRotation = Math.random() * Math.PI * 2
+                const randomX = Math.random() * 8
+                const randomY = Math.random() * 8
+                const pos = this.sphere.positionsElements.splice(i, 1)[0];
+                rock.position.set(pos.x, pos.y, pos.z)
+                rock.lookAt(0,0,0)
+                rock.rotateZ(randomRotation)
+                rock.scale.set(5 + randomX, 5 + randomY, 8)
+                this.add(rock)
+            }
+        })
+        const numberRock = 8 + Math.floor(Math.random() * 4) 
         for(let i = 0; i <= numberRock; i++) {
             const rock = new Rock(this.loader.getAsset('SCN0_Rock1_v1').clone())
             rock.applyMaterials(this.materials)

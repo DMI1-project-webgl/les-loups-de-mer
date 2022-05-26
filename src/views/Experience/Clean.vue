@@ -24,7 +24,7 @@ import Aileron from '../../components/Experience/Aileron.vue';
     </div>
   </section>
    <Modal />
-  <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="true" link="/greenery" text="Continuer" :isWhite="true" @validate="validateStep"/>
+  <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/>
     
 </template>
 

@@ -29,7 +29,7 @@ import SquaredButton from '../../components/UI/SquaredButton.vue';
         </div>
       </div>
     </section>
-    <SquaredButton class="validate-button" :isRouterLink="true" link="/greenery" text="Continuer" :isWhite="true" @validate="validateStep"/>
+    <SquaredButton class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/>
 </template>
 
 <script lang="ts">

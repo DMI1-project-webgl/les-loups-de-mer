@@ -54,13 +54,15 @@
 }
 
 main::before {
-	animation: grain 8s steps(10) infinite;
-	background-image: url(src/assets/js/webgl/textures/noise.png);
+	animation: grain 4s steps(10) infinite;
+	/* background-image: url(src/assets/js/webgl/textures/noise.png); */
+  background-image: url(./img/noise-2.png);
 	content: '';
 	height: 300%;
 	left: -50%;
-	opacity: 0.5;
+	opacity: 0.1;
 	position: fixed;
+  z-index: 100;
 	top: -100%;
 	width: 300%;
 	pointer-events: none;

@@ -68,6 +68,7 @@ export default defineComponent({
 .discover {
     position: relative;
     overflow: hidden;
+    background-image: url(@/assets/img/bg_discover.jpg);
 }
 .discover .discover--container {
     position: absolute;

@@ -1,14 +1,19 @@
 <template>
-  <div v-if="isRouterLink" class="SquaredButton-Container" @click="$emit('validate')">
+  <router-link v-if="isRouterLink" :to="link" class="SquaredButton-Container" @click="$emit('validate')">
     <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
         <p class="SquaredButton-Text">{{ text }}</p>
     </div>
-  </div>
-  <a v-else :href="link" class="SquaredButton-Container">
+  </router-link>
+  <a v-else-if="link" :href="link" class="SquaredButton-Container" @click="$emit('validate')">
     <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
         <p class="SquaredButton-Text">{{ text }}</p>
     </div>
   </a>
+  <div v-else class="SquaredButton-Container" @click="$emit('validate')">
+    <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
+        <p class="SquaredButton-Text">{{ text }}</p>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

@@ -8,7 +8,7 @@ import SquaredButton from './../../components/UI/SquaredButton.vue';
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis accusantium quasi dolorum rerum tempore amet deleniti, ad animi perferendis. Laborum adipisci quam at dolorum deserunt ducimus maiores tempore odio ipsa.</p>
         </div>
         <div class="modal--btn-container">
-          <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" link="#demo-modal" text="Continuer" :isWhite="true" @validate="validateStep"/>
+          <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/>
         </div>
       </div>
     </section>

@@ -23,6 +23,7 @@ export default class Sketch {
   
   
       this.container = document.getElementById("slider");
+      if (!this.container) return
       this.images = JSON.parse(this.container.getAttribute('data-images'));
       this.width = canvas.offsetWidth;
       this.height = canvas.offsetHeight;
