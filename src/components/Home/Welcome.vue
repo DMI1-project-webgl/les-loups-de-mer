@@ -69,7 +69,7 @@ export default defineComponent({
     document.documentElement.style.overflow = 'hidden';
     setTimeout(() => {
       if (!this.$refs.arrow) return
-      ((this.$refs.arrow) as HTMLElement).classList.add('visible')
+      this.$refs.arrow.classList.add('visible')
       // document.documentElement.style.overflow = 'scroll';
     },2000)
   },

@@ -1,5 +1,5 @@
 <template>
-    <audio refs="audio" loop autoplay preload="metadata" id="audio" class="d-none" :src="file" type="audio/mpeg"></audio>
+    <audio ref="audio" loop autoplay preload="metadata" id="audio" class="d-none" :src="file" type="audio/mpeg"></audio>
 </template>
 
 <script lang="ts">
