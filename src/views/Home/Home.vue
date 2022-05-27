@@ -10,7 +10,7 @@ import Sound from './../../components/Sound.vue';
 
 <template>
   <section
-      ref="scrollSections"
+      refs="scrollSections"
       class="toto"
       id="my-scrollbar"
       data-scrollbar
@@ -47,7 +47,7 @@ export default defineComponent({
   },
   mounted () {
     Scrollbar.use(OverscrollPlugin);
-    this.scrollBar =  Scrollbar.init(this.$refs.scrollSections, {
+    this.scrollBar =  Scrollbar.init(((this.$refs.scrollSections) as HTMLElement), {
       plugins: {
        overscroll: {
          effect: 'bounce',

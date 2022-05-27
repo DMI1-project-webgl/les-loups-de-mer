@@ -1,5 +1,5 @@
 <template>
-    <audio ref="audio" loop autoplay preload="metadata" id="audio" class="d-none" :src="file" type="audio/mpeg"></audio>
+    <audio refs="audio" loop autoplay preload="metadata" id="audio" class="d-none" :src="file" type="audio/mpeg"></audio>
 </template>
 
 <script lang="ts">
@@ -9,7 +9,7 @@ export default defineComponent({
   name: 'AdvencementElement',
   props: ['file'],
   mounted () {
-      const audio = this.$refs.audio;
+      const audio = <HTMLAudioElement> this.$refs.audio;
       audio.play();
   },
   methods: {
