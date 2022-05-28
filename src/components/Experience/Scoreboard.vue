@@ -76,9 +76,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.scoreboard {
+    max-width: 250px;
+}
+.scoreboard.tuto {
+    box-shadow: 0px 0px 50px 10px #FFFF00FF;
+    animation: 3s linear 1s infinite alternate tuto;
+    border-radius: 5px;
+}
 .scoreboard--container {
     width: 100%;
-    max-width: 250px;
 }
 ul {
     padding: 0;
@@ -114,5 +121,17 @@ ul {
 }
 .done .scoreboard--value span {
     color: #3ad12f;
+}
+
+@keyframes tuto {
+    0% {
+        box-shadow: 0px 0px 50px 10px #FFFF00FF;
+    }
+    50% {
+        box-shadow: 0px 0px 50px 10px #FFFF000F;
+    }
+    100% {
+        box-shadow: 0px 0px 50px 10px #FFFF00FF;
+    }
 }
 </style>

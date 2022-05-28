@@ -13,8 +13,8 @@ import Aileron from '../../components/Experience/Aileron.vue';
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-3 h-100 px-0">
-          <div class="clear--data-container ">
-            <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1"/>
+          <div class="clear--data-container">
+            <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1" :tuto="tuto2"/>
             <div class="clean--img-container">
               <Aileron :step="step"/>      
             </div>
@@ -23,8 +23,12 @@ import Aileron from '../../components/Experience/Aileron.vue';
       </div>
     </div>
   </section>
-   <Modal />
-  <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/>
+  <Modal v-if="tuto1" text="Voici votre écosystème, malheureusement il est très pollué, à cause de l’être humain, aidez nous à le rendre plus sain pour les requins. Nous allons aussi construire une prothèse d’ailerons pour remplacer celle de ce requin à l’aide des déchets ramassés. Les déchets ainsi récupérés sont triés et recyclés afin de construire des prothèses d’ailerons en plastique 100%* recyclé. " @showoff="hidetuto1"/>
+  <Modal v-if="tuto2" text="Pour commencer, regardez ici la liste des objets à recycler, ils se rayent au fur et à mesure ou vous les ramassez." @showoff="hidetuto2"/>
+  <Modal v-if="tuto3" text="Pour ramasser un déchet, cliquez dessus, vous voyez cette bouteille en plastique ? Ramassez la, allez-y !" @showoff="hidetuto3"/>
+  <Modal v-if="tuto4" text=" Super ! Vous voyez la pollution a diminué, vous pouvez voir ici que la jauge de construction de l’aileron a augmenté,  continuez ainsi pour la remplir."  @showoff="hidetuto4"/>
+  <Modal v-if="canContinue" text=" Félicitation, c’est beaucoup mieux comme ça !" @showoff="validateStep"/>
+  <!-- <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/> -->
     
 </template>
 
@@ -60,7 +64,11 @@ export default defineComponent({
   data() {
     return {
       step: 0,
-      canContinue: false
+      canContinue: false,
+      tuto1: true,
+      tuto2: false,
+      tuto3: false,
+      tuto4: false,
     }
   },
   methods: {
@@ -70,15 +78,33 @@ export default defineComponent({
           this.$router.push('greenery')
         case 'update-depollution':
           this.step = Number(slug[2])
+          if (this.step >= 1 && this.tuto3 == true) {
+            this.tuto3 = false;
+            this.tuto4 = true;
+          }
           if (this.step === 8) {
-            this.canContinue = true
+            this.canContinue = true;
           }
       }
     },
 
     validateStep() {
       this.signal.dispatch(['validate-tapped'])
-    }
+    },
+    hidetuto1() {
+      this.tuto1 = false;
+      this.tuto2 = true;
+    },
+    hidetuto2() {
+      this.tuto2 = false;
+      this.tuto3 = true;
+    },
+    hidetuto3() {
+      this.tuto3 = false;
+    },
+    hidetuto4() {
+      this.tuto4 = false;
+    },
   }
 })
 </script>

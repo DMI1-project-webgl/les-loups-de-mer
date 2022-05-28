@@ -156,11 +156,11 @@ export default defineComponent({
   mounted () {
     let step = 0;
     const that = this
-    const widthContainer = this.$refs.container.offsetWidth;
-    const widthDraggable = this.$refs.element.offsetWidth;
+    const widthContainer = (this.$refs.container as any).offsetWidth;
+    const widthDraggable = (this.$refs.element as any).offsetWidth;
     const positionArray = this.initPositionArray(4, ( widthContainer - widthDraggable ) / 4);
     
-    Draggable.create(this.$refs.element, {
+    Draggable.create(this.$refs.element as any, {
       type:"x",
       inertia: true,
       bounds: this.$refs.container,
@@ -169,7 +169,7 @@ export default defineComponent({
       },
       onDragEnd: function() {
           let posX = that.closestNumArray(positionArray, this.x)
-          gsap.to(that.$refs.element, { x: posX, duration: 0.2});
+          gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
           that.displayPercentX(widthContainer, widthDraggable, posX)
           console.log("koukou " + that.value);

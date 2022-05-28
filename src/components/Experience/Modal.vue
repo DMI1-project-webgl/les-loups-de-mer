@@ -5,10 +5,10 @@ import SquaredButton from './../../components/UI/SquaredButton.vue';
     <section id="modal" class="modal">
       <div class="modal--content-container">
         <div class="modal--content">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis accusantium quasi dolorum rerum tempore amet deleniti, ad animi perferendis. Laborum adipisci quam at dolorum deserunt ducimus maiores tempore odio ipsa.</p>
+          <p>{{text}}</p>
         </div>
         <div class="modal--btn-container">
-          <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/>
+          <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="$emit('showoff')"/>
         </div>
       </div>
     </section>
@@ -19,10 +19,11 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ModalElement',
+  props: ['text'],
   mounted () {
-      document.getElementById('modal-btn').addEventListener("click", (e) => {
-        document.getElementById('modal').classList.add('none')
-      });
+      // document.getElementById('modal-btn').addEventListener("click", (e) => {
+      //   document.getElementById('modal').classList.add('none')
+      // });
   }, 
   methods: {
     
