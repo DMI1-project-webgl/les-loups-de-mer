@@ -1,4 +1,4 @@
-import { BufferAttribute, InterleavedBufferAttribute, Vector3, Object3D, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, Matrix4, Vector4, MeshMatcapMaterial, Color } from 'three'
+import { BufferAttribute, InterleavedBufferAttribute, Vector3, Object3D, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, Matrix4, Vector4, MeshMatcapMaterial, Color, Texture } from 'three'
 import type BasicScene from '../../core/BasicScene'
 import Rock from './Rock'
 

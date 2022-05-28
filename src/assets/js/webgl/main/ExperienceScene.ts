@@ -14,7 +14,6 @@ import type { ExperienceListener } from '../utils/ExperienceStateMachine'
 import Rock from './object/Rock'
 
 export default class ExperienceScene extends BasicScene implements ExperienceListener {
-    public materials: MaterialFactory
 
     // Screen management
     private raycaster: Raycaster
