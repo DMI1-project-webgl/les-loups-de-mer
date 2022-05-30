@@ -20,6 +20,7 @@ export default class ExperienceApp extends BasicApp {
             'SCN0_Shark_v4.gltf',
             'CoralTestALONE.gltf',
             'SCN0_Rock1_v1.glb',
+            'untitled.glb'
           ] as string[],
           textures: [
             'TEXTURE_SCN2_Metal_Roughness.jpg',
@@ -35,6 +36,9 @@ export default class ExperienceApp extends BasicApp {
             'TEXTURE_SCN2_MatcapShark.jpg',
             'TEXTURE_SCN3_MatcapGrass.png',
             'TEXTURE_SCNO_Rock.jpeg',
+            'corauxColor2.jpg',
+            'corauxNormal.jpg',
+            'corauxReflection.jpg',
           ] as string[],
           envs: ['env'] as string[],
           hdr: [] as string[]

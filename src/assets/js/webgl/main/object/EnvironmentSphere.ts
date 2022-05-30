@@ -93,7 +93,8 @@ export default class EnvironmentSphere extends BasicObject3D {
     }
 
     initIsocahedron() {
-        const geometry = new IcosahedronGeometry( 108, 2 );
+        // const geometry = new IcosahedronGeometry( 108, 2 );
+        const geometry = new IcosahedronGeometry( 115, 2 );
         const positions = geometry.getAttribute('position')
         const count = positions.count
        

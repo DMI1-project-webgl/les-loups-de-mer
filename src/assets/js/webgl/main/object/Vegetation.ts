@@ -1,4 +1,4 @@
-import { BufferAttribute, InterleavedBufferAttribute, Vector3, Object3D, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, Matrix4, Vector4, MeshMatcapMaterial, Color, Texture } from 'three'
+import { BufferAttribute, InterleavedBufferAttribute, Vector3, Object3D, InstancedMesh, BufferGeometry, BoxBufferGeometry, IcosahedronGeometry, Matrix4, Vector4, MeshMatcapMaterial, Color, Texture, MeshBasicMaterial } from 'three'
 import type BasicScene from '../../core/BasicScene'
 import Rock from './Rock'
 
@@ -19,7 +19,8 @@ export default class Vegetation {
     // Initialization
     init() {
         let glTFGeometry: BufferGeometry
-        this.scene.loader.getAsset('CoralTestALONE').traverse((child: any) => {
+        const mesh = this.scene.loader.getAsset('untitled')
+        mesh.traverse((child: any) => {
 
             if ( child.isMesh ) {
 
@@ -34,8 +35,11 @@ export default class Vegetation {
         const dummy = new Object3D()
 
 
-        const material = new MeshMatcapMaterial()
-        material.matcap = this.scene.loader.getAsset('TEXTURE_SCN3_MatcapGrass') as Texture
+        // const material = new MeshMatcapMaterial()
+        // material.matcap = this.scene.loader.getAsset('TEXTURE_SCN3_MatcapGrass') as Texture
+
+        const material = new MeshBasicMaterial()
+        material.map = this.scene.loader.getAsset('corauxColor2') as Texture
 
         this.instancedMesh = new InstancedMesh(glTFGeometry, material, this.positionsVegetation.length)
         this.scene.add(this.instancedMesh)
@@ -50,9 +54,12 @@ export default class Vegetation {
                 position.z
             )
 
-            dummy.scale.set(6,6,1)
+            // dummy.scale.set(6,6,1)
+            dummy.scale.set(0.8,0.05,0.8)
 
             dummy.lookAt(position.x * 10, position.y * 10, position.z * 10)
+
+            dummy.rotateX(3.14 / 2)
             
             dummy.updateMatrix()
             this.instancedMesh.setMatrixAt(i, dummy.matrix)
@@ -88,7 +95,8 @@ export default class Vegetation {
             }
             vec.w ++
 
-            const mat4 = new Matrix4().scale(new Vector3(1,1,1.7 - vec.w * 0.07))
+            // const mat4 = new Matrix4().scale(new Vector3(1,1,1.7 - vec.w * 0.07))
+            const mat4 = new Matrix4().scale(new Vector3(1,1.7 - vec.w * 0.07,1))
             let currentMat = new Matrix4()
             this.instancedMesh.getMatrixAt(index, currentMat)
 
