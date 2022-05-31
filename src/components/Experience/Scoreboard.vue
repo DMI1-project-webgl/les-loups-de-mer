@@ -1,5 +1,6 @@
 <template>
   <section class="scoreboard">
+    <div v-if="tuto" class="tuto"></div>
     <div class="scoreboard--title">
         <p>Objects à ramasser</p>
     </div>
@@ -48,7 +49,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ScoreboardElement',
-  props: ['maxBottle', 'maxCan','maxDrink', 'maxToothbrush'],
+  props: ['maxBottle', 'maxCan','maxDrink', 'maxToothbrush', 'tuto'],
   mounted () {
     this.signal.add(this.onSignal.bind(this))
   },
@@ -79,10 +80,16 @@ export default defineComponent({
 .scoreboard {
     max-width: 250px;
 }
-.scoreboard.tuto {
-    box-shadow: 0px 0px 50px 10px #FFFF00FF;
-    animation: 3s linear 1s infinite alternate tuto;
+.scoreboard .tuto {
+    box-shadow: 0px 0px 50px 10px #ffffffff;
+    animation: 2s linear 1s infinite alternate tuto;
     border-radius: 5px;
+    height: 110%;
+    position: absolute;
+    width: 110%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .scoreboard--container {
     width: 100%;
@@ -123,15 +130,4 @@ ul {
     color: #3ad12f;
 }
 
-@keyframes tuto {
-    0% {
-        box-shadow: 0px 0px 50px 10px #FFFF00FF;
-    }
-    50% {
-        box-shadow: 0px 0px 50px 10px #FFFF000F;
-    }
-    100% {
-        box-shadow: 0px 0px 50px 10px #FFFF00FF;
-    }
-}
 </style>

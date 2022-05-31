@@ -6,6 +6,8 @@
         
       </div> -->
       <div  ref="container" id="draggable--container">
+        <div v-if="tuto" class="tuto"></div>
+        <div ref="hitbox" class="draggable--hitbox"></div>
         <div ref="element" id="draggable--element" class="draggable--element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 331.2 331.42">
             <g v-if="value == 100" id="a">
@@ -147,7 +149,7 @@ gsap.registerPlugin(Draggable);
 
 export default defineComponent({
   name: 'DraggableElement',
-  // props: ['step'],
+  props: ['tuto'],
   data: () => {
     return {
       value: 0,
@@ -156,6 +158,7 @@ export default defineComponent({
   mounted () {
     let step = 0;
     const that = this
+    const hitbox = this.$refs.hitbox as any;
     const widthContainer = (this.$refs.container as any).offsetWidth;
     const widthDraggable = (this.$refs.element as any).offsetWidth;
     const positionArray = this.initPositionArray(4, ( widthContainer - widthDraggable ) / 4);
@@ -172,8 +175,17 @@ export default defineComponent({
           gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
           that.displayPercentX(widthContainer, widthDraggable, posX)
-          console.log("koukou " + that.value);
       }
+    });
+
+    hitbox.addEventListener("click", (e) => {
+      let hbWidth = hitbox.offsetWidth;
+      let hbHeight = hitbox.offsetHeight;
+
+      let posX = that.closestNumArray(positionArray, e.clientX-hbWidth)
+      gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
+
+      that.displayPercentX(widthContainer, widthDraggable, posX)
     });
   },
   methods: {
@@ -206,9 +218,30 @@ export default defineComponent({
 
 <style scoped>
 /* Structure  */
+.draggable--hitbox{
+  height: 50px;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: translateY(-50%);
+  bottom: 0;
+  right: 0;
+}
+
 .container {
   display: flex; 
   align-items: baseline; 
+}
+.draggable .tuto {
+  transform: translateX(-15px) translateY(-50%);
+  width: 80px;
+  height: 80px;
+  top: -50%;
+  left: 0;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 11px 7px #fffffff0;
+  animation: 2s linear 1s infinite tutoDraggable;
 }
 
 /* Draggable elements */

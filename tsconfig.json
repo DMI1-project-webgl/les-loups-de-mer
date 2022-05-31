@@ -5,7 +5,7 @@
     "noImplicitAny": false,
     "allowJs": true,
     "lib": ["es2017"],
-    "baseUrl": ".",
+    "baseUrl": "",
     "paths": {
       "@/*": ["./src/*"],
     },
