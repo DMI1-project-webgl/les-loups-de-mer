@@ -49,7 +49,7 @@ export default defineComponent({
 .aileron .tuto {
     box-shadow: 0px 0px 50px 10px #ffffffff;
     animation: 2s linear 1s infinite alternate tuto;
-    border-radius: 5px;
+    border-radius: 20px;
     height: 110%;
     position: absolute;
     width: 85%;
