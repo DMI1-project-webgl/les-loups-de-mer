@@ -92,15 +92,12 @@ export default class MaterialFactory {
 
       // Shark
       case 'Requin':
+      case 'Ceinture_requin':
         materialName = 'MatCapSharkBody'
         break
 
       case 'Aileron_requin':
-        materialName = 'sharkFin'
-        break
-
-      case 'Ceinture_requin':
-        materialName = 'sharkBelt'
+        materialName = 'MatCapAilerons'
         break
 
       case 'StarFish':
@@ -230,6 +227,13 @@ export default class MaterialFactory {
         break
       }
 
+      case 'MatCapAilerons': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('3') as Texture
+        material = m
+        break
+      }
+
       case 'rock': {
         const m = new MeshMatcapMaterial()
         m.matcap = this.loader.getAsset('TEXTURE_SCNO_Rock') as Texture
@@ -265,17 +269,17 @@ export default class MaterialFactory {
         break
       }
 
-      case 'sharkBelt': {
-        material = new MeshStandardMaterial({
-          color: 0x222222,
-          transparent: true,
-          alphaMap: this.loader.getAsset('TEXTURE_SCN0_SharkBeltAlpha') as Texture,
-          map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
-          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
-        })
-        break
-      }
+      // case 'sharkBelt': {
+      //   material = new MeshStandardMaterial({
+      //     color: 0x222222,
+      //     transparent: true,
+      //     alphaMap: this.loader.getAsset('TEXTURE_SCN0_SharkBeltAlpha') as Texture,
+      //     map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
+      //     normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
+      //     roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
+      //   })
+      //   break
+      // }
 
       case 'sharkFin': {
         material = new MeshStandardMaterial({

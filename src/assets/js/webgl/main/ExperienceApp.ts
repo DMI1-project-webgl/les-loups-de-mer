@@ -20,9 +20,15 @@ export default class ExperienceApp extends BasicApp {
             'SCN0_Shark_v4.gltf',
             'CoralTestALONE.gltf',
             'SCN0_Rock1_v1.glb',
-            'untitled.glb'
+            'untitled.glb',
+            'SCN3_CoralBundle_v5.gltf'
           ] as string[],
           textures: [
+            'TEXTURE_SCN3_Color.jpg',
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '4.png',
             'TEXTURE_SCN2_Metal_Roughness.jpg',
             'TEXTURE_SCN2_PlasticSecular.jpg',
             'TEXTURE_SCN2_PlasticColor.jpg',

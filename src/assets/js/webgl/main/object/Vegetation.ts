@@ -19,7 +19,7 @@ export default class Vegetation {
     // Initialization
     init() {
         let glTFGeometry: BufferGeometry
-        const mesh = this.scene.loader.getAsset('untitled')
+        const mesh = this.scene.loader.getAsset('SCN3_CoralBundle_v5')
         mesh.traverse((child: any) => {
 
             if ( child.isMesh ) {
@@ -39,7 +39,7 @@ export default class Vegetation {
         // material.matcap = this.scene.loader.getAsset('TEXTURE_SCN3_MatcapGrass') as Texture
 
         const material = new MeshBasicMaterial()
-        material.map = this.scene.loader.getAsset('corauxColor2') as Texture
+        material.map = this.scene.loader.getAsset('TEXTURE_SCN3_Color') as Texture
 
         this.instancedMesh = new InstancedMesh(glTFGeometry, material, this.positionsVegetation.length)
         this.scene.add(this.instancedMesh)
@@ -55,11 +55,13 @@ export default class Vegetation {
             )
 
             // dummy.scale.set(6,6,1)
-            dummy.scale.set(0.8,0.05,0.8)
+            dummy.scale.set(0.82,0.07,0.82)
 
             dummy.lookAt(position.x * 10, position.y * 10, position.z * 10)
 
             dummy.rotateX(3.14 / 2)
+
+            dummy.rotateY(6.28 * Math.random());
             
             dummy.updateMatrix()
             this.instancedMesh.setMatrixAt(i, dummy.matrix)
@@ -76,11 +78,12 @@ export default class Vegetation {
         this.positionsVegetation.forEach((vec, index) => {
             if (vec.w != 0) {
                 vec.w = 0
-                const mat4 = new Matrix4().scale(new Vector3(1,1,0.13))
+                const mat4 = new Matrix4().scale(new Vector3(1,0.13,1))
+                const mat42 = new Matrix4().makeTranslation(0,-60,0)
                 let currentMat = new Matrix4()
                 this.instancedMesh.getMatrixAt(index, currentMat)
 
-                this.instancedMesh.setMatrixAt(index, currentMat.multiply(mat4))
+                this.instancedMesh.setMatrixAt(index, currentMat.multiply(mat4).multiply(mat42))
 
                 this.instancedMesh.instanceMatrix.needsUpdate = true
             }
@@ -97,10 +100,11 @@ export default class Vegetation {
 
             // const mat4 = new Matrix4().scale(new Vector3(1,1,1.7 - vec.w * 0.07))
             const mat4 = new Matrix4().scale(new Vector3(1,1.7 - vec.w * 0.07,1))
+            const mat42 = new Matrix4().makeTranslation(0,1,0)
             let currentMat = new Matrix4()
             this.instancedMesh.getMatrixAt(index, currentMat)
 
-            this.instancedMesh.setMatrixAt(index, currentMat.multiply(mat4))
+            this.instancedMesh.setMatrixAt(index, currentMat.multiply(mat4).multiply(mat42))
 
             this.instancedMesh.instanceMatrix.needsUpdate = true
 

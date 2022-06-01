@@ -4,6 +4,7 @@ import SquaredButton from '../../components/UI/SquaredButton.vue';
 import Scoreboard from '../../components/Experience/Scoreboard.vue';
 import Modal from '../../components/Experience/Modal.vue';
 import Aileron from '../../components/Experience/Aileron.vue';
+import Loader from '../../components/Experience/Loader.vue';
 </script>
 
 
