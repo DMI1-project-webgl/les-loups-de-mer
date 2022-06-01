@@ -8,6 +8,13 @@
       <div  ref="container" id="draggable--container">
         <div v-if="tuto" class="tuto"></div>
         <div ref="hitbox" class="draggable--hitbox"></div>
+        <p class="draggable--legend left">Minimum</p>
+        <p class="draggable--legend right">Maximum</p>
+        <div class="draggable--step step-1 no"></div>
+        <div class="draggable--step step-2 no"></div>
+        <div class="draggable--step step-3 no"></div>
+        <div class="draggable--step step-4 no"></div>
+        <div class="draggable--step step-5 no"></div>
         <div ref="element" id="draggable--element" class="draggable--element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 331.2 331.42">
             <g v-if="value == 100" id="a">
@@ -127,13 +134,6 @@
             </g>
           </svg>
         </div>
-        <p class="draggable--legend left">Minimum</p>
-        <p class="draggable--legend right">Maximum</p>
-        <div class="draggable--step step-1"></div>
-        <div class="draggable--step step-2"></div>
-        <div class="draggable--step step-3"></div>
-        <div class="draggable--step step-4"></div>
-        <div class="draggable--step step-5"></div>
       </div>
     </div>
 
@@ -180,9 +180,8 @@ export default defineComponent({
 
     hitbox.addEventListener("click", (e) => {
       let hbWidth = hitbox.offsetWidth;
-      let hbHeight = hitbox.offsetHeight;
 
-      let posX = that.closestNumArray(positionArray, e.clientX-hbWidth)
+      let posX = that.closestNumArray(positionArray, e.clientX-hbWidth+widthDraggable/2)
       gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
       that.displayPercentX(widthContainer, widthDraggable, posX)
@@ -328,7 +327,7 @@ section.draggable {
 }
 .draggable--step.step-2 {
   left: 25%;
-  transform: translate(0%, -50%);
+  transform: translate(50%, -50%);
 }
 .draggable--step.step-3 {
   left: 50%;
@@ -336,7 +335,7 @@ section.draggable {
 }
 .draggable--step.step-4 {
   left: 75%;
-  transform: translate(-100%, -50%);
+  transform: translate(-200%, -50%);
 }
 .draggable--step.step-5 {
   left: 100%;
