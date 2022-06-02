@@ -7,7 +7,7 @@ import SquaredButton from './../../components/UI/SquaredButton.vue';
         <div class="modal--content">
           <p>{{text}}</p>
         </div>
-        <div class="modal--btn-container">
+        <div  v-if="showbtn == true" class="modal--btn-container">
           <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="$emit('showoff')"/>
         </div>
       </div>
@@ -19,11 +19,9 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'ModalElement',
-  props: ['text'],
+  props: ['text', 'showbtn'],
   mounted () {
-      // document.getElementById('modal-btn').addEventListener("click", (e) => {
-      //   document.getElementById('modal').classList.add('none')
-      // });
+
   }, 
   methods: {
     

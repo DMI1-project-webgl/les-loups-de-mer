@@ -9,25 +9,25 @@ import Aileron from '../../components/Experience/Aileron.vue';
 
 <template>
   <!-- <Scoreboard /> -->
-  <section id="clean" class="page-experience clean no">
+  <section id="clean" class="page-experience clean ">
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-3 h-100 px-0">
           <div class="clear--data-container">
             <Scoreboard maxBottle="3" maxCan="2" maxDrink="2"  maxToothbrush="1" :tuto="tuto2"/>
             <div class="clean--img-container">
-              <Aileron :step="step"/>      
+              <Aileron :step="step" :tuto="tuto4"/>      
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <Modal v-if="tuto1" text="Voici votre écosystème, malheureusement il est très pollué, à cause de l’être humain, aidez nous à le rendre plus sain pour les requins. Nous allons aussi construire une prothèse d’ailerons pour remplacer celle de ce requin à l’aide des déchets ramassés. Les déchets ainsi récupérés sont triés et recyclés afin de construire des prothèses d’ailerons en plastique 100%* recyclé. " @showoff="hidetuto1"/>
-  <Modal v-if="tuto2" text="Pour commencer, regardez ici la liste des objets à recycler, ils se rayent au fur et à mesure ou vous les ramassez." @showoff="hidetuto2"/>
-  <Modal v-if="tuto3" text="Pour ramasser un déchet, cliquez dessus, vous voyez cette bouteille en plastique ? Ramassez la, allez-y !" @showoff="hidetuto3"/>
-  <Modal v-if="tuto4" text=" Super ! Vous voyez la pollution a diminué, vous pouvez voir ici que la jauge de construction de l’aileron a augmenté,  continuez ainsi pour la remplir."  @showoff="hidetuto4"/>
-  <Modal v-if="canContinue" text=" Félicitation, c’est beaucoup mieux comme ça !" @showoff="validateStep"/>
+  <Modal v-if="tuto1" text="Voici votre écosystème, malheureusement il est très pollué, à cause de l’être humain, aidez nous à le rendre plus sain pour les requins. Nous allons aussi construire une prothèse d’ailerons pour remplacer celle de ce requin à l’aide des déchets ramassés. Les déchets ainsi récupérés sont triés et recyclés afin de construire des prothèses d’ailerons en plastique 100%* recyclé. " @showoff="hidetuto1" :showbtn="true"/>
+  <Modal v-if="tuto2" text="Pour commencer, regardez ici la liste des objets à recycler, ils se rayent au fur et à mesure ou vous les ramassez." @showoff="hidetuto2" :showbtn="true"/>
+  <Modal v-if="tuto3" text="Pour ramasser un déchet, cliquez dessus, vous voyez cette bouteille en plastique ? Ramassez la, allez-y !" @showoff="hidetuto3" :showbtn="false"/>
+  <Modal v-if="tuto4" text=" Super ! Vous voyez la pollution a diminué, vous pouvez voir ici que la jauge de construction de l’aileron a augmenté,  continuez ainsi pour la remplir."  @showoff="hidetuto4" :showbtn="true"/>
+  <Modal v-if="canContinue" text=" Félicitation, c’est beaucoup mieux comme ça !" @showoff="validateStep" :showbtn="true"/>
   <!-- <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/> -->
     
 </template>

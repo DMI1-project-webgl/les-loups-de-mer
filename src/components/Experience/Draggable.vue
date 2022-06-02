@@ -6,6 +6,15 @@
         
       </div> -->
       <div  ref="container" id="draggable--container">
+        <div v-if="tuto" class="tuto"></div>
+        <div ref="hitbox" class="draggable--hitbox"></div>
+        <p class="draggable--legend left">Minimum</p>
+        <p class="draggable--legend right">Maximum</p>
+        <div class="draggable--step step-1 no"></div>
+        <div class="draggable--step step-2 no"></div>
+        <div class="draggable--step step-3 no"></div>
+        <div class="draggable--step step-4 no"></div>
+        <div class="draggable--step step-5 no"></div>
         <div ref="element" id="draggable--element" class="draggable--element">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 331.2 331.42">
             <g v-if="value == 100" id="a">
@@ -125,13 +134,6 @@
             </g>
           </svg>
         </div>
-        <p class="draggable--legend left">Minimum</p>
-        <p class="draggable--legend right">Maximum</p>
-        <div class="draggable--step step-1"></div>
-        <div class="draggable--step step-2"></div>
-        <div class="draggable--step step-3"></div>
-        <div class="draggable--step step-4"></div>
-        <div class="draggable--step step-5"></div>
       </div>
     </div>
 
@@ -147,7 +149,7 @@ gsap.registerPlugin(Draggable);
 
 export default defineComponent({
   name: 'DraggableElement',
-  // props: ['step'],
+  props: ['tuto'],
   data: () => {
     return {
       value: 0,
@@ -156,6 +158,7 @@ export default defineComponent({
   mounted () {
     let step = 0;
     const that = this
+    const hitbox = this.$refs.hitbox as any;
     const widthContainer = (this.$refs.container as any).offsetWidth;
     const widthDraggable = (this.$refs.element as any).offsetWidth;
     const positionArray = this.initPositionArray(4, ( widthContainer - widthDraggable ) / 4);
@@ -172,8 +175,16 @@ export default defineComponent({
           gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
           that.displayPercentX(widthContainer, widthDraggable, posX)
-          console.log("koukou " + that.value);
       }
+    });
+
+    hitbox.addEventListener("click", (e) => {
+      let hbWidth = hitbox.offsetWidth;
+
+      let posX = that.closestNumArray(positionArray, e.clientX-hbWidth+widthDraggable/2)
+      gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
+
+      that.displayPercentX(widthContainer, widthDraggable, posX)
     });
   },
   methods: {
@@ -206,9 +217,30 @@ export default defineComponent({
 
 <style scoped>
 /* Structure  */
+.draggable--hitbox{
+  height: 50px;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: translateY(-50%);
+  bottom: 0;
+  right: 0;
+}
+
 .container {
   display: flex; 
   align-items: baseline; 
+}
+.draggable .tuto {
+  transform: translateX(-15px) translateY(-50%);
+  width: 80px;
+  height: 80px;
+  top: -50%;
+  left: 0;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 10px 3px rgba(234, 240, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
+  animation: 2s cubic-bezier(0.215, 0.61, 0.355, 1) 1s infinite tutoDraggable;
 }
 
 /* Draggable elements */
@@ -237,8 +269,9 @@ section.draggable {
   top: 50%;
   transform: translate( 0, -50%);
   border-radius: 50%;
-  /* box-shadow: rgb(0 0 0 / 35%) -4px -3px 45px 21px; */
+  /* transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1); */
 }
+
 #draggable--element svg {
   height: 30px;
   width: 30px;
@@ -295,7 +328,7 @@ section.draggable {
 }
 .draggable--step.step-2 {
   left: 25%;
-  transform: translate(0%, -50%);
+  transform: translate(50%, -50%);
 }
 .draggable--step.step-3 {
   left: 50%;
@@ -303,7 +336,7 @@ section.draggable {
 }
 .draggable--step.step-4 {
   left: 75%;
-  transform: translate(-100%, -50%);
+  transform: translate(-200%, -50%);
 }
 .draggable--step.step-5 {
   left: 100%;

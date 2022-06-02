@@ -1,5 +1,6 @@
 <template>
   <section id="aileron" class="aileron">
+    <div  v-if="tuto" class="tuto"></div>
     <div class="aileron--img">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 484.33 465.9">
             <path  id="b" d="M483.95,465.9H.12S-11.44,120.61,418,0c0,1.33-123.92,307.53,65.95,465.9Z" style="fill:#fff; opacity:.1;"/>
@@ -27,7 +28,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'AileronElement',
-  props: ['step'],
+  props: ['step', 'tuto'],
   computed: {
       percentage() {
           return String(Math.round(this.step * 100 / 8)) + "%";
@@ -44,6 +45,17 @@ export default defineComponent({
 <style scoped>
 .aileron {
     position: relative;
+}
+.aileron .tuto {
+    box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
+    animation: 2s linear 1s infinite alternate tuto;
+    border-radius: 20px;
+    height: 110%;
+    position: absolute;
+    width: 85%;
+    left: -15px;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 .aileron--img {
     width: 160px;

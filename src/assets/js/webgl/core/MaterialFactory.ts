@@ -50,20 +50,6 @@ export default class MaterialFactory {
     let materialName = 'default'
     console.log(name)
     switch (name) {
-      case 'Bouchon':
-      case 'Bouchon_epices':
-        materialName = 'bouchon'
-        break
-
-      case 'Bouteille':
-      case 'Bouteille_epices':
-        materialName = 'glass'
-        break
-
-      case 'Texture_intérieur':
-        materialName = 'epices'
-        break
-
       case 'Can':
         materialName = 'matCapMetal'
         break
@@ -92,15 +78,12 @@ export default class MaterialFactory {
 
       // Shark
       case 'Requin':
+      case 'Ceinture_requin':
         materialName = 'MatCapSharkBody'
         break
 
       case 'Aileron_requin':
-        materialName = 'sharkFin'
-        break
-
-      case 'Ceinture_requin':
-        materialName = 'sharkBelt'
+        materialName = 'MatCapAilerons'
         break
 
       case 'StarFish':
@@ -126,66 +109,6 @@ export default class MaterialFactory {
   createMaterial (name:string) {
     let material = this.materials.default
     switch (name) {
-      case 'bouchon': {
-        material = new MeshStandardMaterial({
-          map: this.loader.getAsset('TEXTURE_SCN1_BouchonFioleBouillon') as Texture
-        })
-        break
-      }
-
-      case 'epices': {
-        material = new MeshStandardMaterial({
-          color: 0x442200
-        })
-        break
-      }
-
-      case 'glass': {
-        const m = new MeshPhysicalMaterial()
-        m.thickness = 1.5
-        m.roughness = 0
-        m.clearcoat = 0.1
-        m.clearcoatRoughness = 0
-        m.transmission = 1
-        m.ior = 1.25
-        m.envMapIntensity = 25
-        m.envMap = this.hdrCubeRenderTarget.texture
-        material = m
-        break
-      }
-
-      case 'metal': {
-        material = new MeshStandardMaterial({
-          color: 0x666666,
-          metalness: 0.9,
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_Metal_Roughness') as Texture
-        })
-        break
-      }
-        
-      case 'plasticBottle': {
-        const m = new MeshPhysicalMaterial()
-        m.thickness = 1.5
-        m.roughness = 1
-        m.clearcoat = 0.1
-        m.clearcoatRoughness = 0
-        m.transmission = 1
-        m.ior = 1.25
-        m.envMapIntensity = 25
-        m.envMap = this.hdrCubeRenderTarget.texture
-        material = m
-        break
-      }
-
-      case 'bluePlastic': {
-        material = new MeshStandardMaterial({
-          map: this.loader.getAsset('TEXTURE_SCN2_PlasticColor') as Texture,
-          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
-        })
-        break
-      }
-
       case 'brush': {
         material = new MeshStandardMaterial({
           color: 0x555555,
@@ -206,26 +129,16 @@ export default class MaterialFactory {
         break
       }
 
-      case 'sharkBody': {
-        const m = new MeshPhysicalMaterial()
-        m.color = new Color(0xff0000)
-        m.sheenColor = new Color(0xff0000)
-        m.sheen = 10
-        m.thickness = 1.5
-        m.roughness = 0.4
-        m.clearcoat = 1
-        m.clearcoatRoughness = 0
-        m.transmission = 0.5
-        m.ior = 1.6
-        m.envMapIntensity = 25
-        m.envMap = this.hdrCubeRenderTarget.texture
+      case 'MatCapSharkBody': {
+        const m = new MeshMatcapMaterial()
+        m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatcapShark') as Texture
         material = m
         break
       }
 
-      case 'MatCapSharkBody': {
+      case 'MatCapAilerons': {
         const m = new MeshMatcapMaterial()
-        m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatcapShark') as Texture
+        m.matcap = this.loader.getAsset('TEXTURE_SCN0_MatAilron') as Texture
         material = m
         break
       }
@@ -255,43 +168,6 @@ export default class MaterialFactory {
         const m = new MeshMatcapMaterial()
         m.matcap = this.loader.getAsset('TEXTURE_SCN2_MatPlaticBlue') as Texture
         material = m
-        break
-      }
-
-      case 'matCap4': {
-        const m = new MeshMatcapMaterial()
-        m.matcap = this.loader.getAsset('12') as Texture
-        material = m
-        break
-      }
-
-      case 'sharkBelt': {
-        material = new MeshStandardMaterial({
-          color: 0x222222,
-          transparent: true,
-          alphaMap: this.loader.getAsset('TEXTURE_SCN0_SharkBeltAlpha') as Texture,
-          map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
-          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
-        })
-        break
-      }
-
-      case 'sharkFin': {
-        material = new MeshStandardMaterial({
-          color: 0x6E7D4A,
-          map: this.loader.getAsset('TEXTURE_SCN2_PlasticSecular') as Texture,
-          normalMap: this.loader.getAsset('TEXTURE_SCN2_PlasticNormal') as Texture,
-          roughnessMap: this.loader.getAsset('TEXTURE_SCN2_PlasticRoughness') as Texture
-        })
-        break
-      }
-
-      case 'starFish': {
-        material = new MeshStandardMaterial({
-          color: 0x6E7D4A,
-          map: this.loader.getAsset('TEXTURE_SCN3_Starfish_Color') as Texture,
-        })
         break
       }
 

@@ -10,8 +10,11 @@ import { Color, Object3D } from 'three'
 
 export default class HomeScene extends BasicScene {
 
-    private cursor: Cursor = { x: 0 , y: 0 }
-    private materials: MaterialFactory
+    private cursor: Cursor = {
+        x: 0, y: 0,
+        xWin: 0,
+        yWin: 0
+    }
 
     constructor (app:BasicApp, canvas: HTMLCanvasElement, signal: Signal, container: HTMLElement) {
         super(app, canvas, signal, container)
@@ -30,6 +33,8 @@ export default class HomeScene extends BasicScene {
     init () {
         this.background = this.materials.getEnv('main')
         this.background = new Color(0xfef9f0)
+
+        
 
         const fioleBouillon = new FioleBouillon(this.loader.getAsset('SCN1_Broth_v3') as Object3D)
         fioleBouillon.applyMaterials(this.materials)

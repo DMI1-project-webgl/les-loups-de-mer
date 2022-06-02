@@ -93,7 +93,8 @@ export default class EnvironmentSphere extends BasicObject3D {
     }
 
     initIsocahedron() {
-        const geometry = new IcosahedronGeometry( 108, 2 );
+        // const geometry = new IcosahedronGeometry( 108, 2 );
+        const geometry = new IcosahedronGeometry( 110, 2 );
         const positions = geometry.getAttribute('position')
         const count = positions.count
        
@@ -131,6 +132,10 @@ export default class EnvironmentSphere extends BasicObject3D {
         const smog = getPollutionSmog()
         this.smog = smog
         this.add(smog)
+    }
+
+    scaleSmog(n: number) {
+        this.smog.scale.set(n,n,n);
     }
 
     removePollutionSmog() {

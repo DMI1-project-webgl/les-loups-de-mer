@@ -6,7 +6,7 @@ export default class ExperienceApp extends BasicApp {
     constructor (canvas: HTMLCanvasElement, signal: Signal, container: HTMLElement = null) {
         super(canvas, signal)
         
-        this.scene = new ExperienceScene(this, canvas, this.signal, container)
+        this.scene = new ExperienceScene(this, canvas, this.signal)
         this.scenes.push(this.scene)
     }
 
@@ -20,21 +20,21 @@ export default class ExperienceApp extends BasicApp {
             'SCN0_Shark_v4.gltf',
             'CoralTestALONE.gltf',
             'SCN0_Rock1_v1.glb',
+            'untitled.glb',
+            'SCN3_CoralBundle_v5.gltf'
           ] as string[],
           textures: [
-            'TEXTURE_SCN2_Metal_Roughness.jpg',
+            'TEXTURE_SCN0_MatAilron.jpg',
+            'TEXTURE_SCNO_Rock.jpeg',
             'TEXTURE_SCN2_PlasticSecular.jpg',
             'TEXTURE_SCN2_PlasticColor.jpg',
             'TEXTURE_SCN2_PlasticNormal.jpg',
             'TEXTURE_SCN2_PlasticRoughness.jpg',
-            'TEXTURE_SCN0_SharkBeltAlpha.jpg',
-            'TEXTURE_SCN3_Starfish_Color.jpg',
             'TEXTURE_SCN2_MatcapMetal.jpg',
             'TEXTURE_SCN2_MatcapPlastic.jpg',
             'TEXTURE_SCN2_MatPlaticBlue.jpeg',
             'TEXTURE_SCN2_MatcapShark.jpg',
-            'TEXTURE_SCN3_MatcapGrass.png',
-            'TEXTURE_SCNO_Rock.jpeg',
+            'TEXTURE_SCN3_Color.jpg',
           ] as string[],
           envs: ['env'] as string[],
           hdr: [] as string[]

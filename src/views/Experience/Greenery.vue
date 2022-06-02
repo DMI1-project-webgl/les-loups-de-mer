@@ -30,8 +30,8 @@ import Modal from '../../components/Experience/Modal.vue';
         </div>
       </div>
     </section>
-    <Modal v-if="tuto1" text="a manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement bien planté. Mettons-nous au travail ! Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger. " @showoff="hidetuto1"/>
-    <Modal v-if="tuto2" text="Restez appuyé en déplaçant votre souris, les végétaux se développeront sur votre écosystème. À vous maintenant. " @showoff="hidetuto2"/>
+    <Modal v-if="tuto1" text="a manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement bien planté. Mettons-nous au travail ! Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger. " @showoff="hidetuto1" :showbtn="true"/>
+    <Modal v-if="tuto2" text="Restez appuyé en déplaçant votre souris, les végétaux se développeront sur votre écosystème. À vous maintenant. " @showoff="hidetuto2" :showbtn="true"/>
     <!-- <SquaredButton class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/> -->
 </template>
 

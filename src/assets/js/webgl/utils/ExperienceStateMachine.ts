@@ -101,7 +101,7 @@ export default class ExperienceStateMachine {
                 return true
             case ExperienceStep.END:
                 // ..
-                return false
+                return true
         }
     }
 

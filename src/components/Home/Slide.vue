@@ -50,9 +50,26 @@
           <div class="col-12 col-lg-7 h-lg-100">
             <div class="slider--canvas-container">
               <div class="elements-slider">
-                <img v-if="index == 2" src="@/assets/img/slider/bouillon.png" class="element-slider">
+                <!-- <img v-if="index == 2" src="@/assets/img/slider/bouillon.png" class="element-slider">
                 <img v-if="index == 0" src="@/assets/img/slider/epices.png" class="element-slider">
-                <img v-if="index == 1" src="@/assets/img/slider/huile.png" class="element-slider">
+                <img v-if="index == 1" src="@/assets/img/slider/huile.png" class="element-slider"> -->
+                <div id="content-slider" class="content-slider" style="height: 100%">
+                  <!-- <div id="slider-slider" data-images='["./../../src/assets/img/slider/elephant.gif","./../../src/assets/img/slider/epices.png"]' data-disp="./../../src/assets/img/slider/epices.png">
+                  </div> #} -->
+                  <video ref="video01" loop crossOrigin="anonymous" playsinline style="display:none">
+                    <source src="./../../../src/assets/img/slider/1.mp4"
+                      type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                  </video>
+                  <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none">
+                    <source src="./../../../src/assets/img/slider/2.mp4"
+                      type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                  </video>
+                  <video ref="video03" loop crossOrigin="anonymous" playsinline style="display:none">
+                    <source src="./../../../src/assets/img/slider/3.mp4"
+                      type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                  </video>
+                </div>
+                <canvas ref="slider" style="transform: translateY(-100%); pointer-events: none"></canvas>
               </div>
               <button @click="slidePrev" id="prev" class="slider--arrow-prev slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
               <button @click="slideNext" id="next" class="slider--arrow-next slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
@@ -68,12 +85,66 @@
 import { defineComponent } from 'vue'
 import Canvas from './Canvas.vue'
 import SquaredButton from '../UI/SquaredButton.vue'
+import SketchSlider from './../../assets/js/webgl/SketchSlider';
 
 export default defineComponent({
     name: "SlidePage",
     props: ["index"],
     emits: ["slide"],
     mounted() {
+      let sketch = new SketchSlider(this.$refs.slider, [this.$refs.video01, this.$refs.video02, this.$refs.video03],{
+	debug: true,
+	uniforms: {
+		intensity: {value: 1, type:'f', min:0., max:3}
+	},
+	fragment: `
+		uniform float time;
+		uniform float progress;
+		uniform float intensity;
+		uniform float width;
+		uniform float scaleX;
+		uniform float scaleY;
+		uniform float transition;
+		uniform float radius;
+		uniform float swipe;
+		uniform float a1;
+		uniform float a2;
+		uniform sampler2D texture1;
+		uniform sampler2D texture2;
+		uniform sampler2D displacement;
+		uniform vec4 resolution;
+		varying vec2 vUv;
+		mat2 getRotM(float angle) {
+		    float s = sin(angle);
+		    float c = cos(angle);
+		    return mat2(c, -s, s, c);
+		}
+		const float PI = 3.1415;
+		// const float angle1 = PI * 0.25;
+		// const float angle2 = PI * -0.75;
+
+    // const float angle1 = PI * -0.75;
+		// const float angle2 = PI * 0.25;
+
+
+		void main()	{
+			vec2 newUV = (vUv - vec2(0.5))*resolution.zw + vec2(0.5);
+
+			vec4 disp = texture2D(displacement, newUV);
+			vec2 dispVec = vec2(disp.r, disp.g);
+
+			vec2 distortedPosition1 = newUV + getRotM(a1) * dispVec * intensity * progress;
+			vec4 t1 = texture2D(texture1, distortedPosition1);
+
+			vec2 distortedPosition2 = newUV + getRotM(a2) * dispVec * intensity * (1.0 - progress);
+			vec4 t2 = texture2D(texture2, distortedPosition2);
+
+			gl_FragColor = mix(t1, t2, progress);
+
+		}
+
+	`
+});
     },
     methods: {
         slideNext() {
@@ -186,7 +257,6 @@ export default defineComponent({
 canvas {
   height: 100%;
   width: 100%;
-  border: 1px solid red;
 }
 /* HEADER */
 header {
