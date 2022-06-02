@@ -47,7 +47,7 @@ export default defineComponent({
     position: relative;
 }
 .aileron .tuto {
-    box-shadow: 0px 0px 50px 10px #ffffffff;
+    box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
     animation: 2s linear 1s infinite alternate tuto;
     border-radius: 20px;
     height: 110%;

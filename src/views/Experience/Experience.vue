@@ -8,6 +8,7 @@ import Scoreboard from './../../components/Experience/Scoreboard.vue';
 import Advancement from './../../components/Experience/Advancement.vue';
 import BackgroundGradient from '../../components/BackgroundGradient.vue';
 import Sound from './../../components/Sound.vue';
+import Loader from '../../components/Experience/Loader.vue';
 </script>
 
 <template>
@@ -25,6 +26,7 @@ import Sound from './../../components/Sound.vue';
         <Breadcrumb step="1"/> 
         <Button />
     --> 
+    <Loader />
     <Advancement />
     <Sound file="src/assets/sound/.mp3" />
      <router-view />

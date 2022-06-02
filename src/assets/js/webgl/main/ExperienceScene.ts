@@ -24,6 +24,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private cursorVegetation: HTMLElement
     private cursorVegetationChild: HTMLElement
     private cursorVegetationChild2: HTMLElement
+    private cameraControl = { rayon: 250, rayonTarget: 250}
+    private smogScale = { current: 1, target: 1}
 
     // State machine
     private stateMachine: ExperienceStateMachine
@@ -87,6 +89,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
         this.instanceSharkAt(new Vector3(130, 30, 40))
         this.setupCurrentStep()
+
     }
 
     ///////////////////////////////////
@@ -134,11 +137,18 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
             this.angleCameraHorizontal = Math.max(Math.min(this.angleCameraHorizontal, 0.5), -0.5)
             this.angleCameraHorizontal = this.lerp(this.angleCameraHorizontal, 0, 0.08)
 
-            this.camera.position.x = Math.cos(this.angleCameraHorizontal) * Math.cos(this.angleCameraVertical) * 250;
-            this.camera.position.z = Math.cos(this.angleCameraHorizontal) * Math.sin(this.angleCameraVertical) * 250;
-            this.camera.position.y = Math.sin(this.angleCameraHorizontal) * 250;
+            this.cameraControl.rayon = this.lerp(this.cameraControl.rayon, this.cameraControl.rayonTarget, 0.03);
 
-            this.camera.lookAt(0,0,0)
+            if (this.smogScale.current !== this.smogScale.target) {
+                this.smogScale.current = this.lerp(this.smogScale.current, this.smogScale.target, 0.03)
+                this.sphere.scaleSmog(this.smogScale.current)
+            }
+
+            this.camera.position.x = Math.cos(this.angleCameraHorizontal) * Math.cos(this.angleCameraVertical) * this.cameraControl.rayon;
+            this.camera.position.z = Math.cos(this.angleCameraHorizontal) * Math.sin(this.angleCameraVertical) * this.cameraControl.rayon;
+            this.camera.position.y = Math.sin(this.angleCameraHorizontal) * this.cameraControl.rayon;
+
+            this.camera.lookAt(0,0,0);
         }
 
 
@@ -310,6 +320,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 break
             }
             case ExperienceStep.END: {
+                this.cameraControl.rayonTarget = 350;
+                this.smogScale.target = 1.2;
                 break
             }
         }

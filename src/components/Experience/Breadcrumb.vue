@@ -35,6 +35,7 @@ export default defineComponent({
       onSignal(slug: Array<string|number>) {
           if (slug[0] == 'update-step') {
             const steps = document.querySelectorAll(".breadcrumb--step");
+            if (!steps[slug[1] as number - 1]) return
             steps[slug[1] as number - 1].classList.add("is-active");
           }
       }

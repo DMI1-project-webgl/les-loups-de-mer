@@ -239,8 +239,8 @@ export default defineComponent({
   left: 0;
   border-radius: 50%;
   position: absolute;
-  box-shadow: 0 0 11px 7px #fffffff0;
-  animation: 2s linear 1s infinite tutoDraggable;
+  box-shadow: 0 0 10px 3px rgba(234, 240, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
+  animation: 2s cubic-bezier(0.215, 0.61, 0.355, 1) 1s infinite tutoDraggable;
 }
 
 /* Draggable elements */
@@ -269,8 +269,9 @@ section.draggable {
   top: 50%;
   transform: translate( 0, -50%);
   border-radius: 50%;
-  /* box-shadow: rgb(0 0 0 / 35%) -4px -3px 45px 21px; */
+  /* transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1); */
 }
+
 #draggable--element svg {
   height: 30px;
   width: 30px;
