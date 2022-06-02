@@ -5,6 +5,7 @@
       <div id="content" class="content">
         <div id="slider" data-images='["./../../src/assets/img/logo_complet_bg_empty.png","./../../src/assets/img/logo_complet_bg.png"]' data-disp="./../../src/assets/img/logo_complet_bg_empty.png">
         </div>
+        <!-- Create json in data img add send real json to Sketch.js -->
       </div>
       <canvas ref="cover"></canvas>
     </div>
@@ -17,8 +18,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import Sketch from './../../assets/js/webgl/Sketch'
+import { defineComponent } from 'vue';
+import Sketch from './../../assets/js/webgl/Sketch';
 
 export default defineComponent({
   name: 'WelcomePage',

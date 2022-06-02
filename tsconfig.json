@@ -1,7 +1,9 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vite.config.*"],
   "compilerOptions": {
+    "types": [ "node" ],
+    "typeRoots": [ "../node_modules/@types" ],
     "noImplicitAny": false,
     "allowJs": true,
     "lib": ["es2017"],

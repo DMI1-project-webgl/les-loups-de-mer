@@ -180,11 +180,11 @@ export default defineComponent({
 
     hitbox.addEventListener("click", (e) => {
       let hbWidth = hitbox.offsetWidth;
-
-      let posX = that.closestNumArray(positionArray, e.clientX-hbWidth+widthDraggable/2)
+      let hitboxRect = e.target.getBoundingClientRect()
+      let posX = that.closestNumArray(positionArray, e.clientX-hitboxRect.left-widthDraggable)
       gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
-      that.displayPercentX(widthContainer, widthDraggable, posX)
+      // that.displayPercentX(widthContainer, widthDraggable, posX)
     });
   },
   methods: {
@@ -335,7 +335,7 @@ section.draggable {
 }
 .draggable--step.step-4 {
   left: 75%;
-  transform: translate(-200%, -50%);
+  transform: translate(-150%, -50%);
 }
 .draggable--step.step-5 {
   left: 100%;
