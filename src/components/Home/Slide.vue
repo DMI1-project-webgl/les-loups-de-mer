@@ -86,13 +86,20 @@ import { defineComponent } from 'vue'
 import Canvas from './Canvas.vue'
 import SquaredButton from '../UI/SquaredButton.vue'
 import SketchSlider from './../../assets/js/webgl/SketchSlider';
+import Sketch from '../../assets/js/webgl/Sketch';
 
 export default defineComponent({
     name: "SlidePage",
     props: ["index"],
     emits: ["slide"],
+    data: () => {
+      return ({
+        onAnim: false,
+        sketch: undefined
+      })
+    },
     mounted() {
-      let sketch = new SketchSlider(this.$refs.slider, [this.$refs.video01, this.$refs.video02, this.$refs.video03],{
+      this.sketch = new SketchSlider(this.$refs.slider, [this.$refs.video01, this.$refs.video02, this.$refs.video03],{
 	debug: true,
 	uniforms: {
 		intensity: {value: 1, type:'f', min:0., max:3}
@@ -148,10 +155,23 @@ export default defineComponent({
     },
     methods: {
         slideNext() {
-            this.$emit("slide", "next");
+          console.log(this.onAnim)
+          if (this.onAnim) return
+          this.onAnim = true
+          this.sketch.next()
+          this.$emit("slide", "next");
+          setTimeout(() => {
+            this.onAnim = false
+          }, 1000)
         },
         slidePrev() {
-            this.$emit("slide", "prev");
+          if (this.onAnim) return
+          this.onAnim = true
+          this.sketch.previous()
+          this.$emit("slide", "prev");
+          setTimeout(() => {
+            this.onAnim = false
+          }, 1000)
         }
     },
     beforeDestroy() {

@@ -61,8 +61,6 @@ export default class SketchSlider {
     clickEvent(){
       this.next = this.next.bind(this)
       this.previous = this.previous.bind(this)
-      this.clickerNext.addEventListener('click',this.next)
-      this.clickerPrevious.addEventListener('click',this.previous)
     }
     settings() {
       let that = this;
