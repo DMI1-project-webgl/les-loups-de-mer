@@ -237,7 +237,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if(event.key == 'j') {
             this.signal.dispatch(['validate-step'])
         }
-        this.vegetation.reset()
     }
 
     onMouseMove (event: MouseEvent) {
@@ -266,6 +265,10 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 this.notifyUI()
                 this.setupCurrentStep()
             }
+        }
+
+        if (slug[0] == 'remove-vegetation') {
+            this.vegetation.reset()
         }
     }
 

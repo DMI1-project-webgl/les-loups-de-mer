@@ -18,7 +18,7 @@ import Sound from './../../components/Sound.vue';
       <div class="Home">
         <Loading :display="show.loading"/>
         <Header :display="show.header" :banner="show.banner"/>
-        <Welcome :scrollBar="scrollBar" />
+        <Welcome :scrollBar="scrollBar"  @scrolldown="scrollDown" />
         <Discover :scrollBar="scrollBar"/>
         <Slide :index="slideIndex" @slide="slideTo"/>
       </div>
@@ -30,7 +30,6 @@ import Sound from './../../components/Sound.vue';
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Scrollbar from 'smooth-scrollbar';
-import { Bounce } from 'smooth-scrollbar/plugins/overscroll/bounce'
 import OverscrollPlugin from 'smooth-scrollbar/plugins/overscroll/index'
 
 export default defineComponent({
@@ -49,8 +48,8 @@ export default defineComponent({
     Scrollbar.use(OverscrollPlugin);
     this.scrollBar =  Scrollbar.init(this.$refs.scrollSections as any, {
       plugins: {
-       overscroll: {
-         effect: 'bounce',
+      overscroll: {
+        effect: 'bounce',
           onScroll: undefined,
           damping: 0.2,
           maxOverscroll: 150,
@@ -60,6 +59,13 @@ export default defineComponent({
     })
   },
   methods: {
+    scrollDown() {
+      (this.$refs.scrollSections as HTMLElement).style.height = "100vh"
+      this.scrollBar.update()
+      document.querySelectorAll('.video-slider').forEach((video) => {
+        (video as HTMLVideoElement).play();
+      })
+    },
     slideTo(to: string) {
       if (to == 'next') {
         this.slideIndex += 1;
@@ -82,7 +88,7 @@ export default defineComponent({
 
 <style scoped>
 .toto {
-  height: 100vh;
+  /* height: 100vh; */
   overflow: hidden; 
   outline: none;
 }

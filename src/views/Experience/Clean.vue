@@ -60,6 +60,8 @@ export default defineComponent({
   name: 'Clean',
   mounted() {
     this.signal.add(this.onSignal.bind(this))
+    const canvas = document.querySelector('#canvas');
+      canvas.classList.remove('canvas--left')
   },
   data() {
     return {

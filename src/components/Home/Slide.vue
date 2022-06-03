@@ -56,15 +56,15 @@
                 <div id="content-slider" class="content-slider" style="height: 100%">
                   <!-- <div id="slider-slider" data-images='["./../../src/assets/img/slider/elephant.gif","./../../src/assets/img/slider/epices.png"]' data-disp="./../../src/assets/img/slider/epices.png">
                   </div> #} -->
-                  <video ref="video01" loop crossOrigin="anonymous" playsinline style="display:none">
+                  <video ref="video01" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
                     <source src="./../../../src/assets/img/slider/1.mp4"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
-                  <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none">
+                  <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
                     <source src="./../../../src/assets/img/slider/2.mp4"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
-                  <video ref="video03" loop crossOrigin="anonymous" playsinline style="display:none">
+                  <video ref="video03" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
                     <source src="./../../../src/assets/img/slider/3.mp4"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>

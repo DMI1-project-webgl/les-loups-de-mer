@@ -8,7 +8,7 @@ import Modal from '../../components/Experience/Modal.vue';
       <div class="container h-100">
         <div class="row h-100">
           <div class="col-1 h-100 position-relative">
-            <div class="greenery--btn-container">
+            <div class="greenery--btn-container" @click="RemoveVegetation">
               <div class="greenery--btn">
                 <img src="" alt="">
               </div>
@@ -66,6 +66,9 @@ export default defineComponent({
     },
     hidetuto2() {
       this.tuto2 = false;
+    },
+    RemoveVegetation() {
+      this.signal.dispatch(['remove-vegetation'])
     }
     
   },
@@ -81,6 +84,7 @@ export default defineComponent({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 .greenery--btn {
   width: 50px;
