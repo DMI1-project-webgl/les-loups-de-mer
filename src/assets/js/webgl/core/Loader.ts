@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { HDRCubeTextureLoader } from 'three/examples/jsm/loaders/HDRCubeTextureLoader'
 import type AssetsUrl from './InterfaceAssetsUrl'
 import type Signal from "../utils/Signal"
+import type Element from "./Element"
 
 export default class Loader {
   private manifest: AssetsUrl
@@ -26,21 +27,13 @@ export default class Loader {
   load () {
     this.isLoaded = false
     let hasAssets = false
-    if (!this.isNullOrEmpty(this.manifest.models)) {
+    if (!this.isNullOrEmpty(this.manifest.models as Element[])) {
       hasAssets = true
-      this.loadModels(this.manifest.models)
+      this.loadModels(this.manifest.models as Element[])
     }
-    if (!this.isNullOrEmpty(this.manifest.textures)) {
+    if (!this.isNullOrEmpty(this.manifest.textures as Element[])) {
       hasAssets = true
-      this.loadTextures(this.manifest.textures)
-    }
-    if (!this.isNullOrEmpty(this.manifest.envs)) {
-      hasAssets = true
-      this.loadEnvs(this.manifest.envs)
-    }
-    if (!this.isNullOrEmpty(this.manifest.hdr)) {
-      hasAssets = true
-      this.loadHDREnv(this.manifest.hdr)
+      this.loadTextures(this.manifest.textures as Element[])
     }
 
     if (!hasAssets) {
@@ -48,7 +41,7 @@ export default class Loader {
     }
   }
 
-  isNullOrEmpty (arr:Array<string>) {
+  isNullOrEmpty (arr:Array<Element>) {
     return (arr === null || arr.length === 0)
   }
 
@@ -62,55 +55,24 @@ export default class Loader {
     this.signal.dispatch(['load-on-progress', progress])
   }
 
-  loadModels (models:Array<string>) {
+  loadModels (models:Array<Element>) {
     const loader = new GLTFLoader(this.loadingManager)
     for (const model of models) {
-      const path = this.basePath + 'models/' + model
-      loader.load(path, (gltf) => {
-        this.assets[this.getName(model)] = gltf.scene
-        this.assets[this.getName(model) + '-all'] = gltf
+      // const path = this.basePath + 'models/' + model
+      loader.load(model.path, (gltf) => {
+        this.assets[model.name] = gltf.scene
+        this.assets[model.name + '-all'] = gltf
       })
     }
   }
 
-  loadTextures (textures:Array<string>) {
+  loadTextures (textures:Array<Element>) {
     const loader = new TextureLoader(this.loadingManager)
     for (const texture of textures) {
-      const path = this.basePath + 'textures/' + texture
-      loader.load(path, (tx) => {
+      // const path = this.basePath + 'textures/' + texture
+      loader.load(texture.path, (tx) => {
         tx.flipY = false
-        this.assets[this.getName(texture)] = tx
-      })
-    }
-  }
-
-  loadHDREnv (envs:Array<string>) {
-    const urls = ['px.hdr', 'nx.hdr', 'py.hdr', 'ny.hdr', 'pz.hdr', 'nz.hdr']
-    const loader = new HDRCubeTextureLoader(this.loadingManager)
-    for (const dir of envs) {
-      loader.setPath(this.basePath + 'textures/' + dir + '/')
-      loader.load(urls, (cubeTex) => {
-        this.assets[dir] = cubeTex
-      })
-    }
-  }
-
-  loadEnvs (envs:Array<string>) {
-    // const loader = new EXRLoader(this.loadingManager);
-    // for(const env of envs){
-    //     const path = "textures/" + env;
-    //     loader.load(path, (texture)=>{
-    //         this.assets[this.getName(env)] = texture;
-    //     })
-    // }
-
-    
-    const urls = ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']
-    const loader = new CubeTextureLoader(this.loadingManager)
-    for (const dir of envs) {
-      loader.setPath(this.basePath + 'textures/' + dir + '/')
-      loader.load(urls, (cubeTex) => {
-        this.assets[dir] = cubeTex
+        this.assets[texture.name] = tx
       })
     }
   }
@@ -120,7 +82,8 @@ export default class Loader {
   }
 
   getName (file:string): string {
-    return file.substring(0, file.lastIndexOf('.'))
+    console.log(file)
+    return file.substring(0, file.lastIndexOf('.')).replace('/src/assets/js/webgl/models/', '').replace('/src/assets/js/webgl/textures/', '').replace('/assets/', '')
   }
 
   getAsset (name:string) {

@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts">
-import HomeScene from './../../assets/js/webgl/main/HomeScene'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { Timeline } from 'gsap/gsap-core';
+import disp1 from '@/assets/img/disp1.jpg'
 
 export default class Sketch {
-    constructor(canvas, opts) {
+    constructor(canvas, imgs, opts) {
+      this.images = imgs
       this.scene = new THREE.Scene();
       this.vertex = `varying vec2 vUv;void main() {vUv = uv;gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );}`;
       this.fragment = opts.fragment;
@@ -22,9 +24,8 @@ export default class Sketch {
       this.clickers = document.querySelectorAll(".content");
   
   
-      this.container = document.getElementById("slider");
+      this.container = document.getElementById("content");
       if (!this.container) return
-      this.images = JSON.parse(this.container.getAttribute('data-images'));
       this.width = canvas.offsetWidth;
       this.height = canvas.offsetHeight;
       this.container.appendChild(this.renderer.domElement);
@@ -55,7 +56,8 @@ export default class Sketch {
     initiate(cb){
       const promises = [];
       let that = this;
-      this.images.forEach((url,i)=>{
+      this.images.forEach((img,i)=>{
+        const url = img.src;
         let promise = new Promise(resolve => {
           that.textures[i] = new THREE.TextureLoader().load( url, resolve );
         });
@@ -149,7 +151,7 @@ export default class Sketch {
           radius: { type: "f", value: 0 },
           texture1: { type: "f", value: this.textures[0] },
           texture2: { type: "f", value: this.textures[1] },
-          displacement: { type: "f", value: new THREE.TextureLoader().load('./src/assets/img/disp1.jpg') },
+          displacement: { type: "f", value: new THREE.TextureLoader().load(disp1) },
           resolution: { type: "v4", value: new THREE.Vector4() },
         },
         // wireframe: true,

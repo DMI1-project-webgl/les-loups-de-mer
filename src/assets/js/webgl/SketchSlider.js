@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { Timeline } from 'gsap/gsap-core';
+import disp1 from '@/assets/img/disp1.jpg'
 
 export default class SketchSlider {
     constructor(canvas, videos, opts) {
@@ -132,7 +133,7 @@ export default class SketchSlider {
           radius: { type: "f", value: 0 },
           texture1: { type: "f", value: this.textures[0] },
           texture2: { type: "f", value: this.textures[1] },
-          displacement: { type: "f", value: new THREE.TextureLoader().load('./src/assets/img/disp1.jpg') },
+          displacement: { type: "f", value: new THREE.TextureLoader().load(disp1) },
           resolution: { type: "v4", value: new THREE.Vector4() },
         },
         // wireframe: true,

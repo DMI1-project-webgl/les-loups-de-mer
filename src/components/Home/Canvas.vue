@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts">
-import HomeApp from './../../assets/js/webgl/main/HomeApp'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -15,26 +14,8 @@ export default defineComponent({
       homeApp: null
     };
   },
-  watch:{
-    $route (to, from) {
-      const pageName = to.name.toLowerCase()
-      switch (pageName) {
-              case 'greenery':
-              case 'food':
-                if (!this.homeApp) this.$router.push('clean')
-                break
-            default:
-              if (this.homeApp) this.homeApp.destroy(); this.homeApp = null
-        }
-      if (this.homeApp) this.homeApp.changeState(['route-' + pageName])
-    }
-  },
   mounted () {
-    this.homeApp = new HomeApp(this.$refs['canvas'] as HTMLCanvasElement, this.signal, this.$refs.container as any)
   },
-  beforeDestroy () {
-    if (this.homeApp) this.homeApp.destroy()
-  }
 })
 </script>
 

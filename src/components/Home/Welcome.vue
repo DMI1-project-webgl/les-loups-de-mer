@@ -1,10 +1,9 @@
 <template>
   <section id="welcome" class="page welcome color--secondary">
     <div class="welcome--logo-container">
-      <!-- <img src="./../../assets/img/logo_complet.svg" alt=""> -->
       <div id="content" class="content">
-        <div id="slider" data-images='["./../../src/assets/img/logo_complet_bg_empty.png","./../../src/assets/img/logo_complet_bg.png"]' data-disp="./../../src/assets/img/logo_complet_bg_empty.png">
-        </div>
+        <img ref="img1" src="./../../assets/img/logo_complet_bg_empty.png" alt="" style="display:none">
+        <img ref="img2" src="./../../assets/img/logo_complet_bg.png" alt="" style="display:none">
         <!-- Create json in data img add send real json to Sketch.js -->
       </div>
       <canvas ref="cover"></canvas>
@@ -25,7 +24,7 @@ export default defineComponent({
   name: 'WelcomePage',
   props: ['scrollBar'],
   mounted () {
-    let sketch = new Sketch(this.$refs.cover, {
+    let sketch = new Sketch(this.$refs.cover, [this.$refs.img1, this.$refs.img2], {
       debug: true,
       uniforms: {
         intensity: {value: 0.12, type:'f', min:0., max:3}
