@@ -154,47 +154,70 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
             this.camera.lookAt(0,0,0);
         }
 
+        if (this.raycaster) {
 
-        if (this.raycaster && this.vegetation && this.cursorVegetation && !this.statusTuto) {
-            this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--clicked")
+            if (this.vegetation && this.cursorVegetation && !this.statusTuto) {
+                this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--clicked")
+                this.raycaster.setFromCamera( this.pointer, this.camera );
 
-            this.cursorVegetation.style.transform = `
-            translate(${this.cursor.xWin}px, ${this.cursor.yWin}px)
-            `
+                if (this.vegetation && this.cursorVegetation) {
+                    this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--clicked")
 
-            if (Math.pow(this.pointer.y * (this.sizes.height / this.sizes.width) , 2) + Math.pow(this.pointer.x, 2) < 0.12) {
-                this.cursorVegetationChild.style.transform = `
-                rotate3d(${this.pointer.y}, 0, 0, ${(Math.abs(this.pointer.y) + Math.abs(this.pointer.x * 0.25)) * 0.1 * this.sizes.height}deg)
-                `
-                this.cursorVegetationChild2.style.transform = `
-                rotate3d(0, ${this.pointer.x}, 0, ${(Math.abs(this.pointer.x) + Math.abs(this.pointer.y * 0.25)) * 0.1 * this.sizes.width}deg)
-                `
-                this.cursorVegetationChild2.classList.add("cursor-vegetation_child2--focus")
-                if (this.mouseIsDown) {
-                    this.cursorVegetationChild2.classList.add("cursor-vegetation_child2--clicked")
+                    this.cursorVegetation.style.transform = `
+                    translate(${this.cursor.xWin}px, ${this.cursor.yWin}px)
+                    `
+
+                    if (Math.pow(this.pointer.y * (this.sizes.height / this.sizes.width) , 2) + Math.pow(this.pointer.x, 2) < 0.12) {
+                        this.cursorVegetationChild.style.transform = `
+                        rotate3d(${this.pointer.y}, 0, 0, ${(Math.abs(this.pointer.y) + Math.abs(this.pointer.x * 0.25)) * 0.1 * this.sizes.height}deg)
+                        `
+                        this.cursorVegetationChild2.style.transform = `
+                        rotate3d(0, ${this.pointer.x}, 0, ${(Math.abs(this.pointer.x) + Math.abs(this.pointer.y * 0.25)) * 0.1 * this.sizes.width}deg)
+                        `
+                        this.cursorVegetationChild2.classList.add("cursor-vegetation_child2--focus")
+                        if (this.mouseIsDown) {
+                            this.cursorVegetationChild2.classList.add("cursor-vegetation_child2--clicked")
+                        }
+                    } else {
+                        this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--focus")
+                        this.cursorVegetationChild.style.transform = `
+                        rotate3d(0,0,0,0)
+                        `
+                        this.cursorVegetationChild2.style.transform = `
+                        rotate3d(0,0,0,0)
+                        `
+                    }
+
+                    this.vegetation.update(this.deltaTime)
+
+                    if (!this.mouseIsDown) return
+                
+                    if (this.vegetation) {
+                        const intersectsVegetation = this.raycaster.intersectObject(this.vegetation.instancedMesh, false); 
+                        const instanceId = intersectsVegetation[ 0 ].instanceId;
+
+                        if ( intersectsVegetation.length > 0 ) {
+                            const instanceId = intersectsVegetation[ 0 ].instanceId;
+
+                            this.vegetation.scaleVegetation(instanceId)
+                            this.signal.dispatch(['add-vegetation'])
+                        }
+
+                        // Used to glow trash
+                        // if (this.trashes.length > 0) {
+                        //     const intersectsTrash = this.raycaster.intersectObjects(this.trashes)
+                
+                        //     if ( intersectsTrash.length > 0 ) {
+                        //         const object = intersectsTrash[0].object;
+                        //         this.getTrashParent(object).glow();
+                        //     } else {
+                        //         for(let trash of this.trashes) {
+                        //             (trash as Trash).unglow()
+                        //         }
+                        //     }
+                        // }
+                    }
                 }
-            } else {
-                this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--focus")
-                this.cursorVegetationChild.style.transform = `
-                rotate3d(0,0,0,0)
-                `
-                this.cursorVegetationChild2.style.transform = `
-                rotate3d(0,0,0,0)
-                `
-            }
-
-            this.vegetation.update(this.deltaTime)
-
-            if (!this.mouseIsDown) return
-
-            this.raycaster.setFromCamera( this.pointer, this.camera );
-            const intersects = this.raycaster.intersectObject(this.vegetation.instancedMesh, false); 
-    
-            if ( intersects.length > 0 ) {
-                const instanceId = intersects[ 0 ].instanceId;
-
-                this.vegetation.scaleVegetation(instanceId)
-                this.signal.dispatch(['add-vegetation'])
             }
         }
     }
@@ -380,34 +403,30 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     instanceTrashes() {
         for(let i = 0; i < this.stateMachine.neededBottleAmount; i++) {
-            console.log('instance bottle')
             const randomPos = this.randomSpherePoint()
             this.instanceBottleAt(randomPos)
         }
 
         for(let i = 0; i < this.stateMachine.neededToothbrushAmount; i++) {
-            console.log('instance toothbrush')
             const randomPos = this.randomSpherePoint()
             this.instanceToothBrushAt(randomPos)
         }
 
         for(let i = 0; i < this.stateMachine.neededDrinkAmount; i++) {
-            console.log('instance drink')
             const randomPos = this.randomSpherePoint()
             this.instanceDrinkAt(randomPos)
         }
 
         for(let i = 0; i < this.stateMachine.neededCanAmount; i++) {
-            console.log('instance can')
             const randomPos = this.randomSpherePoint()
             this.instanceCanAt(randomPos)
         }
-        console.log('trashes number', this.trashes.length)
     }
 
     instanceCanAt(pos: Vector3): void {
         const can = new Trash((this.loader.getAsset('SCN2_Can_v1') as Mesh).clone())
-        can.applyMaterials(this.materials)
+        can.applyCloneMaterial(this.materials)
+        can.applyHitbox()
         can.position.set(pos.x, pos.y, pos.z)
         can.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(can)
@@ -417,7 +436,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     instanceDrinkAt(pos: Vector3): void {
         const drink = new Trash((this.loader.getAsset('SCN2_Drink_v3') as Mesh).clone())
-        drink.applyMaterials(this.materials)
+        drink.applyCloneMaterial(this.materials)
+        drink.applyHitbox()
         drink.position.set(pos.x, pos.y, pos.z)
         drink.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(drink)
@@ -427,7 +447,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     instanceToothBrushAt(pos: Vector3): void {
         const toothbrush = new Trash((this.loader.getAsset('SCN2_ToothBrush_v1') as Mesh).clone())
-        toothbrush.applyMaterials(this.materials)
+        toothbrush.applyCloneMaterial(this.materials)
+        toothbrush.applyHitbox()
         toothbrush.position.set(pos.x, pos.y, pos.z)
         toothbrush.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(toothbrush)
@@ -437,7 +458,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     instanceBottleAt(pos: Vector3): void {
         const bottle = new Trash((this.loader.getAsset('SCN2_Bottle_v3') as Mesh).clone())
-        bottle.applyMaterials(this.materials)
+        bottle.applyCloneMaterial(this.materials)
+        bottle.applyHitbox()
         bottle.position.set(pos.x, pos.y, pos.z)
         bottle.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(bottle)
@@ -486,12 +508,20 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     // -- Utils -- //
     /////////////////
 
+    getTrashParent(object: Object3D): Trash {
+        let trashParent = object.parent
+        while(!(trashParent instanceof Trash)) {
+            trashParent = trashParent.parent
+        }
+        return trashParent
+    }
+
     lerp (start: number, end: number, amt: number): number {
         return (1-amt)*start+amt*end
     }
 
     randomSpherePoint(): Vector3 {
-        const radius = this.randomIntFromInterval(125, 140); // Random orbit
+        const radius = this.randomIntFromInterval(130, 140); // Random orbit
         const x0 = 0;
         const y0 = 0;
         const z0 = 0;
