@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import RoundButton from './../UI/RoundButton.vue'
+</script>
 <template>
   <div class="slider">
     <header class="page header">
@@ -32,19 +35,16 @@
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
               <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
-              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
             <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
-              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
             <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
-              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
@@ -75,6 +75,9 @@
               <button @click="slideNext" id="next" class="slider--arrow-next slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
             </div>
           </div>
+          <div class="col-1 slider--btn-container">
+            <RoundButton link="/valeurs" text="Nos valeurs" :isClickHear="true" :isWhite="false" :isRouterLink="true" />
+          </div>
         </div>
       </div>
     </section>
@@ -84,7 +87,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Canvas from './Canvas.vue'
-import SquaredButton from '../UI/SquaredButton.vue'
 import SketchSlider from './../../assets/js/webgl/SketchSlider';
 import Sketch from '../../assets/js/webgl/Sketch';
 
@@ -176,7 +178,7 @@ export default defineComponent({
     },
     beforeDestroy() {
     },
-    components: { Canvas, SquaredButton }
+    components: { Canvas }
 })
 </script>
 
@@ -424,5 +426,7 @@ header {
   transform: translateY(-10px);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
-
+.slider--btn-container {
+  position: relative;
+}
 </style>

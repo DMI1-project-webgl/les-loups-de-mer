@@ -119,4 +119,9 @@ export default defineComponent({
 .RoundButton-Container:hover .RoundButton--white .RoundButton-Text {
     color: var(--color-secondary);
 }
+.slider .RoundButton-Container {
+  position: absolute;
+   bottom: 50px;
+   right: 80px;
+}
 </style>
