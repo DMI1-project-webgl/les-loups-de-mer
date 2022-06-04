@@ -426,7 +426,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     instanceCanAt(pos: Vector3): void {
         const can = new Trash((this.loader.getAsset('SCN2_Can_v1') as Mesh).clone())
         can.applyCloneMaterial(this.materials)
-        can.applyHitbox()
+        can.applyHitbox('Can')
         can.position.set(pos.x, pos.y, pos.z)
         can.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(can)
@@ -437,7 +437,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     instanceDrinkAt(pos: Vector3): void {
         const drink = new Trash((this.loader.getAsset('SCN2_Drink_v3') as Mesh).clone())
         drink.applyCloneMaterial(this.materials)
-        drink.applyHitbox()
+        drink.applyHitbox('Drink')
         drink.position.set(pos.x, pos.y, pos.z)
         drink.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(drink)
@@ -448,7 +448,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     instanceToothBrushAt(pos: Vector3): void {
         const toothbrush = new Trash((this.loader.getAsset('SCN2_ToothBrush_v1') as Mesh).clone())
         toothbrush.applyCloneMaterial(this.materials)
-        toothbrush.applyHitbox()
+        toothbrush.applyHitbox('Plank')
         toothbrush.position.set(pos.x, pos.y, pos.z)
         toothbrush.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(toothbrush)
@@ -459,7 +459,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     instanceBottleAt(pos: Vector3): void {
         const bottle = new Trash((this.loader.getAsset('SCN2_Bottle_v3') as Mesh).clone())
         bottle.applyCloneMaterial(this.materials)
-        bottle.applyHitbox()
+        bottle.applyHitbox('Body')
         bottle.position.set(pos.x, pos.y, pos.z)
         bottle.rotation.set(0, 0, this.randomIntFromInterval(0, 30))
         this.add(bottle)

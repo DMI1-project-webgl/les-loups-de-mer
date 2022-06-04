@@ -1,7 +1,7 @@
 import { FrontSide, Mesh, MeshBasicMaterial, Object3D, SphereGeometry } from 'three'
 import BasicObject3D from '../../core/BasicObject3D'
 
-function getHitbox() {
+function getHitbox(trashName: string) {
   const geometry = new SphereGeometry(30, 30, 30)
   const material = new MeshBasicMaterial({
       side: FrontSide,
@@ -9,6 +9,7 @@ function getHitbox() {
       opacity: 0.0
   });
   const mesh = new Mesh(geometry, material);
+  mesh.name = trashName
   return mesh;
 }
 
@@ -23,8 +24,8 @@ export default class Trash extends BasicObject3D {
   }
 
   // Need to be call after `applyMaterial()`
-  applyHitbox() {
-    this.add(getHitbox())
+  applyHitbox(trashName: string) {
+    this.model.add(getHitbox(trashName))
   } 
 
   glow() {
