@@ -16,19 +16,9 @@ import Loader from '../../components/Experience/Loader.vue';
     <BackgroundGradient />
     <Canvas />
     <Nav />
-    <!-- 
-      components : 
-      <Scoreboard />
-      img aileron
-      <Popup />
-      Row props: 
-        <Progress />
-        <Breadcrumb step="1"/> 
-        <Button />
-    --> 
     <Loader />
     <Advancement />
     <Sound file="src/assets/sound/.mp3" />
-     <router-view />
+    <router-view />
   </div>
 </template>

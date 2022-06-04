@@ -105,4 +105,13 @@ export default defineComponent({
 .SquaredButton-Container:hover .SquaredButton--white .SquaredButton-Text {
     color: var(--color-secondary);
 }
+.result .SquaredButton {
+  width: inherit !important;
+  padding: 0 30px !important;
+  overflow: hidden;
+}
+.result .SquaredButton::after {
+  width: 110%;
+  border: none;
+}
 </style>
