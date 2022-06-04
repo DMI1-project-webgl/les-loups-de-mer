@@ -26,6 +26,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private cursorVegetationChild2: HTMLElement
     private cameraControl = { rayon: 250, rayonTarget: 250}
     private smogScale = { current: 1, target: 1}
+    private cursorControl = { current: 0, target: 0}
+    private statusTuto = true
 
     // State machine
     private stateMachine: ExperienceStateMachine
@@ -123,24 +125,25 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
         if (this.pointer) {
             if (this.pointer.x > 0.05) {
-                this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2), 0.6)
+                this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2 * this.cursorControl.current), 0.6)
             } else if (this.pointer.x < -0.05) {
-                this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2), 0.6)
+                this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2 * this.cursorControl.current), 0.6)
             }
 
             if (this.pointer.y > 0.1) {
-                this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2)
+                this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2 * this.cursorControl.current)
             } else if (this.pointer.y < -0.1) {
-                this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2)
+                this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2 * this.cursorControl.current)
             }
 
             this.angleCameraHorizontal = Math.max(Math.min(this.angleCameraHorizontal, 0.5), -0.5)
             this.angleCameraHorizontal = this.lerp(this.angleCameraHorizontal, 0, 0.08)
 
-            this.cameraControl.rayon = this.lerp(this.cameraControl.rayon, this.cameraControl.rayonTarget, 0.03);
+            this.cameraControl.rayon = this.lerp(this.cameraControl.rayon, this.cameraControl.rayonTarget, 0.02);
+            this.cursorControl.current = this.lerp(this.cursorControl.current, this.cursorControl.target, 0.02);
 
             if (this.smogScale.current !== this.smogScale.target) {
-                this.smogScale.current = this.lerp(this.smogScale.current, this.smogScale.target, 0.03)
+                this.smogScale.current = this.lerp(this.smogScale.current, this.smogScale.target, 0.02)
                 this.sphere.scaleSmog(this.smogScale.current)
             }
 
@@ -152,7 +155,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
 
-        if (this.raycaster && this.vegetation && this.cursorVegetation) {
+        if (this.raycaster && this.vegetation && this.cursorVegetation && !this.statusTuto) {
             this.cursorVegetationChild2.classList.remove("cursor-vegetation_child2--clicked")
 
             this.cursorVegetation.style.transform = `
@@ -202,7 +205,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 	    this.pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
         this.raycaster.setFromCamera( this.pointer, this.camera );
 
-        if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION) {
+        if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION && !this.statusTuto) {
             const intersects = this.raycaster.intersectObjects(this.trashes);
             if(intersects.length > 0) {
                 this.smogLerpAlpha += 0.1
@@ -270,6 +273,13 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if (slug[0] == 'remove-vegetation') {
             this.vegetation.reset()
         }
+
+        if (slug[0] == 'camera-experience-state') {
+            this.cameraExperienceState()
+            if (this.stateMachine.currentStep === ExperienceStep.VEGETATION) {
+                this.cursorVegetation.classList.remove("cursor-vegetation--disable")
+            }
+        }
     }
 
     initCursorVegetation () {
@@ -294,13 +304,16 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     }
 
     setCameraPosition () {
-        this.camera.position.set(0, 0, 250)
+        this.camera.position.set(0, 0, 300)
         this.camera.lookAt(0, 0, 0)
     }
 
     setupCurrentStep() {
         switch(this.stateMachine.currentStep) {
             case ExperienceStep.DEPOLLUTION: {
+                this.cameraControl.rayon = 300
+                this.smogScale.current = 1.11
+                this.cameraTutoState()
                 this.instanceTrashes()
                 this.instanceRocks()
                 this.sphere.addPollutionSmog();
@@ -311,11 +324,12 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 for (let trash of this.trashes) {
                     trash.removeFromParent();
                 }
+                this.cameraTutoState()
                 this.vegetation = new Vegetation(this, this.sphere.positionsElements)
-                this.cursorVegetation.classList.remove("cursor-vegetation--disable")
                 break
             }
             case ExperienceStep.FEEDING: {
+                this.cameraTutoState()
                 this.cursorVegetation.classList.add("cursor-vegetation--disable")
                 this.vegetation.destroy()
                 this.vegetation = null
@@ -330,6 +344,20 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
         this.signal.dispatch(['update-advancement', this.stateMachine.sustainabilityIndex])
         this.signal.dispatch(['update-step', this.stateMachine.currentStep + 1])
+    }
+
+    cameraTutoState () {
+        this.cameraControl.rayonTarget = 300
+        this.smogScale.target = 1.12
+        this.cursorControl.target = 0
+        this.statusTuto = true
+    }
+
+    cameraExperienceState () {
+        this.cameraControl.rayonTarget = 250
+        this.smogScale.target = 1
+        this.cursorControl.target = 1
+        this.statusTuto = false
     }
 
     notifyUI() {
