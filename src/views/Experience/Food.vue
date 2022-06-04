@@ -7,7 +7,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
 <template>
   <div class="food-container">
     <Draggable @valueChange="updateNumberFish" :tuto="tuto1"/>
-    <Modal v-if="tuto1" text="Utilisez la jauge pour ajouter des petits poissons qui serviront d’alimentation à notre requin, une fois que vous pensez avoir bien dosé, validez votre choix. " @showoff="hidetuto1" :showbtn="true"/>
+    <Modal v-if="tuto1" :classlist="tuto1Class" text="Utilisez la jauge pour ajouter des petits poissons qui serviront d’alimentation à notre requin, une fois que vous pensez avoir bien dosé, validez votre choix. " @showoff="hidetuto1" :showbtn="false"/>
       <div class="food--btn-container" @click="validateStep" >
         <div class="food--btn">
           <img src="" alt="">
@@ -29,6 +29,7 @@ export default defineComponent({
     return {
       value: 0,
       tuto1: false,
+      tuto1Class: ''
     }
   },
   mounted () {
@@ -39,7 +40,11 @@ export default defineComponent({
       this.signal.dispatch(['numberFish', value])
     },
     hidetuto1() {
-      this.tuto1 = false;
+      // this.tuto1 = false;
+      this.tuto1Class = "modal-disable"
+      setTimeout(() => {
+        this.tuto1 = false
+      }, 300)
     },
     onSignal(slug: Array<string|number>) {
       switch(slug[0]) {
@@ -47,6 +52,9 @@ export default defineComponent({
           this.$router.push('result')
         case 'begin-tuto':
           this.tuto1 = true
+          break
+        case 'numberFish':
+          this.hidetuto1()
       }
     },
     validateStep() {

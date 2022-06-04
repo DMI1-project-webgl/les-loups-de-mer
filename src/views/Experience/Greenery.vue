@@ -35,7 +35,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
         'Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger. '
         ]" />
     </section>
-    <Modal v-if="tuto1" text="Restez appuyé en déplaçant votre souris, les végétaux se développeront sur votre écosystème. À vous maintenant. " @showoff="hidetuto1" :showbtn="true"/>
+    <Modal v-if="tuto1" :classlist="tuto1Class" ref="modal1" text="Restez appuyé en déplaçant votre souris, les végétaux se développeront sur votre écosystème. À vous maintenant. " @showoff="hidetuto1" :showbtn="false"/>
     <!-- <SquaredButton class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/> -->
 </template>
 
@@ -47,6 +47,7 @@ export default defineComponent({
   data() {
     return {
       tuto1: false,
+      tuto1Class: ''
     }
   },
   mounted() {
@@ -59,6 +60,9 @@ export default defineComponent({
           this.$router.push('food')
         case 'begin-tuto':
           this.tuto1 = true
+          break
+        case 'add-vegetation':
+          this.hidetuto1()
       }
     },
 
@@ -66,7 +70,8 @@ export default defineComponent({
       this.signal.dispatch(['validate-tapped'])
     },
     hidetuto1() {
-      this.tuto1 = false;
+      // this.tuto1 = false;
+      this.tuto1Class = "modal-disable"
     },
     RemoveVegetation() {
       this.signal.dispatch(['remove-vegetation'])

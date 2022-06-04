@@ -194,6 +194,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 const instanceId = intersects[ 0 ].instanceId;
 
                 this.vegetation.scaleVegetation(instanceId)
+                this.signal.dispatch(['add-vegetation'])
             }
         }
     }

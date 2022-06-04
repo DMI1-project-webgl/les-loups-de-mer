@@ -2,12 +2,12 @@
 import SquaredButton from './../../components/UI/SquaredButton.vue';
 </script>
 <template>
-    <section id="modal" class="modal">
+    <section id="modal" class="modal" ref="modal" :class="classlist">
       <div class="modal--content-container">
         <div class="modal--content">
-          <p>{{text}}</p>
+          <p ref="modalText">{{text}}</p>
         </div>
-        <div  v-if="showbtn == true" class="modal--btn-container">
+        <div  v-if="showbtn == true" class="modal--btn-container" ref="modalButton">
           <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="$emit('showoff')"/>
         </div>
       </div>
@@ -16,17 +16,44 @@ import SquaredButton from './../../components/UI/SquaredButton.vue';
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { gsap } from 'gsap';
 
 export default defineComponent({
   name: 'ModalElement',
-  props: ['text', 'showbtn'],
+  props: ['text', 'showbtn', 'classlist'],
   mounted () {
-
+    gsap.to((this.$refs.modal as HTMLElement), {
+        opacity: 1,
+        scaleX: 1,
+        duration: 1,
+        ease: 'power3.out',
+    })
+    gsap.fromTo((this.$refs.modalText as HTMLElement), {
+        opacity: 0,
+        x: -10
+    },{
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        delay:0.6,
+        ease: 'power2.out',
+    })
+    if (!this.$refs.modalButton) return
+    gsap.fromTo((this.$refs.modalButton as HTMLElement), {
+        opacity: 0,
+        x: -10,
+    },{
+        opacity: 1,
+        duration: 0.8,
+        x: 0,
+        delay: 1.2,
+        ease: 'power2.out',
+    })
   }, 
   methods: {
-    
   },
   beforeDestroy () {
+     
   }
 })
 </script>
@@ -38,7 +65,15 @@ export default defineComponent({
   aspect-ratio: 1/1;
   top: 50%;
   right: 0;
-  transform: translate(-100px, -50%);
+  transform: translate(-100px, -50%) scaleX(0.6);
+  opacity: 0;
+  transform-origin: left;
+  transition: opacity 0.3s ease-out;
+}
+
+.modal-disable {
+  opacity: 0 !important;
+  pointer-events: none;
 }
 .modal--content-container {
   display: flex;
