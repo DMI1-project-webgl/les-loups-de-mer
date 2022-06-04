@@ -28,19 +28,19 @@
       <div class="container-fluid">
         <div class="row h-100">
           <div class="col-12 col-lg-4 h-lg-100">
-            <div v-if="index == 0" class="slider--content-container">
+            <div class="slider--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
               <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
               <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
-            <div v-else-if="index == 1" class="slider--content-container">
+            <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
               <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
-            <div v-else-if="index == 2" class="slider--content-container">
+            <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
@@ -195,6 +195,16 @@ export default defineComponent({
   position: relative;
   top: 50%;
   transform: translate(0, -50%);
+  transition: opacity 1s cubic-bezier(0.165, 0.840, 0.440, 1.000), transform 1s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  position: absolute;
+}
+
+.content-active {
+  pointer-events: all;
+}
+
+.content-disable {
+  pointer-events: none;
 }
 
 .slider--text {
@@ -377,6 +387,42 @@ header {
   100% {
     transform: translateX(0%);
   }
+}
+
+.content-active .slider--title {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
+}
+
+.content-disable .slider--title {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.content-active .slider--subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+}
+
+.content-disable .slider--subtitle {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.content-active .slider--text {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
+}
+
+.content-disable .slider--text {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 </style>

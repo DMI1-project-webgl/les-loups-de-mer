@@ -76,7 +76,7 @@ export default defineComponent({
   methods: {
     goTo () {
       this.$emit('scrolldown')
-      this.scrollBar.scrollTo(0, window.innerHeight, 600);
+      this.scrollBar.scrollTo(0, window.innerHeight, 1000);
     }
   },
   beforeDestroy () {

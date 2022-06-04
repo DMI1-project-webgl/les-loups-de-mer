@@ -83,7 +83,7 @@ export default class SketchSlider {
       
   
       // image cover
-      this.imageAspect = 400/480;
+      this.imageAspect = 1024/1024;
       let a1; let a2;
       if(this.height/this.width>this.imageAspect) {
         a1 = (this.width/this.height) * this.imageAspect ;

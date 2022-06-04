@@ -55,7 +55,7 @@ export default defineComponent({
     },
     methods: {
       goTo () {
-        this.scrollBar.scrollTo(0, window.innerHeight * 2, 600);
+        this.scrollBar.scrollTo(0, window.innerHeight * 2, 1000);
       }
     },
     beforeDestroy() {
