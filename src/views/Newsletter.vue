@@ -96,6 +96,9 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
     text-align: left;
     display: flex;
 }
+.newsletter--cgu-group {
+    text-align: left;
+}
 .newsletter--cgu-group label {
     font-family: "leaguespartan";
     font-size: .5em;
@@ -103,10 +106,6 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
     font-style: italic;
     padding-left: 15px;
 }
-/* .newsletter--form-col {
-    display: inline-flex;
-    width: 100%;
-} */
 .newsletter--form-submit {
     aspect-ratio: 1;
     height: 100%;

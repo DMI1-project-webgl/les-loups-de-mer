@@ -184,7 +184,8 @@ export default defineComponent({
       let posX = that.closestNumArray(positionArray, e.clientX-hitboxRect.left-widthDraggable)
       gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
-      // that.displayPercentX(widthContainer, widthDraggable, posX)
+
+      that.displayPercentX(widthContainer, widthDraggable, posX)
     });
   },
   methods: {
@@ -245,6 +246,7 @@ export default defineComponent({
 
 /* Draggable elements */
 section.draggable {
+  padding-left: 100px;
   position: fixed;
   width: 40vw;
   top: 10%;
