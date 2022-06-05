@@ -46,6 +46,7 @@ export default defineComponent({
       this.tuto1Class = "modal-disable"
       setTimeout(() => {
         this.tuto1 = false
+        this.signal.dispatch(['none-tuto-modal'])
       }, 300)
     },
     onSignal(slug: Array<string|number>) {

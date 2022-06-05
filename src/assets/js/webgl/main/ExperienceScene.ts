@@ -28,6 +28,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private smogScale = { current: 1, target: 1}
     private cursorControl = { current: 0, target: 0}
     private statusTuto = true
+    private statusTutoModal = true
 
     // State machine
     private stateMachine: ExperienceStateMachine
@@ -124,15 +125,15 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
         if (this.pointer) {
-            if (this.pointer.x > 0.05) {
+            if (this.pointer.x > 0.05 && !this.statusTutoModal) {
                 this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2 * this.cursorControl.current), 0.6)
-            } else if (this.pointer.x < -0.05) {
+            } else if (this.pointer.x < -0.05 && !this.statusTutoModal) {
                 this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2 * this.cursorControl.current), 0.6)
             }
 
-            if (this.pointer.y > 0.1) {
+            if (this.pointer.y > 0.1 && !this.statusTutoModal) {
                 this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2 * this.cursorControl.current)
-            } else if (this.pointer.y < -0.1) {
+            } else if (this.pointer.y < -0.1 && !this.statusTutoModal) {
                 this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2 * this.cursorControl.current)
             }
 
@@ -303,6 +304,10 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 this.cursorVegetation.classList.remove("cursor-vegetation--disable")
             }
         }
+
+        if (slug[0] == 'none-tuto-modal') {
+            this.statusTutoModal = false
+        }
     }
 
     initCursorVegetation () {
@@ -347,6 +352,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 for (let trash of this.trashes) {
                     trash.removeFromParent();
                 }
+                this.statusTutoModal = true
                 this.cameraTutoState()
                 this.vegetation = new Vegetation(this, this.sphere.positionsElements)
                 break
@@ -356,6 +362,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 this.cursorVegetation.classList.add("cursor-vegetation--disable")
                 this.vegetation.destroy()
                 this.vegetation = null
+                this.statusTutoModal = true
                 this.mainFish = new MainFish(this.renderer, this)
                 break
             }

@@ -109,6 +109,7 @@ export default defineComponent({
     hidetuto3() {
       // this.tuto3 = false;
       this.tuto3Class = "modal-disable"
+      this.signal.dispatch(['none-tuto-modal'])
     },
   }
 })

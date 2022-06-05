@@ -76,6 +76,7 @@ export default defineComponent({
     hidetuto1() {
       // this.tuto1 = false;
       this.tuto1Class = "modal-disable"
+      this.signal.dispatch(['none-tuto-modal'])
     },
     RemoveVegetation() {
       this.signal.dispatch(['remove-vegetation'])
