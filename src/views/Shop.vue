@@ -92,19 +92,19 @@ import RoundButton from './../components/UI/RoundButton.vue'
             <div ref="blur" class="shop--product-video-container position-relative blur">
               <div class="shop--product-video content-active" :class="index == 0 ? 'content-active' : 'content-'">
                 <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
-                  <source src="src/assets/img/packs/large.webm"
+                  <source src="./../../../src/assets/img/packs/large.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
               <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
                 <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
-                  <source src="src/assets/img/packs/medium.webm"
+                  <source src="./../../../src/assets/img/packs/medium.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
               <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
                 <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
-                  <source src="src/assets/img/packs/small.webm"
+                  <source src="./../../../src/assets/img/packs/small.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
