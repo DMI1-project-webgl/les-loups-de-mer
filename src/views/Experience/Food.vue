@@ -36,6 +36,7 @@ export default defineComponent({
   },
   mounted () {
     this.signal.add(this.onSignal.bind(this))
+    this.signal.dispatch(['success'])
   },
   methods: {
     updateNumberFish (value: number) {
@@ -61,6 +62,7 @@ export default defineComponent({
       }
     },
     validateStep() {
+      this.signal.dispatch(['click-general'])
       this.signal.dispatch(['validate-tapped'])
     },
   }

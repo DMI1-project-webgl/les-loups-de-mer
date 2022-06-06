@@ -50,6 +50,7 @@ export default defineComponent({
     nextStep() {
         const timeline = gsap.timeline();
         if (this.step.current !== -1 && this.step.current < this.elSteps.length) {
+            this.signal.dispatch(['click-general'])
             timeline.to((this.$refs.next as HTMLElement), { 
                 opacity: 0,
                 duration: 0.3,

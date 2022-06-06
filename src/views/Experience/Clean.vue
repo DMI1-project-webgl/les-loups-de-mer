@@ -89,6 +89,7 @@ export default defineComponent({
           }
           if (this.step === 8) {
             this.canContinue = true;
+            this.signal.dispatch(['success'])
           }
           break
         case 'begin-tuto':

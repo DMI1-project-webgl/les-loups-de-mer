@@ -12,7 +12,7 @@ export default defineComponent({
   props: ['file'],
   mounted () {
       const audio = <HTMLAudioElement> this.$refs.audio;
-      audio.play();
+      // audio.play();
   },
   methods: {
 

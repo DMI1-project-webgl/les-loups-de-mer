@@ -197,6 +197,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                         const intersectsVegetation = this.raycaster.intersectObject(this.vegetation.instancedMesh, false); 
 
                         if ( intersectsVegetation.length > 0 ) {
+                            this.signal.dispatch(["click-coraux",])
                             const instanceId = intersectsVegetation[ 0 ].instanceId;
 
                             this.vegetation.scaleVegetation(instanceId)
@@ -232,6 +233,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if (this.stateMachine.currentStep == ExperienceStep.DEPOLLUTION && !this.statusTuto) {
             const intersects = this.raycaster.intersectObjects(this.trashes);
             if(intersects.length > 0) {
+                this.signal.dispatch(['click-waste'])
                 this.smogLerpAlpha += 0.1
                 this.sphere.reducePollutionSmog(this.smogLerpAlpha)
 
