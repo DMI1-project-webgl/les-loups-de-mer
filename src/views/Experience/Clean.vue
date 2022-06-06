@@ -76,7 +76,6 @@ export default defineComponent({
   },
   methods: {
     onSignal(slug: Array<string|number>) {
-      console.log(slug)
       switch(slug[0]) {
         case 'next-step':
           this.$router.push('greenery')

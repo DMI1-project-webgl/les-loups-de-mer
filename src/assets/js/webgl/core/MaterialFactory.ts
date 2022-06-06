@@ -48,7 +48,6 @@ export default class MaterialFactory {
    */
   getMaterial (name:string): MeshBasicMaterial | MeshStandardMaterial | MeshPhysicalMaterial | MeshMatcapMaterial  {
     let materialName = 'default'
-    console.log(name)
     switch (name) {
       case 'Can':
         materialName = 'matCapMetal'
