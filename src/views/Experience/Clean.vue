@@ -10,7 +10,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
 
 <template>
   <!-- <Scoreboard /> -->
-  <section id="clean" class="page-experience clean ">
+  <section id="clean" class="page-experience clean no">
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-3 h-100 px-0">

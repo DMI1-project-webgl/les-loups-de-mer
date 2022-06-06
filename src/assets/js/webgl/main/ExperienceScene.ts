@@ -48,6 +48,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private angleCameraHorizontal = 0
     private angleCameraVertical = 0
     private mouseIsDown = false
+    private sphereRotationCenter = { x: -0.5, y: 0 };
 
     constructor (app:BasicApp, canvas: HTMLCanvasElement, signal: Signal) {
         super(app, canvas, signal)
@@ -124,15 +125,15 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
         if (this.pointer) {
-            if (this.pointer.x > 0.05) {
+            if (this.pointer.x > this.sphereRotationCenter.x + 0.05) {
                 this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2 * this.cursorControl.current), 0.6)
-            } else if (this.pointer.x < -0.05) {
+            } else if (this.pointer.x < this.sphereRotationCenter.x - 0.05) {
                 this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2 * this.cursorControl.current), 0.6)
             }
 
-            if (this.pointer.y > 0.1) {
+            if (this.pointer.y > this.sphereRotationCenter.y + 0.1) {
                 this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2 * this.cursorControl.current)
-            } else if (this.pointer.y < -0.1) {
+            } else if (this.pointer.y < this.sphereRotationCenter.y - 0.1) {
                 this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2 * this.cursorControl.current)
             }
 

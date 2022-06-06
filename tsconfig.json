@@ -11,7 +11,7 @@
     "paths": {
       "@/*": ["./src/*"],
     },
-    "strictNullChecks": false,
+    "strictNullChecks": false
   },
 
   "references": [
