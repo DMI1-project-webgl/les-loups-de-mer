@@ -24,8 +24,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private cursorVegetation: HTMLElement
     private cursorVegetationChild: HTMLElement
     private cursorVegetationChild2: HTMLElement
-    private cameraControl = { rayon: 250, rayonTarget: 250}
-    private smogScale = { current: 1, target: 1}
+    private cameraControl = { rayon: 450, rayonTarget: 450}
+    private smogScale = { current: 1.2, target: 1.2}
     private cursorControl = { current: 0, target: 0}
     private statusTuto = true
     private statusTutoModal = true
@@ -125,22 +125,22 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
         if (this.pointer) {
-            if (this.pointer.x > 0.05 && !this.statusTutoModal) {
+            if (this.pointer.x > 0.05) {
                 this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2 * this.cursorControl.current), 0.6)
-            } else if (this.pointer.x < -0.05 && !this.statusTutoModal) {
+            } else if (this.pointer.x < -0.05) {
                 this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2 * this.cursorControl.current), 0.6)
             }
 
-            if (this.pointer.y > 0.1 && !this.statusTutoModal) {
+            if (this.pointer.y > 0.1) {
                 this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2 * this.cursorControl.current)
-            } else if (this.pointer.y < -0.1 && !this.statusTutoModal) {
+            } else if (this.pointer.y < -0.1) {
                 this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2 * this.cursorControl.current)
             }
 
             this.angleCameraHorizontal = Math.max(Math.min(this.angleCameraHorizontal, 0.5), -0.5)
             this.angleCameraHorizontal = this.lerp(this.angleCameraHorizontal, 0, 0.08)
 
-            this.cameraControl.rayon = this.lerp(this.cameraControl.rayon, this.cameraControl.rayonTarget, 0.02);
+            this.cameraControl.rayon = this.lerp(this.cameraControl.rayon, this.cameraControl.rayonTarget, 0.015);
             this.cursorControl.current = this.lerp(this.cursorControl.current, this.cursorControl.target, 0.02);
 
             if (this.smogScale.current !== this.smogScale.target) {
@@ -307,6 +307,12 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
         if (slug[0] == 'none-tuto-modal') {
             this.statusTutoModal = false
+            this.cursorControl.target = 1
+        }
+
+        if (slug[0] == 'loaded') {
+            this.cameraControl.rayonTarget = 300
+            this.smogScale.target = 1.12
         }
     }
 
@@ -339,8 +345,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     setupCurrentStep() {
         switch(this.stateMachine.currentStep) {
             case ExperienceStep.DEPOLLUTION: {
-                this.cameraControl.rayon = 300
-                this.smogScale.current = 1.11
+                this.cameraControl.rayon = 450
+                this.smogScale.current = 1.3
                 this.cameraTutoState()
                 this.instanceTrashes()
                 this.instanceRocks()
@@ -353,6 +359,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                     trash.removeFromParent();
                 }
                 this.statusTutoModal = true
+                this.cursorControl.target = 0
                 this.cameraTutoState()
                 this.vegetation = new Vegetation(this, this.sphere.positionsElements)
                 break
@@ -363,6 +370,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 this.vegetation.destroy()
                 this.vegetation = null
                 this.statusTutoModal = true
+                this.cursorControl.target = 0
                 this.mainFish = new MainFish(this.renderer, this)
                 break
             }
@@ -386,7 +394,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     cameraExperienceState () {
         this.cameraControl.rayonTarget = 250
         this.smogScale.target = 1
-        this.cursorControl.target = 1
+        // this.cursorControl.target = 1
         this.statusTuto = false
     }
 

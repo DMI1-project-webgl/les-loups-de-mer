@@ -93,6 +93,7 @@ export default defineComponent({
           break
         case 'begin-tuto':
           this.tuto1 = true
+          break
       }
     },
 
