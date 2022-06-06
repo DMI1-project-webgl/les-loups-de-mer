@@ -1,9 +1,9 @@
 <template>
     <div>
       <audio ref="clickGeneral" src="./../../src/assets/sound/click-general.mp3" preload="metadata" type="audio/mp3"></audio>
-      <audio ref="waste" src="./../../src/assets/sound/ramasse-dechets.wav" preload="metadata" type="audio/wav"></audio>
+      <audio ref="waste" src="./../../src/assets/sound/ramasse-dechets.mp3" preload="metadata" type="audio/mp3"></audio>
       <audio ref="bubble" src="./../../src/assets/sound/pop-bubble.wav" preload="metadata" type="audio/wav"></audio>
-      <audio ref="coraux" src="./../../src/assets/sound/coraux.wav" preload="metadata" type="audio/mp3"></audio>
+      <audio ref="coraux" src="./../../src/assets/sound/coraux.wav" preload="metadata" type="audio/wav"></audio>
       <audio ref="success" src="./../../src/assets/sound/reussite.wav" preload="metadata" type="audio/wav"></audio>
       <audio ref="successFinal" src="./../../src/assets/sound/reussite-finale.wav" preload="metadata" type="audio/wav"></audio>
 
@@ -42,6 +42,7 @@ export default defineComponent({
             break
              case "click-waste":
                 (this.$refs.waste as HTMLAudioElement).play();
+                (this.$refs.waste as HTMLAudioElement).currentTime = 0;
                 (this.$refs.waste as HTMLAudioElement).volume = this.volumeglobale;
             break
              case "click-coraux":
@@ -74,7 +75,7 @@ export default defineComponent({
                     this.loop.coef = 0.005
                     this.loop.target = 0.6
                     this.update()
-                }, 4000)
+                }, 4400)
             break
             case "experience-start":
                 this.loop.target = 0.6;
