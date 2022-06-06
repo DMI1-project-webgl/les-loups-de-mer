@@ -27,10 +27,10 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
   </section>
   <Modal v-if="tuto1" text="Pour commencer, regardez ici la liste des objets à recycler, ils se rayent au fur et à mesure ou vous les ramassez." @showoff="hidetuto1" :showbtn="true"/>
   <Modal v-if="tuto2" text="Pour ramasser un déchet, cliquez dessus, vous voyez cette bouteille en plastique ? Ramassez la, allez-y !" @showoff="hidetuto2" :showbtn="false"/>
-  <Modal v-if="tuto3" :classlist="tuto3Class" text=" Super ! Vous voyez la pollution a diminué, vous pouvez voir ici que la jauge de construction de l’aileron a augmenté,  continuez ainsi pour la remplir."  @showoff="hidetuto3" :showbtn="true"/>
+  <Modal v-if="tuto3" :classlist="tuto3Class" text=" Super ! Vous voyez la pollution a diminué, vous pouvez voir ici que la jauge de construction de l’aileron a augmenté,  continuez ainsi pour la remplir."  @showoff="hidetuto3"/>
   <Modal v-if="canContinue" text=" Félicitation, c’est beaucoup mieux comme ça !" @showoff="validateStep" :showbtn="true"/>
   <!-- <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/> -->
-    
+
 </template>
 
 <style scoped>
@@ -85,6 +85,9 @@ export default defineComponent({
             this.tuto1 = false;
             this.tuto2 = false;
             this.tuto3 = true;
+            setTimeout(() => {
+              this.hidetuto3()
+            }, 8000)
           }
           if (this.step === 8) {
             this.canContinue = true;
@@ -103,14 +106,14 @@ export default defineComponent({
     hidetuto1() {
       this.tuto1 = false;
       this.tuto2 = true;
+      this.signal.dispatch(['none-tuto-modal'])
     },
     hidetuto2() {
       this.tuto2 = false;
     },
     hidetuto3() {
-      // this.tuto3 = false;
+      this.tuto3 = false;
       this.tuto3Class = "modal-disable"
-      this.signal.dispatch(['none-tuto-modal'])
     },
   },
   beforeDestroy () {
