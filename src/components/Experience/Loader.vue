@@ -27,7 +27,9 @@ export default defineComponent({
         if (slug[0] === "loaded") {
             this.value = 100;
             setTimeout(() => {
-                (this.$refs.loader as HTMLElement).classList.add('Loader--disable')
+                if (this.$refs.loader as HTMLElement) {
+                  (this.$refs.loader as HTMLElement).classList.add('Loader--disable')
+                }
             }, 1000);
         }
     }
