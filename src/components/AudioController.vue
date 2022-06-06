@@ -37,7 +37,8 @@ export default defineComponent({
   name: 'AudioController',
   data: () => ({
       loop: {current: 0, target: 0, coef: 0.005},
-      soundStatus: true
+      soundStatus: true,
+      volumeglobale: 1
   }),
   mounted () {
     this.signal.add(this.onSignal.bind(this));
@@ -51,17 +52,23 @@ export default defineComponent({
         switch (slug[0]) {
             case "click-general":
                 (this.$refs.clickGeneral as HTMLAudioElement).play();
+                (this.$refs.clickGeneral as HTMLAudioElement).volume = this.volumeglobale;
             break
              case "click-waste":
                 (this.$refs.waste as HTMLAudioElement).play();
+                (this.$refs.waste as HTMLAudioElement).currentTime = 0;
+                (this.$refs.waste as HTMLAudioElement).volume = this.volumeglobale;
             break
              case "click-coraux":
                 (this.$refs.coraux as HTMLAudioElement).play();
+                (this.$refs.coraux as HTMLAudioElement).volume = this.volumeglobale;
             break
             case "click-fish":
                 (this.$refs.bubble as HTMLAudioElement).play();
+                (this.$refs.bubble as HTMLAudioElement).volume = this.volumeglobale;
             break
             case "success":
+                if (this.volumeglobale === 0) return
                 this.loop.coef = 0.01
                 this.loop.target = 0
                 this.update()
@@ -73,6 +80,7 @@ export default defineComponent({
                 }, 3400)
             break
             case "success-final":
+                if (this.volumeglobale === 0) return
                 this.loop.coef = 0.01
                 this.loop.target = 0
                 this.update()
@@ -81,7 +89,7 @@ export default defineComponent({
                     this.loop.coef = 0.005
                     this.loop.target = 0.6
                     this.update()
-                }, 4000)
+                }, 4400)
             break
             case "experience-start":
                 this.loop.target = 0.6;
@@ -98,9 +106,7 @@ export default defineComponent({
         }
     },
     loopPlay() {
-        console.log('yoooooo', (this.$refs.piano as HTMLAudioElement).paused)
         if (!(this.$refs.piano as HTMLAudioElement).paused) return
-        console.log('yooooooaaa', (this.$refs.piano as HTMLAudioElement).paused);
         (this.$refs.piano as HTMLAudioElement).play()
         if (this.loop.target = 0.6) {
             (this.$refs.audioControl as HTMLElement).classList.remove('audio-control--disable');
@@ -123,15 +129,17 @@ export default defineComponent({
     toggleSound() {
         if (this.soundStatus) {
             this.soundStatus = false;
-            (this.$refs.volume as HTMLElement).style.display = 'block';
-            (this.$refs.mute as HTMLElement).style.display = 'none';
+            this.volumeglobale = 0;
+            (this.$refs.volume as HTMLElement).style.display = 'none';
+            (this.$refs.mute as HTMLElement).style.display = 'block';
             this.loop.target = -0.09
             this.loop.coef = 0.1
             this.update()
         } else {
             this.soundStatus = true;
-            (this.$refs.volume as HTMLElement).style.display = 'none';
-            (this.$refs.mute as HTMLElement).style.display = 'block';
+            this.volumeglobale = 1;
+            (this.$refs.volume as HTMLElement).style.display = 'block';
+            (this.$refs.mute as HTMLElement).style.display = 'none';
             this.loop.coef = 0.01
             this.loop.target = 0.6
             this.update()
@@ -167,7 +175,7 @@ export default defineComponent({
     opacity: 0;
 }
 
-.volume {
+.mute {
     display: none;
 }
 </style>

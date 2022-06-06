@@ -6,6 +6,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
 
 <template>
     <section class="greenery page-experience">
+      <div ref="stateVege" class="state-vegetaux state-vegetaux--error">Végétaux insuffisants</div>
       <div class="container h-100">
         <div class="row h-100">
           <div class="col-1 h-100 position-relative">
@@ -51,7 +52,8 @@ export default defineComponent({
   data() {
     return {
       tuto1: false,
-      tuto1Class: ''
+      tuto1Class: '',
+      cpt: 0,
     }
   },
   mounted() {
@@ -67,12 +69,18 @@ export default defineComponent({
           break
         case 'add-vegetation':
           this.hidetuto1()
+          this.cpt ++
+          if (this.cpt > 100 && this.$refs.stateVege) {
+            this.signal.dispatch(['validate-tapped']);
+            (this.$refs.stateVege as HTMLElement).innerHTML = "Végétaux suffisant";
+            (this.$refs.stateVege as HTMLElement).classList.remove("state-vegetaux--error");
+            (this.$refs.stateVege as HTMLElement).classList.add("state-vegetaux--valide")
+          }
       }
     },
 
     validateStep() {
       this.signal.dispatch(['click-general'])
-      this.signal.dispatch(['validate-tapped'])
     },
     hidetuto1() {
       // this.tuto1 = false;
@@ -81,7 +89,11 @@ export default defineComponent({
     },
     RemoveVegetation() {
       this.signal.dispatch(['click-general'])
-      this.signal.dispatch(['remove-vegetation'])
+      this.signal.dispatch(['remove-vegetation']);
+      (this.$refs.stateVege as HTMLElement).innerHTML = "Végétaux insuffisants";
+      (this.$refs.stateVege as HTMLElement).classList.add("state-vegetaux--error");
+      (this.$refs.stateVege as HTMLElement).classList.remove("state-vegetaux--valide")
+      this.cpt = 0
     }
     
   },
@@ -125,5 +137,24 @@ export default defineComponent({
   padding: 5px 0;
   text-align: center;
   white-space: nowrap;
+}
+
+.state-vegetaux {
+  position: fixed;
+  bottom: 0;
+  left: 50px;
+  margin: 40px;
+  background-color: #fff;
+  font-family: "leaguespartan";
+  font-size: 0.5em;
+  padding: 20px 30px;
+}
+
+.state-vegetaux--error {
+  color: #F00;
+}
+
+.state-vegetaux--valide {
+  color: #00d100;
 }
 </style>

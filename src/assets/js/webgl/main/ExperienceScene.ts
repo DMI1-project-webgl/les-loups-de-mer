@@ -19,6 +19,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private raycaster: Raycaster
     private pointer: Vector2
     private cursor: Cursor = { x: 0 , y: 0, xWin: 0, yWin: 0 }
+    private center = {x: 0, y:0 }
     private period: number
     private _clock: Clock = new Clock()
     private cursorVegetation: HTMLElement
@@ -125,16 +126,16 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
         if (this.pointer) {
-            if (this.pointer.x > this.sphereRotationCenter.x + 0.05) {
-                this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05) * 2 * this.cursorControl.current), 0.6)
+            if (this.pointer.x+ this.center.x > this.sphereRotationCenter.x + 0.05) {
+                this.angleCameraVertical -= 0.01 * Math.min(((this.pointer.x - 0.05 + this.center.x) * 2 * this.cursorControl.current), 0.6)
             } else if (this.pointer.x < this.sphereRotationCenter.x - 0.05) {
-                this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05)* 2 * this.cursorControl.current), 0.6)
+                this.angleCameraVertical += 0.01 * Math.min(((-this.pointer.x - 0.05 + this.center.x)* 2 * this.cursorControl.current), 0.6)
             }
 
-            if (this.pointer.y > this.sphereRotationCenter.y + 0.1) {
-                this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1) * 2 * this.cursorControl.current)
+            if (this.pointer.y  + this.center.y> this.sphereRotationCenter.y + 0.1) {
+                this.angleCameraHorizontal += 0.01 * ((this.pointer.y - 0.1 + this.center.y) * 2 * this.cursorControl.current)
             } else if (this.pointer.y < this.sphereRotationCenter.y - 0.1) {
-                this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1)* 2 * this.cursorControl.current)
+                this.angleCameraHorizontal -= 0.01 * ((-this.pointer.y - 0.1 + this.center.y)* 2 * this.cursorControl.current)
             }
 
             this.angleCameraHorizontal = Math.max(Math.min(this.angleCameraHorizontal, 0.5), -0.5)
@@ -376,6 +377,8 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
             case ExperienceStep.END: {
                 this.cameraControl.rayonTarget = 350;
                 this.smogScale.target = 1.2;
+                this.center.x = 0.5
+                // this.cursorControl.target = 0.3
                 break
             }
         }
