@@ -4,7 +4,7 @@
           <source src="./../../src/assets/sound/click-general.mp3" type="audio/mp3">
       </audio>
       <audio ref="waste" preload="metadata">
-          <source src="./../../src/assets/sound/ramasse-dechets.wav" type="audio/wav">
+          <source src="./../../src/assets/sound/ramasse-dechets.mp3" type="audio/wav">
       </audio>
       <audio ref="bubble" preload="metadata">
           <source src="./../../src/assets/sound/pop-bubble.wav" type="audio/wav">
