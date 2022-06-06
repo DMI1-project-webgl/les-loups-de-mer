@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AudioController from './components/AudioController.vue';
 </script>
 
 <template>
@@ -15,6 +16,7 @@
       <router-link to="/shop">Shop</router-link>
       <router-link to="/newsletter">Newsletter</router-link>
     </div>
+    <AudioController />
     <main>
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">

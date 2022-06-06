@@ -1,15 +1,15 @@
 <template>
-  <router-link v-if="isRouterLink" :to="link" class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
+  <router-link v-if="isRouterLink" :to="link" @click="onClick" class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
     <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
         <p class="RoundButton-Text">{{ text }}</p>
     </div>
   </router-link>
-  <a v-else-if="link" :href="link" class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
+  <a v-else-if="link" :href="link" @click="onClick" class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
     <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
         <p class="RoundButton-Text">{{ text }}</p>
     </div>
   </a>
-  <div v-else class="RoundButton-Container" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
+  <div v-else class="RoundButton-Container" @click="onClick" :class="isClickHear ? 'RoundButton-Container--click-hear' : ''">
     <div class="RoundButton" :class="isWhite ? 'RoundButton--white' : 'RoundButton--blue'">
         <p class="RoundButton-Text">{{ text }}</p>
     </div>
@@ -29,6 +29,9 @@ export default defineComponent({
   mounted () {
   },
   methods: {
+    onClick () {
+      this.signal.dispatch(['click-general'])
+    }
   },
   beforeDestroy () {
   }
