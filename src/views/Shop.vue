@@ -89,22 +89,22 @@ import RoundButton from './../components/UI/RoundButton.vue'
               <h1>Nos packs</h1>
               <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
             </div>
-            <div class="shop--product-video-container position-relative">
+            <div ref="blur" class="shop--product-video-container position-relative blur">
               <div class="shop--product-video content-active" :class="index == 0 ? 'content-active' : 'content-'">
-                <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                  <source src="./../../src/assets/img/packs/large.mp4"
+                <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
+                  <source src="src/assets/img/packs/large.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
               <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
-                <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                  <source src="./../../src/assets/img/packs/medium.mp4"
+                <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
+                  <source src="src/assets/img/packs/medium.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
               <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
-                <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                  <source src="./../../src/assets/img/packs/small.mp4"
+                <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
+                  <source src="src/assets/img/packs/small.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
@@ -119,6 +119,9 @@ import RoundButton from './../components/UI/RoundButton.vue'
                 </svg>
               </button>
             </div>
+            <div ref="blurbtn" class="shop--blur-btn">
+              <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/>
+            </div>
           </div>
         </div>
         <div class="col-3 h-100">
@@ -132,7 +135,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
             <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
               <p>90€</p>
             </div>
-              <RoundButton link="/valeurs" text="Nos valeurs" :isWhite="true" :isRouterLink="true" />
+              <RoundButton link="/shop" text="Nos valeurs" :isWhite="true" :isRouterLink="true" />
           </div>
         </div>
       </div> 
@@ -151,7 +154,11 @@ export default defineComponent({
     this.signal.dispatch(['experience-end'])
   },
   methods: {
-    
+    removeEffect() {
+      (this.$refs.blur as any).classList.remove('blur');
+      (this.$refs.blurbtn as any).classList.add("d-none");
+      (this.$refs.video01 as any).play()
+    }
   }
 })
 </script>
@@ -214,16 +221,20 @@ export default defineComponent({
   height: 100%;
   position: relative;
 }
-.shop--product-video {
+.shop--product-video-container { 
   width: 100%;
-  border: 1px solid red;
+  aspect-ratio: 1;
+  transition: all .5s ease;
+}
+.shop--product-video {
+  height: 100%;
   position: relative;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
 }
 .shop--product-video video {
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 .shop--heading-container {
@@ -297,5 +308,15 @@ export default defineComponent({
 .content-disable {
   pointer-events: none;
   opacity: 0;
+}
+.blur {
+  filter: grayscale(0.5) blur(5px);
+  transition: all 1s ease-out;
+}
+.shop--blur-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
