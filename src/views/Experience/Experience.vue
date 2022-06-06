@@ -13,7 +13,7 @@ import Loader from '../../components/Experience/Loader.vue';
     <Nav />
     <Loader />
     <Advancement />
-    <button class="validate-button" @click="validate">Validate step</button>
+    <!-- <button class="validate-button" @click="validate">Validate step</button> -->
     <router-view />
   </div>
 </template>
