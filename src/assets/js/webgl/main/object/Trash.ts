@@ -54,7 +54,7 @@ export default class Trash extends BasicObject3D {
         child.material.color.setHex(0xFFFFFF)
       } else {
         for(let childOfGroup of child.children) {
-          childOfGroup.material.color.setHex(0xFFFFFF)
+          (childOfGroup as Mesh<any, any>).material.color.setHex(0xFFFFFF)
         }
       }
     }

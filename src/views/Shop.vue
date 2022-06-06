@@ -151,7 +151,12 @@ export default defineComponent({
     this.signal.dispatch(['experience-end'])
   },
   methods: {
-    
+    slidePrev() {
+
+    },
+    slideNext() {
+
+    }
   }
 })
 </script>
