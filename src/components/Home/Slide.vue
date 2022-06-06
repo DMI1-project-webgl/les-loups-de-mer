@@ -57,15 +57,15 @@ import RoundButton from './../UI/RoundButton.vue'
                   <!-- <div id="slider-slider" data-images='["./../../src/assets/img/slider/elephant.gif","./../../src/assets/img/slider/epices.png"]' data-disp="./../../src/assets/img/slider/epices.png">
                   </div> #} -->
                   <video ref="video01" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                    <source src="./../../../src/assets/img/slider/1.mp4"
+                    <source src="./../../../src/assets/img/slider/epice.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                   <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                    <source src="./../../../src/assets/img/slider/2.mp4"
+                    <source src="./../../../src/assets/img/slider/huile.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                   <video ref="video03" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                    <source src="./../../../src/assets/img/slider/3.mp4"
+                    <source src="./../../../src/assets/img/slider/bouillon.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                 </div>
@@ -202,6 +202,30 @@ export default defineComponent({
   position: absolute;
 }
 
+.content-slider:after {
+  content: '';
+  height: 100%;
+  width: 80px;
+  position: absolute;
+  z-index: 1;
+   background: linear-gradient(90deg, rgba(254, 249, 240,1) 0%, rgba(254, 249, 240,0) 100%);
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.content-slider:before {
+  content: '';
+  height: 100%;
+  width: 80px;
+  position: absolute;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(254, 249, 240,0) 0%, rgba(254, 249, 240,1) 100%);
+  top: 0;
+  right: 0;
+  pointer-events: none;
+}
+
 .content-active {
   pointer-events: all;
 }
@@ -226,6 +250,7 @@ export default defineComponent({
 }
 
 .slider--arrow-prev {
+  z-index: 5;
   position: absolute;
   width: 50px;
   height: 50px;
@@ -242,6 +267,7 @@ export default defineComponent({
   transform: rotate(90deg);
 }
 .slider--arrow-next {
+  z-index: 5;
   position: absolute;
   width: 50px;
   height: 50px;
@@ -429,5 +455,6 @@ header {
 }
 .slider--btn-container {
   position: relative;
+  z-index: 5;
 }
 </style>
