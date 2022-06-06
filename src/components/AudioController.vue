@@ -3,7 +3,7 @@
       <audio ref="clickGeneral" src="./../../src/assets/sound/click-general.mp3" preload="metadata" type="audio/mp3"></audio>
       <audio ref="waste" src="./../../src/assets/sound/ramasse-dechets.wav" preload="metadata" type="audio/wav"></audio>
       <audio ref="bubble" src="./../../src/assets/sound/pop-bubble.wav" preload="metadata" type="audio/wav"></audio>
-      <audio ref="coraux" src="./../../src/assets/sound/coraux.mp3" preload="metadata" type="audio/mp3"></audio>
+      <audio ref="coraux" src="./../../src/assets/sound/coraux.wav" preload="metadata" type="audio/mp3"></audio>
       <audio ref="success" src="./../../src/assets/sound/reussite.wav" preload="metadata" type="audio/wav"></audio>
       <audio ref="successFinal" src="./../../src/assets/sound/reussite-finale.wav" preload="metadata" type="audio/wav"></audio>
 

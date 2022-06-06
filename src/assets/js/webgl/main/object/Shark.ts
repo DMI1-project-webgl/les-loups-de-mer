@@ -9,7 +9,6 @@ export default class Shark extends BasicObject3D {
     super(object)
     this.animationMixer = new AnimationMixer(object)
     const clips = modelFull.animations;
-    console.log(clips)
     const clip = AnimationClip.findByName( clips, 'animation_0' );
     const action = this.animationMixer.clipAction( clip );
     action.play();

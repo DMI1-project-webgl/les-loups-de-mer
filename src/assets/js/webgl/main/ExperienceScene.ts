@@ -28,7 +28,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     private smogScale = { current: 1.2, target: 1.2}
     private cursorControl = { current: 0, target: 0}
     private statusTuto = true
-    private statusTutoModal = true
 
     // State machine
     private stateMachine: ExperienceStateMachine
@@ -308,7 +307,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         }
 
         if (slug[0] == 'none-tuto-modal') {
-            this.statusTutoModal = false
             this.cursorControl.target = 1
         }
 
@@ -360,7 +358,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 for (let trash of this.trashes) {
                     trash.removeFromParent();
                 }
-                this.statusTutoModal = true
                 this.cursorControl.target = 0
                 this.cameraTutoState()
                 this.vegetation = new Vegetation(this, this.sphere.positionsElements)
@@ -371,7 +368,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 this.cursorVegetation.classList.add("cursor-vegetation--disable")
                 this.vegetation.destroy()
                 this.vegetation = null
-                this.statusTutoModal = true
                 this.cursorControl.target = 0
                 this.mainFish = new MainFish(this.renderer, this)
                 break

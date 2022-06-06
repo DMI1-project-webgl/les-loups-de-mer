@@ -82,7 +82,6 @@ export default class Loader {
   }
 
   getName (file:string): string {
-    console.log(file)
     return file.substring(0, file.lastIndexOf('.')).replace('/src/assets/js/webgl/models/', '').replace('/src/assets/js/webgl/textures/', '').replace('/assets/', '')
   }
 

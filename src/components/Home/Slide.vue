@@ -157,7 +157,6 @@ export default defineComponent({
     },
     methods: {
         slideNext() {
-          console.log(this.onAnim)
           if (this.onAnim) return
           this.onAnim = true
           this.sketch.next()
