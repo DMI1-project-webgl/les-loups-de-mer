@@ -4,8 +4,8 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
 </script>
 
 <template>
-    <BackgroundGradient />  
-    <Nav />
+   <div>
+        <BackgroundGradient />  
     <section class="newsletter page-experience">
         <div class="container-fluid h-100">
             <div class="row h-100">
@@ -44,8 +44,21 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
             </div>
         </div>
     </section>
-    <router-view />
+   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
+  name: 'Newsletter',
+  mounted() {
+    this.signal.dispatch(['experience-end'])
+  },
+  methods: {
+    
+  }
+})
+</script>
 
 <style scoped>
 .newsletter {

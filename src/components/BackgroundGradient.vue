@@ -29,6 +29,7 @@ export default defineComponent({
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 	height: 100vh;
+	inset: 0;
 }
 
 .BackgroundGradient_Child {

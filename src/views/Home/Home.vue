@@ -45,6 +45,7 @@ export default defineComponent({
     }
   },
   mounted () {
+    this.signal.dispatch(['experience-end'])
     Scrollbar.use(OverscrollPlugin);
     this.scrollBar =  Scrollbar.init(this.$refs.scrollSections as any, {
       plugins: {

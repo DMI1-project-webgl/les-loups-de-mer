@@ -113,6 +113,9 @@ export default defineComponent({
       this.tuto3Class = "modal-disable"
       this.signal.dispatch(['none-tuto-modal'])
     },
+  },
+  beforeDestroy () {
+    this.signal.dispatch(['experience-end'])
   }
 })
 </script>

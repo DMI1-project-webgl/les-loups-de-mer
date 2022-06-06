@@ -9,3 +9,16 @@ import Header from './../../components/Header.vue';
         <Values />
     </section>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
+  name: 'Values',
+  mounted() {
+    this.signal.dispatch(['experience-end'])
+  },
+  methods: {
+    
+  }
+})
+</script>

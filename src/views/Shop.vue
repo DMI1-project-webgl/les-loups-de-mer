@@ -6,8 +6,8 @@ import RoundButton from './../components/UI/RoundButton.vue'
 </script>
 
 <template>
+<div>  
   <BackgroundGradient />
-  <Nav />
   <section class="shop page-experience">
     <div class="container-fluid h-100">
       <div class="row h-100">
@@ -58,6 +58,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
       </div>
     </div>
   </section>
+</div>
 </template>
 
 
@@ -66,6 +67,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Shop',
   mounted() {
+    this.signal.dispatch(['experience-end'])
   },
   methods: {
     

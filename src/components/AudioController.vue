@@ -17,7 +17,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'AudioController',
   data: () => ({
-      loop: {current: 0, target: 0.6, coef: 0.005}
+      loop: {current: 0, target: 0, coef: 0.005}
   }),
   mounted () {
     this.signal.add(this.onSignal.bind(this));
@@ -63,11 +63,19 @@ export default defineComponent({
                     this.update()
                 }, 3400)
             break
+            case "experience-start":
+                this.loop.target = 0.6
+                break
+            case "experience-end":
+                this.loop.target = -0.5
+                this.loop.coef = 0.1
+                this.update()
         }
     },
     loopPlay() {
         (this.$refs.piano as HTMLAudioElement).play()
-        this.update();
+        this.loop.coef = 0.005
+        this.update()
     },
     lerp (start: number, end: number, amt: number): number {
         return (1-amt)*start+amt*end
@@ -76,9 +84,9 @@ export default defineComponent({
 
     },
     update() {
-        if (this.loop.current < this.loop.target + 0.1 && this.loop.current > this.loop.target - 0.1) return
+        if (this.loop.current < this.loop.target + 0.05 && this.loop.current > this.loop.target - 0.2) return
         console.log('update')
-        this.loop.current = this.lerp(this.loop.current, this.loop.target, this.loop.coef);
+        this.loop.current = Math.max(this.lerp(this.loop.current, this.loop.target, this.loop.coef), 0);
         (this.$refs.piano as HTMLAudioElement).volume = this.loop.current
         setTimeout(this.update, 10)
     }

@@ -33,6 +33,7 @@ export default defineComponent({
   data: () => ({
   }),
   mounted () {
+    this.signal.dispatch(['experience-start'])
   }, 
   methods: {
     validate() {
@@ -40,7 +41,7 @@ export default defineComponent({
     },
   },
   beforeDestroy () {
-  }
+  },
 })
 </script>
 

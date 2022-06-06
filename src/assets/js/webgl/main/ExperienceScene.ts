@@ -197,7 +197,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                         const intersectsVegetation = this.raycaster.intersectObject(this.vegetation.instancedMesh, false); 
 
                         if ( intersectsVegetation.length > 0 ) {
-                            this.signal.dispatch(["click-coraux",])
+                            this.signal.dispatch(["click-coraux"])
                             const instanceId = intersectsVegetation[ 0 ].instanceId;
 
                             this.vegetation.scaleVegetation(instanceId)
