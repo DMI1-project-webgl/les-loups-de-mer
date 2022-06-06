@@ -275,9 +275,9 @@ header ~ section.page, header ~ section.page-full{
   padding-top: calc(3% + 26px + 26px);
 }
 
-/* .d-none {
+.d-none {
   display: none !important;
-} */
+}
 
 .btn {
   width: fit-content;
