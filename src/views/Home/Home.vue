@@ -5,7 +5,6 @@ import Slide from './../../components/Home/Slide.vue';
 import Welcome from './../../components/Home/Welcome.vue';
 import Discover from './../../components/Home/Discover.vue';
 import Loading from './../../components/Home/Loading.vue';
-import Sound from './../../components/Sound.vue';
 </script>
 
 <template>
@@ -45,6 +44,7 @@ export default defineComponent({
     }
   },
   mounted () {
+    this.signal.dispatch(['experience-end'])
     Scrollbar.use(OverscrollPlugin);
     this.scrollBar =  Scrollbar.init(this.$refs.scrollSections as any, {
       plugins: {

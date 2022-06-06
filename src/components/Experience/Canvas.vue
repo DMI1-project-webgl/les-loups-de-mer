@@ -60,6 +60,6 @@ canvas#canvas {
     display: block;
     width: 100%;
     height: 100%;
-    transition: transform 3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: transform 4s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 </style>

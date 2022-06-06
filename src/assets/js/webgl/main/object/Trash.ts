@@ -1,10 +1,62 @@
+import { FrontSide, Mesh, MeshBasicMaterial, Object3D, SphereGeometry } from 'three'
 import BasicObject3D from '../../core/BasicObject3D'
 
+function getHitbox(trashName: string) {
+  const geometry = new SphereGeometry(30, 30, 30)
+  const material = new MeshBasicMaterial({
+      side: FrontSide,
+      transparent: true,
+      opacity: 0.0
+  });
+  const mesh = new Mesh(geometry, material);
+  mesh.name = trashName
+  return mesh;
+}
+
 export default class Trash extends BasicObject3D {
-  getScale(): number {
-      return 1
+  private model: Object3D = null
+
+  private glowing: boolean = false
+
+  constructor(model: Object3D) {
+    super(model)
+    this.model = model
   }
-  getEnvMapIntensity () {
-    return 3
+
+  // Need to be call after `applyMaterial()`
+  applyHitbox(trashName: string) {
+    this.model.add(getHitbox(trashName))
+  } 
+
+  glow() {
+    if (this.glowing) return;
+
+    this.glowing = true
+    
+    for(let child of this.model.children) {
+      if (child instanceof Mesh) {
+        child.material.color.setHex(0x3333AA)
+      } else {
+        for(let childOfGroup of child.children) {
+          (childOfGroup as Mesh<any, any>).material.color.setHex(0x3333AA)
+        }
+      }
+    }
+  }
+
+  unglow() {
+    if (!this.glowing) return;
+
+    this.glowing = false
+
+    for(let child of this.model.children) {
+      if (child instanceof Mesh) {
+        child.material.color.setHex(0xFFFFFF)
+      } else {
+        for(let childOfGroup of child.children) {
+          childOfGroup.material.color.setHex(0xFFFFFF)
+        }
+      }
+    }
   }
 }

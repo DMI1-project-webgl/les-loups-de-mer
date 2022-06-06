@@ -1,14 +1,14 @@
 <template>
     <section class="actions color--secondary">
-        <div class="col-12 col-lg-6 h-lg-100">
+        <div class="pute col-12 col-lg-6 h-lg-100">
             <div class="actions--img-container">
                 <div class="actions--img">
-                    <img src="" alt="">
+                    <img src="../../assets/img/MainDroiteV2.png" alt="">
                 </div>
                 <div class="actions--img">
-                    <img src="" alt="">
+                    <img src="../../assets/img/MainGaucheV2.png" alt="">
                 </div>
-                <canvas></canvas>
+                <img src="../../assets/img/loader.gif" alt="" class="earth">
             </div>
         </div>
         <div class="actions-left col-12 col-lg-5 actions--col-content">
@@ -52,6 +52,10 @@ export default defineComponent({
     margin: 0;
     overflow-x: hidden;
 }
+
+.pute {
+    padding: 0 5%;
+}
 .actions--col-content {
     display: flex;
     flex-direction: column;
@@ -69,10 +73,14 @@ export default defineComponent({
     background: transparent;
 }
 .actions--img {
-    border: 2px solid var(--color-primary);
-    aspect-ratio: 4 / 5;
-    height: 50%;
+    height: 70%;
     position: absolute;
+    object-fit: contain;
+    animation: levite 5s ease-in-out infinite;
+}
+
+.actions--img:nth-of-type(2) {
+    animation: levite2 6s ease-in-out infinite;
 }
 .actions--img:nth-child(1) {
     top: 0;
@@ -87,10 +95,10 @@ export default defineComponent({
     padding: 3% 0px;
     font-size: 0.5em;
 }
-.actions--img-container canvas{
+.actions--img-container .earth{
     height: 100%;
     width: 100%;
-    border: 1px solid green;
+    padding: 10%;
 }
 
 .actions--link-container {
@@ -104,6 +112,30 @@ export default defineComponent({
 
 .actions-left {
     height: calc(100vh - 140px);
+}
+
+@keyframes levite {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes levite2 {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 </style>

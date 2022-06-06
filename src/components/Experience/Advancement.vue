@@ -13,7 +13,7 @@ import RoundButton1 from '../UI/RoundButton.vue';
                 <!--<div class="col col-3 h-100">
                     <Progress />
                 </div>-->
-                <div class="col col-6 h-100">
+                <div class="col col-6 h-100 no">
                     <Breadcrumb  />
                 </div>
                 <!--<div class="col-3 h-100">

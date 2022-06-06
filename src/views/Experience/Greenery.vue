@@ -71,13 +71,16 @@ export default defineComponent({
     },
 
     validateStep() {
+      this.signal.dispatch(['click-general'])
       this.signal.dispatch(['validate-tapped'])
     },
     hidetuto1() {
       // this.tuto1 = false;
       this.tuto1Class = "modal-disable"
+      this.signal.dispatch(['none-tuto-modal'])
     },
     RemoveVegetation() {
+      this.signal.dispatch(['click-general'])
       this.signal.dispatch(['remove-vegetation'])
     }
     

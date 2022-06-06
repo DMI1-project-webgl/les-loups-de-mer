@@ -175,6 +175,7 @@ export default defineComponent({
           gsap.to(that.$refs.element as any, { x: posX, duration: 0.2});
 
           that.displayPercentX(widthContainer, widthDraggable, posX)
+          that.signal.dispatch(['click-fish'])
       }
     });
 
@@ -186,6 +187,7 @@ export default defineComponent({
 
 
       that.displayPercentX(widthContainer, widthDraggable, posX)
+      this.signal.dispatch(['click-fish'])
     });
   },
   methods: {

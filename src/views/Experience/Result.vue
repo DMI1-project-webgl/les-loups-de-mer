@@ -36,6 +36,7 @@ export default defineComponent({
   mounted () {
       const canvas = document.querySelector('#canvas');
       canvas.classList.add('canvas--left')
+      this.signal.dispatch(["success-final"])
   },
   methods: {
     oui() {

@@ -1,15 +1,15 @@
 <template>
-  <router-link v-if="isRouterLink" :to="link" class="SquaredButton-Container" @click="$emit('validate')">
+  <router-link v-if="isRouterLink" :to="link" class="SquaredButton-Container" @click="onClick">
     <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
         <p class="SquaredButton-Text">{{ text }}</p>
     </div>
   </router-link>
-  <a v-else-if="link" :href="link" class="SquaredButton-Container" @click="$emit('validate')">
+  <a v-else-if="link" :href="link" class="SquaredButton-Container" @click="onClick">
     <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
         <p class="SquaredButton-Text">{{ text }}</p>
     </div>
   </a>
-  <div v-else class="SquaredButton-Container" @click="$emit('validate')">
+  <div v-else class="SquaredButton-Container" @click="onClick">
     <div class="SquaredButton" :class="isWhite ? 'SquaredButton--white' : 'SquaredButton--blue'">
         <p class="SquaredButton-Text">{{ text }}</p>
     </div>
@@ -29,6 +29,10 @@ export default defineComponent({
   mounted () {
   },
   methods: {
+    onClick () {
+      this.signal.dispatch(['click-general'])
+      this.$emit('validate')
+    }
   },
   beforeDestroy () {
   }
@@ -43,6 +47,7 @@ export default defineComponent({
     align-items: center;
     overflow: hidden;
     padding: 3px;
+    width: min-content;
 }
 
 .SquaredButton {
@@ -55,6 +60,7 @@ export default defineComponent({
     align-items: center;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+    white-space: nowrap;
 }
 
 .SquaredButton--white {
@@ -108,10 +114,11 @@ export default defineComponent({
 .result .SquaredButton {
   width: inherit !important;
   padding: 0 30px !important;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .result .SquaredButton::after {
-  width: 110%;
+  width: 250px;
+  height: 250px;
   border: none;
 }
 </style>

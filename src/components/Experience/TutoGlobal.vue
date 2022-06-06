@@ -50,9 +50,11 @@ export default defineComponent({
     nextStep() {
         const timeline = gsap.timeline();
         if (this.step.current !== -1 && this.step.current < this.elSteps.length) {
+            this.signal.dispatch(['click-general'])
             timeline.to((this.$refs.next as HTMLElement), { 
                 opacity: 0,
                 duration: 0.3,
+                pointerEvents: 'none',
                 ease: 'power2.out',
             })
             timeline.to(this.elSteps[this.step.current].querySelectorAll('.TutoGlobal-char'), {
@@ -87,6 +89,7 @@ export default defineComponent({
             timeline.to((this.$refs.next as HTMLElement), {
                 opacity: 1,
                 duration: 0.3,
+                pointerEvents: 'all',
                 ease: 'power2.out',
             })
         } else {
@@ -165,6 +168,7 @@ export default defineComponent({
     font-weight: 300;
     transition: text-shadow 0.3s ease-out;
     opacity: 0;
+    pointer-events: none;
 }
 
 .TutoGlobal-next:hover {

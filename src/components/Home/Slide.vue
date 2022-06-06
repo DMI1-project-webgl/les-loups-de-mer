@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import RoundButton from './../UI/RoundButton.vue'
+</script>
 <template>
   <div class="slider">
     <header class="page header">
@@ -32,19 +35,16 @@
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
               <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
-              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
             <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
-              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
             <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
               <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
-              <SquaredButton :isRouterLink="true" link="/valeurs" text="En savoir plus"/>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
@@ -57,15 +57,15 @@
                   <!-- <div id="slider-slider" data-images='["./../../src/assets/img/slider/elephant.gif","./../../src/assets/img/slider/epices.png"]' data-disp="./../../src/assets/img/slider/epices.png">
                   </div> #} -->
                   <video ref="video01" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                    <source src="./../../../src/assets/img/slider/1.mp4"
+                    <source src="./../../../src/assets/img/slider/epice.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                   <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                    <source src="./../../../src/assets/img/slider/2.mp4"
+                    <source src="./../../../src/assets/img/slider/huile.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                   <video ref="video03" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
-                    <source src="./../../../src/assets/img/slider/3.mp4"
+                    <source src="./../../../src/assets/img/slider/bouillon.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                 </div>
@@ -74,6 +74,9 @@
               <button @click="slidePrev" id="prev" class="slider--arrow-prev slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
               <button @click="slideNext" id="next" class="slider--arrow-next slider--arrow"><img src="./../../assets/img/arrow.svg" alt=""></button>
             </div>
+          </div>
+          <div class="col-1 slider--btn-container">
+            <RoundButton link="/valeurs" text="Nos valeurs" :isClickHear="true" :isWhite="false" :isRouterLink="true" />
           </div>
         </div>
       </div>
@@ -84,7 +87,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Canvas from './Canvas.vue'
-import SquaredButton from '../UI/SquaredButton.vue'
 import SketchSlider from './../../assets/js/webgl/SketchSlider';
 import Sketch from '../../assets/js/webgl/Sketch';
 
@@ -155,7 +157,6 @@ export default defineComponent({
     },
     methods: {
         slideNext() {
-          console.log(this.onAnim)
           if (this.onAnim) return
           this.onAnim = true
           this.sketch.next()
@@ -163,6 +164,7 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
+          this.signal.dispatch(['click-general'])
         },
         slidePrev() {
           if (this.onAnim) return
@@ -172,11 +174,12 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
+          this.signal.dispatch(['click-general'])
         }
     },
     beforeDestroy() {
     },
-    components: { Canvas, SquaredButton }
+    components: { Canvas }
 })
 </script>
 
@@ -197,6 +200,30 @@ export default defineComponent({
   transform: translate(0, -50%);
   transition: opacity 1s cubic-bezier(0.165, 0.840, 0.440, 1.000), transform 1s cubic-bezier(0.165, 0.840, 0.440, 1.000);
   position: absolute;
+}
+
+.content-slider:after {
+  content: '';
+  height: 100%;
+  width: 80px;
+  position: absolute;
+  z-index: 1;
+   background: linear-gradient(90deg, rgba(254, 249, 240,1) 0%, rgba(254, 249, 240,0) 100%);
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.content-slider:before {
+  content: '';
+  height: 100%;
+  width: 80px;
+  position: absolute;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(254, 249, 240,0) 0%, rgba(254, 249, 240,1) 100%);
+  top: 0;
+  right: 0;
+  pointer-events: none;
 }
 
 .content-active {
@@ -223,6 +250,7 @@ export default defineComponent({
 }
 
 .slider--arrow-prev {
+  z-index: 5;
   position: absolute;
   width: 50px;
   height: 50px;
@@ -239,6 +267,7 @@ export default defineComponent({
   transform: rotate(90deg);
 }
 .slider--arrow-next {
+  z-index: 5;
   position: absolute;
   width: 50px;
   height: 50px;
@@ -424,5 +453,8 @@ header {
   transform: translateY(-10px);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
-
+.slider--btn-container {
+  position: relative;
+  z-index: 5;
+}
 </style>

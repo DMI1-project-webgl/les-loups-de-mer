@@ -43,6 +43,35 @@ export default class BasicObject3D extends Group {
     }
 
     /**
+     * Copy/paste of `applyMaterials`
+     * Used to control each material independently of each instance
+     * @param factory 
+     */
+    applyCloneMaterial(factory: MaterialFactory) {
+        this.children.forEach((child) => {
+            this.shadeCloneObject(child, factory)
+        })
+        factory.applyEnvMap(this, this.getEnvMapIntensity())
+    }
+
+    /**
+     * Copy/paste of `shadeObject`
+     * Work with `applyCloneMaterial`
+     * @param factory 
+     */
+    shadeCloneObject (model: Group | Mesh | any, factory: MaterialFactory) {
+        if (model instanceof Group || (model instanceof Object3D && !(model instanceof Mesh))) {
+          model.children.forEach((child) => {
+            this.shadeCloneObject(child, factory)
+          })
+        } else if (model instanceof Mesh) {
+          model.material = factory.getMaterial(model.name).clone()
+          if (!model.material) return
+          model.material.needsUpdate = true
+        }
+    }
+
+    /**
      * To scale the Group
      */
     getScale () {
