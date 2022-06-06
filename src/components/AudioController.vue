@@ -67,7 +67,7 @@ export default defineComponent({
                 this.loop.target = 0.6
                 break
             case "experience-end":
-                this.loop.target = -0.5
+                this.loop.target = -0.09
                 this.loop.coef = 0.1
                 this.update()
         }
@@ -84,7 +84,7 @@ export default defineComponent({
 
     },
     update() {
-        if (this.loop.current < this.loop.target + 0.05 && this.loop.current > this.loop.target - 0.2) return
+        if (this.loop.current < this.loop.target + 0.1 && this.loop.current > this.loop.target - 0.2) return
         console.log('update')
         this.loop.current = Math.max(this.lerp(this.loop.current, this.loop.target, this.loop.coef), 0);
         (this.$refs.piano as HTMLAudioElement).volume = this.loop.current
