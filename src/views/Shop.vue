@@ -8,6 +8,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
 <template>
 <div>  
   <BackgroundGradient />
+  <Nav/>
   <section class="shop page-experience">
     <div class="container-fluid h-100">
       <div class="row h-100">
@@ -90,13 +91,22 @@ import RoundButton from './../components/UI/RoundButton.vue'
             </div>
             <div class="shop--product-video-container position-relative">
               <div class="shop--product-video content-active" :class="index == 0 ? 'content-active' : 'content-'">
-                <video src="#"></video>
+                <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
+                  <source src="./../../src/assets/img/packs/large.mp4"
+                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                </video>
               </div>
               <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
-                <video src="#"></video>
+                <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
+                  <source src="./../../src/assets/img/packs/medium.mp4"
+                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                </video>
               </div>
               <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
-                <video src="#"></video>
+                <video ref="video02" loop crossOrigin="anonymous" playsinline style="display:none" class="video-slider">
+                  <source src="./../../src/assets/img/packs/small.mp4"
+                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                </video>
               </div>
               <button @click="slidePrev" id="prev" class="shop--arrow-prev shop--arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.77 40.8">
