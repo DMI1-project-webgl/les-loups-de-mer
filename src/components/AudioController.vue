@@ -1,13 +1,27 @@
 <template>
     <div>
-      <audio ref="clickGeneral" src="./../../src/assets/sound/click-general.mp3" preload="metadata" type="audio/mp3"></audio>
-      <audio ref="waste" src="./../../src/assets/sound/ramasse-dechets.wav" preload="metadata" type="audio/wav"></audio>
-      <audio ref="bubble" src="./../../src/assets/sound/pop-bubble.wav" preload="metadata" type="audio/wav"></audio>
-      <audio ref="coraux" src="./../../src/assets/sound/coraux.wav" preload="metadata" type="audio/mp3"></audio>
-      <audio ref="success" src="./../../src/assets/sound/reussite.wav" preload="metadata" type="audio/wav"></audio>
-      <audio ref="successFinal" src="./../../src/assets/sound/reussite-finale.wav" preload="metadata" type="audio/wav"></audio>
+      <audio ref="clickGeneral" preload="metadata">
+          <source src="./../../src/assets/sound/click-general.mp3" type="audio/mp3">
+      </audio>
+      <audio ref="waste" preload="metadata">
+          <source src="./../../src/assets/sound/ramasse-dechets.wav" type="audio/wav">
+      </audio>
+      <audio ref="bubble" preload="metadata">
+          <source src="./../../src/assets/sound/pop-bubble.wav" type="audio/wav">
+      </audio>
+      <audio ref="coraux" preload="metadata">
+          <source src="./../../src/assets/sound/coraux.wav" type="audio/wav">
+      </audio>
+      <audio ref="success" preload="metadata">
+          <source src="./../../src/assets/sound/reussite.wav" type="audio/wav">
+      </audio>
+      <audio ref="successFinal" preload="metadata">
+          <source src="./../../src/assets/sound/reussite-finale.wav" type="audio/wav">
+      </audio>
 
-      <audio ref="piano" src="./../../src/assets/sound/melodie_piano.wav" preload="metadata" autoplay loop type="audio/wav"></audio>
+      <audio ref="piano" preload="metadata" autoplay loop>
+          <source src="./../../src/assets/sound/melodie_piano.wav" type="audio/wav">
+      </audio>
 
       <div ref="audioControl" class="audio-control audio-control--disable" @click="toggleSound">
           <img class="volume" ref="volume" src="../assets/img/volume.png">
