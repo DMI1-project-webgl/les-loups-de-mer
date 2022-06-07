@@ -41,6 +41,15 @@ export default defineComponent({
       const canvas = document.querySelector('#canvas');
       canvas.classList.add('canvas--left')
       this.signal.dispatch(["success-final"])
+      var image = (canvas as HTMLCanvasElement).toDataURL("image/png");
+
+      var a = document.createElement('a');
+      a.href = "img.png";
+      a.download = image;
+      a.innerHTML += "Download image";
+      a.style.top = '100px'
+      a.style.position = 'fixed';
+      (this.$refs.result as HTMLElement).appendChild(a);
       setTimeout(() => {
         (this.$refs.result as HTMLElement).classList.add("result-show")
       }, 2000)
