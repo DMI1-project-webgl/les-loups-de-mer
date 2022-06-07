@@ -23,10 +23,10 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
         </div>
       </div>
     </div>
-    <TutoGlobal :alreadyOpen="true" :texts="['Voici votre écosystème, malheureusement il est très pollué, à cause de l’être humain, aidez nous à le rendre plus sain pour les requins.', ' Nous allons aussi construire une prothèse d’ailerons pour remplacer celle de ce requin à l’aide des déchets ramassés. Les déchets ainsi récupérés sont triés et recyclés afin de construire des prothèses d’ailerons en plastique 100%* recyclé.']" />
+    <TutoGlobal :alreadyOpen="true" :texts="['Voici votre écosystème, malheureusement il est très pollué, à cause de l’être humain, aidez nous à le rendre plus sain pour les requins.', ' Nous allons aussi construire une prothèse d’aileron pour remplacer celle de ce requin à l’aide des déchets ramassés. Les déchets ainsi récupérés sont triés et recyclés afin de construire des prothèses d’aileron en plastique 100% recyclé.']" />
   </section>
-  <Modal v-if="tuto1" text="Pour commencer, regardez ici la liste des objets à recycler, ils se rayent au fur et à mesure ou vous les ramassez." @showoff="hidetuto1" :showbtn="true"/>
-  <Modal v-if="tuto2" text="Pour ramasser un déchet, cliquez dessus, vous voyez cette bouteille en plastique ? Ramassez la, allez-y !" @showoff="hidetuto2" :showbtn="false"/>
+  <Modal v-if="tuto1" text="Pour commencer, regardez ici la liste des objets à recycler, ils se rayent au fur et à mesure quand vous les ramassez." @showoff="hidetuto1" :showbtn="true"/>
+  <Modal v-if="tuto2" text="Pour ramasser un déchet, cliquez dessus, vous en voyez un ? Ramassez le, allez-y !" @showoff="hidetuto2" :showbtn="false"/>
   <Modal v-if="tuto3" :classlist="tuto3Class" text=" Super ! Vous voyez la pollution a diminué, vous pouvez voir ici que la jauge de construction de l’aileron a augmenté,  continuez ainsi pour la remplir."  @showoff="hidetuto3"/>
   <Modal v-if="canContinue" text=" Félicitation, c’est beaucoup mieux comme ça !" @showoff="validateStep" :showbtn="true"/>
   <!-- <SquaredButton v-show="canContinue" class="validate-button" :isRouterLink="false" text="Continuer" :isWhite="true" @validate="validateStep"/> -->

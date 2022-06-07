@@ -10,6 +10,8 @@ export default class Vegetation {
     private positionsVegetation: Array<Vector4> = []
     private vegetationOnAnim: Array<number> = []
 
+    public numberVegetation: number = 0
+
     constructor(scene: BasicScene, positionsVegetation: Array<Vector4>) {
         this.scene = scene
         this.positionsVegetation = positionsVegetation
@@ -78,6 +80,8 @@ export default class Vegetation {
         this.positionsVegetation.forEach((vec, index) => {
             if (vec.w != 0) {
                 vec.w = 0
+                this.numberVegetation = 0
+                this.scene.signal.dispatch(["number-coraux", this.numberVegetation])
                 const mat4 = new Matrix4().scale(new Vector3(1,0.13,1))
                 const mat42 = new Matrix4().makeTranslation(0,-60,0)
                 let currentMat = new Matrix4()
@@ -95,6 +99,8 @@ export default class Vegetation {
             const vec = this.positionsVegetation[index]
             if (vec.w >= 10) {
                 this.vegetationOnAnim.splice(i, 1);
+                this.numberVegetation ++
+                this.scene.signal.dispatch(["number-coraux", this.numberVegetation])
             }
             vec.w ++
 

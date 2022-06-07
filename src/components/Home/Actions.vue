@@ -8,7 +8,7 @@
                 <div class="actions--img">
                     <img src="../../assets/img/MainGaucheV2.png" alt="">
                 </div>
-                <img src="../../assets/img/loader.gif" alt="" class="earth">
+                <img src="../../assets/img/planet.png" alt="" class="earth">
             </div>
         </div>
         <div class="actions-left col-12 col-lg-5 actions--col-content">
@@ -17,7 +17,7 @@
             </div>
             <div class="actions--content-container">
                 <p class="actions--text">Découvrez nos actions sur le terrain pour protéger les requins.</p>
-                <p class="actions--text">Les vertus millénaires des grands squales marins sont des trésors à préserver. Engagés depuis une dizaine d'années dans la préservation des espaces natureks abritant les requins, Les loups de mer défendent des valeurs écologiques.</p>
+                <p class="actions--text">Les vertus millénaires des grands squales marins sont des trésors à préserver. Engagés depuis une dizaine d'années dans la préservation des espaces naturels abritant les requins, les Loups de mer défendent des valeurs écologiques.</p>
                 <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
             </div>
             <div class="actions--link-container">
@@ -99,6 +99,7 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     padding: 10%;
+    object-fit: contain;
 }
 
 .actions--link-container {

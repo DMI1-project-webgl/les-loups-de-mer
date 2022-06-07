@@ -5,56 +5,55 @@ import Nav from './../components/Nav.vue';
 import RoundButton from './../components/UI/RoundButton.vue'
 </script>
 
-<template>
-<div>  
+<template> 
   <BackgroundGradient />
   <Nav/>
   <section class="shop page-experience">
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-3 h-100 position-relative">
-          <div class="shop--content-container content-active" :class="index == 0 ? 'content-active' : 'content-'">
+          <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
             <div class="shop--product-details">
-              <h2 class="shop--product-name">Requin blanc</h2>
-              <p class="shop--product-package">La version luxe</p>
-              <p class="shop--product-description">Avec ce pack, aidez jusqu'à 12 requins.</p>
+              <h2 class="shop--product-name">Pack roussette</h2>
+              <p class="shop--product-package">La version mini </p>
+              <p class="shop--product-description">Avec ce pack aidez jusqu’à 4 requins.</p>
             </div>
             <div>
               <table class="shop--pack-composition">
                 <tr>
                   <td class="shop--composition-name">huile</td>
-                  <td class="shop--composition">2 L</td>
+                  <td class="shop--composition">30 cl</td>
                 </tr>
                 <tr>
                   <td class="shop--composition-name">Épices</td>
-                  <td class="shop--composition">100g</td>
+                  <td class="shop--composition">15g</td>
                 </tr>
                 <tr>
                   <td class="shop--composition-name">Bouillon</td>
-                  <td class="shop--composition">125g</td>
+                  <td class="shop--composition">25g</td>
                 </tr>
               </table>
             </div>
           </div>
           <div class="shop--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
             <div class="shop--product-details">
-              <h2 class="shop--product-name">Requin blanc</h2>
-              <p class="shop--product-package">La version luxe</p>
-              <p class="shop--product-description">Avec ce pack, aidez jusqu'à 12 requins.</p>
+              <h2 class="shop--product-name"> Pack requin marteau</h2>
+              <p class="shop--product-package">La version medium</p>
+              <p class="shop--product-description">Avec ce pack aidez jusqu’à 6 requins.</p>
             </div>
             <div>
               <table class="shop--pack-composition">
                 <tr>
                   <td class="shop--composition-name">huile</td>
-                  <td class="shop--composition">2 L</td>
+                  <td class="shop--composition">50cl</td>
                 </tr>
                 <tr>
                   <td class="shop--composition-name">Épices</td>
-                  <td class="shop--composition">100g</td>
+                  <td class="shop--composition">30g</td>
                 </tr>
                 <tr>
                   <td class="shop--composition-name">Bouillon</td>
-                  <td class="shop--composition">125g</td>
+                  <td class="shop--composition">50g</td>
                 </tr>
               </table>
             </div>
@@ -90,7 +89,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
               <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
             </div>
             <div ref="blur" class="shop--product-video-container position-relative blur">
-              <div class="shop--product-video content-active" :class="index == 0 ? 'content-active' : 'content-'">
+              <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
                 <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
                   <source src="./../../src/assets/img/packs/large.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -126,11 +125,11 @@ import RoundButton from './../components/UI/RoundButton.vue'
         </div>
         <div class="col-3 h-100">
           <div class="shop--product">
-            <div class="shop--product-price content-active" :class="index == 0 ? 'content-active' : 'content- '">
-              <p>90€</p>
+            <div class="shop--product-price" :class="index == 0 ? 'content-active' : 'content-disable'">
+              <p>40€</p>
             </div>
             <div class="shop--product-price" :class="index == 1 ? 'content-active' : 'content-disable'">
-              <p>90€</p>
+              <p>60€</p>
             </div>
             <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
               <p>90€</p>
@@ -141,7 +140,25 @@ import RoundButton from './../components/UI/RoundButton.vue'
       </div> 
     </div>
   </section>
-</div>
+  <section class="banner">
+    <div class="banner--mentions-container">
+      <div class="banner--mentions">
+        <p> Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
+      </div>
+    </div>
+    <div class="banner--container color--secondary">
+      <div class="banner--text">
+        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
+      </div>
+    </div>
+    <div class="banner--container">
+      <div class="header--text-upper">
+        <span v-for="i in 8" :key="i">
+            protégeons notre planète
+        </span>
+      </div>
+    </div>
+  </section>
 </template>
 
 
@@ -149,7 +166,11 @@ import RoundButton from './../components/UI/RoundButton.vue'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Shop',
-  props: ['index'],
+  data: function () {
+    return {
+      index: 0
+    }
+  },
   mounted() {
     this.signal.dispatch(['experience-end'])
   },
@@ -163,6 +184,22 @@ export default defineComponent({
       (this.$refs.blur as any).classList.remove('blur');
       (this.$refs.blurbtn as any).classList.add("d-none");
       (this.$refs.video01 as any).play()
+    },
+    slideNext() {
+      console.log('next')
+      if (this.index == 2) {
+        this.index = 0;
+      } else {
+        this.index += 1;
+      }
+    },
+    slidePrev() {
+      console.log('prev')
+      if (this.index == 0) {
+        this.index = 2;
+      } else {
+        this.index -= 1;
+      }
     }
   }
 })
@@ -243,6 +280,7 @@ export default defineComponent({
   width: 100%;
 }
 .shop--heading-container {
+  margin-top: 50px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -309,10 +347,12 @@ export default defineComponent({
 .content-active {
   pointer-events: all;
   opacity: 1;
+  transition: opacity 2s ease;
 }
 .content-disable {
   pointer-events: none;
   opacity: 0;
+  transition: opacity 2s ease;
 }
 .blur {
   filter: grayscale(0.5) blur(5px);
@@ -323,5 +363,61 @@ export default defineComponent({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.banner--container {
+  width: 100vw;
+  position: relative;
+  top: 0;
+  left: 0;
+  text-align: center;
+  padding: 5px 0;
+}
+.header--text-upper {
+  font-family: "leaguespartan";
+  font-size: 0.5em;
+  font-weight: 400;
+  line-height: 1em;
+  width: 200%;
+  margin-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  animation: marquee 50s linear infinite;
+  white-space: nowrap;
+}
+
+.header--text-upper span {
+  display: block;
+  width: 25%;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+section.banner {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+
+.banner--text p {
+  text-align: center;
+}
+.banner--mentions-container {
+  margin-bottom: 50px;
+  color: white;
+  text-align: center;  
+  width: 100vw;
+}
+.banner--mentions a {
+  text-decoration: underline;
+  font-weight: 900;
 }
 </style>
