@@ -104,7 +104,7 @@ export default defineComponent({
       this.sketch = new SketchSlider(this.$refs.slider, [this.$refs.video01, this.$refs.video02, this.$refs.video03],{
 	debug: true,
 	uniforms: {
-		intensity: {value: 1, type:'f', min:0., max:3}
+		intensity: {value: 0.4, type:'f', min:0., max:3}
 	},
 	fragment: `
 		uniform float time;
@@ -284,9 +284,10 @@ export default defineComponent({
   transform: rotate(-90deg);
 }
 .slider--canvas-container {
+  max-width: 700px;
   height: 100%;
   width: 100%;
-  margin-left: 5%;
+  margin-left: auto;
 }
 
 .slider--arrow::before {
@@ -455,6 +456,6 @@ header {
 }
 .slider--btn-container {
   position: relative;
-  z-index: 5;
+  z-index: 4;
 }
 </style>

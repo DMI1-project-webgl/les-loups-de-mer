@@ -8,7 +8,7 @@
                 <div class="actions--img">
                     <img src="../../assets/img/MainGaucheV2.png" alt="">
                 </div>
-                <img src="../../assets/img/loader.gif" alt="" class="earth">
+                <img src="../../assets/img/planet.png" alt="" class="earth">
             </div>
         </div>
         <div class="actions-left col-12 col-lg-5 actions--col-content">
@@ -99,6 +99,7 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     padding: 10%;
+    object-fit: contain;
 }
 
 .actions--link-container {

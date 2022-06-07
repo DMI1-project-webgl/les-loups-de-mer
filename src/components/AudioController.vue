@@ -24,7 +24,8 @@ export default defineComponent({
   data: () => ({
       loop: {current: 0, target: 0, coef: 0.005},
       soundStatus: true,
-      volumeglobale: 1
+      volumeglobale: 1,
+      isExperience: false
   }),
   mounted () {
     this.signal.add(this.onSignal.bind(this));
@@ -78,13 +79,13 @@ export default defineComponent({
                 }, 4400)
             break
             case "experience-start":
+                this.isExperience = true
+                if (!this.soundStatus) return
                 this.loop.target = 0.6;
                 (this.$refs.piano as HTMLAudioElement).pause()
-                if (!(this.$refs.piano as HTMLAudioElement).paused) {
-                    this.loopPlay()
-                }
                 break
             case "experience-end":
+                this.isExperience = false
                 this.loop.target = -0.09
                 this.loop.coef = 0.1;
                 (this.$refs.audioControl as HTMLElement).classList.add('audio-control--disable')
@@ -92,11 +93,10 @@ export default defineComponent({
         }
     },
     loopPlay() {
+        if (!this.isExperience) return
         if (!(this.$refs.piano as HTMLAudioElement).paused) return
-        (this.$refs.piano as HTMLAudioElement).play()
-        if (this.loop.target = 0.6) {
-            (this.$refs.audioControl as HTMLElement).classList.remove('audio-control--disable');
-        }
+        (this.$refs.piano as HTMLAudioElement).play();
+        (this.$refs.audioControl as HTMLElement).classList.remove('audio-control--disable');
         this.loop.coef = 0.005
         this.update()
     },
@@ -109,6 +109,9 @@ export default defineComponent({
     update() {
         if (this.loop.current < this.loop.target + 0.1 && this.loop.current > this.loop.target - 0.2) return
         this.loop.current = Math.max(this.lerp(this.loop.current, this.loop.target, this.loop.coef), 0);
+        if (this.loop.current < 0.05 && this.loop.target <= 0) {
+            this.loop.current = 0
+        }
         (this.$refs.piano as HTMLAudioElement).volume = this.loop.current
         setTimeout(this.update, 10)
     },
