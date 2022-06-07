@@ -91,6 +91,7 @@ export default defineComponent({
 .food--btn-container--valide {
   opacity: 1;
   pointer-events: all;
+  cursor: pointer;
 }
 
 .food--btn {
