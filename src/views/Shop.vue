@@ -175,11 +175,6 @@ export default defineComponent({
     this.signal.dispatch(['experience-end'])
   },
   methods: {
-    slidePrev() {
-
-    },
-    slideNext() {
-    },
     removeEffect() {
       (this.$refs.blur as any).classList.remove('blur');
       (this.$refs.blurbtn as any).classList.add("d-none");
