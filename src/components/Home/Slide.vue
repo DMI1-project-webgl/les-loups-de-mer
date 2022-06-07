@@ -34,17 +34,17 @@ import RoundButton from './../UI/RoundButton.vue'
             <div class="slider--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
-              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau.</p>
+              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau !</p>
             </div>
             <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Cette huole à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation</p>
+              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation !</p>
             </div>
             <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonnae santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
+              <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonne santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">

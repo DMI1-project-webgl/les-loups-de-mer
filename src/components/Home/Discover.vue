@@ -15,7 +15,7 @@
           <div class="col-12">
               <div class="discover--title-container">
                   <h1 class="discover--title">Découvrez notre nouvelle gamme</h1>
-                  <p class="discover--subtitle">Prooduits français, naturels et surtout rajeunissants</p>
+                  <p class="discover--subtitle">Produits français, naturels et surtout rajeunissants</p>
               </div>
           </div>
           <div class="col-6 position-relative">

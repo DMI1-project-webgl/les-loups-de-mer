@@ -36,8 +36,8 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
         </div>
       </div>
       <TutoGlobal :alreadyOpen="false" :texts="[
-        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement bien planté. Mettons-nous au travail !', 
-        'Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger. '
+        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au travail !', 
+        'Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger.'
         ]" />
     </section>
     <Modal v-if="tuto1" :classlist="tuto1Class" ref="modal1" text="Restez appuyé en déplaçant votre souris, les végétaux se développeront sur votre écosystème. À vous maintenant. " @showoff="hidetuto1" :showbtn="false"/>
