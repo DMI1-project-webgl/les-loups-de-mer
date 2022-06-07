@@ -5,8 +5,7 @@ import Nav from './../components/Nav.vue';
 import RoundButton from './../components/UI/RoundButton.vue'
 </script>
 
-<template>
-<div>  
+<template> 
   <BackgroundGradient />
   <Nav/>
   <section class="shop page-experience">
@@ -141,7 +140,25 @@ import RoundButton from './../components/UI/RoundButton.vue'
       </div> 
     </div>
   </section>
-</div>
+  <section class="banner">
+    <div class="banner--mentions-container">
+      <div class="banner--mentions">
+        <p> Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
+      </div>
+    </div>
+    <div class="banner--container color--secondary">
+      <div class="banner--text">
+        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
+      </div>
+    </div>
+    <div class="banner--container">
+      <div class="header--text-upper">
+        <span v-for="i in 8" :key="i">
+            protégeons notre planète
+        </span>
+      </div>
+    </div>
+  </section>
 </template>
 
 
@@ -258,6 +275,7 @@ export default defineComponent({
   width: 100%;
 }
 .shop--heading-container {
+  margin-top: 50px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -340,5 +358,61 @@ export default defineComponent({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.banner--container {
+  width: 100vw;
+  position: relative;
+  top: 0;
+  left: 0;
+  text-align: center;
+  padding: 5px 0;
+}
+.header--text-upper {
+  font-family: "leaguespartan";
+  font-size: 0.5em;
+  font-weight: 400;
+  line-height: 1em;
+  width: 200%;
+  margin-left: 16px;
+  display: flex;
+  justify-content: space-between;
+  animation: marquee 50s linear infinite;
+  white-space: nowrap;
+}
+
+.header--text-upper span {
+  display: block;
+  width: 25%;
+  color: white;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+section.banner {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+
+.banner--text p {
+  text-align: center;
+}
+.banner--mentions-container {
+  margin-bottom: 50px;
+  color: white;
+  text-align: center;  
+  width: 100vw;
+}
+.banner--mentions a {
+  text-decoration: underline;
+  font-weight: 900;
 }
 </style>
