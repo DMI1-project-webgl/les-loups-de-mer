@@ -21,7 +21,7 @@
                 <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
             </div>
             <div class="actions--link-container">
-                <RoundButton link="/clean" text="Lancer l'expèrience" :isClickHear="true" :isRouterLink="true" />
+                <RoundButton link="/clean" text="Lancer l'expérience" :isClickHear="true" :isRouterLink="true" />
             </div>
         </div>
     </section>
@@ -59,7 +59,7 @@ export default defineComponent({
 .actions--col-content {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
 }
 .actions--img-container {
     height: 100%;

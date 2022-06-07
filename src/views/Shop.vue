@@ -21,7 +21,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
             <div>
               <table class="shop--pack-composition">
                 <tr>
-                  <td class="shop--composition-name">huile</td>
+                  <td class="shop--composition-name">Huile</td>
                   <td class="shop--composition">30 cl</td>
                 </tr>
                 <tr>
@@ -44,7 +44,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
             <div>
               <table class="shop--pack-composition">
                 <tr>
-                  <td class="shop--composition-name">huile</td>
+                  <td class="shop--composition-name">Huile</td>
                   <td class="shop--composition">50cl</td>
                 </tr>
                 <tr>
@@ -96,13 +96,13 @@ import RoundButton from './../components/UI/RoundButton.vue'
                 </video>
               </div>
               <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
-                <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
+                <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
                   <source src="src/assets/img/packs/medium.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
               </div>
               <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
-                <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
+                <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
                   <source src="src/assets/img/packs/large.webm"
                     type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                 </video>
@@ -134,7 +134,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
             <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
               <p>90€</p>
             </div>
-              <RoundButton link="/shop" text="Nos valeurs" :isWhite="true" :isRouterLink="true" />
+              <RoundButton link="/newsletter" text="Achetter les produits" :isWhite="true" :isRouterLink="true" />
           </div>
         </div>
       </div> 
@@ -144,18 +144,6 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <div class="banner--mentions-container">
       <div class="banner--mentions">
         <p> Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
-      </div>
-    </div>
-    <div class="banner--container color--secondary">
-      <div class="banner--text">
-        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
-      </div>
-    </div>
-    <div class="banner--container">
-      <div class="header--text-upper">
-        <span v-for="i in 8" :key="i">
-            protégeons notre planète
-        </span>
       </div>
     </div>
   </section>
@@ -179,6 +167,8 @@ export default defineComponent({
       (this.$refs.blur as any).classList.remove('blur');
       (this.$refs.blurbtn as any).classList.add("d-none");
       (this.$refs.video01 as any).play()
+      
+      // (this.$refs.video03 as any).play()
     },
     slideNext() {
       console.log('next')
@@ -187,6 +177,7 @@ export default defineComponent({
       } else {
         this.index += 1;
       }
+      this.playVideo();
     },
     slidePrev() {
       console.log('prev')
@@ -194,6 +185,20 @@ export default defineComponent({
         this.index = 2;
       } else {
         this.index -= 1;
+      }
+      this.playVideo();
+    },
+    playVideo() {
+      switch (this.index ) {
+        case 0 :
+          (this.$refs.video01 as any).play();
+          break;
+        case 1 :
+          (this.$refs.video02 as any).play();
+          break;
+        case 2 :
+          (this.$refs.video03 as any).play();
+          break;
       }
     }
   }
@@ -296,7 +301,10 @@ export default defineComponent({
 }
 .shop--arrow-prev svg {
   width: 15px;
-  transform: rotate(90deg);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50% ) rotate(90deg);
 }
 .shop--arrow-next {
   position: absolute;
@@ -312,7 +320,10 @@ export default defineComponent({
 }
 .shop--arrow-next svg {
   width: 15px;
-  transform: rotate(-90deg);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50% ) rotate(-90deg);
   color: white;
 }
 .shop--arrow::before {

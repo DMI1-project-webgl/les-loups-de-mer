@@ -36,7 +36,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
         </div>
       </div>
       <TutoGlobal :alreadyOpen="false" :texts="[
-        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au travail !', 
+        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au&#8239;travail !', 
         'Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger.'
         ]" />
     </section>
