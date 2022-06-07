@@ -8,7 +8,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
   <div class="food-container">
     <Draggable @valueChange="updateNumberFish" :tuto="tuto1"/>
     <Modal v-if="tuto1" :classlist="tuto1Class" text="Utilisez la jauge pour ajouter des petits poissons qui serviront d’alimentation à notre requin, une fois que vous pensez avoir bien dosé, validez votre choix. " @showoff="hidetuto1" :showbtn="false"/>
-      <div class="food--btn-container" @click="validateStep" >
+      <div ref="validate" class="food--btn-container" @click="validateStep" >
         <div class="food--btn">
           <svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
             <path d="M141,300c-5.58,0-10.82-2.85-13.84-7.64L43.8,160.09c-4.82-7.65-2.53-17.75,5.12-22.57,7.64-4.82,17.75-2.53,22.57,5.12l65.86,104.5L227.06,10.57c3.2-8.45,12.65-12.7,21.1-9.5,8.45,3.2,12.7,12.65,9.5,21.1l-101.35,267.27c-2.2,5.8-7.49,9.86-13.67,10.48-.55,.05-1.09,.08-1.64,.08Z" style="fill:#1f3666;"/>
@@ -44,11 +44,13 @@ export default defineComponent({
     },
     hidetuto1() {
       // this.tuto1 = false;
-      this.tuto1Class = "modal-disable"
+      this.tuto1Class = "modal-disable";
       setTimeout(() => {
         this.tuto1 = false
         this.signal.dispatch(['none-tuto-modal'])
       }, 300)
+      if (!this.$refs.validate) return
+      (this.$refs.validate as HTMLElement).classList.add("food--btn-container--valide")
     },
     onSignal(slug: Array<string|number>) {
       switch(slug[0]) {
@@ -81,7 +83,16 @@ export default defineComponent({
   top: 50%;
   right: 10%;
   transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-out;
 }
+
+.food--btn-container--valide {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .food--btn {
   width: 50px;
   height: 50px;

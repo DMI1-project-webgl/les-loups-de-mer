@@ -248,7 +248,7 @@ export default defineComponent({
 
 /* Draggable elements */
 section.draggable {
-  padding-left: 100px;
+  padding-left: 40px;
   position: fixed;
   width: 40vw;
   top: 10%;
