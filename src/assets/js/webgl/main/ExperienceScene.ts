@@ -375,6 +375,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
                 break
             }
             case ExperienceStep.END: {
+                this.signal.dispatch(['experience-end'])
                 this.cameraControl.rayonTarget = 350;
                 this.smogScale.target = 1.2;
                 this.center.x = 0.5

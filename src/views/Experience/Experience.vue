@@ -12,7 +12,7 @@ import Loader from '../../components/Experience/Loader.vue';
     <Canvas />
     <Nav />
     <Loader />
-    <Advancement />
+    <Advancement v-if="showAdvancement" />
     <button class="validate-button" @click="validate">Validate step</button>
     <router-view />
   </div>
@@ -24,12 +24,21 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Experience',
-  data: () => ({
-  }),
+  data() {
+    return {
+      showAdvancement: true
+    }
+  },
   mounted () {
+    this.signal.add(this.onSignal.bind(this))
     this.signal.dispatch(['experience-start'])
   }, 
   methods: {
+    onSignal(slug: string[]) {
+      if(slug[0] === 'experience-end') {
+        this.showAdvancement = false
+      }
+    },
     validate() {
         this.signal.dispatch(['validate-tapped'])
     },
