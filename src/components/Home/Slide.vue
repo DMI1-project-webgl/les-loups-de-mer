@@ -6,7 +6,7 @@ import RoundButton from './../UI/RoundButton.vue'
     <header class="page header">
       <div class="banner--container color--primary">
         <div class="banner--text">
-          <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
+          <p>Achetez notre produit et retrouvez votre vigueur d'antan - <span>CODE PROMO -2%</span> JESAUVELAPLANETE</p>
         </div>
       </div>
       <div class="banner--container color--secondary">
@@ -200,6 +200,15 @@ export default defineComponent({
   transform: translate(0, -50%);
   transition: opacity 1s cubic-bezier(0.165, 0.840, 0.440, 1.000), transform 1s cubic-bezier(0.165, 0.840, 0.440, 1.000);
   position: absolute;
+}
+
+.banner--text {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+.banner--text span {
+  letter-spacing: 2px;
 }
 
 .content-slider:after {

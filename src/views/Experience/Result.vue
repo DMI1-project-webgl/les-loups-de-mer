@@ -41,6 +41,7 @@ export default defineComponent({
       const canvas = document.querySelector('#canvas');
       canvas.classList.add('canvas--left')
       this.signal.dispatch(["success-final"])
+      
       var image = (canvas as HTMLCanvasElement).toDataURL("image/png");
 
       var a = document.createElement('a');
