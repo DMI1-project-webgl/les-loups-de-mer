@@ -62,7 +62,7 @@ export default defineComponent({
 
 <style scoped>
 .newsletter {
-    color: white;
+    color: var(--color-tertiary);
     text-align: center;
     padding: 10% 0;
 }
@@ -78,7 +78,7 @@ export default defineComponent({
 }
 .newsletter--cgu-link {
     text-decoration: underline;
-    color: white;
+    color: var(--color-tertiary);
     font-weight: bold;
 }
 .newsletter--form {
@@ -90,20 +90,20 @@ export default defineComponent({
 }
 .newsletter--form-container input[type="text"] {
     background: #FFFFFF0F;
-    border: 1px solid white;
+    border: 1px solid var(--color-tertiary);
     height: 60px;
     width: -webkit-fill-available;
     padding-left: 30px;
 }
 .newsletter--form-container input[type="text"]::placeholder {
     font-size: 1.2em;
-    color: white;
+    color: var(--color-tertiary);
 }
 .newsletter--content-container input[type="checkbox"] {
     height: 1em;
     aspect-ratio: 1;
     background: #FFFFFF0F;
-    border: 1px solid white;
+    border: 1px solid var(--color-tertiary);
 }
 .newsletter--form-group {
     text-align: left;
@@ -127,11 +127,11 @@ export default defineComponent({
 .newsletter--form-group input[type="submit"] {
     height: 60px;
     width: 60px;
-    border: 1px solid white;
+    border: 1px solid var(--color-tertiary);
     font-size: 0px;
     aspect-ratio: 1;
     margin-left: 15px;
-    background-color: white;
+    background-color: var(--color-tertiary);
     background-image: url("src/assets/img/send.svg");
     background-size: 30px 30px;
     background-repeat: no-repeat;
