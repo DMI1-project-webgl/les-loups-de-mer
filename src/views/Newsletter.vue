@@ -29,15 +29,16 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
                                         <input type="checkbox" id="cgu" name="cgu" value="cgu">
                                         <label for="cgu">J'ai lu et j'accepte les conditions d'utilisations</label>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="newsletter--cgu-container">
-                                <p class="newsletter--cgu-text">
-                                    En vous inscrivant à notre newsletter vous participez à un tirage au sort pour 2<br>
-                                    billets d'avion pour aller voir nos élevages de requins dans l'océan pacifique !<br>
-                                    <a href="/cgu" class="newsletter--cgu-link">voir les conditons du concours ici</a>
-                                </p>
-                            </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="newsletter--cgu-container">
+                            <p class="newsletter--cgu-text">
+                                En vous inscrivant à notre newsletter vous participez à un tirage au sort pour 2<br>
+                                billets d'avion pour aller voir nos élevages de requins dans l'océan pacifique !<br>
+                                <a href="/cgu" class="newsletter--cgu-link">voir les conditons du concours ici</a>
+                            </p>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -62,7 +63,7 @@ export default defineComponent({
 
 <style scoped>
 .newsletter {
-    color: var(--color-tertiary);
+    color: white;
     text-align: center;
     padding: 10% 0;
 }
@@ -78,7 +79,7 @@ export default defineComponent({
 }
 .newsletter--cgu-link {
     text-decoration: underline;
-    color: var(--color-tertiary);
+    color: white;
     font-weight: bold;
 }
 .newsletter--form {
@@ -90,20 +91,20 @@ export default defineComponent({
 }
 .newsletter--form-container input[type="text"] {
     background: #FFFFFF0F;
-    border: 1px solid var(--color-tertiary);
+    border: 1px solid white;
     height: 60px;
     width: -webkit-fill-available;
     padding-left: 30px;
 }
 .newsletter--form-container input[type="text"]::placeholder {
     font-size: 1.2em;
-    color: var(--color-tertiary);
+    color: white;
 }
 .newsletter--content-container input[type="checkbox"] {
     height: 1em;
     aspect-ratio: 1;
     background: #FFFFFF0F;
-    border: 1px solid var(--color-tertiary);
+    border: 1px solid white;
 }
 .newsletter--form-group {
     text-align: left;
@@ -127,11 +128,11 @@ export default defineComponent({
 .newsletter--form-group input[type="submit"] {
     height: 60px;
     width: 60px;
-    border: 1px solid var(--color-tertiary);
+    border: 1px solid white;
     font-size: 0px;
     aspect-ratio: 1;
     margin-left: 15px;
-    background-color: var(--color-tertiary);
+    background-color: white;
     background-image: url("src/assets/img/send.svg");
     background-size: 30px 30px;
     background-repeat: no-repeat;
