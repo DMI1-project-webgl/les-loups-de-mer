@@ -5,7 +5,7 @@ import type BasicObject3D from './BasicObject3D'
 import type Signal from "../utils/Signal";
 import type Loader from './Loader';
 import type BasicApp from './BasicApp';
-import Stats from 'three/examples/jsm/libs/stats.module';
+//import Stats from 'three/examples/jsm/libs/stats.module';
 import type MaterialFactory from './MaterialFactory';
 
 /**
