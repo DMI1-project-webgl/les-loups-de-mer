@@ -33,7 +33,7 @@
         <div class="col-12 px-0">
           <div class="discover--banner-container">
             <p class="discover--banner">
-              <span v-for="index in 4" :key="index">
+              <span v-for="index in 5" :key="index">
                 EFFICACE ET FIABLE
               </span>
             </p>

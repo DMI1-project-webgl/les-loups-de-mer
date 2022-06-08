@@ -86,6 +86,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
         this.period = 10
         this.raycaster = new Raycaster();
+        this.raycaster.far = 280;
         this.pointer = new Vector2();
 
         this.instanceSharkAt(new Vector3(130, 30, 40))
