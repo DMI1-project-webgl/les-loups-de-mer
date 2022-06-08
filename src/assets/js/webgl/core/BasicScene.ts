@@ -26,7 +26,7 @@ export default class BasicScene extends Scene {
   public loader: Loader
   public materials: MaterialFactory
 
-  private stats: Stats
+  //private stats: Stats
   private canvas: HTMLCanvasElement
   private clock: Clock
   private controls!: OrbitControls
