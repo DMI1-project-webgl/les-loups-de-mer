@@ -207,7 +207,7 @@ export default defineComponent({
 
 <style scoped>
 .shop {
-  color: white;
+  color: var(--color-tertiary);
 }
 .shop--heading {
   text-align: center;
@@ -244,7 +244,7 @@ export default defineComponent({
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--color-tertiary);
 }
 .shop--product-price p {
   position: absolute;
@@ -291,7 +291,7 @@ export default defineComponent({
   position: absolute;
   width: 50px;
   height: 50px;
-  border: 1px solid white;
+  border: 1px solid var(--color-tertiary);
   left: 0;
   top: 50%;
   transform: translate(0, -50%);
@@ -312,7 +312,7 @@ export default defineComponent({
   height: 50px;
   right: 0;
   top: 50%;
-  border: 1px solid white;
+  border: 1px solid var(--color-tertiary);
   transform: translate(0, -50%);
   border-radius: 50%;
   cursor: pointer;
@@ -324,7 +324,7 @@ export default defineComponent({
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50% ) rotate(-90deg);
-  color: white;
+  color: var(--color-tertiary);
 }
 .shop--arrow::before {
   position: absolute;
@@ -394,7 +394,7 @@ export default defineComponent({
 .header--text-upper span {
   display: block;
   width: 25%;
-  color: white;
+  color: var(--color-tertiary);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -418,7 +418,7 @@ section.banner {
 }
 .banner--mentions-container {
   margin-bottom: 50px;
-  color: white;
+  color: var(--color-tertiary);
   text-align: center;  
   width: 100vw;
 }

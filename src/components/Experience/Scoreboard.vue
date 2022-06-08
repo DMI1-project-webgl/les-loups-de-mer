@@ -102,7 +102,7 @@ ul {
     display: flex;
     justify-content: space-between;
     font-size: 1em;
-    color: white;
+    color: var(--color-tertiary);
     background-color: #ffffff10;
     padding: 5px 20px;
     margin: 10px 0;
@@ -110,13 +110,13 @@ ul {
     font-size: .7em;
 }
 .scoreboard--title {
-    color: white;
+    color: var(--color-tertiary);
     font-size: .7em;
 }
 
 .scoreboard--value span {
     margin: 2px;
-    color: white;
+    color: var(--color-tertiary);
     font-family: "leaguespartan";
     font-weight: bold;
     font-size: .8em;
