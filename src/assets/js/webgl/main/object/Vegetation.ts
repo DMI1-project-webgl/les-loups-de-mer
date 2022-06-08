@@ -3,10 +3,8 @@ import type BasicScene from '../../core/BasicScene'
 import Rock from './Rock'
 
 export default class Vegetation {
-    public instancedMesh!: InstancedMesh
-    private geometry!: IcosahedronGeometry
-    private positions!: BufferAttribute | InterleavedBufferAttribute
-    private scene!: BasicScene
+    public instancedMesh: InstancedMesh = null
+    private scene: BasicScene = null
     private positionsVegetation: Array<Vector4> = []
     private vegetationOnAnim: Array<number> = []
 

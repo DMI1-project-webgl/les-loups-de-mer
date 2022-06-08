@@ -83,7 +83,7 @@ function getPollutionSmog() {
 export default class EnvironmentSphere extends BasicObject3D {
     private smog: Mesh = null
     public positionsElements: Array<Vector4> = []
-    public mesh: Mesh
+    public mesh: Mesh = null
 
     constructor() {
         const mesh = getSphereMesh()
@@ -140,5 +140,10 @@ export default class EnvironmentSphere extends BasicObject3D {
 
     removePollutionSmog() {
         this.smog.removeFromParent();
+    }
+
+    destroy() {
+        this.mesh.clear()
+        this.smog.clear()
     }
 }
