@@ -6,43 +6,43 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
 <template>
    <div>
         <BackgroundGradient />  
-    <section class="newsletter page-experience">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <div class="col-12 h-100">
-                    <div class="newsletter--content-container">
-                        <div class="newsletter--title">
-                            <h1>Merci pour votre achat</h1>
-                        </div>
-                        <div class="newsletter--text">
-                            <p>Merci infiniment pour votre soutien !<br>Pour suivre nos avancées et recevoirles actualités de nos<br>produits inscrivez-vous à notre newsletter.</p>
-                        </div>
-                        <div class="newsletter--form-container">
-                            <form action="" method="get" class="newsletter--form">
-                                <div class="newsletter--form-col">
-                                    <div class="newsletter--form-group">
-                                        <input type="text" name="name" id="name" required  placeholder="Votre email">
-                                        <input type="submit" value="Subscribe!">
+        <section class="newsletter page-experience">
+            <div class="container-fluid h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="newsletter--content-container">
+                            <div class="newsletter--title">
+                                <h1>Merci pour votre achat</h1>
+                            </div>
+                            <div class="newsletter--text">
+                                <p>Merci infiniment pour votre soutien !<br>Pour suivre nos avancées et recevoirles actualités de nos<br>produits inscrivez-vous à notre newsletter.</p>
+                            </div>
+                            <div class="newsletter--form-container">
+                                <form action="" method="get" class="newsletter--form">
+                                    <div class="newsletter--form-col">
+                                        <div class="newsletter--form-group">
+                                            <input type="text" name="name" id="name" required  placeholder="Votre email">
+                                            <input type="submit" value="Subscribe!">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="newsletter--cgu-group">
-                                    <input type="checkbox" id="cgu" name="cgu" value="cgu">
-                                    <label for="cgu">J'ai lu et j'accepte les conditions d'utilisations</label>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="newsletter--cgu-container">
-                            <p class="newsletter--cgu-text">
-                                En vous inscrivant à notre newsletter vous participez à un tirage au sort pour 2<br>
-                                billets d'avion pour aller voir nos élevages de requins dans l'océan pacifique !<br>
-                                <a href="/cgu" class="newsletter--cgu-link">voir les conditons du concours ici</a>
-                            </p>
+                                    <div class="newsletter--cgu-group">
+                                        <input type="checkbox" id="cgu" name="cgu" value="cgu">
+                                        <label for="cgu">J'ai lu et j'accepte les conditions d'utilisations</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="newsletter--cgu-container">
+                                <p class="newsletter--cgu-text">
+                                    En vous inscrivant à notre newsletter vous participez à un tirage au sort pour 2<br>
+                                    billets d'avion pour aller voir nos élevages de requins dans l'océan pacifique !<br>
+                                    <a href="/cgu" class="newsletter--cgu-link">voir les conditons du concours ici</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
    </div>
 </template>
 
