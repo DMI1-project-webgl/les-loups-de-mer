@@ -86,7 +86,6 @@ header {
   text-align: right;
   position: absolute;
   right: 0;
-  font-size: .7em;
   top: 0;
   transform: translate(0%, -100%) rotate(-90deg);
 }
@@ -139,6 +138,7 @@ header {
 .header--breadcrumb {
   color: var(--color-primary);
   text-transform: uppercase;
+  font-size: .45em;
 }
 
 @keyframes marquee {

@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <div class="values-col col-12 col-lg-6 values--col-content">
+        <div class="values-col col-12 col-lg-5 values--col-content">
             <div class="values--title-container">
                 <h1 class="values--title">Nos valeurs</h1>
             </div>
@@ -121,9 +121,10 @@ export default defineComponent({
     color: var(--color-primary);
     font-family: "frasha-regular";
     position: absolute;
+    line-height: .5em;
     top: 0;
     left: 0;
-    transform: translate(-50%, 100%);
+    transform: translate(-50%, 0%);
 }
 
 .values p {
@@ -132,12 +133,13 @@ export default defineComponent({
 .values--quote::after {
     content: "»";
     font-size: 5em;
+    line-height: .5em;
     color: var(--color-primary);
     font-family: "frasha-regular";
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(-100%, -120%);
+    transform: translate(-100%, 0%);
 }
 .values--name {
     font-family:  "greatvibes-regular";
