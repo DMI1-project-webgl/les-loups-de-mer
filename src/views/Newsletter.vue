@@ -29,7 +29,8 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
                                         <input type="checkbox" id="cgu" name="cgu" value="cgu">
                                         <label for="cgu">J'ai lu et j'accepte les conditions d'utilisations</label>
                                     </div>
-                                </form>
+                                </div>
+                            </form>
                             </div>
                             <div class="newsletter--cgu-container">
                                 <p class="newsletter--cgu-text">

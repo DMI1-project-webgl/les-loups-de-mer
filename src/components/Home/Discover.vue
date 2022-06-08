@@ -34,7 +34,7 @@
           <div class="discover--banner-container">
             <p class="discover--banner">
               <span v-for="index in 4" :key="index">
-                WONDER EFFECTS
+                EFFICACE ET FIABLE
               </span>
             </p>
           </div>
@@ -106,9 +106,9 @@ export default defineComponent({
     align-items: flex-end;
 }
 .discover--subtitle {
-  font-size: .7em;
-  color: var(--color-tertiary);
-  font-weight: 900;
+  font-size: .54em;
+  color: var(--light-blue);
+  font-weight: 400;
 }
 .discover--banner-container {
   border-top: 2px solid var(--color-primary);
@@ -118,8 +118,6 @@ export default defineComponent({
   overflow: hidden;
 }
 .discover--banner {
-  font-size: 2em;
-  line-height: 1em;
   width: 200%;
   margin-left: 16px;
   display: flex;
@@ -130,7 +128,16 @@ export default defineComponent({
 
 .discover--banner span {
   display: block;
+  line-height: 1;
+  margin: 5px 0 -5px 0;
+  font-size: 3.2em;
+  font-weight: 400;
   width: 50%;
+}
+
+.discover--banner span:nth-of-type(2n) {
+  color: rgba(0,0,0,0);
+  -webkit-text-stroke: 1px var(--color-primary);
 }
 
 @keyframes marquee {

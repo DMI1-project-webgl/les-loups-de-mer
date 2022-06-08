@@ -61,8 +61,23 @@ main::before {
 }
 @font-face {
   font-family: "leaguespartan";
-  src: url("./fonts/leaguespartan-variablefont_wght-webfont.woff2") format("woff2"),
-         url("./fonts/leaguespartan-variablefont_wght-webfont.woff") format("woff");
+  src: url("./fonts/LeagueSpartan-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/LeagueSpartan-Light.woff2") format("woff2");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/LeagueSpartan-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/LeagueSpartan-SemiBold.woff2") format("woff2");
+  font-weight: 600;
 }
 
 
@@ -156,24 +171,22 @@ h2 {
 h3 {
   font-family: "leaguespartan";
   font-size: .8em;
-  font-variation-settings: 'wght' 900;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 /* H4- LeagueSpartan Light 14pt */
 h4 {
   font-family: "leaguespartan";
   font-size: .6em;
-  font-variation-settings: 'wght' 300;
+  font-weight: 400;
 }
 
 /* p- LeagueSpartan Regular 16pt - interlignagne 20 */
 p {
   font-family: "leaguespartan";
-  font-size: .6em;
-  line-height: 20pt;
-  font-variation-settings: 'wght' 900;
-  font-weight: bold;
+  font-size: .5em;
+  line-height: 1.2;
+  font-weight: 400;
 }
 
 img {
