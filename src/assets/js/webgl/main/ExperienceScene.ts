@@ -567,8 +567,16 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         for(let model of this.models) {
             model.destroy();
         }
-        this.vegetation.destroy()
-        this.mainFish.destroy()
-        this.sphere.destroy()
+        if (this.vegetation) {
+            this.vegetation.destroy()
+        }
+
+        if (this.mainFish) {
+            this.mainFish.destroy()
+        }
+
+        if (this.sphere) {
+            this.sphere.destroy()
+        }
     }
 }
