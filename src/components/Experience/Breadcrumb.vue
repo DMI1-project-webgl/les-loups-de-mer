@@ -52,7 +52,7 @@ export default defineComponent({
 }
 .breadcrumb--container { 
     position: relative;
-    border: 1px solid white;
+    border: 1px solid var(--color-tertiary);
     height: 2px;
     margin: 0 15%;
     position: relative;
@@ -62,7 +62,7 @@ export default defineComponent({
     height: 10px;
     border-radius: 50%;
     background-color: var(--color-primary);
-    border: 1px solid white;
+    border: 1px solid var(--color-tertiary);
     position: absolute;
     top: 50%;
 }
@@ -79,7 +79,7 @@ export default defineComponent({
     transform: translate( 50% , -50% );
 }
 .breadcrumb--step-content {
-    color: white;
+    color: var(--color-tertiary);
     font-size: .7em;
     text-align: center;
     white-space: nowrap;
@@ -95,11 +95,11 @@ export default defineComponent({
 }
 
 .is-active.breadcrumb--step {
-    background-color: white;
+    background-color: var(--color-tertiary);
 }
 .breadcrumb--title h2 {
     font-size: .7em;
-    color: white;
+    color: var(--color-tertiary);
     padding: 15px;
     text-align: center;
 }

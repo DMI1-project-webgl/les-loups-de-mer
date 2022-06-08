@@ -85,7 +85,7 @@ export default defineComponent({
 .Loader-title {
     font-family: "frasha-regular";
     font-size: 0.9em;
-    color: #fff;
+    color: var(--color-tertiary);
     font-weight: 300;
     margin-top: 220px;
 }
@@ -98,21 +98,21 @@ export default defineComponent({
 .Loader-number {
     font-family: "frasha-regular";
     font-size: 0.7em;
-    color: #fff;
+    color: var(--color-tertiary);
     font-weight: 300;
     position: absolute;
     margin-left: 380px;
     margin-top: -10%;
 }
 .Loader-circle {
-    position: absolute;
-    margin-top: -10%;
+  position: absolute;
+  margin-top: -10%;
   border: 3px solid rgba(164, 185, 255, 0.6);
   border-radius: 50%;
-  border-top: 3px solid  rgba(255,255,255,1);
+  border-top: 3px solid var(--color-tertiary);
   width: 220px;
   height: 220px;
-background: radial-gradient(rgba(164, 185, 255, 0) 50%, rgba(164, 185, 255, 0.3));
+  background: radial-gradient(rgba(164, 185, 255, 0) 50%, rgba(164, 185, 255, 0.3));
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
   transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);

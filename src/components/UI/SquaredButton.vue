@@ -78,7 +78,7 @@ export default defineComponent({
   height: 182px;
   border-radius: 50%;
   transform: scale(0);
-  background: #fff;
+  background: var(--color-tertiary);
   transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 

@@ -98,7 +98,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--color-tertiary);
   border-radius: 50%;
   overflow: hidden;
 }
@@ -111,7 +111,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
 }
 .food--btn-text {
-  color: white;
+  color: var(--color-tertiary);
   font-size: .5em;
   padding: 5px 0;
   text-align: center;

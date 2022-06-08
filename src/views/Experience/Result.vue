@@ -56,7 +56,7 @@ export default defineComponent({
 
 <style scoped>
 .result {
-  color: white;
+  color: var(--color-tertiary);
   opacity: 0;
   transform-origin: top;
   transform: translateY(5px) scaleY(1.08);
