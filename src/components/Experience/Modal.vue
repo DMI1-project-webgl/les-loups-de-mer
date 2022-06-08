@@ -80,7 +80,7 @@ export default defineComponent({
   flex-direction: column;
 }
 .modal--content {
-  background-color: white;
+  background-color: var(--color-tertiary);
   padding: 30px;
   position: relative;
   font-size: .7em;
@@ -91,7 +91,7 @@ export default defineComponent({
 }
 .modal.none{
   max-width: 0;
-  color: white;
+  color: var(--color-tertiary);
   overflow: hidden;
   /* border-radius: 50%;
   transition: max-width .5s ease-in-out; */

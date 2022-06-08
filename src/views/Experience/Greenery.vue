@@ -124,7 +124,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--color-tertiary);
   border-radius: 50%;
   overflow: hidden;
   position: relative;
@@ -141,7 +141,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
 }
 .greenery--btn-text {
-  color: white;
+  color: var(--color-tertiary);
   font-size: .5em;
   padding: 5px 0;
   text-align: center;
@@ -153,7 +153,7 @@ export default defineComponent({
   bottom: 0;
   left: 50px;
   margin: 40px;
-  background-color: #fff;
+  background-color: var(--color-tertiary);
   font-family: "leaguespartan";
   font-size: 0.5em;
   padding: 20px 30px;

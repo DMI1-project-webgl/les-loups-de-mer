@@ -40,6 +40,6 @@
     pointer-events: all;
 }
 .nav--link svg {
-  color: white;
+  color: var(--color-tertiary);
 }
 </style> 

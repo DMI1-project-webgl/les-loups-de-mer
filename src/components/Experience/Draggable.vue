@@ -258,7 +258,7 @@ section.draggable {
 #draggable--container{
   height: 1px;
   width: 500px;
-  background-color: white;
+  background-color: var(--color-tertiary);
   border-radius: 7px 7px;
   position: relative;
   margin: auto 0;
@@ -267,7 +267,7 @@ section.draggable {
   overflow: hidden;
   width: 50px;
   height: 50px;
-  background-color: white;
+  background-color: var(--color-tertiary);
   position: absolute;
   left: 0;
   top: 50%;
@@ -288,7 +288,7 @@ section.draggable {
   height: 100%;
 }
 .draggable--text {
-  color: white;
+  color: var(--color-tertiary);
   margin: 0 20px;
   font-size: 0.5em;
   font-weight: bold;
@@ -297,7 +297,7 @@ section.draggable {
   justify-content: flex-end;
 }
 .draggable--text span {
-  color: white;
+  color: var(--color-tertiary);
   font-size: 1.3em;
   font-weight: bold;
 
@@ -305,7 +305,7 @@ section.draggable {
 .draggable--legend {
   position: absolute;
   top: 0;
-  color: white;
+  color: var(--color-tertiary);
   opacity: .5;
   padding: 15px;
   font-size: .4em;
@@ -324,7 +324,7 @@ section.draggable {
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  background-color: white;
+  background-color: var(--color-tertiary);
 }
 .draggable--step.step-1 {
   left: 0;

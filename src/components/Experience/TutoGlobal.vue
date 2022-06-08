@@ -138,7 +138,7 @@ export default defineComponent({
 }
 
 .TutoGlobal p {
-    color: #FFF;
+    color: var(--color-tertiary);
     text-align: center;
     font-family: "frasha-regular";
     font-size: 0.9rem;
@@ -161,7 +161,7 @@ export default defineComponent({
     height: min-content;
     display: block;
     margin: auto;
-    color: #FFF;
+    color: var(--color-tertiary);
     text-align: center;
     font-family: "frasha-regular";
     font-size: 1.2rem;
@@ -172,7 +172,7 @@ export default defineComponent({
 }
 
 .TutoGlobal-next:hover {
-    text-shadow: #FFF 0px 0 10px;
+    text-shadow: var(--color-tertiary) 0px 0 10px;
 }
 
 .TutoGlobal-next-container {

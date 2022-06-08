@@ -60,7 +60,7 @@ export default defineComponent({
 .aileron--img {
     width: 160px;
     height: 150px;
-    border-right: 2px dashed white;
+    border-right: 2px dashed var(--color-tertiary);
     padding-right: 10px;   
 }
 .aileron--img svg {

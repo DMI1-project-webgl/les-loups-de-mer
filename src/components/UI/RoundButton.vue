@@ -88,7 +88,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   transform: scale(0);
-  background: #fff;
+  background: var(--color-tertiary);
   border-radius: 50%;
   transition: transform 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }

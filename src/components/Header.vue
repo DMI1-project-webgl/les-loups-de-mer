@@ -19,7 +19,7 @@
         </button>
       </div>
       <div class="header--text-container">
-        <h4 class="header--text">Nos produits</h4>
+        <p class="header--breadcrumb">Nos produits</p>
       </div>
     </div>
   </header>
@@ -58,7 +58,7 @@ header {
   left: 0;
   width: 100px;
   height: 97%;
-  border-right: 1px solid currentColor;
+  border-right: 1px solid var(--color-primary);
   z-index: 1;
   margin-top: 3%;
 }
@@ -94,9 +94,8 @@ header {
   width: 100%; 
   height: 100%;
   pointer-events: all;
+  color: var(--color-primary);
 }
-
-
 .banner--container {
   border-top: 2px solid var(--color-primary);
   border-bottom: 2px solid var(--color-primary);
@@ -120,6 +119,10 @@ header {
 .header--text-upper span {
   display: block;
   width: 25%;
+}
+.header--breadcrumb {
+  color: var(--color-primary);
+  text-transform: uppercase;
 }
 
 @keyframes marquee {
