@@ -69,8 +69,8 @@ export default defineComponent({
     width: 100%;
 }
 .aileron--text {
-    font-size: .85em;
-    margin-top: 8px;
+    font-size: .8em;
+    margin-top: 10px;
 }
 .aileron--percent {
     position: absolute;

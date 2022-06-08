@@ -88,7 +88,7 @@ export default defineComponent({
 }
 .breadcrumb--step-content {
     color: var(--color-tertiary);
-    font-size: .7em;
+    font-size: .8em;
     text-align: center;
     white-space: nowrap;
     position: absolute;

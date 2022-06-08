@@ -1,6 +1,6 @@
 <template>
     <section class="values color--secondary row">
-        <div class="values-col col-12 col-lg-5 h-lg-100">
+        <div class="values-col col-12 col-lg-6 h-lg-100">
             <div class="values--img-container">
                 <div class="values--img"></div>
                 <div class="values--img">
@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="values-col col-12 col-lg-5 values--col-content">
-            <div class="values--title-container">
+            <div class="values--title-container"> 
                 <h1 class="values--title">Nos valeurs</h1>
             </div>
             <p class="values--text">Chez les loups de mer, on est passionné du milieu marin depuis 1987, nous sommes une équipe composée de cuisiniers, scientifiques et spécialistes de la faune et de la flore aquatique. Très soucieux du développement de cet espace naturel magique, nous travaillons à base de produits frais et sourcés avec attention. </p>
@@ -57,15 +57,13 @@ export default defineComponent({
 .values-col {
     padding: 0;
 }
-
-.values--title {
-    margin-left: -40px;
+.values--title-container {
+    margin-bottom: 20px;
 }
-
 .values--col-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     padding-bottom: 100px;
 }
 .values--img-container {
@@ -106,14 +104,15 @@ export default defineComponent({
 }
 
 .values--text {
-    padding: 5px 10% 0px 40px;
+    padding: 5px 25% 40px 0px;
 }
 .values--quote {
-    padding: 5px 90px 0px 40px;
+    padding: 5px 25% 0px 0px;
     position: relative;
+    margin-bottom: 20px;
 }
 .values--name-container {
-    padding: 10px 0 0px 40px;
+    padding: 10px 0 0px 0px;
 }
 .values--quote::before {
     content: "«";
@@ -124,7 +123,7 @@ export default defineComponent({
     line-height: .5em;
     top: 0;
     left: 0;
-    transform: translate(-50%, 0%);
+    transform: translate(-130%, 0%);
 }
 
 .values p {
@@ -139,7 +138,7 @@ export default defineComponent({
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(-100%, 0%);
+    transform: translate(-280%, 0%);
 }
 .values--name {
     font-family:  "greatvibes-regular";

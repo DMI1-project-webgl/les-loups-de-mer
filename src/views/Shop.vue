@@ -3,13 +3,14 @@ import SquaredButton from './../components/UI/SquaredButton.vue';
 import BackgroundGradient from './../components/BackgroundGradient.vue';
 import Nav from './../components/Nav.vue';
 import RoundButton from './../components/UI/RoundButton.vue'
+import Modal from './../components/Experience/Modal.vue'
 </script>
 
 <template> 
   <div>
     <BackgroundGradient />
     <Nav/>
-    <section class="shop page-experience">
+    <section ref="blur" class="shop page-experience blur">
       <div class="container-fluid h-100">
         <div class="row h-100">
           <div class="col-3 h-100 position-relative">
@@ -89,8 +90,8 @@ import RoundButton from './../components/UI/RoundButton.vue'
                 <h1>Nos packs</h1>
                 <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
               </div>
-              <div ref="blur" class="shop--product-video-container position-relative blur">
-                <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
+              <div class="shop--product-video-container position-relative">
+                <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/small.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -119,9 +120,6 @@ import RoundButton from './../components/UI/RoundButton.vue'
                   </svg>
                 </button>
               </div>
-              <div ref="blurbtn" class="shop--blur-btn">
-                <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/>
-              </div>
             </div>
           </div>
           <div class="col-3 h-100">
@@ -135,7 +133,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
               <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
                 <p>90€</p>
               </div>
-                <RoundButton link="/newsletter" text="Achetter les produits" :isWhite="true" :isRouterLink="true" />
+              <RoundButton link="/newsletter" text="Achetter les produits" :isWhite="true" :isRouterLink="true" />
             </div>
           </div>
         </div> 
@@ -144,10 +142,14 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <section class="banner">
       <div class="banner--mentions-container">
         <div class="banner--mentions">
-          <p> Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
+          <p>Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
         </div>
       </div>
     </section>
+    <div ref="blurbtn" class="shop--blur-btn">
+      <Modal v-if="promo" text="Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2%: JESAUVELAPLANETE" @showoff="removeEffect" :showbtn="true"/>
+      <!-- <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/> -->
+    </div>
   </div>
 </template>
 
@@ -159,7 +161,8 @@ export default defineComponent({
   data: function () {
     return {
       index: 0,
-      videos: []
+      videos: [],
+      promo: true,
     }
   },
   mounted() {
@@ -171,8 +174,7 @@ export default defineComponent({
       (this.$refs.blur as any).classList.remove('blur');
       (this.$refs.blurbtn as any).classList.add("d-none");
       (this.$refs.video01 as any).play()
-      
-      // (this.$refs.video03 as any).play()
+      this.promo = false;
     },
     slideNext() {
       this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
@@ -266,7 +268,7 @@ export default defineComponent({
 }
 .shop--product-price {
   position: absolute;
-  left: 0;
+  left: 15px;
   width: 60px;
   height: 60px;
   border-radius: 50%;

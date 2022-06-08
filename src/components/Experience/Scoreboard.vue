@@ -102,7 +102,7 @@ ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
-    font-size: 1em;
+    font-size: .8em;
     color: var(--color-tertiary);
     background-color: #ffffff10;
     padding: 12px 20px 10px 20px;

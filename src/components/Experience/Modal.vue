@@ -99,6 +99,11 @@ export default defineComponent({
 .modal.none .modal--btn-container {
   opacity: 0;
 }
-
+.shop--blur-btn .modal {
+  position: absolute;
+  min-width: 400px;
+  left: 50%;
+  aspect-ratio: unset;
+}
 </style>
 
