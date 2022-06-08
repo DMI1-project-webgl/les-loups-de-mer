@@ -83,7 +83,7 @@ export default defineComponent({
   background-color: var(--color-tertiary);
   padding: 30px;
   position: relative;
-  font-size: .7em;
+  font-size: .8em;
 }
 .modal--btn {
   align-items: flex-start;

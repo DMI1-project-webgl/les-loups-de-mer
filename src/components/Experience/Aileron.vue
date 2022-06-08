@@ -45,6 +45,7 @@ export default defineComponent({
 <style scoped>
 .aileron {
     position: relative;
+    padding: 5px;
 }
 .aileron .tuto {
     box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
@@ -68,7 +69,8 @@ export default defineComponent({
     width: 100%;
 }
 .aileron--text {
-    font-size: .7em;
+    font-size: .85em;
+    margin-top: 8px;
 }
 .aileron--percent {
     position: absolute;
