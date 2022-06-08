@@ -16,22 +16,22 @@ import Rock from './object/Rock'
 export default class ExperienceScene extends BasicScene implements ExperienceListener {
 
     // Screen management
-    private raycaster: Raycaster
-    private pointer: Vector2
+    private raycaster: Raycaster = null
+    private pointer: Vector2 = null
     private cursor: Cursor = { x: 0 , y: 0, xWin: 0, yWin: 0 }
     private center = {x: 0, y:0 }
-    private period: number
+    private period: number = null
     private _clock: Clock = new Clock()
-    private cursorVegetation: HTMLElement
-    private cursorVegetationChild: HTMLElement
-    private cursorVegetationChild2: HTMLElement
+    private cursorVegetation: HTMLElement = null
+    private cursorVegetationChild: HTMLElement = null
+    private cursorVegetationChild2: HTMLElement = null
     private cameraControl = { rayon: 450, rayonTarget: 450}
     private smogScale = { current: 1.2, target: 1.2}
     private cursorControl = { current: 0, target: 0}
     private statusTuto = true
 
     // State machine
-    private stateMachine: ExperienceStateMachine
+    private stateMachine: ExperienceStateMachine = null
     private depollutionStatus: DepollutionStatus = {
         bottlesPicked: 0,
         cansPicked: 0,
@@ -76,9 +76,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     }
 
     init () {
-        // this.background = this.materials.getEnv('main')
-        // this.background = new Color(0x002244);
-
         this.stateMachine = new ExperienceStateMachine();
         this.stateMachine.register(this)
 
@@ -89,6 +86,7 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
         this.period = 10
         this.raycaster = new Raycaster();
+        this.raycaster.far = 280;
         this.pointer = new Vector2();
 
         this.instanceSharkAt(new Vector3(130, 30, 40))
@@ -96,17 +94,13 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
 
     }
 
-    ///////////////////////////////////
-    // -- State machine callbacks -- //
-    ///////////////////////////////////
-
-    // ...
-
     ////////////////////////////
     // -- Events callbacks -- //
     ////////////////////////////
     
     update () {
+        console.log('Number of triangles', this.renderer.info.render.triangles)
+
         // Making sphere shader animation
         if (this.sphere) {
             this.sphereMaterial.uniforms.uTime.value = this._clock.getElapsedTime()
@@ -315,6 +309,17 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         if (slug[0] == 'loaded') {
             this.cameraControl.rayonTarget = 300
             this.smogScale.target = 1.12
+        }
+
+        if (slug[0] == 'download-ecosystem') {
+            this.renderer.render(this, this.camera);
+            this.renderer.domElement.toBlob(function(blob){
+                var a = document.createElement('a');
+                var url = URL.createObjectURL(blob);
+                a.href = url;
+                a.download = 'ecosystem.png';
+                a.click();
+            }, 'image/png', 1.0);
         }
     }
 
@@ -562,6 +567,17 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
         super.destroy()
         for(let model of this.models) {
             model.destroy();
+        }
+        if (this.vegetation) {
+            this.vegetation.destroy()
+        }
+
+        if (this.mainFish) {
+            this.mainFish.destroy()
+        }
+
+        if (this.sphere) {
+            this.sphere.destroy()
         }
     }
 }

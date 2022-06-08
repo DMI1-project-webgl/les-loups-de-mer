@@ -80,10 +80,10 @@ export default defineComponent({
   flex-direction: column;
 }
 .modal--content {
-  background-color: white;
+  background-color: var(--color-tertiary);
   padding: 30px;
   position: relative;
-  font-size: .7em;
+  font-size: .8em;
 }
 .modal--btn {
   align-items: flex-start;
@@ -91,7 +91,7 @@ export default defineComponent({
 }
 .modal.none{
   max-width: 0;
-  color: white;
+  color: var(--color-tertiary);
   overflow: hidden;
   /* border-radius: 50%;
   transition: max-width .5s ease-in-out; */
@@ -99,6 +99,11 @@ export default defineComponent({
 .modal.none .modal--btn-container {
   opacity: 0;
 }
-
+.shop--blur-btn .modal {
+  position: absolute;
+  min-width: 400px;
+  left: 50%;
+  aspect-ratio: unset;
+}
 </style>
 

@@ -2,7 +2,7 @@
   <header v-if="display" id="1" class="page-full header">
     <div v-if="banner" class="banner--container color--primary">
       <div class="banner--text">
-        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
+        <p>Achetez notre produit et retrouvez votre vigueur d'antan - <span>CODE PROMO -2%</span> JESAUVELAPLANETE</p>
       </div>
     </div>
     <div v-if="banner != false" class="banner--container color--secondary">
@@ -19,7 +19,7 @@
         </button>
       </div>
       <div class="header--text-container">
-        <h4 class="header--text">Nos produits</h4>
+        <p class="header--breadcrumb">{{breadcrumb}}</p>
       </div>
     </div>
   </header>
@@ -30,7 +30,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'HeaderElement',
-  props: ['show','display', 'banner'],
+  props: ['show','display', 'banner', 'breadcrumb'],
   emits: ['next'],
   
   mounted () {
@@ -52,13 +52,24 @@ header {
   pointer-events: none;
   z-index: 1;
 }
+.banner--text p {
+  font-size: 0.42em;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-weight: normal;
+}
+
+.banner--text span {
+  letter-spacing: 2px;
+  font-weight: 400;
+}
 .header--main {
   position: relative;
   bottom: 0;
   left: 0;
   width: 100px;
   height: 97%;
-  border-right: 1px solid currentColor;
+  border-right: 1px solid var(--color-primary);
   z-index: 1;
   margin-top: 3%;
 }
@@ -70,12 +81,13 @@ header {
   transform: translate(100%, 0);
 }
 .header--text-container {
+  transform-origin: bottom right;
   white-space: nowrap;
   text-align: right;
   position: absolute;
   right: 0;
   top: 0;
-  transform: translate(31%, 100%) rotate(-90deg);
+  transform: translate(0%, -100%) rotate(-90deg);
 }
 .banner--container {
   width: 100vw;
@@ -89,14 +101,16 @@ header {
 .header--text-upper {
   text-transform: uppercase;
   white-space: nowrap;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 0.8em;
 }
 .header--link {
   width: 100%; 
   height: 100%;
   pointer-events: all;
+  color: var(--color-primary);
 }
-
-
 .banner--container {
   border-top: 2px solid var(--color-primary);
   border-bottom: 2px solid var(--color-primary);
@@ -106,7 +120,7 @@ header {
 }
 .header--text-upper {
   font-family: "leaguespartan";
-  font-size: 0.5em;
+  font-size: 0.4em;
   font-weight: 400;
   line-height: 1em;
   width: 200%;
@@ -120,6 +134,11 @@ header {
 .header--text-upper span {
   display: block;
   width: 25%;
+}
+.header--breadcrumb {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: .45em;
 }
 
 @keyframes marquee {

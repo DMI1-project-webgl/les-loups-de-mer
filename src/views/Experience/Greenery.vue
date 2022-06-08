@@ -36,7 +36,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
         </div>
       </div>
       <TutoGlobal :alreadyOpen="false" :texts="[
-        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au travail !', 
+        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au&#8239;travail !', 
         'Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger.'
         ]" />
     </section>
@@ -68,7 +68,7 @@ export default defineComponent({
           break
         case 'number-coraux':
           this.hidetuto1()
-          if (slug[1] > 10 && this.$refs.stateVege) {
+          if (slug[1] > 16 && this.$refs.stateVege) {
             // this.signal.dispatch(['validate-tapped']);
             (this.$refs.stateVege as HTMLElement).innerHTML = "Végétaux suffisant";
             (this.$refs.stateVege as HTMLElement).classList.remove("state-vegetaux--error");
@@ -124,7 +124,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--color-tertiary);
   border-radius: 50%;
   overflow: hidden;
   position: relative;
@@ -141,7 +141,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
 }
 .greenery--btn-text {
-  color: white;
+  color: var(--color-tertiary);
   font-size: .5em;
   padding: 5px 0;
   text-align: center;
@@ -153,7 +153,7 @@ export default defineComponent({
   bottom: 0;
   left: 50px;
   margin: 40px;
-  background-color: #fff;
+  background-color: var(--color-tertiary);
   font-family: "leaguespartan";
   font-size: 0.5em;
   padding: 20px 30px;
@@ -164,6 +164,6 @@ export default defineComponent({
 }
 
 .state-vegetaux--valide {
-  color: #00d100;
+  color: #00aa00;
 }
 </style>

@@ -12,6 +12,14 @@ export interface IUniform<TValue = any> {
     value: TValue;
 }
 
+export enum FishStep {
+    FIRST = 0,
+    SECOND = 25,
+    THIRD = 50,
+    FOURTH = 75,
+    FITH = 100
+}
+
 type GPUVariableDetail = {
     name: string;
     initialValueTexture: Texture;
@@ -35,18 +43,20 @@ type FishUniform = {
 
 export default class MainFish {
 
-    private renderer: WebGLRenderer
-    private scene: Scene
-    public WIDTH: number = 16 // 32
+    private renderer: WebGLRenderer = null
+    private scene: Scene = null
+    public WIDTH: number = 32 // 64
     private BOUNDS: number = 200 // 800
-    private velocityVariable: GPUVariableDetail
-    private positionVariable: GPUVariableDetail
-    private positionUniforms: { [uniform: string]: IUniform<any>; }
-    private velocityUniforms: { [uniform: string]: IUniform<any>; }
-    private fishUniforms: FishUniform
+    private velocityVariable: GPUVariableDetail = null
+    private positionVariable: GPUVariableDetail = null
+    private positionUniforms: { [uniform: string]: IUniform<any>; } = null
+    private velocityUniforms: { [uniform: string]: IUniform<any>; } = null
+    private fishUniforms: FishUniform = null
     private last: number = performance.now();
-    private gpuCompute: GPUComputationRenderer
-    private fishGeometry: FishGeometry
+    private gpuCompute: GPUComputationRenderer = null
+    private fishGeometry: FishGeometry = null
+
+    private fishMesh: Mesh = null;
     
     constructor(renderer: WebGLRenderer, scene: Scene) {
         this.renderer = renderer
@@ -72,7 +82,27 @@ export default class MainFish {
 
     onSignal (slug: Array<string|number>) {
         if (slug[0] === 'numberFish') {
-            this.fishUniforms[ 'number' ].value = Number(slug[1]) * 2
+            switch(slug[1]) {
+                case FishStep.FIRST:
+                    this.fishUniforms[ 'number' ].value = Number(0) * 2
+                    break
+                case FishStep.SECOND:
+                    this.fishUniforms[ 'number' ].value = Number(50) * 2
+                    this.velocityUniforms[ 'separationDistance' ].value = 30.0
+                    break
+                case FishStep.THIRD:
+                    this.fishUniforms[ 'number' ].value = Number(100) * 2
+                    this.velocityUniforms[ 'separationDistance' ].value = 26.0
+                    break
+                case FishStep.FOURTH:
+                    this.fishUniforms[ 'number' ].value = Number(150) * 2
+                    this.velocityUniforms[ 'separationDistance' ].value = 23.0
+                    break
+                case FishStep.FITH:
+                    this.fishUniforms[ 'number' ].value = Number(250) * 2
+                    this.velocityUniforms[ 'separationDistance' ].value = 20.0
+                    break
+            }
         }
     }
 
@@ -183,9 +213,11 @@ export default class MainFish {
         } );
 
         const fishMesh = new Mesh( this.fishGeometry, material );
+        this.fishMesh = fishMesh
         fishMesh.rotation.y = Math.PI / 2;
         fishMesh.matrixAutoUpdate = false;
         fishMesh.updateMatrix();
+        
 
         this.scene.add( fishMesh );
     }
@@ -248,5 +280,9 @@ export default class MainFish {
 
         this.fishUniforms[ 'texturePosition' ].value = this.gpuCompute.getCurrentRenderTarget( this.positionVariable ).texture;
         this.fishUniforms[ 'textureVelocity' ].value = this.gpuCompute.getCurrentRenderTarget( this.velocityVariable ).texture;
+    }
+
+    destroy() {
+        this.fishMesh.clear()
     }
 }

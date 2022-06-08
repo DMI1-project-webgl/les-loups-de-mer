@@ -1,6 +1,6 @@
 <template>
     <section class="values color--secondary row">
-        <div class="values-col col-12 col-lg-5 h-lg-100">
+        <div class="values-col col-12 col-lg-6 h-lg-100">
             <div class="values--img-container">
                 <div class="values--img"></div>
                 <div class="values--img">
@@ -8,8 +8,8 @@
                 </div>
             </div>
         </div>
-        <div class="values-col col-12 col-lg-6 values--col-content">
-            <div class="values--title-container">
+        <div class="values-col col-12 col-lg-5 values--col-content">
+            <div class="values--title-container"> 
                 <h1 class="values--title">Nos valeurs</h1>
             </div>
             <p class="values--text">Chez les loups de mer, on est passionné du milieu marin depuis 1987, nous sommes une équipe composée de cuisiniers, scientifiques et spécialistes de la faune et de la flore aquatique. Très soucieux du développement de cet espace naturel magique, nous travaillons à base de produits frais et sourcés avec attention. </p>
@@ -18,7 +18,7 @@
                 <p class="values--name">Christelle Deneuve</p>
                 <p class="values--profession">Fondatrice des Loups de mer</p>
             </div>
-            <div class="values--link-container">
+            <div ref="btn" class="values--link-container btn-round-hidden">
                 <RoundButton link="/actions" text="Suivant" :isClickHear="true" :isRouterLink="true" />
             </div>
             <div class="ws-50"></div>
@@ -33,6 +33,11 @@ import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
   name: 'ValuesPage',
+  mounted () {
+      setTimeout(() => {
+            (this.$refs.btn as HTMLElement).classList.add('btn-round-show')
+        }, 100)
+  },
   beforeDestroy () {
   },
   components: { RoundButton }
@@ -43,7 +48,7 @@ export default defineComponent({
 
 .values {
     min-height: 100vh;
-    padding: 105px 0 20px 100px;
+    padding: 80px 0 20px 100px;
     width: 100vw;
     margin: 0;
     overflow-x: hidden;
@@ -52,16 +57,13 @@ export default defineComponent({
 .values-col {
     padding: 0;
 }
-
-.values--title {
-    margin-left: -40px;
+.values--title-container {
+    margin-bottom: 20px;
 }
-
 .values--col-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 100px;
+    justify-content: center;
 }
 .values--img-container {
     height: 100%;
@@ -101,14 +103,15 @@ export default defineComponent({
 }
 
 .values--text {
-    padding: 5px 10% 0px 40px;
+    padding: 5px 30% 20px 0px;
 }
 .values--quote {
-    padding: 5px 90px 0px 40px;
+    padding: 5px 30% 0px 0px;
     position: relative;
+    margin-bottom: 20px;
 }
 .values--name-container {
-    padding: 10px 0 0px 40px;
+    padding: 10px 0 0px 0px;
 }
 .values--quote::before {
     content: "«";
@@ -116,9 +119,10 @@ export default defineComponent({
     color: var(--color-primary);
     font-family: "frasha-regular";
     position: absolute;
+    line-height: .5em;
     top: 0;
     left: 0;
-    transform: translate(-50%, 100%);
+    transform: translate(-130%, 0%);
 }
 
 .values p {
@@ -127,12 +131,13 @@ export default defineComponent({
 .values--quote::after {
     content: "»";
     font-size: 5em;
+    line-height: .5em;
     color: var(--color-primary);
     font-family: "frasha-regular";
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(-100%, -120%);
+    transform: translate(-380%, 0%);
 }
 .values--name {
     font-family:  "greatvibes-regular";

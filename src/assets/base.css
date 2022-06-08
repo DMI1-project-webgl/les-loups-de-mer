@@ -4,53 +4,21 @@
   --dark-blue: #163860;
   --blue: #23548f;
   --light-blue: #4f85c1;
+  --white: #ffffff;
 
   --light-brow: #fef9f0;
   --green: #8aa385;
   --red: #da5e33;
   --pink: #ed9f91;
   --yellow: #f5b548;
-
-
-  /* default theme */
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
 /* semantic color variables for this project */
 :root {
   --color-primary: var(--dark-blue);
+  --color-primary-bis: var(--blue);
   --color-secondary: var(--light-brow);
-  --color-tertiary: var(--blue);
-
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
+  --color-tertiary: var(--white);
 }
 
 main::before {
@@ -81,20 +49,6 @@ main::before {
   90% { transform:translate(-10%, 10%); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
-
 @font-face {
   font-family: "frasha-regular";
   src: url("./fonts/frastha_regular-webfont.woff2") format("woff2"),
@@ -107,8 +61,23 @@ main::before {
 }
 @font-face {
   font-family: "leaguespartan";
-  src: url("./fonts/leaguespartan-variablefont_wght-webfont.woff2") format("woff2"),
-         url("./fonts/leaguespartan-variablefont_wght-webfont.woff") format("woff");
+  src: url("./fonts/LeagueSpartan-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/LeagueSpartan-Light.woff2") format("woff2");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/LeagueSpartan-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "leaguespartan";
+  src: url("./fonts/LeagueSpartan-SemiBold.woff2") format("woff2");
+  font-weight: 600;
 }
 
 
@@ -202,22 +171,22 @@ h2 {
 h3 {
   font-family: "leaguespartan";
   font-size: .8em;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 /* H4- LeagueSpartan Light 14pt */
 h4 {
   font-family: "leaguespartan";
-  font-size: .85em;
-  font-weight: lighter;
+  font-size: .6em;
+  font-weight: 400;
 }
 
 /* p- LeagueSpartan Regular 16pt - interlignagne 20 */
 p {
   font-family: "leaguespartan";
   font-size: .6em;
-  line-height: 20pt;
-  font-weight: bold;
+  line-height: 1.2;
+  font-weight: 400;
 }
 
 img {
@@ -428,4 +397,17 @@ button, input[type="submit"], input[type="reset"] {
       transform: translateX(100px) translateY(-50%);
       opacity: 0;
   }
+}
+
+
+
+.btn-round-hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: center;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.2s, transform 1.2s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+}
+.btn-round-show {
+  opacity: 1;
+  transform: translate(0,0) scale(1);
 }

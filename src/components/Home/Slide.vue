@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import RoundButton from './../UI/RoundButton.vue'
+import Header from './../Header.vue'
 </script>
 <template>
   <div class="slider">
-    <header class="page header">
+    <Header :display="true" :banner="true" breadcrumb="Nos produits"/>
+    <!-- <header class="page header">
       <div class="banner--container color--primary">
         <div class="banner--text">
-          <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
+          <p>Achetez notre produit et retrouvez votre vigueur d'antan - <span>CODE PROMO -2%</span> JESAUVELAPLANETE</p>
         </div>
       </div>
       <div class="banner--container color--secondary">
@@ -26,7 +28,7 @@ import RoundButton from './../UI/RoundButton.vue'
           <h4 class="header--text">Nos produits</h4>
         </div>
       </div>
-    </header>
+    </header> -->
     <section id="slide" class="page slider color--secondary">
       <div class="container-fluid">
         <div class="row h-100">
@@ -34,17 +36,17 @@ import RoundButton from './../UI/RoundButton.vue'
             <div class="slider--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
-              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau !</p>
+              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin&#8239;marteau&#8239;!</p>
             </div>
             <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation !</p>
+              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de&#8239;mémorisation&#8239;!</p>
             </div>
             <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonne santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
+              <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonne santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs&#8239;articulaires&#8239;! </p>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
@@ -164,7 +166,6 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
-          this.signal.dispatch(['click-general'])
         },
         slidePrev() {
           if (this.onAnim) return
@@ -174,7 +175,6 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
-          this.signal.dispatch(['click-general'])
         }
     },
     beforeDestroy() {
@@ -200,6 +200,18 @@ export default defineComponent({
   transform: translate(0, -50%);
   transition: opacity 1s cubic-bezier(0.165, 0.840, 0.440, 1.000), transform 1s cubic-bezier(0.165, 0.840, 0.440, 1.000);
   position: absolute;
+}
+
+.banner--text p {
+  font-size: 0.42em;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-weight: normal;
+}
+
+.banner--text span {
+  letter-spacing: 2px;
+  font-weight: 400;
 }
 
 .content-slider:after {
@@ -235,7 +247,7 @@ export default defineComponent({
 }
 
 .slider--text {
-  margin: 30px 0;
+  margin: 30px 50px 30px 0;
 }
 
 .decoration {
@@ -360,9 +372,12 @@ header {
 .header--text {
   font-size: .5em;
 }
-.header--text-upper {
+.header--text-upper span {
   text-transform: uppercase;
   white-space: nowrap;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 0.8em;
 }
 .header--link {
   width: 100%; 
@@ -421,37 +436,42 @@ header {
 
 .content-active .slider--title {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
+  transform: translateY(0) scaleY(1);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s, transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
 }
 
 .content-disable .slider--title {
   opacity: 0;
-  transform: translateY(-10px);
+  transform-origin: bottom;
+  transform: translateY(-10px) scaleY(1.08);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .content-active .slider--subtitle {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  transform: translateY(0) scaleY(1);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s, transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
 
 .content-disable .slider--subtitle {
   opacity: 0;
-  transform: translateY(-10px);
+  transform-origin: bottom;
+
+  transform: translateY(-10px) scaleY(1.08);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .content-active .slider--text {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
+  transform: translateY(0) scaleY(1);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s, transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
 }
 
 .content-disable .slider--text {
   opacity: 0;
-  transform: translateY(-10px);
+  transform-origin: bottom;
+
+  transform: translateY(-10px) scaleY(1.08);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 .slider--btn-container {

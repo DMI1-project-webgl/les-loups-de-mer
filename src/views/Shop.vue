@@ -3,162 +3,154 @@ import SquaredButton from './../components/UI/SquaredButton.vue';
 import BackgroundGradient from './../components/BackgroundGradient.vue';
 import Nav from './../components/Nav.vue';
 import RoundButton from './../components/UI/RoundButton.vue'
+import Modal from './../components/Experience/Modal.vue'
 </script>
 
 <template> 
-  <BackgroundGradient />
-  <Nav/>
-  <section class="shop page-experience">
-    <div class="container-fluid h-100">
-      <div class="row h-100">
-        <div class="col-3 h-100 position-relative">
-          <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
-            <div class="shop--product-details">
-              <h2 class="shop--product-name">Pack roussette</h2>
-              <p class="shop--product-package">La version mini </p>
-              <p class="shop--product-description">Avec ce pack aidez jusqu’à 4 requins.</p>
-            </div>
-            <div>
-              <table class="shop--pack-composition">
-                <tr>
-                  <td class="shop--composition-name">huile</td>
-                  <td class="shop--composition">30 cl</td>
-                </tr>
-                <tr>
-                  <td class="shop--composition-name">Épices</td>
-                  <td class="shop--composition">15g</td>
-                </tr>
-                <tr>
-                  <td class="shop--composition-name">Bouillon</td>
-                  <td class="shop--composition">25g</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="shop--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
-            <div class="shop--product-details">
-              <h2 class="shop--product-name"> Pack requin marteau</h2>
-              <p class="shop--product-package">La version medium</p>
-              <p class="shop--product-description">Avec ce pack aidez jusqu’à 6 requins.</p>
-            </div>
-            <div>
-              <table class="shop--pack-composition">
-                <tr>
-                  <td class="shop--composition-name">huile</td>
-                  <td class="shop--composition">50cl</td>
-                </tr>
-                <tr>
-                  <td class="shop--composition-name">Épices</td>
-                  <td class="shop--composition">30g</td>
-                </tr>
-                <tr>
-                  <td class="shop--composition-name">Bouillon</td>
-                  <td class="shop--composition">50g</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="shop--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
-            <div class="shop--product-details">
-              <h2 class="shop--product-name">Requin blanc</h2>
-              <p class="shop--product-package">La version luxe</p>
-              <p class="shop--product-description">Avec ce pack, aidez jusqu'à 12 requins.</p>
-            </div>
-            <div>
-              <table class="shop--pack-composition">
-                <tr>
-                  <td class="shop--composition-name">huile</td>
-                  <td class="shop--composition">2 L</td>
-                </tr>
-                <tr>
-                  <td class="shop--composition-name">Épices</td>
-                  <td class="shop--composition">100g</td>
-                </tr>
-                <tr>
-                  <td class="shop--composition-name">Bouillon</td>
-                  <td class="shop--composition">125g</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 h-100">
-          <div class="shop--heading-container">
-            <div class="shop--heading">
-              <h1>Nos packs</h1>
-              <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
-            </div>
-            <div ref="blur" class="shop--product-video-container position-relative blur">
-              <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
-                <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
-                  <source src="./../../src/assets/img/packs/large.webm"
-                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                </video>
+  <div>
+    <BackgroundGradient />
+    <Nav/>
+    <section ref="blur" class="shop page-experience blur">
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          <div class="col-3 h-100 position-relative">
+            <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
+              <div class="shop--product-details">
+                <h2 class="shop--product-name">Pack roussette</h2>
+                <p class="shop--product-package">La version mini </p>
+                <p class="shop--product-description">Avec ce pack aidez jusqu’à 4 requins.</p>
               </div>
-              <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
-                <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
-                  <source src="./../../src/assets/img/packs/medium.webm"
-                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                </video>
+              <div>
+                <table class="shop--pack-composition">
+                  <tr>
+                    <td class="shop--composition-name">Huile</td>
+                    <td class="shop--composition">30 cl</td>
+                  </tr>
+                  <tr>
+                    <td class="shop--composition-name">Épices</td>
+                    <td class="shop--composition">15g</td>
+                  </tr>
+                  <tr>
+                    <td class="shop--composition-name">Bouillon</td>
+                    <td class="shop--composition">25g</td>
+                  </tr>
+                </table>
               </div>
-              <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
-                <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
-                  <source src="./../../src/assets/img/packs/small.webm"
-                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-                </video>
-              </div>
-              <button @click="slidePrev" id="prev" class="shop--arrow-prev shop--arrow">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.77 40.8">
-                    <path id="Tracé_4706" data-name="Tracé 4706" fill="currentColor" d="M18,40c0-.15,3.95-14.83,14.57-14.83a1.18,1.18,0,1,0,.07-2.35h-.07c-5.19,0-9.76,2.91-13.22,8.4a26.62,26.62,0,0,0-1.31,2.34V1.17a1.18,1.18,0,0,0-2.35,0V33.53c-.39-.77-.83-1.56-1.33-2.36-3.46-5.5-8-8.4-13.21-8.4a1.18,1.18,0,0,0,0,2.35c10.57,0,14.54,14.69,14.58,14.83A1.17,1.17,0,0,0,18,40" transform="translate(-0.04 -0.03)"/>
-                </svg>
-              </button>
-              <button @click="slideNext" id="next" class="shop--arrow-next shop--arrow">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.77 40.8">
-                    <path id="Tracé_4706" data-name="Tracé 4706" fill="currentColor" d="M18,40c0-.15,3.95-14.83,14.57-14.83a1.18,1.18,0,1,0,.07-2.35h-.07c-5.19,0-9.76,2.91-13.22,8.4a26.62,26.62,0,0,0-1.31,2.34V1.17a1.18,1.18,0,0,0-2.35,0V33.53c-.39-.77-.83-1.56-1.33-2.36-3.46-5.5-8-8.4-13.21-8.4a1.18,1.18,0,0,0,0,2.35c10.57,0,14.54,14.69,14.58,14.83A1.17,1.17,0,0,0,18,40" transform="translate(-0.04 -0.03)"/>
-                </svg>
-              </button>
             </div>
-            <div ref="blurbtn" class="shop--blur-btn">
-              <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/>
+            <div class="shop--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
+              <div class="shop--product-details">
+                <h2 class="shop--product-name"> Pack requin marteau</h2>
+                <p class="shop--product-package">La version medium</p>
+                <p class="shop--product-description">Avec ce pack aidez jusqu’à 6 requins.</p>
+              </div>
+              <div>
+                <table class="shop--pack-composition">
+                  <tr>
+                    <td class="shop--composition-name">Huile</td>
+                    <td class="shop--composition">50cl</td>
+                  </tr>
+                  <tr>
+                    <td class="shop--composition-name">Épices</td>
+                    <td class="shop--composition">30g</td>
+                  </tr>
+                  <tr>
+                    <td class="shop--composition-name">Bouillon</td>
+                    <td class="shop--composition">50g</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="shop--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
+              <div class="shop--product-details">
+                <h2 class="shop--product-name">Requin blanc</h2>
+                <p class="shop--product-package">La version luxe</p>
+                <p class="shop--product-description">Avec ce pack, aidez jusqu'à 12 requins.</p>
+              </div>
+              <div>
+                <table class="shop--pack-composition">
+                  <tr>
+                    <td class="shop--composition-name">huile</td>
+                    <td class="shop--composition">2 L</td>
+                  </tr>
+                  <tr>
+                    <td class="shop--composition-name">Épices</td>
+                    <td class="shop--composition">100g</td>
+                  </tr>
+                  <tr>
+                    <td class="shop--composition-name">Bouillon</td>
+                    <td class="shop--composition">125g</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-3 h-100">
-          <div class="shop--product">
-            <div class="shop--product-price" :class="index == 0 ? 'content-active' : 'content-disable'">
-              <p>40€</p>
+          <div class="col-6 h-100">
+            <div class="shop--heading-container">
+              <div class="shop--heading">
+                <h1>Nos packs</h1>
+                <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
+              </div>
+              <div class="shop--product-video-container position-relative">
+                <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
+                  <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
+                    <source src="src/assets/img/packs/small.webm"
+                      type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                  </video>
+                </div>
+                <div ref="video2" class="shop--product-video" :class="index == 1 ? 'content-active-video' : 'content-disable-video'">
+                  <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
+                    <source src="src/assets/img/packs/medium.webm"
+                      type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                  </video>
+                </div>
+                <div ref="video3" class="shop--product-video" :class="index == 2 ? 'content-active-video' : 'content-disable-video'">
+                  <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
+                    <source src="src/assets/img/packs/large.webm"
+                      type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                  </video>
+                </div>
+                <button @click="slidePrev" id="prev" class="shop--arrow-prev shop--arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.77 40.8">
+                      <path id="Tracé_4706" data-name="Tracé 4706" fill="currentColor" d="M18,40c0-.15,3.95-14.83,14.57-14.83a1.18,1.18,0,1,0,.07-2.35h-.07c-5.19,0-9.76,2.91-13.22,8.4a26.62,26.62,0,0,0-1.31,2.34V1.17a1.18,1.18,0,0,0-2.35,0V33.53c-.39-.77-.83-1.56-1.33-2.36-3.46-5.5-8-8.4-13.21-8.4a1.18,1.18,0,0,0,0,2.35c10.57,0,14.54,14.69,14.58,14.83A1.17,1.17,0,0,0,18,40" transform="translate(-0.04 -0.03)"/>
+                  </svg>
+                </button>
+                <button @click="slideNext" id="next" class="shop--arrow-next shop--arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.77 40.8">
+                      <path id="Tracé_4706" data-name="Tracé 4706" fill="currentColor" d="M18,40c0-.15,3.95-14.83,14.57-14.83a1.18,1.18,0,1,0,.07-2.35h-.07c-5.19,0-9.76,2.91-13.22,8.4a26.62,26.62,0,0,0-1.31,2.34V1.17a1.18,1.18,0,0,0-2.35,0V33.53c-.39-.77-.83-1.56-1.33-2.36-3.46-5.5-8-8.4-13.21-8.4a1.18,1.18,0,0,0,0,2.35c10.57,0,14.54,14.69,14.58,14.83A1.17,1.17,0,0,0,18,40" transform="translate(-0.04 -0.03)"/>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div class="shop--product-price" :class="index == 1 ? 'content-active' : 'content-disable'">
-              <p>60€</p>
-            </div>
-            <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
-              <p>90€</p>
-            </div>
-              <RoundButton link="/shop" text="Nos valeurs" :isWhite="true" :isRouterLink="true" />
           </div>
+          <div class="col-3 h-100">
+            <div class="shop--product">
+              <div class="shop--product-price" :class="index == 0 ? 'content-active' : 'content-disable'">
+                <p>40€</p>
+              </div>
+              <div class="shop--product-price" :class="index == 1 ? 'content-active' : 'content-disable'">
+                <p>60€</p>
+              </div>
+              <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
+                <p>90€</p>
+              </div>
+              <RoundButton link="/newsletter" text="Achetter les produits" :isWhite="true" :isRouterLink="true" />
+            </div>
+          </div>
+        </div> 
+      </div>
+    </section>
+    <section class="banner">
+      <div class="banner--mentions-container">
+        <div class="banner--mentions">
+          <p>Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
         </div>
-      </div> 
-    </div>
-  </section>
-  <section class="banner">
-    <div class="banner--mentions-container">
-      <div class="banner--mentions">
-        <p> Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
       </div>
+    </section>
+    <div ref="blurbtn" class="shop--blur-btn">
+      <Modal v-if="promo" text="Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2%: JESAUVELAPLANETE" @showoff="removeEffect" :showbtn="true"/>
+      <!-- <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/> -->
     </div>
-    <div class="banner--container color--secondary">
-      <div class="banner--text">
-        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
-      </div>
-    </div>
-    <div class="banner--container">
-      <div class="header--text-upper">
-        <span v-for="i in 8" :key="i">
-            protégeons notre planète
-        </span>
-      </div>
-    </div>
-  </section>
+  </div>
 </template>
 
 
@@ -168,32 +160,73 @@ export default defineComponent({
   name: 'Shop',
   data: function () {
     return {
-      index: 0
+      index: 0,
+      videos: [],
+      promo: true,
     }
   },
   mounted() {
     this.signal.dispatch(['experience-end'])
+    this.videos = [this.$refs.video1, this.$refs.video2, this.$refs.video3]
   },
   methods: {
     removeEffect() {
       (this.$refs.blur as any).classList.remove('blur');
       (this.$refs.blurbtn as any).classList.add("d-none");
       (this.$refs.video01 as any).play()
+      this.promo = false;
     },
     slideNext() {
+      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transform = "translate(-20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
       console.log('next')
       if (this.index == 2) {
         this.index = 0;
       } else {
         this.index += 1;
       }
+      this.videos[this.index].style.transition = "none"
+      this.videos[this.index].style.transform = "translate(20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
+      setTimeout(() => {
+        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transform = "translate(0, -70%)"
+        this.videos[this.index].style.opacity = "1"
+      }, 300)
+      this.playVideo();
     },
     slidePrev() {
+      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transform = "translate(20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
       console.log('prev')
       if (this.index == 0) {
         this.index = 2;
       } else {
         this.index -= 1;
+      }
+      this.videos[this.index].style.transition = "none"
+      this.videos[this.index].style.transform = "translate(-20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
+      setTimeout(() => {
+        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transform = "translate(0, -70%)"
+        this.videos[this.index].style.opacity = "1"
+      }, 300)
+      this.playVideo();
+    },
+    playVideo() {
+      switch (this.index ) {
+        case 0 :
+          (this.$refs.video01 as any).play();
+          break;
+        case 1 :
+          (this.$refs.video02 as any).play();
+          break;
+        case 2 :
+          (this.$refs.video03 as any).play();
+          break;
       }
     }
   }
@@ -202,7 +235,12 @@ export default defineComponent({
 
 <style scoped>
 .shop {
-  color: white;
+  color: var(--color-tertiary);
+}
+.shop--heading p {
+  font-size: .5em;
+  max-width: 500px;
+  margin: 0 auto;
 }
 .shop--heading {
   text-align: center;
@@ -239,7 +277,7 @@ export default defineComponent({
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--color-tertiary);
 }
 .shop--product-price p {
   position: absolute;
@@ -275,7 +313,7 @@ export default defineComponent({
   width: 100%;
 }
 .shop--heading-container {
-  margin-top: 50px;
+  margin-top: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -286,7 +324,7 @@ export default defineComponent({
   position: absolute;
   width: 50px;
   height: 50px;
-  border: 1px solid white;
+  border: 1px solid var(--color-tertiary);
   left: 0;
   top: 50%;
   transform: translate(0, -50%);
@@ -296,7 +334,10 @@ export default defineComponent({
 }
 .shop--arrow-prev svg {
   width: 15px;
-  transform: rotate(90deg);
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50% ) rotate(90deg);
 }
 .shop--arrow-next {
   position: absolute;
@@ -304,7 +345,7 @@ export default defineComponent({
   height: 50px;
   right: 0;
   top: 50%;
-  border: 1px solid white;
+  border: 1px solid var(--color-tertiary);
   transform: translate(0, -50%);
   border-radius: 50%;
   cursor: pointer;
@@ -312,8 +353,11 @@ export default defineComponent({
 }
 .shop--arrow-next svg {
   width: 15px;
-  transform: rotate(-90deg);
-  color: white;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50% ) rotate(-90deg);
+  color: var(--color-tertiary);
 }
 .shop--arrow::before {
   position: absolute;
@@ -342,13 +386,38 @@ export default defineComponent({
 .content-active {
   pointer-events: all;
   opacity: 1;
-  transition: opacity 2s ease;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.7s;
 }
 .content-disable {
   pointer-events: none;
   opacity: 0;
-  transition: opacity 2s ease;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+.content-active-video {
+  pointer-events: all;
+  opacity: 1;
+  transform: translate(0px, -70%) scale(1);
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content-disable-video {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.content-active .shop--product-details {
+  opacity: 1;
+  transform: translateY(0px) scaleY(1);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.8s, opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.8s;
+}
+
+.content-disable .shop--product-details {
+  opacity: 0;
+  transform: translateY(15px) scaleY(1.08);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .blur {
   filter: grayscale(0.5) blur(5px);
   transition: all 1s ease-out;
@@ -383,7 +452,7 @@ export default defineComponent({
 .header--text-upper span {
   display: block;
   width: 25%;
-  color: white;
+  color: var(--color-tertiary);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -406,10 +475,13 @@ section.banner {
   text-align: center;
 }
 .banner--mentions-container {
-  margin-bottom: 50px;
-  color: white;
+  margin-bottom: 15px;
+  color: var(--color-tertiary);
   text-align: center;  
   width: 100vw;
+}
+.banner--mentions p {
+  font-size: .5em;
 }
 .banner--mentions a {
   text-decoration: underline;

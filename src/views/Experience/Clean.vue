@@ -42,7 +42,7 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
   margin-top: 10%;
 }
 .clean--img-container {
-  color: white;
+  color: var(--color-tertiary);
   width: 100%;
   padding-right: 15%;
   margin-top: 50px;

@@ -55,15 +55,15 @@ progress::-webkit-progress-bar {
     height: 10px;
 }
 progress::-webkit-progress-value {  
-    background: white;
+    background: var(--color-tertiary);
     height: 10px;
 }  
 progress::-moz-progress-bar { 
-    background: white;
+    background: var(--color-tertiary);
     height: 10px;
 }
 .progress--title {
-    color: white;
+    color: var(--color-tertiary);
     margin-bottom: -20px;
     font-size: .5em;
 }
@@ -75,7 +75,7 @@ progress::-moz-progress-bar {
 }
 .progress--legend {
     width: max-content;
-    color: white;
+    color: var(--color-tertiary);
     opacity: .4;
     transform: translateY(-10px);
 }

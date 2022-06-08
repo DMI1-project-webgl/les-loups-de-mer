@@ -6,8 +6,9 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
 
 <template>
   <div class="food-container">
-    <Draggable @valueChange="updateNumberFish" :tuto="tuto1"/>
+    <Draggable v-if="!validatedFish" @valueChange="updateNumberFish" :tuto="tuto1"/>
     <Modal v-if="tuto1" :classlist="tuto1Class" text="Utilisez la jauge pour ajouter des petits poissons qui serviront d’alimentation à notre requin, une fois que vous pensez avoir bien dosé, validez votre choix. " @showoff="hidetuto1" :showbtn="false"/>
+    <Modal v-if="isFishNumberCorrect != null" :text="answerText" @showoff="showResult" :showbtn="true"/>
       <div ref="validate" class="food--btn-container" @click="validateStep" >
         <div class="food--btn">
           <svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
@@ -18,20 +19,31 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
       </div>
       <TutoGlobal :alreadyOpen="false" :texts="[
         'Parfait, c’est vraiment beau, vous êtes très doué.e ! Il ne manque plus que l’alimentation.', 
-        'Le requin mange jusqu’à 15 kilos de viande par semaine, les loups de mer ont donc pris soin de mettre à disposition de ce magnifique animal tout ce dont il aura besoin. '
+        'Le requin a besoin de se nourrir pour gagner en force, à vous d\'estimer la quantité de poissons dont il a besoin !'
         ]" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { FishStep } from '@/assets/js/webgl/main/fish/MainFish';
 
 export default defineComponent({
   data: () => {
     return {
-      value: 0,
       tuto1: false,
+      validatedFish: false,
+      fishNumber: 0,
+      isFishNumberCorrect: undefined,
       tuto1Class: ''
+    }
+  },
+  computed: {
+    answerText() {
+      return this.isFishNumberCorrect
+        ?
+        `C'est exact ! Il faut environ 15 kg de poissons par semaine au requin pour se nourrir convenablement !` :
+        `Dommage ce n'était pas la bonne quantité ! Il faut environ 15 kg de poissons par semaine au requin pour se nourrir convenablement.`
     }
   },
   mounted () {
@@ -39,8 +51,21 @@ export default defineComponent({
     this.signal.dispatch(['success'])
   },
   methods: {
-    updateNumberFish (value: number) {
-      this.signal.dispatch(['numberFish', value])
+    onSignal(slug: Array<string|number>) {
+      switch(slug[0]) {
+        case 'next-step':
+          this.$router.push('result')
+        case 'begin-tuto':
+          this.tuto1 = true
+          break
+        case 'numberFish':
+          this.fishNumber
+          this.hidetuto1()
+      }
+    },
+    updateNumberFish (fishNumber: number) {
+      this.fishNumber = fishNumber
+      this.signal.dispatch(['numberFish', fishNumber])
     },
     hidetuto1() {
       // this.tuto1 = false;
@@ -52,21 +77,20 @@ export default defineComponent({
       if (!this.$refs.validate) return
       (this.$refs.validate as HTMLElement).classList.add("food--btn-container--valide")
     },
-    onSignal(slug: Array<string|number>) {
-      switch(slug[0]) {
-        case 'next-step':
-          this.$router.push('result')
-        case 'begin-tuto':
-          this.tuto1 = true
-          break
-        case 'numberFish':
-          this.hidetuto1()
+    validateStep() {
+      (this.$refs.validate as HTMLElement).classList.remove("food--btn-container--valide")
+
+      this.validatedFish = true
+      if (this.fishNumber == FishStep.FOURTH) {
+        this.isFishNumberCorrect = true
+      } else {
+        this.isFishNumberCorrect = false
       }
     },
-    validateStep() {
+    showResult() {
       this.signal.dispatch(['click-general'])
       this.signal.dispatch(['validate-tapped'])
-    },
+    }
   }
 })
 </script>
@@ -98,7 +122,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--color-tertiary);
   border-radius: 50%;
   overflow: hidden;
 }
@@ -111,7 +135,7 @@ export default defineComponent({
   transform: translate(-50%, -50%);
 }
 .food--btn-text {
-  color: white;
+  color: var(--color-tertiary);
   font-size: .5em;
   padding: 5px 0;
   text-align: center;

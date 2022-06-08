@@ -162,7 +162,7 @@ export default defineComponent({
     z-index: 5;
     width: 50px;
     height: 50px;
-    background-color: #fff;
+    background-color: var(--color-tertiary);
     border-radius: 50%;
     padding: 18px;
     display: flex;

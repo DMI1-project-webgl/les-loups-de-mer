@@ -18,10 +18,10 @@
             <div class="actions--content-container">
                 <p class="actions--text">Découvrez nos actions sur le terrain pour protéger les requins.</p>
                 <p class="actions--text">Les vertus millénaires des grands squales marins sont des trésors à préserver. Engagés depuis une dizaine d'années dans la préservation des espaces naturels abritant les requins, les Loups de mer défendent des valeurs écologiques.</p>
-                <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
+                <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu&#8239;naturel.</p>
             </div>
-            <div class="actions--link-container">
-                <RoundButton link="/clean" text="Lancer l'expèrience" :isClickHear="true" :isRouterLink="true" />
+            <div ref="btn" class="actions--link-container btn-round-hidden">
+                <RoundButton link="/clean" text="Lancer l'expérience" :isClickHear="true" :isRouterLink="true" />
             </div>
         </div>
     </section>
@@ -34,6 +34,9 @@ import RoundButton from '../UI/RoundButton.vue'
 export default defineComponent({
     name: "ActionsPage",
     mounted() {
+        setTimeout(() => {
+            (this.$refs.btn as HTMLElement).classList.add('btn-round-show')
+        }, 100)
     },
     methods: {},
     beforeDestroy() {
@@ -59,7 +62,7 @@ export default defineComponent({
 .actions--col-content {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
 }
 .actions--img-container {
     height: 100%;
@@ -71,9 +74,12 @@ export default defineComponent({
 
 .actions--img img { 
     background: transparent;
+    width: auto !important;
 }
 .actions--img {
     height: 70%;
+    width: -moz-fit-content;
+    width: fit-content;
     position: absolute;
     object-fit: contain;
     animation: levite 5s ease-in-out infinite;
@@ -84,11 +90,13 @@ export default defineComponent({
 }
 .actions--img:nth-child(1) {
     top: 0;
-    right: 0;
+    right: -15%;
+    width: 50%;
 }
 .actions--img:nth-child(2) {
     bottom: 0;
     left: 0;
+    width: 50%;
 }
 
 .actions--text {
@@ -97,8 +105,8 @@ export default defineComponent({
 }
 .actions--img-container .earth{
     height: 100%;
-    width: 100%;
-    padding: 10%;
+    width: 95%;
+    padding: 10% 0 10% 20%;
     object-fit: contain;
 }
 

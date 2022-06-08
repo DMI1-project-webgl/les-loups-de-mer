@@ -17,6 +17,7 @@ export default class Shark extends BasicObject3D {
   getScale(): number {
       return 0.7
   }
+
   getEnvMapIntensity () {
     return 3
   }
@@ -35,6 +36,5 @@ export default class Shark extends BasicObject3D {
     this.rotateY(30)
     
     this.animationMixer.update(deltaTime * 0.02)
-    // this.animationMixer.clipAction(this.animations[0]).play()
   }
 }

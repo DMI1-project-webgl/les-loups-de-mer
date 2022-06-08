@@ -45,6 +45,7 @@ export default defineComponent({
 <style scoped>
 .aileron {
     position: relative;
+    padding: 5px;
 }
 .aileron .tuto {
     box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
@@ -60,7 +61,7 @@ export default defineComponent({
 .aileron--img {
     width: 160px;
     height: 150px;
-    border-right: 2px dashed white;
+    border-right: 2px dashed var(--color-tertiary);
     padding-right: 10px;   
 }
 .aileron--img svg {
@@ -68,7 +69,8 @@ export default defineComponent({
     width: 100%;
 }
 .aileron--text {
-    font-size: .7em;
+    font-size: .8em;
+    margin-top: 10px;
 }
 .aileron--percent {
     position: absolute;

@@ -8,12 +8,12 @@ import RoundButton from '../../components/UI/RoundButton.vue';
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-6 h-100"></div>
-        <div class="col-5 h-100">
+        <div class="col-4 h-100 puta">
           <div class="result--content-container">
             <div class="result--content">
               <h2>Félicitation ! </h2>
               <p class="result-text">Voici votre écosystème. Il est parfait, partagez-le à vos amis.</p>
-              <SquaredButton class="" :isRouterLink="false" text="Partager mon écosystème" :isWhite="true" @validate="oui"/> 
+              <SquaredButton class="" :isRouterLink="false" text="Partager mon écosystème" :isWhite="true" @validate="downloadImg()"/> 
             </div>
             <div class="result--content">
               <h2>Et après ? </h2>
@@ -38,25 +38,18 @@ export default defineComponent({
     }
   },
   mounted () {
-      const canvas = document.querySelector('#canvas');
+      const canvas: HTMLCanvasElement = document.querySelector('#canvas');
       canvas.classList.add('canvas--left')
       this.signal.dispatch(["success-final"])
-      var image = (canvas as HTMLCanvasElement).toDataURL("image/png");
+      this.signal.dispatch(['experience-end'])
 
-      var a = document.createElement('a');
-      a.href = "img.png";
-      a.download = image;
-      a.innerHTML += "Download image";
-      a.style.top = '100px'
-      a.style.position = 'fixed';
-      (this.$refs.result as HTMLElement).appendChild(a);
       setTimeout(() => {
         (this.$refs.result as HTMLElement).classList.add("result-show")
       }, 2000)
   },
   methods: {
-    oui() {
-
+    downloadImg() {
+      this.signal.dispatch(['download-ecosystem'])
     }
   }
 })
@@ -64,11 +57,15 @@ export default defineComponent({
 
 <style scoped>
 .result {
-  color: white;
+  color: var(--color-tertiary);
   opacity: 0;
   transform-origin: top;
   transform: translateY(5px) scaleY(1.08);
   transition: opacity 2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.puta {
+  padding-right: 5%;
 }
 
 .result-text {
@@ -98,10 +95,14 @@ export default defineComponent({
   transition: opacity 2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
 } 
 .result--content {
-  margin-bottom: 35px;
+  margin-bottom: 45px;
 }
 
 .result--btn {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 5%;
   margin-left: auto;
   opacity: 0;
   transform: scale(0.5);

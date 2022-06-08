@@ -5,7 +5,8 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
 
 <template>
    <div>
-        <BackgroundGradient />  
+        <BackgroundGradient /> 
+        <Nav /> 
     <section class="newsletter page-experience">
         <div class="container-fluid h-100">
             <div class="row h-100">
@@ -24,10 +25,10 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
                                         <input type="text" name="name" id="name" required  placeholder="Votre email">
                                         <input type="submit" value="Subscribe!">
                                     </div>
-                                </div>
-                                <div class="newsletter--cgu-group">
-                                    <input type="checkbox" id="cgu" name="cgu" value="cgu">
-                                    <label for="cgu">J'ai lu et j'accepte les conditions d'utilisations</label>
+                                    <div class="newsletter--cgu-group">
+                                        <input type="checkbox" id="cgu" name="cgu" value="cgu">
+                                        <label for="cgu">J'ai lu et j'accepte les conditions d'utilisations</label>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -37,19 +38,19 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
                                 billets d'avion pour aller voir nos élevages de requins dans l'océan pacifique !<br>
                                 <a href="/cgu" class="newsletter--cgu-link">voir les conditons du concours ici</a>
                             </p>
-
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
+  components: { Nav },
   name: 'Newsletter',
   mounted() {
     this.signal.dispatch(['experience-end'])
@@ -132,6 +133,10 @@ export default defineComponent({
     aspect-ratio: 1;
     margin-left: 15px;
     background-color: white;
+    background-image: url("src/assets/img/send.svg");
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 .h-fit-content {
     height: fit-content;
