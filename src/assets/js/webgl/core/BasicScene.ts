@@ -72,7 +72,7 @@ export default class BasicScene extends Scene {
       alpha: true,
     })
 
-    this.stats = Stats()
+    //this.stats = Stats()
 
     // this.setupControls()
 
@@ -85,7 +85,7 @@ export default class BasicScene extends Scene {
     this.isRunning = true
     this.tick()
 
-    document.body.appendChild(this.stats.dom)
+    //document.body.appendChild(this.stats.dom)
 
     this.signal.add(this.onSignal);
   }
@@ -180,7 +180,7 @@ export default class BasicScene extends Scene {
     this.deltaTime = (Date.now() - this.time) * 0.001
     this.time = Date.now()
 
-    this.stats.update()
+    //this.stats.update()
 
     this.update()
 

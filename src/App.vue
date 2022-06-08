@@ -5,7 +5,7 @@ import AudioController from './components/AudioController.vue';
 <template>
   <!-- ALL ROUTES -->
   <div>
-    <div class="nav">
+    <div class="nav d-none">
       <router-link to="/">Home</router-link>
       <router-link to="/valeurs">Values</router-link>
       <router-link to="/actions">Actions</router-link>
