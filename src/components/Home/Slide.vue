@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import RoundButton from './../UI/RoundButton.vue'
+import Header from './../Header.vue'
 </script>
 <template>
   <div class="slider">
-    <header class="page header">
+    <Header :display="true" :banner="true" breadcrumb="Nos produits"/>
+    <!-- <header class="page header">
       <div class="banner--container color--primary">
         <div class="banner--text">
           <p>Achetez notre produit et retrouvez votre vigueur d'antan - <span>CODE PROMO -2%</span> JESAUVELAPLANETE</p>
@@ -26,7 +28,7 @@ import RoundButton from './../UI/RoundButton.vue'
           <h4 class="header--text">Nos produits</h4>
         </div>
       </div>
-    </header>
+    </header> -->
     <section id="slide" class="page slider color--secondary">
       <div class="container-fluid">
         <div class="row h-100">
@@ -34,17 +36,17 @@ import RoundButton from './../UI/RoundButton.vue'
             <div class="slider--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Les flocons</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
-              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin marteau !</p>
+              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin&#8239;marteau&#8239;!</p>
             </div>
             <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
               <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de mémorisation !</p>
+              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de&#8239;mémorisation&#8239;!</p>
             </div>
             <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>
               <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonne santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs articulaires ! </p>
+              <p class="slider--text">Le complexe synergique du bouillon issu de l'aileron du requin blanc permet de préserver une bonne santé osseuse. Il contribue à une bonne circulation du sang pour réduire durablement les sensations de douleurs&#8239;articulaires&#8239;! </p>
             </div>
           </div>
           <div class="col-12 col-lg-7 h-lg-100">
@@ -247,7 +249,7 @@ export default defineComponent({
 }
 
 .slider--text {
-  margin: 30px 0;
+  margin: 30px 50px 30px 0;
 }
 
 .decoration {

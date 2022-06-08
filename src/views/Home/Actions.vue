@@ -5,7 +5,7 @@ import Header from './../../components/Header.vue';
 
 <template>
     <section>
-        <Header :display="true" :banner="true"/>
+        <Header :display="true" :banner="true" breadcrumb="Nos engagements"/>
         <Actions/>
     </section>
 </template>

@@ -19,7 +19,7 @@
         </button>
       </div>
       <div class="header--text-container">
-        <p class="header--breadcrumb">Nos produits</p>
+        <p class="header--breadcrumb">{{breadcrumb}}</p>
       </div>
     </div>
   </header>
@@ -30,7 +30,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'HeaderElement',
-  props: ['show','display', 'banner'],
+  props: ['show','display', 'banner', 'breadcrumb'],
   emits: ['next'],
   
   mounted () {
@@ -81,12 +81,14 @@ header {
   transform: translate(100%, 0);
 }
 .header--text-container {
+  transform-origin: bottom right;
   white-space: nowrap;
   text-align: right;
   position: absolute;
   right: 0;
+  font-size: .7em;
   top: 0;
-  transform: translate(31%, 100%) rotate(-90deg);
+  transform: translate(0%, -100%) rotate(-90deg);
 }
 .banner--container {
   width: 100vw;
