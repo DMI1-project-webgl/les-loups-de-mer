@@ -13,7 +13,7 @@ import RoundButton from '../../components/UI/RoundButton.vue';
             <div class="result--content">
               <h2>Félicitation ! </h2>
               <p class="result-text">Voici votre écosystème. Il est parfait, partagez-le à vos amis.</p>
-              <SquaredButton class="" :isRouterLink="false" text="Partager mon écosystème" :isWhite="true" @validate="oui"/> 
+              <SquaredButton class="" :isRouterLink="false" text="Partager mon écosystème" :isWhite="true" @validate="downloadImg()"/> 
             </div>
             <div class="result--content">
               <h2>Et après ? </h2>
@@ -38,25 +38,17 @@ export default defineComponent({
     }
   },
   mounted () {
-      const canvas = document.querySelector('#canvas');
+      const canvas: HTMLCanvasElement = document.querySelector('#canvas');
       canvas.classList.add('canvas--left')
       this.signal.dispatch(["success-final"])
-      var image = (canvas as HTMLCanvasElement).toDataURL("image/png");
 
-      var a = document.createElement('a');
-      a.href = "img.png";
-      a.download = image;
-      a.innerHTML += "Download image";
-      a.style.top = '100px'
-      a.style.position = 'fixed';
-      (this.$refs.result as HTMLElement).appendChild(a);
       setTimeout(() => {
         (this.$refs.result as HTMLElement).classList.add("result-show")
       }, 2000)
   },
   methods: {
-    oui() {
-
+    downloadImg() {
+      this.signal.dispatch(['download-ecosystem'])
     }
   }
 })

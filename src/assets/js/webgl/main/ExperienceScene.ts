@@ -316,6 +316,17 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
             this.cameraControl.rayonTarget = 300
             this.smogScale.target = 1.12
         }
+
+        if (slug[0] == 'download-ecosystem') {
+            this.renderer.render(this, this.camera);
+            this.renderer.domElement.toBlob(function(blob){
+                var a = document.createElement('a');
+                var url = URL.createObjectURL(blob);
+                a.href = url;
+                a.download = 'ecosystem.png';
+                a.click();
+            }, 'image/png', 1.0);
+        }
     }
 
     initCursorVegetation () {
