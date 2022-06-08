@@ -164,6 +164,6 @@ export default defineComponent({
 }
 
 .state-vegetaux--valide {
-  color: #00d100;
+  color: #00aa00;
 }
 </style>

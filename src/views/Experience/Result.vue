@@ -8,7 +8,7 @@ import RoundButton from '../../components/UI/RoundButton.vue';
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-6 h-100"></div>
-        <div class="col-5 h-100">
+        <div class="col-4 h-100 puta">
           <div class="result--content-container">
             <div class="result--content">
               <h2>Félicitation ! </h2>
@@ -41,6 +41,7 @@ export default defineComponent({
       const canvas: HTMLCanvasElement = document.querySelector('#canvas');
       canvas.classList.add('canvas--left')
       this.signal.dispatch(["success-final"])
+      this.signal.dispatch(['experience-end'])
 
       setTimeout(() => {
         (this.$refs.result as HTMLElement).classList.add("result-show")
@@ -61,6 +62,10 @@ export default defineComponent({
   transform-origin: top;
   transform: translateY(5px) scaleY(1.08);
   transition: opacity 2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.puta {
+  padding-right: 5%;
 }
 
 .result-text {
@@ -90,10 +95,14 @@ export default defineComponent({
   transition: opacity 2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
 } 
 .result--content {
-  margin-bottom: 35px;
+  margin-bottom: 45px;
 }
 
 .result--btn {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 5%;
   margin-left: auto;
   opacity: 0;
   transform: scale(0.5);
