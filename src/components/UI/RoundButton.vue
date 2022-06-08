@@ -129,6 +129,6 @@ export default defineComponent({
 }
 .shop .RoundButton-Container {
   position: absolute;
-  right: 15px;
+  left: 80px;
 }
 </style>

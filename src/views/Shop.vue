@@ -91,7 +91,7 @@ import Modal from './../components/Experience/Modal.vue'
                 <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
               </div>
               <div class="shop--product-video-container position-relative">
-                <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
+                <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/small.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -237,6 +237,11 @@ export default defineComponent({
 .shop {
   color: var(--color-tertiary);
 }
+.shop--heading p {
+  font-size: .5em;
+  max-width: 500px;
+  margin: 0 auto;
+}
 .shop--heading {
   text-align: center;
 }
@@ -268,7 +273,7 @@ export default defineComponent({
 }
 .shop--product-price {
   position: absolute;
-  left: 15px;
+  left: 0;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -308,7 +313,7 @@ export default defineComponent({
   width: 100%;
 }
 .shop--heading-container {
-  margin-top: 50px;
+  margin-top: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -470,10 +475,13 @@ section.banner {
   text-align: center;
 }
 .banner--mentions-container {
-  margin-bottom: 50px;
+  margin-bottom: 15px;
   color: var(--color-tertiary);
   text-align: center;  
   width: 100vw;
+}
+.banner--mentions p {
+  font-size: .5em;
 }
 .banner--mentions a {
   text-decoration: underline;
