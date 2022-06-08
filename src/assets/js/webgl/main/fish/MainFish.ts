@@ -35,18 +35,20 @@ type FishUniform = {
 
 export default class MainFish {
 
-    private renderer: WebGLRenderer
-    private scene: Scene
+    private renderer: WebGLRenderer = null
+    private scene: Scene = null
     public WIDTH: number = 16 // 32
     private BOUNDS: number = 200 // 800
-    private velocityVariable: GPUVariableDetail
-    private positionVariable: GPUVariableDetail
-    private positionUniforms: { [uniform: string]: IUniform<any>; }
-    private velocityUniforms: { [uniform: string]: IUniform<any>; }
-    private fishUniforms: FishUniform
+    private velocityVariable: GPUVariableDetail = null
+    private positionVariable: GPUVariableDetail = null
+    private positionUniforms: { [uniform: string]: IUniform<any>; } = null
+    private velocityUniforms: { [uniform: string]: IUniform<any>; } = null
+    private fishUniforms: FishUniform = null
     private last: number = performance.now();
-    private gpuCompute: GPUComputationRenderer
-    private fishGeometry: FishGeometry
+    private gpuCompute: GPUComputationRenderer = null
+    private fishGeometry: FishGeometry = null
+
+    private fishMesh: Mesh = null;
     
     constructor(renderer: WebGLRenderer, scene: Scene) {
         this.renderer = renderer
@@ -183,9 +185,11 @@ export default class MainFish {
         } );
 
         const fishMesh = new Mesh( this.fishGeometry, material );
+        this.fishMesh = fishMesh
         fishMesh.rotation.y = Math.PI / 2;
         fishMesh.matrixAutoUpdate = false;
         fishMesh.updateMatrix();
+        
 
         this.scene.add( fishMesh );
     }
@@ -248,5 +252,9 @@ export default class MainFish {
 
         this.fishUniforms[ 'texturePosition' ].value = this.gpuCompute.getCurrentRenderTarget( this.positionVariable ).texture;
         this.fishUniforms[ 'textureVelocity' ].value = this.gpuCompute.getCurrentRenderTarget( this.velocityVariable ).texture;
+    }
+
+    destroy() {
+        this.fishMesh.clear()
     }
 }
