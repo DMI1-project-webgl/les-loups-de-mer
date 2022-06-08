@@ -18,7 +18,7 @@
                 <p class="values--name">Christelle Deneuve</p>
                 <p class="values--profession">Fondatrice des Loups de mer</p>
             </div>
-            <div class="values--link-container">
+            <div ref="btn" class="values--link-container btn-round-hidden">
                 <RoundButton link="/actions" text="Suivant" :isClickHear="true" :isRouterLink="true" />
             </div>
             <div class="ws-50"></div>
@@ -33,6 +33,11 @@ import RoundButton from '../UI/RoundButton.vue'
 
 export default defineComponent({
   name: 'ValuesPage',
+  mounted () {
+      setTimeout(() => {
+            (this.$refs.btn as HTMLElement).classList.add('btn-round-show')
+        }, 100)
+  },
   beforeDestroy () {
   },
   components: { RoundButton }

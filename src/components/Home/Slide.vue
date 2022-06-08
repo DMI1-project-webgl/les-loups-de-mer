@@ -430,37 +430,42 @@ header {
 
 .content-active .slider--title {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
+  transform: translateY(0) scaleY(1);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s, transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
 }
 
 .content-disable .slider--title {
   opacity: 0;
-  transform: translateY(-10px);
+  transform-origin: bottom;
+  transform: translateY(-10px) scaleY(1.08);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .content-active .slider--subtitle {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  transform: translateY(0) scaleY(1);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s, transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
 }
 
 .content-disable .slider--subtitle {
   opacity: 0;
-  transform: translateY(-10px);
+  transform-origin: bottom;
+
+  transform: translateY(-10px) scaleY(1.08);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .content-active .slider--text {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s, transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
+  transform: translateY(0) scaleY(1);
+  transition: opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s, transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.6s;
 }
 
 .content-disable .slider--text {
   opacity: 0;
-  transform: translateY(-10px);
+  transform-origin: bottom;
+
+  transform: translateY(-10px) scaleY(1.08);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 .slider--btn-container {
