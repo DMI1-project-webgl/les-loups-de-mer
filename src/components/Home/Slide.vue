@@ -166,7 +166,6 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
-          this.signal.dispatch(['click-general'])
         },
         slidePrev() {
           if (this.onAnim) return
@@ -176,7 +175,6 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
-          this.signal.dispatch(['click-general'])
         }
     },
     beforeDestroy() {
