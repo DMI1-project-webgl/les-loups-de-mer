@@ -30,7 +30,7 @@ export default defineComponent({
   },
   methods: {
     onClick () {
-      this.signal.dispatch(['click-general'])
+      //this.signal.dispatch(['click-general'])
     }
   },
   beforeDestroy () {
