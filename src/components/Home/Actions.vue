@@ -18,7 +18,7 @@
             <div class="actions--content-container">
                 <p class="actions--text">Découvrez nos actions sur le terrain pour protéger les requins.</p>
                 <p class="actions--text">Les vertus millénaires des grands squales marins sont des trésors à préserver. Engagés depuis une dizaine d'années dans la préservation des espaces naturels abritant les requins, les Loups de mer défendent des valeurs écologiques.</p>
-                <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu naturel.</p>
+                <p class="actions--text">À chaque achat de nos produits, nous prélevons une partie du prix pour participer au parrainage d'un requin et à la défense de son milieu&#8239;naturel.</p>
             </div>
             <div ref="btn" class="actions--link-container btn-round-hidden">
                 <RoundButton link="/clean" text="Lancer l'expérience" :isClickHear="true" :isRouterLink="true" />
@@ -101,7 +101,7 @@ export default defineComponent({
 .actions--img-container .earth{
     height: 100%;
     width: 100%;
-    padding: 10%;
+    padding: 10% 0 10% 20%;
     object-fit: contain;
 }
 

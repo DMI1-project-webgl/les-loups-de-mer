@@ -81,6 +81,9 @@ export default defineComponent({
   height: 30vh;
   width: fit-content;
 }
+.discover--shark-container img { 
+  filter: drop-shadow(5px 20px 10px #444);
+}
 .discover--shark-container {
   height: 25vh;
   aspect-ratio: 3/2 ;
