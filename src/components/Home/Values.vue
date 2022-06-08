@@ -48,7 +48,7 @@ export default defineComponent({
 
 .values {
     min-height: 100vh;
-    padding: 105px 0 20px 100px;
+    padding: 80px 0 20px 100px;
     width: 100vw;
     margin: 0;
     overflow-x: hidden;
@@ -64,7 +64,6 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 100px;
 }
 .values--img-container {
     height: 100%;
@@ -104,10 +103,10 @@ export default defineComponent({
 }
 
 .values--text {
-    padding: 5px 25% 40px 0px;
+    padding: 5px 30% 20px 0px;
 }
 .values--quote {
-    padding: 5px 25% 0px 0px;
+    padding: 5px 30% 0px 0px;
     position: relative;
     margin-bottom: 20px;
 }
@@ -138,7 +137,7 @@ export default defineComponent({
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(-280%, 0%);
+    transform: translate(-380%, 0%);
 }
 .values--name {
     font-family:  "greatvibes-regular";

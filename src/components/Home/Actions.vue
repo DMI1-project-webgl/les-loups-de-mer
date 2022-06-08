@@ -105,7 +105,7 @@ export default defineComponent({
 }
 .actions--img-container .earth{
     height: 100%;
-    width: 100%;
+    width: 95%;
     padding: 10% 0 10% 20%;
     object-fit: contain;
 }
