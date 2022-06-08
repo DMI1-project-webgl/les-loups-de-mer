@@ -90,19 +90,19 @@ import RoundButton from './../components/UI/RoundButton.vue'
                 <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
               </div>
               <div ref="blur" class="shop--product-video-container position-relative blur">
-                <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
+                <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/small.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                 </div>
-                <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
+                <div ref="video2" class="shop--product-video" :class="index == 1 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/medium.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                 </div>
-                <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
+                <div ref="video3" class="shop--product-video" :class="index == 2 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/large.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -158,11 +158,13 @@ export default defineComponent({
   name: 'Shop',
   data: function () {
     return {
-      index: 0
+      index: 0,
+      videos: []
     }
   },
   mounted() {
     this.signal.dispatch(['experience-end'])
+    this.videos = [this.$refs.video1, this.$refs.video2, this.$refs.video3]
   },
   methods: {
     removeEffect() {
@@ -173,21 +175,43 @@ export default defineComponent({
       // (this.$refs.video03 as any).play()
     },
     slideNext() {
+      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transform = "translate(-20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
       console.log('next')
       if (this.index == 2) {
         this.index = 0;
       } else {
         this.index += 1;
       }
+      this.videos[this.index].style.transition = "none"
+      this.videos[this.index].style.transform = "translate(20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
+      setTimeout(() => {
+        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transform = "translate(0, -70%)"
+        this.videos[this.index].style.opacity = "1"
+      }, 300)
       this.playVideo();
     },
     slidePrev() {
+      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transform = "translate(20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
       console.log('prev')
       if (this.index == 0) {
         this.index = 2;
       } else {
         this.index -= 1;
       }
+      this.videos[this.index].style.transition = "none"
+      this.videos[this.index].style.transform = "translate(-20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
+      setTimeout(() => {
+        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transform = "translate(0, -70%)"
+        this.videos[this.index].style.opacity = "1"
+      }, 300)
       this.playVideo();
     },
     playVideo() {
@@ -355,13 +379,38 @@ export default defineComponent({
 .content-active {
   pointer-events: all;
   opacity: 1;
-  transition: opacity 2s ease;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.7s;
 }
 .content-disable {
   pointer-events: none;
   opacity: 0;
-  transition: opacity 2s ease;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+.content-active-video {
+  pointer-events: all;
+  opacity: 1;
+  transform: translate(0px, -70%) scale(1);
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content-disable-video {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.content-active .shop--product-details {
+  opacity: 1;
+  transform: translateY(0px) scaleY(1);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.8s, opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.8s;
+}
+
+.content-disable .shop--product-details {
+  opacity: 0;
+  transform: translateY(15px) scaleY(1.08);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .blur {
   filter: grayscale(0.5) blur(5px);
   transition: all 1s ease-out;
