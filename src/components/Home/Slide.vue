@@ -34,14 +34,14 @@ import Header from './../Header.vue'
         <div class="row h-100">
           <div class="col-12 col-lg-4 h-lg-100">
             <div class="slider--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
-              <h2 class="slider--title decoration">Les flocons</h2>
+              <h2 class="slider--title decoration">Les épices</h2>
               <h3 class="slider--subtitle">Vitalité</h3>
-              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido, retrouvez l'énergie et la vivacité d’un grand requin&#8239;marteau&#8239;!</p>
+              <p class="slider--text"> Coup de boost immédiat les flocons de cartilage réduisent la fatigue, maintiennent l'énergie dans la durée, favorisent le désir et la libido. Retrouvez l'énergie et la vivacité d’un grand requin&#8239;marteau&#8239;!</p>
             </div>
             <div class="slider--content-container" :class="index == 1 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">L'huile</h2>
-              <h3 class="slider--subtitle">Force</h3>
-              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Il la stimule en favorisant le ralentissement du vieillissemet cérébral et en augmentant les capacités de concentration et de&#8239;mémorisation&#8239;!</p>
+              <h3 class="slider--subtitle">Mémoire</h3>
+              <p class="slider--text">Cette huile à base d'aileron de roussette résout les problèmes de mémoire. Elle la stimule en favorisant le ralentissement du vieillissement cérébral et en augmentant les capacités de concentration et de&#8239;mémorisation&#8239;!</p>
             </div>
             <div class="slider--content-container" :class="index == 2 ? 'content-active' : 'content-disable'">
               <h2 class="slider--title decoration">Le bouillon</h2>

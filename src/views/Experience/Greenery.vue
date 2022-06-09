@@ -36,8 +36,8 @@ import TutoGlobal from '../../components/Experience/TutoGlobal.vue';
         </div>
       </div>
       <TutoGlobal :alreadyOpen="false" :texts="[
-        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au&#8239;travail !', 
-        'Chez les loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger.'
+        'Chez les Loups de mer, on prend toujours soin de sélectionner les espaces les plus riches et de les protéger.',
+        'Il manque un peu de végétaux ici, la plupart des requins ont besoin d’un environnement riche en coraux et en algues. Mettons-nous au&#8239;travail !'
         ]" />
     </section>
     <Modal v-if="tuto1" :classlist="tuto1Class" ref="modal1" text="Restez appuyé en déplaçant votre souris, les végétaux se développeront sur votre écosystème. À vous maintenant. " @showoff="hidetuto1" :showbtn="false"/>
@@ -70,7 +70,7 @@ export default defineComponent({
           this.hidetuto1()
           if (slug[1] > 16 && this.$refs.stateVege) {
             // this.signal.dispatch(['validate-tapped']);
-            (this.$refs.stateVege as HTMLElement).innerHTML = "Végétaux suffisant";
+            (this.$refs.stateVege as HTMLElement).innerHTML = "Végétaux suffisants";
             (this.$refs.stateVege as HTMLElement).classList.remove("state-vegetaux--error");
             (this.$refs.stateVege as HTMLElement).classList.add("state-vegetaux--valide");
             (this.$refs.validate as HTMLElement).classList.add("greenery--btn-container--valide")

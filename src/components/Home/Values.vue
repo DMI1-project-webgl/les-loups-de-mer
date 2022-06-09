@@ -12,7 +12,7 @@
             <div class="values--title-container"> 
                 <h1 class="values--title">Nos valeurs</h1>
             </div>
-            <p class="values--text">Chez les loups de mer, on est passionné du milieu marin depuis 1987, nous sommes une équipe composée de cuisiniers, scientifiques et spécialistes de la faune et de la flore aquatique. Très soucieux du développement de cet espace naturel magique, nous travaillons à base de produits frais et sourcés avec attention. </p>
+            <p class="values--text">Chez les loups de mer, on est passionnés du milieu marin depuis 1987, nous sommes une équipe composée de cuisiniers, scientifiques et spécialistes de la faune et de la flore aquatique. Très soucieux du développement de cet espace naturel magique, nous travaillons à base de produits frais et sourcés avec attention. </p>
             <p class="values--quote">Nous vous proposons des produits dérivés de cette richesse naturelle destinés à vous aider à lutter contre les effets du temps sur votre corps. Vitalité, énergie, jeunesse et confort, nous travaillons ensemble pour vous aider à profiter des bienfaits des fonds marins.</p>
             <div class="values--name-container">
                 <p class="values--name">Christelle Deneuve</p>

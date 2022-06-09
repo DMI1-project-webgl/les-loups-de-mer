@@ -82,7 +82,7 @@ export default defineComponent({
   width: fit-content;
 }
 .discover--shark-container img { 
-  filter: drop-shadow(5px 20px 10px #444);
+  filter: drop-shadow(5px 20px 10px rgba(0,0,0,0.4));
 }
 .discover--shark-container {
   height: 25vh;

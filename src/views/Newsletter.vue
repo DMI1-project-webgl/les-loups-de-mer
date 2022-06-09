@@ -16,7 +16,7 @@ import BackgroundGradient from './../components/BackgroundGradient.vue';
                             <h1>Merci pour votre achat</h1>
                         </div>
                         <div class="newsletter--text">
-                            <p>Merci infiniment pour votre soutien !<br>Pour suivre nos avancées et recevoirles actualités de nos<br>produits inscrivez-vous à notre newsletter.</p>
+                            <p>Merci infiniment pour votre soutien !<br>Pour suivre nos avancées et recevoir les actualités de nos<br>produits inscrivez-vous à notre newsletter.</p>
                         </div>
                         <div class="newsletter--form-container">
                             <form action="" method="get" class="newsletter--form">
