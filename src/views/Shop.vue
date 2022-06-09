@@ -10,7 +10,15 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <BackgroundGradient />
     <Nav/>
     <section ref="blur" class="shop page-experience blur add-blur">
+<<<<<<< HEAD
       <div class="container-fluid h-100">
+=======
+      <div class="shop--heading">
+        <h1>Nos packs</h1>
+        <p>Retrouvez dans nos packs composés d'une épice, d'une huile et d'un bouillon qui révèlent le meilleur de l'aileron de requin pour vous aider à lutter contre les effets du temps.</p>
+      </div>
+      <div class="container-fluid slider-height">
+>>>>>>> luc/ui-features
         <div class="row h-100">
           <div class="col-3 h-100 position-relative">
             <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
@@ -85,10 +93,6 @@ import RoundButton from './../components/UI/RoundButton.vue'
           </div>
           <div class="col-6 h-100">
             <div class="shop--heading-container">
-              <div class="shop--heading">
-                <h1>Nos packs</h1>
-                <p>Retrouvez dans nos packs composés d'une épice, d'une huile et d'un bouillon qui révèlent le meilleur de l'aileron de requin pour vous aider à lutter contre les effets du temps.</p>
-              </div>
               <div class="shop--product-video-container position-relative">
                 <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
@@ -285,6 +289,7 @@ export default defineComponent({
 }
 .shop--heading {
   text-align: center;
+  padding-top: 50px;
 }
 .shop--content-container{
   position: absolute;
@@ -319,6 +324,7 @@ export default defineComponent({
   height: 60px;
   border-radius: 50%;
   background-color: var(--color-tertiary);
+  padding-top: 5px;
 }
 .shop--product-price p {
   position: absolute;
@@ -530,5 +536,13 @@ section.banner {
 .banner--mentions a {
   text-decoration: underline;
   font-weight: 900;
+}
+.slider-height {
+  height: calc(100% - 30%);
+}
+.shop {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
