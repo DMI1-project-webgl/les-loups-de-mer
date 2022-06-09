@@ -112,7 +112,7 @@ export default defineComponent({
       this.tuto2 = false;
     },
     hidetuto3() {
-      this.tuto3 = false;
+      // this.tuto3 = false;
       this.tuto3Class = "modal-disable"
     },
   },
