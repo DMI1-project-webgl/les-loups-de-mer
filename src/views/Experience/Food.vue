@@ -35,15 +35,13 @@ export default defineComponent({
       validatedFish: false,
       fishNumber: 0,
       isFishNumberCorrect: undefined,
-      tuto1Class: ''
+      tuto1Class: '',
+      isValidateBtn: false
     }
   },
   computed: {
     answerText() {
-      return this.isFishNumberCorrect
-        ?
-        `C'est exact ! Il faut environ 15 kg de poissons par semaine au requin pour se nourrir convenablement !` :
-        `Dommage ce n'était pas la bonne quantité ! Il faut environ 15 kg de poissons par semaine au requin pour se nourrir convenablement.`
+      return `Super! Il faut environ 15 kg de poissons par semaine au requin pour se nourrir convenablement !`
     }
   },
   mounted () {
@@ -59,12 +57,18 @@ export default defineComponent({
           this.tuto1 = true
           break
         case 'numberFish':
-          this.fishNumber
           this.hidetuto1()
       }
     },
     updateNumberFish (fishNumber: number) {
       this.fishNumber = fishNumber
+      if (this.$refs.validate) {
+        if (fishNumber === FishStep.FIRST) {
+          this.hideValidateBtn()
+        } else {
+          this.showValidateBtn()
+        }
+      }
       this.signal.dispatch(['numberFish', fishNumber])
     },
     hidetuto1() {
@@ -74,14 +78,12 @@ export default defineComponent({
         this.tuto1 = false
         this.signal.dispatch(['none-tuto-modal'])
       }, 300)
-      if (!this.$refs.validate) return
-      (this.$refs.validate as HTMLElement).classList.add("food--btn-container--valide")
     },
     validateStep() {
-      (this.$refs.validate as HTMLElement).classList.remove("food--btn-container--valide")
+      this.hideValidateBtn()
 
       this.validatedFish = true
-      if (this.fishNumber == FishStep.FOURTH) {
+      if (this.fishNumber == FishStep.FIRST) {
         this.isFishNumberCorrect = true
       } else {
         this.isFishNumberCorrect = false
@@ -90,6 +92,18 @@ export default defineComponent({
     showResult() {
       this.signal.dispatch(['click-general'])
       this.signal.dispatch(['validate-tapped'])
+    },
+    showValidateBtn() {
+      if ((!this.isValidateBtn)) {
+         this.isValidateBtn = true;
+        (this.$refs.validate as HTMLElement).classList.add("food--btn-container--valide")
+      }
+    },
+    hideValidateBtn() {
+      if ((this.isValidateBtn)) {
+        this.isValidateBtn = false;
+        (this.$refs.validate as HTMLElement).classList.remove("food--btn-container--valide")
+      }
     }
   }
 })
