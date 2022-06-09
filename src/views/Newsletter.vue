@@ -133,7 +133,7 @@ export default defineComponent({
     aspect-ratio: 1;
     margin-left: 15px;
     background-color: white;
-    background-image: url("src/assets/img/send.svg");
+    background-image: url("./../../src/assets/img/send.svg");
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
