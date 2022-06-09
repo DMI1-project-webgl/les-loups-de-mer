@@ -3,14 +3,13 @@ import SquaredButton from './../components/UI/SquaredButton.vue';
 import BackgroundGradient from './../components/BackgroundGradient.vue';
 import Nav from './../components/Nav.vue';
 import RoundButton from './../components/UI/RoundButton.vue'
-import Modal from './../components/Experience/Modal.vue'
 </script>
 
 <template> 
   <div>
     <BackgroundGradient />
     <Nav/>
-    <section ref="blur" class="shop page-experience blur">
+    <section ref="blur" class="shop page-experience blur add-blur">
       <div class="container-fluid h-100">
         <div class="row h-100">
           <div class="col-3 h-100 position-relative">
@@ -147,8 +146,13 @@ import Modal from './../components/Experience/Modal.vue'
       </div>
     </section>
     <div ref="blurbtn" class="shop--blur-btn">
-      <Modal v-if="promo" text="Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2%: JESAUVELAPLANETE" @showoff="removeEffect" :showbtn="true"/>
-      <!-- <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/> -->
+      <div class="modal">
+        <div class="modal-container">
+          <h3>CODE PROMO</h3>
+          <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2%: JESAUVELAPLANETE</p>
+        </div>
+        <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/>
+      </div>
     </div>
   </div>
 </template>
@@ -162,19 +166,20 @@ export default defineComponent({
     return {
       index: 0,
       videos: [],
-      promo: true,
     }
   },
   mounted() {
     this.signal.dispatch(['experience-end'])
     this.videos = [this.$refs.video1, this.$refs.video2, this.$refs.video3]
+    setTimeout(() => {
+      (this.$refs.blurbtn as any).classList.add('add-blur');
+    }, 500)
   },
   methods: {
     removeEffect() {
-      (this.$refs.blur as any).classList.remove('blur');
-      (this.$refs.blurbtn as any).classList.add("d-none");
-      (this.$refs.video01 as any).play()
-      this.promo = false;
+      (this.$refs.blur as any).classList.remove('add-blur');
+      (this.$refs.blurbtn as any).classList.remove('add-blur');
+      // (this.$refs.blurbtn as any).classList.add("d-none");
     },
     slideNext() {
       this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
@@ -234,6 +239,42 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.modal {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-container {
+  background-color: #FFF;
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  transform: scaleY(1.05) translateY(10px);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.add-blur .modal-container {
+  transform: scaleY(1) translateY(0);
+  opacity: 1;
+}
+.modal--btn {
+  transform: scale(0.9) ;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.2s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
+}
+.add-blur .modal--btn {
+  transform: scaleY(1);
+  opacity: 1;
+}
+.modal-container p {
+  margin-top: 10px;
+  font-size: 0.5rem;
+}
+.modal-container h3 {
+  font-weight: 600;
+}
 .shop {
   color: var(--color-tertiary);
 }
@@ -419,8 +460,11 @@ export default defineComponent({
 }
 
 .blur {
+  transition: filter 1s ease-out;
+}
+
+.blur.add-blur {
   filter: grayscale(0.5) blur(5px);
-  transition: all 1s ease-out;
 }
 .shop--blur-btn {
   position: absolute;
