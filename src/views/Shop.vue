@@ -10,7 +10,11 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <BackgroundGradient />
     <Nav/>
     <section ref="blur" class="shop page-experience blur add-blur">
-      <div class="container-fluid h-100">
+      <div class="shop--heading">
+        <h1>Nos packs</h1>
+        <p>Retrouvez dans nos packs composés d'une épice, d'une huile et d'un bouillon qui révèlent le meilleur de l'aileron de requin pour vous aider à lutter contre les effets du temps.</p>
+      </div>
+      <div class="container-fluid slider-height">
         <div class="row h-100">
           <div class="col-3 h-100 position-relative">
             <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
@@ -85,10 +89,6 @@ import RoundButton from './../components/UI/RoundButton.vue'
           </div>
           <div class="col-6 h-100">
             <div class="shop--heading-container">
-              <div class="shop--heading">
-                <h1>Nos packs</h1>
-                <p>Retrouvez dans nos packs composés d'une épice, d'une huile et d'un bouillon qui révèlent le meilleur de l'aileron de requin pour vous aider à lutter contre les effets du temps.</p>
-              </div>
               <div class="shop--product-video-container position-relative">
                 <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
@@ -181,7 +181,7 @@ export default defineComponent({
       (this.$refs.blurbtn as any).classList.remove('add-blur');
     },
     slideNext() {
-      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transition = "opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)"
       this.videos[this.index].style.transform = "translate(-20px, -70%)"
       this.videos[this.index].style.opacity = "0"
       if (this.index == 2) {
@@ -193,14 +193,14 @@ export default defineComponent({
       this.videos[this.index].style.transform = "translate(20px, -70%)"
       this.videos[this.index].style.opacity = "0"
       setTimeout(() => {
-        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transition = "opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)"
         this.videos[this.index].style.transform = "translate(0, -70%)"
         this.videos[this.index].style.opacity = "1"
       }, 300)
       this.playVideo();
     },
     slidePrev() {
-      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transition = "opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)"
       this.videos[this.index].style.transform = "translate(20px, -70%)"
       this.videos[this.index].style.opacity = "0"
       if (this.index == 0) {
@@ -212,7 +212,7 @@ export default defineComponent({
       this.videos[this.index].style.transform = "translate(-20px, -70%)"
       this.videos[this.index].style.opacity = "0"
       setTimeout(() => {
-        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transition = "opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)"
         this.videos[this.index].style.transform = "translate(0, -70%)"
         this.videos[this.index].style.opacity = "1"
       }, 300)
@@ -282,8 +282,10 @@ export default defineComponent({
 }
 .shop--heading {
   text-align: center;
+  padding-top: 30px;
 }
 .shop--content-container{
+  margin-top: -15%;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
@@ -316,6 +318,7 @@ export default defineComponent({
   height: 60px;
   border-radius: 50%;
   background-color: var(--color-tertiary);
+  padding-top: 5px;
 }
 .shop--product-price p {
   position: absolute;
@@ -324,6 +327,7 @@ export default defineComponent({
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: .8em;
+  margin-top: 2px;
 
 }
 .shop--product {
@@ -351,7 +355,6 @@ export default defineComponent({
   width: 100%;
 }
 .shop--heading-container {
-  margin-top: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -424,7 +427,7 @@ export default defineComponent({
 .content-active {
   pointer-events: all;
   opacity: 1;
-  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.7s;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
 }
 .content-disable {
   pointer-events: none;
@@ -436,7 +439,7 @@ export default defineComponent({
   pointer-events: all;
   opacity: 1;
   transform: translate(0px, -70%) scale(1);
-  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .content-disable-video {
@@ -447,7 +450,7 @@ export default defineComponent({
 .content-active .shop--product-details {
   opacity: 1;
   transform: translateY(0px) scaleY(1);
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.8s, opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.8s;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.3s, opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
 }
 
 .content-disable .shop--product-details {
@@ -527,5 +530,13 @@ section.banner {
 .banner--mentions a {
   text-decoration: underline;
   font-weight: 900;
+}
+.slider-height {
+  height: calc(100% - 30%);
+}
+.shop {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
