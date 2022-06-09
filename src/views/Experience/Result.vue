@@ -11,13 +11,13 @@ import RoundButton from '../../components/UI/RoundButton.vue';
         <div class="col-4 h-100 puta">
           <div class="result--content-container">
             <div class="result--content">
-              <h2>Félicitation ! </h2>
+              <h2>Félicitation !</h2>
               <p class="result-text">Voici votre écosystème. Il est parfait, partagez-le à vos amis.</p>
-              <SquaredButton class="" :isRouterLink="false" text="Partager mon écosystème" :isWhite="true" @validate="downloadImg()"/> 
+              <SquaredButton class="" :isRouterLink="false" text="Télécharger mon écosystème" :isWhite="true" @validate="downloadImg()"/> 
             </div>
             <div class="result--content">
               <h2>Et après ? </h2>
-              <p class="result-text">Pour continuer vos actions dans la vraie vie, aidez nous à financer nos actions et nos recherches. À chacun de vos achats de [XXXXXX], nous prélevons une petite partie pour aider à réaliser nos différents actions. Alors n'hésitez pas, bénéficiez des avantages de nos produits en protégeant l'environnement dès maintenant ! </p>
+              <p class="result-text">Pour continuer vos actions dans la vraie vie, aidez nous à financer nos actions et nos recherches. À chacun de vos achats de la gamme Squale Age Lifter, nous prélevons une petite partie pour aider à réaliser nos différents actions. Alors n'hésitez pas, bénéficiez des avantages de nos produits en protégeant l'environnement dès maintenant ! </p>
             </div>
             <div class="result--btn">
               <RoundButton link="/shop" text="Acheter les produits" :isWhite="true" :isRouterLink="true" />

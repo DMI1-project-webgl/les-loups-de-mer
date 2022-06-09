@@ -69,6 +69,7 @@ export default defineComponent({
   opacity: 0;
   transform-origin: left;
   transition: opacity 0.3s ease-out;
+  color: var(--color-primary);
 }
 
 .modal-disable {

@@ -87,7 +87,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
             <div class="shop--heading-container">
               <div class="shop--heading">
                 <h1>Nos packs</h1>
-                <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
+                <p>Retrouvez dans nos packs composés d'une épice, d'une huile et d'un bouillon qui révèlent le meilleur de l'aileron de requin pour vous aider à lutter contre les effets du temps.</p>
               </div>
               <div class="shop--product-video-container position-relative">
                 <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
@@ -132,7 +132,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
               <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
                 <p>90€</p>
               </div>
-              <RoundButton link="/newsletter" text="Achetter les produits" :isWhite="true" :isRouterLink="true" />
+              <RoundButton link="/newsletter" text="Acheter les produits" :isWhite="true" :isRouterLink="true" />
             </div>
           </div>
         </div> 
@@ -141,7 +141,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <section class="banner">
       <div class="banner--mentions-container">
         <div class="banner--mentions">
-          <p>Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
+          <p>Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> souscrivez à un abonnement mensuel.</a></p>
         </div>
       </div>
     </section>

@@ -117,8 +117,8 @@ export default defineComponent({
   /* overflow: hidden; */
 }
 .result .SquaredButton::after {
-  width: 250px;
-  height: 250px;
+  width: 270px;
+  height: 270px;
   border: none;
 }
 </style>
