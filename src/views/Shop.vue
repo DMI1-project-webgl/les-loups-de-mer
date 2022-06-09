@@ -179,13 +179,11 @@ export default defineComponent({
     removeEffect() {
       (this.$refs.blur as any).classList.remove('add-blur');
       (this.$refs.blurbtn as any).classList.remove('add-blur');
-      // (this.$refs.blurbtn as any).classList.add("d-none");
     },
     slideNext() {
       this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
       this.videos[this.index].style.transform = "translate(-20px, -70%)"
       this.videos[this.index].style.opacity = "0"
-      console.log('next')
       if (this.index == 2) {
         this.index = 0;
       } else {
@@ -205,7 +203,6 @@ export default defineComponent({
       this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
       this.videos[this.index].style.transform = "translate(20px, -70%)"
       this.videos[this.index].style.opacity = "0"
-      console.log('prev')
       if (this.index == 0) {
         this.index = 2;
       } else {

@@ -95,7 +95,7 @@ export default class BasicScene extends Scene {
    * Listen event send by BasicApp
    */
   onSignal (slug: Array<string|number>) {
-    console.log('signal : ', slug)
+    // console.log('signal : ', slug)
   }
 
   setCameraPosition () {

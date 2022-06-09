@@ -99,7 +99,6 @@ export default class ExperienceScene extends BasicScene implements ExperienceLis
     ////////////////////////////
     
     update () {
-        console.log('Number of triangles', this.renderer.info.render.triangles)
 
         // Making sphere shader animation
         if (this.sphere) {
