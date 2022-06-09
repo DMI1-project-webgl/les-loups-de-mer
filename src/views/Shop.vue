@@ -11,7 +11,15 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <Nav/>
     <section class="shop page-experience">
       <div class="container-fluid h-100">
-        <div class="row h-100">
+        <div class="row">
+          <div class="col-6 m-auto">
+            <div class="shop--heading">
+              <h1>Nos packs</h1>
+              <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-3 h-100 position-relative">
             <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
               <div class="shop--product-details">
@@ -85,10 +93,6 @@ import RoundButton from './../components/UI/RoundButton.vue'
           </div>
           <div class="col-6 h-100">
             <div class="shop--heading-container">
-              <div class="shop--heading">
-                <h1>Nos packs</h1>
-                <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
-              </div>
               <div ref="blur" class="shop--product-video-container position-relative blur">
                 <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
