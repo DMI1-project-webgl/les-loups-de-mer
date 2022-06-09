@@ -18,7 +18,7 @@
           </div>
       </div>
       <div class="breadcrumb--title">
-          <h2>Dépollution de l'environnement</h2>
+          <h2 ref="title">Dépollution de l’écosystème</h2>
       </div>
   </section>
 </template>
@@ -28,6 +28,11 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'BreadcrumbElement',
+  data() {
+    return {
+      texts: ['Dépollution de l’écosystème', 'Végétallisation de l’écosystème', 'Peuplement de l’écosystème']
+    };
+  },
   mounted() {
     this.signal.add(this.onSignal.bind(this))
   },
@@ -35,6 +40,9 @@ export default defineComponent({
       onSignal(slug: Array<string|number>) {
           if (slug[0] == 'update-step') {
             const steps = document.querySelectorAll(".breadcrumb--step");
+            if (this.$refs.title as HTMLElement && this.texts[slug[1] as number - 1]) {
+                (this.$refs.title as HTMLElement).innerHTML = this.texts[slug[1] as number - 1]
+            }
             if (!steps[slug[1] as number - 1]) return
             steps[slug[1] as number - 1].classList.add("is-active");
           }
@@ -80,7 +88,7 @@ export default defineComponent({
 }
 .breadcrumb--step-content {
     color: var(--color-tertiary);
-    font-size: .7em;
+    font-size: .8em;
     text-align: center;
     white-space: nowrap;
     position: absolute;

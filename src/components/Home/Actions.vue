@@ -74,9 +74,12 @@ export default defineComponent({
 
 .actions--img img { 
     background: transparent;
+    width: auto !important;
 }
 .actions--img {
     height: 70%;
+    width: -moz-fit-content;
+    width: fit-content;
     position: absolute;
     object-fit: contain;
     animation: levite 5s ease-in-out infinite;
@@ -87,11 +90,13 @@ export default defineComponent({
 }
 .actions--img:nth-child(1) {
     top: 0;
-    right: 0;
+    right: -15%;
+    width: 50%;
 }
 .actions--img:nth-child(2) {
     bottom: 0;
     left: 0;
+    width: 50%;
 }
 
 .actions--text {
@@ -100,7 +105,7 @@ export default defineComponent({
 }
 .actions--img-container .earth{
     height: 100%;
-    width: 100%;
+    width: 95%;
     padding: 10% 0 10% 20%;
     object-fit: contain;
 }

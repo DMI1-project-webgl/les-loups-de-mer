@@ -30,7 +30,7 @@ export default defineComponent({
   },
   methods: {
     onClick () {
-      this.signal.dispatch(['click-general'])
+      //this.signal.dispatch(['click-general'])
     }
   },
   beforeDestroy () {
@@ -129,6 +129,6 @@ export default defineComponent({
 }
 .shop .RoundButton-Container {
   position: absolute;
-  right: 0;
+  left: 80px;
 }
 </style>

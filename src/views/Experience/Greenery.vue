@@ -68,7 +68,7 @@ export default defineComponent({
           break
         case 'number-coraux':
           this.hidetuto1()
-          if (slug[1] > 10 && this.$refs.stateVege) {
+          if (slug[1] > 16 && this.$refs.stateVege) {
             // this.signal.dispatch(['validate-tapped']);
             (this.$refs.stateVege as HTMLElement).innerHTML = "Végétaux suffisant";
             (this.$refs.stateVege as HTMLElement).classList.remove("state-vegetaux--error");
@@ -164,6 +164,6 @@ export default defineComponent({
 }
 
 .state-vegetaux--valide {
-  color: #00d100;
+  color: #00aa00;
 }
 </style>

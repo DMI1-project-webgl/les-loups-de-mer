@@ -308,7 +308,7 @@ section.draggable {
   color: var(--color-tertiary);
   opacity: .5;
   padding: 15px;
-  font-size: .4em;
+  font-size: .5em;
 }
 .draggable--legend.left {
   transform: translate(-100%,-50%);

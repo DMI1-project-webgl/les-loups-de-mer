@@ -9,17 +9,13 @@ import RoundButton from './../components/UI/RoundButton.vue'
   <div>
     <BackgroundGradient />
     <Nav/>
-    <section class="shop page-experience">
-      <div class="container-fluid h-100">
-        <div class="row">
-          <div class="col-6 m-auto">
-            <div class="shop--heading">
-              <h1>Nos packs</h1>
-              <p>Retrouvez dans nos packs composés d'une épice, d'une soupe et d'un bouillon qui révèle le meilleur de l'aileron de requin pour vous aider à lutter contre es effets du temps</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
+    <section ref="blur" class="shop page-experience blur add-blur">
+      <div class="shop--heading">
+        <h1>Nos packs</h1>
+        <p>Retrouvez dans nos packs composés d'une épice, d'une huile et d'un bouillon qui révèlent le meilleur de l'aileron de requin pour vous aider à lutter contre les effets du temps.</p>
+      </div>
+      <div class="container-fluid slider-height">
+        <div class="row h-100">
           <div class="col-3 h-100 position-relative">
             <div class="shop--content-container" :class="index == 0 ? 'content-active' : 'content-disable'">
               <div class="shop--product-details">
@@ -93,20 +89,20 @@ import RoundButton from './../components/UI/RoundButton.vue'
           </div>
           <div class="col-6 h-100">
             <div class="shop--heading-container">
-              <div ref="blur" class="shop--product-video-container position-relative blur">
-                <div class="shop--product-video" :class="index == 0 ? 'content-active' : 'content-disable'">
+              <div class="shop--product-video-container position-relative">
+                <div ref="video1" class="shop--product-video" :class="index == 0 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video01" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/small.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                 </div>
-                <div class="shop--product-video" :class="index == 1 ? 'content-active' : 'content-disable'">
+                <div ref="video2" class="shop--product-video" :class="index == 1 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video02" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/medium.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                   </video>
                 </div>
-                <div class="shop--product-video" :class="index == 2 ? 'content-active' : 'content-disable'">
+                <div ref="video3" class="shop--product-video" :class="index == 2 ? 'content-active-video' : 'content-disable-video'">
                   <video ref="video03" loop crossOrigin="anonymous" playsinline class="video-slider">
                     <source src="src/assets/img/packs/large.webm"
                       type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -123,9 +119,6 @@ import RoundButton from './../components/UI/RoundButton.vue'
                   </svg>
                 </button>
               </div>
-              <div ref="blurbtn" class="shop--blur-btn">
-                <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/>
-              </div>
             </div>
           </div>
           <div class="col-3 h-100">
@@ -139,7 +132,7 @@ import RoundButton from './../components/UI/RoundButton.vue'
               <div class="shop--product-price" :class="index == 2 ? 'content-active' : 'content-disable'">
                 <p>90€</p>
               </div>
-                <RoundButton link="/newsletter" text="Achetter les produits" :isWhite="true" :isRouterLink="true" />
+              <RoundButton link="/newsletter" text="Acheter les produits" :isWhite="true" :isRouterLink="true" />
             </div>
           </div>
         </div> 
@@ -148,10 +141,19 @@ import RoundButton from './../components/UI/RoundButton.vue'
     <section class="banner">
       <div class="banner--mentions-container">
         <div class="banner--mentions">
-          <p> Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> à un abonnement mensuel.</a></p>
+          <p>Pour continuer à profiter des bienfaits des ailerons de requin et nous aider durablement à les conserver, <a href=""> souscrivez à un abonnement mensuel.</a></p>
         </div>
       </div>
     </section>
+    <div ref="blurbtn" class="shop--blur-btn">
+      <div class="modal">
+        <div class="modal-container">
+          <h3>CODE PROMO</h3>
+          <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2%: JESAUVELAPLANETE</p>
+        </div>
+        <SquaredButton id="modal-btn" class="modal--btn" :isRouterLink="false" text="Découvrir" :isWhite="true" @validate="removeEffect"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -162,36 +164,61 @@ export default defineComponent({
   name: 'Shop',
   data: function () {
     return {
-      index: 0
+      index: 0,
+      videos: [],
     }
   },
   mounted() {
     this.signal.dispatch(['experience-end'])
+    this.videos = [this.$refs.video1, this.$refs.video2, this.$refs.video3]
+    setTimeout(() => {
+      (this.$refs.blurbtn as any).classList.add('add-blur');
+    }, 500)
   },
   methods: {
     removeEffect() {
-      (this.$refs.blur as any).classList.remove('blur');
-      (this.$refs.blurbtn as any).classList.add("d-none");
-      (this.$refs.video01 as any).play()
-      
-      // (this.$refs.video03 as any).play()
+      (this.$refs.blur as any).classList.remove('add-blur');
+      (this.$refs.blurbtn as any).classList.remove('add-blur');
+      // (this.$refs.blurbtn as any).classList.add("d-none");
     },
     slideNext() {
+      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transform = "translate(-20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
       console.log('next')
       if (this.index == 2) {
         this.index = 0;
       } else {
         this.index += 1;
       }
+      this.videos[this.index].style.transition = "none"
+      this.videos[this.index].style.transform = "translate(20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
+      setTimeout(() => {
+        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transform = "translate(0, -70%)"
+        this.videos[this.index].style.opacity = "1"
+      }, 300)
       this.playVideo();
     },
     slidePrev() {
+      this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1)"
+      this.videos[this.index].style.transform = "translate(20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
       console.log('prev')
       if (this.index == 0) {
         this.index = 2;
       } else {
         this.index -= 1;
       }
+      this.videos[this.index].style.transition = "none"
+      this.videos[this.index].style.transform = "translate(-20px, -70%)"
+      this.videos[this.index].style.opacity = "0"
+      setTimeout(() => {
+        this.videos[this.index].style.transition = "opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.4s"
+        this.videos[this.index].style.transform = "translate(0, -70%)"
+        this.videos[this.index].style.opacity = "1"
+      }, 300)
       this.playVideo();
     },
     playVideo() {
@@ -212,11 +239,53 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.modal {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-container {
+  background-color: #FFF;
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  transform: scaleY(1.05) translateY(10px);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.add-blur .modal-container {
+  transform: scaleY(1) translateY(0);
+  opacity: 1;
+}
+.modal--btn {
+  transform: scale(0.9) ;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.2s, transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
+}
+.add-blur .modal--btn {
+  transform: scaleY(1);
+  opacity: 1;
+}
+.modal-container p {
+  margin-top: 10px;
+  font-size: 0.5rem;
+}
+.modal-container h3 {
+  font-weight: 600;
+}
 .shop {
   color: var(--color-tertiary);
 }
+.shop--heading p {
+  font-size: .5em;
+  max-width: 500px;
+  margin: 0 auto;
+}
 .shop--heading {
   text-align: center;
+  padding-top: 50px;
 }
 .shop--content-container{
   position: absolute;
@@ -251,6 +320,7 @@ export default defineComponent({
   height: 60px;
   border-radius: 50%;
   background-color: var(--color-tertiary);
+  padding-top: 5px;
 }
 .shop--product-price p {
   position: absolute;
@@ -286,7 +356,7 @@ export default defineComponent({
   width: 100%;
 }
 .shop--heading-container {
-  margin-top: 50px;
+  margin-top: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -359,16 +429,44 @@ export default defineComponent({
 .content-active {
   pointer-events: all;
   opacity: 1;
-  transition: opacity 2s ease;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1) 0.7s;
 }
 .content-disable {
   pointer-events: none;
   opacity: 0;
-  transition: opacity 2s ease;
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+.content-active-video {
+  pointer-events: all;
+  opacity: 1;
+  transform: translate(0px, -70%) scale(1);
+  transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content-disable-video {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.content-active .shop--product-details {
+  opacity: 1;
+  transform: translateY(0px) scaleY(1);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.8s, opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1) 0.8s;
+}
+
+.content-disable .shop--product-details {
+  opacity: 0;
+  transform: translateY(15px) scaleY(1.08);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .blur {
+  transition: filter 1s ease-out;
+}
+
+.blur.add-blur {
   filter: grayscale(0.5) blur(5px);
-  transition: all 1s ease-out;
 }
 .shop--blur-btn {
   position: absolute;
@@ -423,13 +521,24 @@ section.banner {
   text-align: center;
 }
 .banner--mentions-container {
-  margin-bottom: 50px;
+  margin-bottom: 15px;
   color: var(--color-tertiary);
   text-align: center;  
   width: 100vw;
 }
+.banner--mentions p {
+  font-size: .5em;
+}
 .banner--mentions a {
   text-decoration: underline;
   font-weight: 900;
+}
+.slider-height {
+  height: calc(100% - 30%);
+}
+.shop {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

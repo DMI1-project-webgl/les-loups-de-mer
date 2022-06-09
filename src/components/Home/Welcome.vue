@@ -77,7 +77,6 @@ export default defineComponent({
     goTo () {
       this.$emit('scrolldown')
       this.scrollBar.scrollTo(0, window.innerHeight, 1000);
-      this.signal.dispatch(['click-general'])
     }
   },
   beforeDestroy () {

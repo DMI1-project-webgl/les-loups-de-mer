@@ -166,7 +166,6 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
-          this.signal.dispatch(['click-general'])
         },
         slidePrev() {
           if (this.onAnim) return
@@ -176,7 +175,6 @@ export default defineComponent({
           setTimeout(() => {
             this.onAnim = false
           }, 1000)
-          this.signal.dispatch(['click-general'])
         }
     },
     beforeDestroy() {
@@ -204,13 +202,16 @@ export default defineComponent({
   position: absolute;
 }
 
-.banner--text {
-  font-size: 0.7rem;
+.banner--text p {
+  font-size: 0.42em;
   letter-spacing: 1px;
+  font-weight: 400;
+  font-weight: normal;
 }
 
 .banner--text span {
   letter-spacing: 2px;
+  font-weight: 400;
 }
 
 .content-slider:after {
@@ -371,9 +372,12 @@ header {
 .header--text {
   font-size: .5em;
 }
-.header--text-upper {
+.header--text-upper span {
   text-transform: uppercase;
   white-space: nowrap;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 0.8em;
 }
 .header--link {
   width: 100%; 

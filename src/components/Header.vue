@@ -2,7 +2,7 @@
   <header v-if="display" id="1" class="page-full header">
     <div v-if="banner" class="banner--container color--primary">
       <div class="banner--text">
-        <p>Achetez notre produit et retrouvez votre vigueur d'antan - CODE PROMO -2% JESAUVELAPLANETE</p>
+        <p>Achetez notre produit et retrouvez votre vigueur d'antan - <span>CODE PROMO -2%</span> JESAUVELAPLANETE</p>
       </div>
     </div>
     <div v-if="banner != false" class="banner--container color--secondary">
@@ -52,6 +52,17 @@ header {
   pointer-events: none;
   z-index: 1;
 }
+.banner--text p {
+  font-size: 0.42em;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-weight: normal;
+}
+
+.banner--text span {
+  letter-spacing: 2px;
+  font-weight: 400;
+}
 .header--main {
   position: relative;
   bottom: 0;
@@ -91,6 +102,9 @@ header {
 .header--text-upper {
   text-transform: uppercase;
   white-space: nowrap;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 0.8em;
 }
 .header--link {
   width: 100%; 
@@ -107,7 +121,7 @@ header {
 }
 .header--text-upper {
   font-family: "leaguespartan";
-  font-size: 0.5em;
+  font-size: 0.4em;
   font-weight: 400;
   line-height: 1em;
   width: 200%;
@@ -125,6 +139,7 @@ header {
 .header--breadcrumb {
   color: var(--color-primary);
   text-transform: uppercase;
+  font-size: .45em;
 }
 
 @keyframes marquee {

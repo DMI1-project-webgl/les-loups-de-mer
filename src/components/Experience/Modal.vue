@@ -83,7 +83,7 @@ export default defineComponent({
   background-color: var(--color-tertiary);
   padding: 30px;
   position: relative;
-  font-size: .7em;
+  font-size: .8em;
 }
 .modal--btn {
   align-items: flex-start;
@@ -99,6 +99,11 @@ export default defineComponent({
 .modal.none .modal--btn-container {
   opacity: 0;
 }
-
+.shop--blur-btn .modal {
+  position: absolute;
+  min-width: 400px;
+  left: 50%;
+  aspect-ratio: unset;
+}
 </style>
 

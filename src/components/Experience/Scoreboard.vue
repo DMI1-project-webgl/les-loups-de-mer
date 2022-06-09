@@ -79,6 +79,7 @@ export default defineComponent({
 <style scoped>
 .scoreboard {
     max-width: 250px;
+    padding: 7px 6px 0px;
 }
 .scoreboard .tuto {
     box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.4), 0px 0px 10px 3px rgba(255, 255, 255, 0.4) inset;
@@ -101,17 +102,18 @@ ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
-    font-size: 1em;
+    font-size: .8em;
     color: var(--color-tertiary);
     background-color: #ffffff10;
-    padding: 5px 20px;
+    padding: 12px 20px 10px 20px;
     margin: 10px 0;
     border-radius: 30px;
-    font-size: .7em;
+    font-size: .8em;
 }
 .scoreboard--title {
     color: var(--color-tertiary);
-    font-size: .7em;
+    font-size: .8em;
+    margin-bottom: 5px;
 }
 
 .scoreboard--value span {
@@ -119,7 +121,7 @@ ul {
     color: var(--color-tertiary);
     font-family: "leaguespartan";
     font-weight: bold;
-    font-size: .8em;
+    font-size: .9em;
 }
 
 .done .scoreboard--text{
