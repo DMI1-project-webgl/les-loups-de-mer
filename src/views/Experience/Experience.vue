@@ -12,7 +12,7 @@ import Loader from '../../components/Experience/Loader.vue';
     <Canvas />
     <Nav />
     <Loader />
-    <Advancement />
+    <Advancement  v-if="showAdvancement" />
     <!-- <button class="validate-button" @click="validate">Validate step</button> -->
     <router-view />
   </div>
